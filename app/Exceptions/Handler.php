@@ -27,7 +27,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -38,20 +38,28 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            return $this->renderHttpException($exception);
+        }
+
+        if (config('app.debug')) {
+            return $this->renderExceptionWithWhoops($exception);
+        }
+
         return parent::render($request, $exception);
     }
 
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -61,5 +69,44 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest('login');
+    }
+
+    /**
+     * Render an exception using Whoops.
+     *
+     * @param  \Exception $e
+     * @return \Illuminate\Http\Response
+     */
+    protected function renderExceptionWithWhoops(Exception $e)
+    {
+        $whoops = new \Whoops\Run;
+//        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+        $errorPage = new \Whoops\Handler\PrettyPageHandler();
+
+        $errorPage->setPageTitle("ERROR !"); // Set the page's title
+        $errorPage->setEditor(function ($file, $line) {
+            $translations = array('/home/vagrant/code' => env('WHOOPS_PATH')); // change to your path
+
+            foreach ($translations as $from => $to) {
+                $file = preg_replace('#' . $from . '#', $to, $file, 1);
+            }
+
+            // Intellig platform requires that you send an Ajax request, else the browser will quit the page
+            return array(
+                'url' => "phpstorm://open?file=$file&line=$line",
+                'ajax' => false
+            );
+
+
+        }
+        );
+        $whoops->pushHandler($errorPage);
+//        $whoops->register();
+
+        return new \Illuminate\Http\Response(
+            $whoops->handleException($e),
+            $e->getStatusCode(),
+            $e->getHeaders()
+        );
     }
 }
