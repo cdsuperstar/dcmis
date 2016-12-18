@@ -25,4 +25,22 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * @param string $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function tpl($page)
+    {
+        return view('tpl.' . $page);
+    }
+
+    /**
+     * @param $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function views($page)
+    {
+        return view('views.' . $page);
+    }
 }
