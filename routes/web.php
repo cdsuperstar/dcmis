@@ -17,6 +17,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/tpl/{page}', 'HomeController@tpl');
-Route::get('/views/{page}', 'HomeController@views');
+Route::get('/home/{page}/{para}', 'HomeController@index');

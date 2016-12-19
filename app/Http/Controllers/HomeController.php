@@ -21,26 +21,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page)
     {
-        return view('home');
+        return view('home.' . $page . '.index');
     }
 
-    /**
-     * @param string $page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function tpl($page)
-    {
-        return view('tpl.' . $page);
-    }
-
-    /**
-     * @param $page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function views($page)
-    {
-        return view('views.' . $page);
-    }
 }
