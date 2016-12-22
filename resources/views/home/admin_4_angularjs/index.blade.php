@@ -29,8 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
-          type="text/css"/>
+    <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -74,19 +73,19 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 <!-- END PAGE SPINNER -->
 <!-- BEGIN HEADER -->
-<div data-ng-include="'header'" data-ng-controller="HeaderController"
+<div data-ng-include="'tpl/header'" data-ng-controller="HeaderController"
      class="page-header navbar navbar-fixed-top"></div>
 <!-- END HEADER -->
 <div class="clearfix"></div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <div data-ng-include="'sidebar'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"></div>
+    <div data-ng-include="'tpl/sidebar'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"></div>
     <!-- END SIDEBAR -->
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE HEAD -->
-            <div data-ng-include="'page-head'" data-ng-controller="PageHeadController" class="page-head"></div>
+            <div data-ng-include="'tpl/page-head'" data-ng-controller="PageHeadController" class="page-head"></div>
             <!-- END PAGE HEAD -->
             <!-- BEGIN ACTUAL CONTENT -->
             <div ui-view class="fade-in-up"></div>
@@ -98,13 +97,13 @@ License: You must have a valid license purchased only from themeforest(the above
         <i class="icon-login"></i>
     </a>
 
-    <div data-ng-include="'quick-sidebar'" data-ng-controller="QuickSidebarController"
+    <div data-ng-include="'tpl/quick-sidebar'" data-ng-controller="QuickSidebarController"
          class="page-quick-sidebar-wrapper"></div>
     <!-- END QUICK SIDEBAR -->
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
-<div data-ng-include="'footer'" data-ng-controller="FooterController" class="page-footer"></div>
+<div data-ng-include="'tpl/footer'" data-ng-controller="FooterController" class="page-footer"></div>
 <!-- END FOOTER -->
 <!-- BEGIN QUICK NAV -->
 <nav class="quick-nav">

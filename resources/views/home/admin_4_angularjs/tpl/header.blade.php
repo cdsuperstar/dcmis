@@ -3,8 +3,7 @@
     <!-- BEGIN LOGO -->
     <div class="page-logo">
         <a ui-sref="dashboard">
-            <img src="{{settings.layoutPath}}/img/logo-light.png" alt="logo" class="logo-default"/> </a>
-
+            <img src="@{{settings.layoutPath}}/img/logo-light.png" alt="logo" class="logo-default"/> </a>
         <div class="menu-toggler sidebar-toggler">
             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
         </div>
@@ -194,7 +193,7 @@
                                 <li>
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
+                                            <img src="@{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
                                             <span class="from"> Lisa Wong </span>
@@ -206,7 +205,7 @@
                                 <li>
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
+                                            <img src="@{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
                                             <span class="from"> Richard Doe </span>
@@ -218,7 +217,7 @@
                                 <li>
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="{{settings.layoutPath}}/img/avatar1.jpg" class="img-circle"
+                                            <img src="@{{settings.layoutPath}}/img/avatar1.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
                                             <span class="from"> Bob Nilson </span>
@@ -230,7 +229,7 @@
                                 <li>
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
+                                            <img src="@{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
                                             <span class="from"> Lisa Wong </span>
@@ -242,7 +241,7 @@
                                 <li>
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
+                                            <img src="@{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
                                             <span class="from"> Richard Doe </span>
@@ -383,7 +382,7 @@
                        data-close-others="true">
                         <span class="username username-hide-on-mobile"> Nick </span>
                         <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                        <img alt="" class="img-circle" src="{{settings.layoutPath}}/img/avatar9.jpg"/> </a>
+                        <img alt="" class="img-circle" src="@{{settings.layoutPath}}/img/avatar9.jpg"/> </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
                             <a href="#/profile/dashboard">

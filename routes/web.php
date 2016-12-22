@@ -17,5 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home/{page}/{para}', 'HomeController@index');
+Route::get('/home/{layout}/{pagelv1?}/{pagelv2?}', 'HomeController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
+
+//Route::controllers([
+//    'auth' => 'Auth\AuthController',
+//    'password' => 'Auth\PasswordController',
+//    'dcassets'=>'dcResController',
+//    'user'=>'User\userController',
+//    'dcmodel'=>'dcmodel\dcmodelController',
+//    'pxunit'=>'pxunit\pxunitController',
+//    'sysmsg'=>'sysmsg\sysmsgController',
+//    'userprofile'=>'User\userprofileController',
+//]);

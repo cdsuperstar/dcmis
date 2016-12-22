@@ -19,9 +19,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page, $para)
+    public function index(String $layout, String $pagelv1 = null, String $pagelv2 = null)
     {
-        return view('home.' . $page . '.' . $para);
+        $sView = 'home.' . $layout;
+        $sView .= $pagelv1 ? '.' . $pagelv1 : null;
+        $sView .= $pagelv2 ? '.' . $pagelv2 : null;
+        return view($sView);
     }
 
 }
