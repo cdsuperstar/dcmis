@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\models\dcMdGrp;
+use App\models\dcmodel;
+
 class HomeController extends Controller
 {
     /**
@@ -19,12 +22,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(String $layout, String $pagelv1 = null, String $pagelv2 = null)
+    public function index(String $layout)
     {
-        $sView = 'home.' . $layout;
-        $sView .= $pagelv1 ? '.' . $pagelv1 : null;
-        $sView .= $pagelv2 ? '.' . $pagelv2 : null;
+        $sView = 'home.' . $layout . ".index";
         return view($sView);
     }
 
+    public function tpl(String $layout, String $tpl)
+    {
+        $sView = 'home.' . $layout . ".tpl." . $tpl;
+        return view($sView);
+    }
+
+    public function jsMain(String $layout)
+    {
+        $mdTreeJson = dcMdGrp::with(['dcmodel' => function ($q) {
+            $q->addSelect(array('id', 'name', 'title', 'ismenu', 'icon', 'url', 'templateurl', 'files'));
+        }])->get()->tohierarchy()->toJson();
+        $dcModels = dcmodel::where('url', '<>', '')->get();
+        $sView = 'home.' . $layout . ".js.main";
+        return view($sView, ['mdTreeJson' => $mdTreeJson, 'dcModels' => $dcModels]);
+    }
 }

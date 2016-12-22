@@ -17,8 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home/{layout}/{pagelv1?}/{pagelv2?}', 'HomeController@index');
+//Route::get('/home/{layout}', 'HomeController');
 Route::get('/logout', 'Auth\LoginController@logout');
+Route::group(['prefix' => '/home/{layout}'], function () {
+    Route::get('index', 'HomeController@index');
+    Route::get('tpl/{tpl}', 'HomeController@tpl');
+    Route::get('js/main', 'HomeController@jsMain');
+});
+
 
 //Route::controllers([
 //    'auth' => 'Auth\AuthController',

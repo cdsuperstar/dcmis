@@ -167,7 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
 <!-- END CORE ANGULARJS PLUGINS -->
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
-<script src="js/main.js" type="text/javascript"></script>
+<script src="js/main" type="text/javascript"></script>
 <script src="js/directives.js" type="text/javascript"></script>
 <!-- END APP LEVEL ANGULARJS SCRIPTS -->
 <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
