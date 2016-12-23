@@ -60,11 +60,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 };
 }])
 ;
-/*
-
- $scope.mdTreeJson={!! $mdTreeJson !!};
-
- */
 /***
  Layout Partials.
  By default the partials are loaded through AngularJS ng-include directive. In case they loaded in server side(e.g: PHP include function) then below partial
