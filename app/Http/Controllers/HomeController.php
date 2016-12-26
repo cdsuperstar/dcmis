@@ -33,6 +33,11 @@ class HomeController extends Controller
         $sView = 'home.' . $layout . ".tpl." . $tpl;
         return view($sView);
     }
+    public function login(String $layout)
+    {
+        $sView = 'home.' . $layout . ".login";
+        return view($sView);
+    }
 
     public function jsMain(String $layout)
     {
