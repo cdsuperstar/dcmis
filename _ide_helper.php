@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.0-Dev on 2016-12-12.
+ * Generated for Laravel 5.3.28 on 2016-12-27.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2396,31 +2396,21 @@ namespace {
         /**
          * Remove all items from the cache.
          *
-         * @return bool 
+         * @return void 
          * @static 
          */
         public static function flush(){
-            return \Illuminate\Cache\FileStore::flush();
+            \Illuminate\Cache\MemcachedStore::flush();
         }
         
         /**
-         * Get the Filesystem instance.
+         * Get the underlying Memcached connection.
          *
-         * @return \Illuminate\Filesystem\Filesystem 
+         * @return \Memcached 
          * @static 
          */
-        public static function getFilesystem(){
-            return \Illuminate\Cache\FileStore::getFilesystem();
-        }
-        
-        /**
-         * Get the working directory of the cache.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getDirectory(){
-            return \Illuminate\Cache\FileStore::getDirectory();
+        public static function getMemcached(){
+            return \Illuminate\Cache\MemcachedStore::getMemcached();
         }
         
         /**
@@ -2430,7 +2420,18 @@ namespace {
          * @static 
          */
         public static function getPrefix(){
-            return \Illuminate\Cache\FileStore::getPrefix();
+            return \Illuminate\Cache\MemcachedStore::getPrefix();
+        }
+        
+        /**
+         * Set the cache key prefix.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */
+        public static function setPrefix($prefix){
+            \Illuminate\Cache\MemcachedStore::setPrefix($prefix);
         }
         
     }
@@ -2629,12 +2630,11 @@ namespace {
         /**
          * Queue a cookie to send with the next response.
          *
-         * @param array $parameters
          * @return void 
          * @static 
          */
-        public static function queue($parameters = null){
-            \Illuminate\Cookie\CookieJar::queue($parameters);
+        public static function queue(){
+            \Illuminate\Cookie\CookieJar::queue();
         }
         
         /**
@@ -3109,13 +3109,12 @@ namespace {
         /**
          * Rollback the active database transaction.
          *
-         * @param int|null $toLevel
          * @return void 
          * @static 
          */
-        public static function rollBack($toLevel = null){
+        public static function rollBack(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\PostgresConnection::rollBack($toLevel);
+            \Illuminate\Database\PostgresConnection::rollBack();
         }
         
         /**
@@ -3670,12 +3669,11 @@ namespace {
          * Get the first record matching the attributes or instantiate it.
          *
          * @param array $attributes
-         * @param array $values
          * @return \Illuminate\Database\Eloquent\Model 
          * @static 
          */
-        public static function firstOrNew($attributes, $values = array()){
-            return \Illuminate\Database\Eloquent\Builder::firstOrNew($attributes, $values);
+        public static function firstOrNew($attributes){
+            return \Illuminate\Database\Eloquent\Builder::firstOrNew($attributes);
         }
         
         /**
@@ -3723,18 +3721,6 @@ namespace {
          */
         public static function firstOrFail($columns = array()){
             return \Illuminate\Database\Eloquent\Builder::firstOrFail($columns);
-        }
-        
-        /**
-         * Execute the query and get the first result or call a callback.
-         *
-         * @param \Closure|array $columns
-         * @param \Closure|null $callback
-         * @return \Illuminate\Database\Eloquent\Model|static|mixed 
-         * @static 
-         */
-        public static function firstOr($columns = array(), $callback = null){
-            return \Illuminate\Database\Eloquent\Builder::firstOr($columns, $callback);
         }
         
         /**
@@ -3891,17 +3877,6 @@ namespace {
          */
         public static function when($value, $callback, $default = null){
             return \Illuminate\Database\Eloquent\Builder::when($value, $callback, $default);
-        }
-        
-        /**
-         * Add a where clause on the primary key to the query.
-         *
-         * @param mixed $id
-         * @return $this 
-         * @static 
-         */
-        public static function whereKey($id){
-            return \Illuminate\Database\Eloquent\Builder::whereKey($id);
         }
         
         /**
@@ -5995,6 +5970,7 @@ namespace {
          *
          * @param object|string $class
          * @return mixed 
+         * @throws \InvalidArgumentException
          * @static 
          */
         public static function getPolicyFor($class){
@@ -6122,19 +6098,6 @@ namespace {
         }
         
         /**
-         * Get the translation for a given key from the JSON translation files.
-         *
-         * @param string $key
-         * @param array $replace
-         * @param string $locale
-         * @return string 
-         * @static 
-         */
-        public static function getFromJson($key, $replace = array(), $locale = null){
-            return \Illuminate\Translation\Translator::getFromJson($key, $replace, $locale);
-        }
-        
-        /**
          * Add translation lines to the given locale.
          *
          * @param array $lines
@@ -6164,28 +6127,30 @@ namespace {
         /**
          * Get the translation for a given key.
          *
-         * @param string $key
-         * @param array $replace
+         * @param string $id
+         * @param array $parameters
+         * @param string $domain
          * @param string $locale
          * @return string|array|null 
          * @static 
          */
-        public static function trans($key, $replace = array(), $locale = null){
-            return \Illuminate\Translation\Translator::trans($key, $replace, $locale);
+        public static function trans($id, $parameters = array(), $domain = 'messages', $locale = null){
+            return \Illuminate\Translation\Translator::trans($id, $parameters, $domain, $locale);
         }
         
         /**
          * Get a translation according to an integer value.
          *
-         * @param string $key
+         * @param string $id
          * @param int|array|\Countable $number
-         * @param array $replace
+         * @param array $parameters
+         * @param string $domain
          * @param string $locale
          * @return string 
          * @static 
          */
-        public static function transChoice($key, $number, $replace = array(), $locale = null){
-            return \Illuminate\Translation\Translator::transChoice($key, $number, $replace, $locale);
+        public static function transChoice($id, $number, $parameters = array(), $domain = 'messages', $locale = null){
+            return \Illuminate\Translation\Translator::transChoice($id, $number, $parameters, $domain, $locale);
         }
         
         /**
@@ -6227,7 +6192,7 @@ namespace {
         /**
          * Get the message selector instance.
          *
-         * @return \Illuminate\Translation\MessageSelector 
+         * @return \Symfony\Component\Translation\MessageSelector 
          * @static 
          */
         public static function getSelector(){
@@ -6237,7 +6202,7 @@ namespace {
         /**
          * Set the message selector instance.
          *
-         * @param \Illuminate\Translation\MessageSelector $selector
+         * @param \Symfony\Component\Translation\MessageSelector $selector
          * @return void 
          * @static 
          */
@@ -6577,6 +6542,18 @@ namespace {
          */
         public static function alwaysFrom($address, $name = null){
             \Illuminate\Mail\Mailer::alwaysFrom($address, $name);
+        }
+        
+        /**
+         * Set the global reply-to address and name.
+         *
+         * @param string $address
+         * @param string|null $name
+         * @return void 
+         * @static 
+         */
+        public static function alwaysReplyTo($address, $name = null){
+            \Illuminate\Mail\Mailer::alwaysReplyTo($address, $name);
         }
         
         /**
@@ -8869,7 +8846,7 @@ namespace {
         }
         
         /**
-         * Checks whether or not the method is safe.
+         * Checks whether the method is safe or not.
          *
          * @see https://tools.ietf.org/html/rfc7231#section-4.2.1
          * @param bool $andCacheable Adds the additional condition that the method should be cacheable. True by default.
@@ -8879,17 +8856,6 @@ namespace {
         public static function isMethodSafe(){
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
             return \Illuminate\Http\Request::isMethodSafe();
-        }
-        
-        /**
-         * Checks whether or not the method is idempotent.
-         *
-         * @return bool 
-         * @static 
-         */
-        public static function isMethodIdempotent(){
-            //Method inherited from \Symfony\Component\HttpFoundation\Request            
-            return \Illuminate\Http\Request::isMethodIdempotent();
         }
         
         /**
@@ -9413,12 +9379,12 @@ namespace {
          * Create a route group with shared attributes.
          *
          * @param array $attributes
-         * @param \Closure|string $routes
+         * @param \Closure $callback
          * @return void 
          * @static 
          */
-        public static function group($attributes, $routes){
-            \Illuminate\Routing\Router::group($attributes, $routes);
+        public static function group($attributes, $callback){
+            \Illuminate\Routing\Router::group($attributes, $callback);
         }
         
         /**
@@ -9549,8 +9515,8 @@ namespace {
          * @return $this 
          * @static 
          */
-        public static function aliasMiddleware($name, $class){
-            return \Illuminate\Routing\Router::aliasMiddleware($name, $class);
+        public static function middleware($name, $class){
+            return \Illuminate\Routing\Router::middleware($name, $class);
         }
         
         /**
@@ -9617,17 +9583,6 @@ namespace {
          */
         public static function bind($key, $binder){
             \Illuminate\Routing\Router::bind($key, $binder);
-        }
-        
-        /**
-         * Get the binding callback for a given binding.
-         *
-         * @param string $key
-         * @return \Closure|null 
-         * @static 
-         */
-        public static function getBindingCallback($key){
-            return \Illuminate\Routing\Router::getBindingCallback($key);
         }
         
         /**
@@ -9863,19 +9818,6 @@ namespace {
          */
         public static function hasMacro($name){
             return \Illuminate\Routing\Router::hasMacro($name);
-        }
-        
-        /**
-         * Dynamically handle calls to the class.
-         *
-         * @param string $method
-         * @param array $parameters
-         * @return mixed 
-         * @throws \BadMethodCallException
-         * @static 
-         */
-        public static function macroCall($method, $parameters){
-            return \Illuminate\Routing\Router::macroCall($method, $parameters);
         }
         
     }
@@ -10809,12 +10751,12 @@ namespace {
          *
          * @param string $path
          * @param string|resource $contents
-         * @param array $options
+         * @param string $visibility
          * @return bool 
          * @static 
          */
-        public static function put($path, $contents, $options = array()){
-            return \Illuminate\Filesystem\FilesystemAdapter::put($path, $contents, $options);
+        public static function put($path, $contents, $visibility = null){
+            return \Illuminate\Filesystem\FilesystemAdapter::put($path, $contents, $visibility);
         }
         
         /**
@@ -10822,12 +10764,12 @@ namespace {
          *
          * @param string $path
          * @param \Illuminate\Http\UploadedFile $file
-         * @param array $options
+         * @param string $visibility
          * @return string|false 
          * @static 
          */
-        public static function putFile($path, $file, $options = array()){
-            return \Illuminate\Filesystem\FilesystemAdapter::putFile($path, $file, $options);
+        public static function putFile($path, $file, $visibility = null){
+            return \Illuminate\Filesystem\FilesystemAdapter::putFile($path, $file, $visibility);
         }
         
         /**
@@ -10836,12 +10778,12 @@ namespace {
          * @param string $path
          * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile $file
          * @param string $name
-         * @param array $options
+         * @param string $visibility
          * @return string|false 
          * @static 
          */
-        public static function putFileAs($path, $file, $name, $options = array()){
-            return \Illuminate\Filesystem\FilesystemAdapter::putFileAs($path, $file, $name, $options);
+        public static function putFileAs($path, $file, $name, $visibility = null){
+            return \Illuminate\Filesystem\FilesystemAdapter::putFileAs($path, $file, $name, $visibility);
         }
         
         /**
@@ -11209,38 +11151,6 @@ namespace {
         }
         
         /**
-         * Set a callback to be used to format the host of generated URLs.
-         *
-         * @param \Closure $callback
-         * @return $this 
-         * @static 
-         */
-        public static function formatHostUsing($callback){
-            return \Illuminate\Routing\UrlGenerator::formatHostUsing($callback);
-        }
-        
-        /**
-         * Set a callback to be used to format the path of generated URLs.
-         *
-         * @param \Closure $callback
-         * @return $this 
-         * @static 
-         */
-        public static function formatPathUsing($callback){
-            return \Illuminate\Routing\UrlGenerator::formatPathUsing($callback);
-        }
-        
-        /**
-         * Get the path formatter being used by the URL generator.
-         *
-         * @return \Closure 
-         * @static 
-         */
-        public static function pathFormatter(){
-            return \Illuminate\Routing\UrlGenerator::pathFormatter();
-        }
-        
-        /**
          * Get the request instance.
          *
          * @return \Illuminate\Http\Request 
@@ -11403,7 +11313,7 @@ namespace {
         /**
          * Get the Translator implementation.
          *
-         * @return \Illuminate\Contracts\Translation\Translator 
+         * @return \Symfony\Component\Translation\TranslatorInterface 
          * @static 
          */
         public static function getTranslator(){
@@ -11675,59 +11585,6 @@ namespace {
         }
         
         /**
-         * Get the parent placeholder for the current request.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function parentPlaceholder(){
-            return \Illuminate\View\Factory::parentPlaceholder();
-        }
-        
-        /**
-         * Start a component rendering process.
-         *
-         * @param string $name
-         * @param array $data
-         * @return void 
-         * @static 
-         */
-        public static function startComponent($name, $data = array()){
-            \Illuminate\View\Factory::startComponent($name, $data);
-        }
-        
-        /**
-         * Render the current component.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function renderComponent(){
-            return \Illuminate\View\Factory::renderComponent();
-        }
-        
-        /**
-         * Start the slot rendering process.
-         *
-         * @param string $name
-         * @return void 
-         * @static 
-         */
-        public static function slot($name){
-            \Illuminate\View\Factory::slot($name);
-        }
-        
-        /**
-         * Save the slot content for rendering.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function endSlot(){
-            \Illuminate\View\Factory::endSlot();
-        }
-        
-        /**
          * Start injecting content into a push section.
          *
          * @param string $section
@@ -11760,27 +11617,6 @@ namespace {
          */
         public static function yieldPushContent($section, $default = ''){
             return \Illuminate\View\Factory::yieldPushContent($section, $default);
-        }
-        
-        /**
-         * Start a translation block.
-         *
-         * @param array $replacements
-         * @return void 
-         * @static 
-         */
-        public static function startTranslation($replacements = array()){
-            \Illuminate\View\Factory::startTranslation($replacements);
-        }
-        
-        /**
-         * Render the current translation.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function renderTranslation(){
-            return \Illuminate\View\Factory::renderTranslation();
         }
         
         /**
@@ -12066,6 +11902,108 @@ namespace {
          */
         public static function getNames(){
             return \Illuminate\View\Factory::getNames();
+        }
+        
+    }
+
+
+    class Entrust extends \Zizaco\Entrust\EntrustFacade{
+        
+        /**
+         * Checks if the current user has a role by its name
+         *
+         * @param string $name Role name.
+         * @return bool 
+         * @static 
+         */
+        public static function hasRole($role, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::hasRole($role, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a permission by its name
+         *
+         * @param string $permission Permission string.
+         * @return bool 
+         * @static 
+         */
+        public static function can($permission, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::can($permission, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a role or permission by its name
+         *
+         * @param array|string $roles The role(s) needed.
+         * @param array|string $permissions The permission(s) needed.
+         * @param array $options The Options.
+         * @return bool 
+         * @static 
+         */
+        public static function ability($roles, $permissions, $options = array()){
+            return \Zizaco\Entrust\Entrust::ability($roles, $permissions, $options);
+        }
+        
+        /**
+         * Get the currently authenticated user or null.
+         *
+         * @return \Zizaco\Entrust\Illuminate\Auth\UserInterface|null 
+         * @static 
+         */
+        public static function user(){
+            return \Zizaco\Entrust\Entrust::user();
+        }
+        
+        /**
+         * Filters a route for a role or set of roles.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles
+         * @return mixed 
+         * @static 
+         */
+        public static function routeNeedsRole($route, $roles, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsRole($route, $roles, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for a permission or set of permissions.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all permissions
+         * @return mixed 
+         * @static 
+         */
+        public static function routeNeedsPermission($route, $permissions, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsPermission($route, $permissions, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for role(s) and/or permission(s).
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles and permissions
+         * @return void 
+         * @static 
+         */
+        public static function routeNeedsRoleOrPermission($route, $roles, $permissions, $result = null, $requireAll = false){
+            \Zizaco\Entrust\Entrust::routeNeedsRoleOrPermission($route, $roles, $permissions, $result, $requireAll);
         }
         
     }

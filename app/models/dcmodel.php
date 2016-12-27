@@ -2,13 +2,35 @@
 
 namespace App\models;
 
-//use LaravelBook\Ardent\Ardent;
 use LaravelArdent\Ardent\Ardent;
 use File;
 
 /**
  * Class dcmodel
+ *
  * @package App\models
+ * @property-read \App\models\dcMdGrp $dcmdgrp
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @property string $title
+ * @property int $ismenu
+ * @property string $icon
+ * @property string $url
+ * @property string $templateurl
+ * @property string $files
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereTitle($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereIsmenu($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereIcon($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereTemplateurl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereFiles($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereUpdatedAt($value)
  */
 class dcmodel extends Ardent
 {
