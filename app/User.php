@@ -83,8 +83,11 @@ class User extends Ardent implements
                          Closure $afterSave = null
     )
     {
-        $this->entrustRolesave($options);
-        return $this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false);
+        if ($this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false)) {
+            Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -117,6 +117,15 @@
             </li>
         </ul>
     </script>
+    <form class="sidebar-search sidebar-search-bordered" action="extra_search.html" method="POST">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="搜索...">
+					<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit">
+                        <i class="icon-magnifier"></i></a>
+					</span>
+        </div>
+    </form>
 
     <ul ng-repeat="tree in ::mdTreeJson " class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true"
         data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
@@ -126,15 +135,6 @@
             <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
             <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
 
-            <form class="sidebar-search sidebar-search-bordered" action="extra_search.html" method="POST">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="搜索...">
-					<span class="input-group-btn">
-					<a href="javascript:;" class="btn submit">
-                        <i class="icon-magnifier"></i></a>
-					</span>
-                </div>
-            </form>
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
         </li>
         <li ng-repeat="tree in ::tree.children" ng-include="'categoryTree'"></li>

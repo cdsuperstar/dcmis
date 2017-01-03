@@ -30,6 +30,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
+
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -47,6 +49,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="../assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="../assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../assets/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
@@ -151,22 +155,29 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"
-        type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE JQUERY PLUGINS -->
 <!-- BEGIN CORE ANGULARJS PLUGINS -->
-<script src="../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
+{{--<script src="../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>--}}
+<script src="/js/common/angular.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+
+<script src="/js/common/lodash.min.js" type="text/javascript"></script>
+<script src="/js/common/restangular.min.js" type="text/javascript"></script>
+<script src="/js/common/ui-grid.min.js" type="text/javascript"></script>
+<script src="/js/common/angular-animate.min.js" type="text/javascript"></script>
 <!-- END CORE ANGULARJS PLUGINS -->
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+
+
 <script src="js/main" type="text/javascript"></script>
 <script src="js/directives.js" type="text/javascript"></script>
 <!-- END APP LEVEL ANGULARJS SCRIPTS -->
@@ -175,7 +186,11 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+
+<script src="../assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
+<!--
 <script src="../assets/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
+-->
 <!-- END APP LEVEL JQUERY SCRIPTS -->
 <!-- END JAVASCRIPTS -->
 </body>
