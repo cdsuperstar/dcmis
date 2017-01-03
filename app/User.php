@@ -8,6 +8,11 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\Authenticatable;
 use LaravelArdent\Ardent\Ardent;
 
+
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
+
+
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -83,11 +88,9 @@ class User extends Ardent implements
                          Closure $afterSave = null
     )
     {
-        if ($this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false)) {
-            Cache::tags(Config::get('entrust.permission_role_table'))->flush();
-        } else {
-            return false;
-        }
+        Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+
+        return $this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false);
     }
 
     /**
