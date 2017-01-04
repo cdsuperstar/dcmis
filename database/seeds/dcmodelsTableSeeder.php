@@ -69,8 +69,9 @@ INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, fi
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (4, 'sys-users', '用户管理', 1, 'icon-users', '/sys-users.html', 'dcviews/sys-users', '
                             ''views/sys-users/sys-users.css'',
 
+                            ''views/sys-users/sys-users.js'',
                             ''js/controllers/GeneralPageController.js'',
-                            ''views/sys-users/sys-users.js'',', '1995-05-11 02:20:06', '2010-12-29 11:58:31');
+                            ', '1995-05-11 02:20:06', '2010-12-29 11:58:31');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (3, 'sys-setting', '系统设置', 1, 'icon-settings', null, null, '', '1975-01-03 21:45:55', '1980-04-24 22:26:43');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (13, 'sys-profile', '个人信息', 1, 'icon-user-following', '/sys-profile.html', 'dcviews/sys-profile', '                            ''../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css'',
                             ''../assets/global/plugins/typeahead/typeahead.css'',

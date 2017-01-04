@@ -1,10 +1,9 @@
 'use strict';
 
-MetronicApp.controller('userCtrl',
-    ['$scope', 'Restangular',
-        function ($scope, Restangular) {
+angular.module("MetronicApp").controller('dcuserCtrl',
+    ['$scope', 'Restangular','$q',
+        function ($scope, Restangular,$q) {
             var baseAccounts = Restangular.all('/users');
-
             $scope.addData = function () {
                 console.log($scope.gridApi.rowEdit.getDirtyRows());
             };
@@ -26,23 +25,35 @@ MetronicApp.controller('userCtrl',
                     }
                 );
             };
-
-            $scope.saveRow = function (rowEntity) {
-                var userWithId = _.find($scope.gridOptions.data, function (user) {
-                    return user.id === rowEntity.id;
+            //$scope.editdataids = [];
+            $scope.editData = function () {
+                var toEditRows=$scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
+                toEditRows.forEach(function(edituser){
+                    var userWithId = _.find($scope.gridOptions.data, function (user) {
+                        return user.id === edituser.entity.id;
+                    });
+                    userWithId.password_confirmation = userWithId.password;
+                    //console.log(userWithId);
+                    userWithId.put().then(function (res) {
+                        console.log(res);
+                        if (res.success) {
+                            showMsg(res.messages.toString(), '信息', 'lime');
+                            var dataRows = toEditRows.map( function( gridRow ) { if(userWithId.id === gridRow.entity.id)return gridRow.entity; });
+                            $scope.gridApi.rowEdit.setRowsClean( dataRows );
+                        } else {
+                            showMsg(res.errors.toString(), '错误', 'ruby');
+                        }
+                    });
                 });
-                userWithId.password_confirmation = userWithId.password;
-                $scope.gridApi.rowEdit.setSavePromise(rowEntity, userWithId.put().then(function(res){
-                    console.log(res);
-                    if (res.success) {
-                        rowEntity = JSON.parse(res.data);
-                        showMsg(res.messages.toString(), '信息', 'lime');
-                    } else {
-                        // TODO add error message to system
-                        showMsg(res.errors.toString(), '错误', 'ruby');
-                        console.log('update failed!');
-                    }
-                }));
+                //$scope.editdataids=[];
+
+            }
+            $scope.saveRow = function (rowEntity) {
+                //$scope.editdataids.push(rowEntity.id);
+                var promise = $q.defer();
+                $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
+                //promise.resolve();
+                promise.reject();
             };
 
             $scope.gridOptions = {
@@ -70,7 +81,6 @@ MetronicApp.controller('userCtrl',
             baseAccounts.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                //console.log($scope.gridOptions.data);
             });
 
         }

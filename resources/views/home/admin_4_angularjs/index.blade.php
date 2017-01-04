@@ -162,8 +162,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE JQUERY PLUGINS -->
 <!-- BEGIN CORE ANGULARJS PLUGINS -->
-{{--<script src="../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>--}}
-<script src="/js/common/angular.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
+{{--<script src="/js/common/angular.min.js" type="text/javascript"></script>--}}
 <script src="../assets/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>

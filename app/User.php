@@ -41,13 +41,13 @@ class User extends Ardent implements
         EntrustRoleTrait::save as entrustRolesave;
     }
     public static $rules = array(
-        'name' => 'required|between:4,16',
+        'name' => 'required|between:1,16',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed',
         'password_confirmation' => ''
     );
     public static $angularrules = array(
-        'name' => 'required|between:4,16|min_len:4|max_len:16',
+        'name' => 'required|between:4,16|min_len:1|max_len:16',
         'email' => 'required|email|unique:users',
         'password' => 'required|min_len:6',
         'password_confirmation' => 'match:dcEdition.password,Password|required',

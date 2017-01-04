@@ -49,7 +49,7 @@ class userController extends Controller
             }
             if ($user->updateUniques()) {
                 return response()->json([
-                    'messages' => trans('users.savesuccess'),
+                    'messages' => trans('users.savesuccess',["data"=>$user->name]),
                     'success' => true,
                     'data' => $user->toJson(),
                 ]);
@@ -106,7 +106,7 @@ class userController extends Controller
 
             if ($user->updateUniques()) {
                 return response()->json([
-                    'messages' => trans('users.updatesuccess'),
+                    'messages' => trans('users.updatesuccess',["data"=>$user->name]),
                     'success' => true,
                     'data' => $user->toJson(),
                 ]);
