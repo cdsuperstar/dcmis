@@ -16,7 +16,7 @@ class dcmodelController extends Controller
      *
      * @return Response
      */
-    public function getData($id = '')
+    public function index($id = '')
     {
         //
         if ($id == '') {
@@ -75,7 +75,7 @@ class dcmodelController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function postData(Request $request)
+    public function store(Request $request)
     {
         //
         $recData = new dcmodel();
@@ -119,7 +119,7 @@ class dcmodelController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function putData(Request $request, $id)
+    public function update(Request $request, $id)
     {
         if (!$id) return false;
 
@@ -150,7 +150,7 @@ class dcmodelController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function deleteData($id)
+    public function destroy($id)
     {
         //
         $aTodel = array();

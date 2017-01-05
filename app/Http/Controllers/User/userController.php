@@ -32,6 +32,10 @@ class userController extends Controller
      */
     public function create()
     {
+        return view('assets.edition')->with([
+            'fields' => User::$angularrules,
+            'title' => '用户',
+        ]);
     }
 
     /**
@@ -47,12 +51,14 @@ class userController extends Controller
             foreach ($request->input() as $key => $val) {
                 $user->$key = $val;
             }
-            if ($user->updateUniques()) {
-                return response()->json([
-                    'messages' => trans('users.savesuccess',["data"=>$user->name]),
-                    'success' => true,
-                    'data' => $user->toJson(),
-                ]);
+
+            if ($user->save()) {
+                return response()->json(array_merge([
+                        'messages' => trans('users.savesuccess', ["data" => $user->name]),
+                        'success' => true,
+                    ], $user->toArray()
+                    )
+                );
             }
         }
         return response()->json(['errors' => $user->errors()->all()]);
@@ -65,7 +71,7 @@ class userController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  String $appUser
+     * @param  String $id
      * @return \Illuminate\Http\Response
      */
     public function show(String $id)
@@ -99,14 +105,15 @@ class userController extends Controller
         if (!$id) return false;
 
         $user = User::find($id);
-       if ($user) {
+        if ($user) {
             foreach ($request->input() as $key => $val) {
                 $user->$key = $val;
             }
+            Log::info($user->toArray());
 
             if ($user->updateUniques()) {
                 return response()->json([
-                    'messages' => trans('users.updatesuccess',["data"=>$user->name]),
+                    'messages' => trans('users.updatesuccess', ["data" => $user->name]),
                     'success' => true,
                     'data' => $user->toJson(),
                 ]);
@@ -136,7 +143,7 @@ class userController extends Controller
         $deletedRows = User::destroy($aTodel);
         if ($deletedRows) {
             return response()->json([
-                'messages' => trans('users.deletesuccess', ['rows' => $deletedRows." with id $id"]),
+                'messages' => trans('users.deletesuccess', ['rows' => $deletedRows . " with id $id"]),
                 'success' => true,
                 'data' => $deletedRows,
             ]);

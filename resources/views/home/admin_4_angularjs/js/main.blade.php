@@ -11,12 +11,19 @@ var MetronicApp = angular.module("MetronicApp", [
     "restangular",
     "ngTouch",
     "ui.grid",
+    "ngDialog",
     "ui.grid.edit",
     "ui.grid.rowEdit",
     "ui.grid.pagination",
     "ui.grid.selection",
     "ui.grid.moveColumns"
 ]);
+
+MetronicApp.value('validationConfig', {
+    debounce: 500,
+    displayOnlyLastErrorMsg: false,
+    preValidateFormElements: false
+});
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 MetronicApp.config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {

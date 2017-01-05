@@ -56,7 +56,6 @@ class User extends Ardent implements
     public $autoHydrateEntityFromInput = true;
     public static $passwordAttributes = array('password');
     public $autoHashPasswordAttributes = true;
-
     /**
      * hash new password
      * @return bool
@@ -91,6 +90,16 @@ class User extends Ardent implements
         Cache::tags(Config::get('entrust.permission_role_table'))->flush();
 
         return $this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false);
+    }
+
+    function __construct($attributes = array())
+    {
+        parent::__construct($attributes);
+
+        $this->purgeFilters[] = function ($key) {
+            $purge = array('messages', 'success');
+            return !in_array($key, $purge);
+        };
     }
 
     /**
