@@ -1,19 +1,17 @@
 <!-- BEGIN PAGE HEADER-->
 <div class="page-bar">
-    <ul class="page-breadcrumb">
+    <ul class="page-breadcrumb breadcrumb">
         <li>
-            <i class="fa fa-home"></i>
-            <a href="#/dashboard.html">主页</a>
+            <a ui-sref="dashboard">主页</a>
             @foreach($aTitle as $title)
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <a href="#">{{ $title }}</a>
+                <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">{{ $title }}</a>
             @endforeach
-            </li>
-                    <!-- BEGIN SYS PATH -->
-            <!-- END SYS PATH -->
+        </li>
     </ul>
+
     <!--
     <div class="page-toolbar">
         <div class="btn-group pull-right">
