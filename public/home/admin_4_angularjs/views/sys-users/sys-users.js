@@ -96,14 +96,16 @@ angular.module("MetronicApp").controller('dcuserCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: true,
+                enableCellEditOnFocus:true,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false},
-                    {name: 'name', field: 'name'},
-                    {name: 'email', field: 'email'},
+                    {name: 'name', field: 'name',enableCellEdit: true},
+                    {name: 'email', field: 'email',enableCellEdit: true},
                     {
                         name: 'password',
                         field: 'password',
-                        cellTemplate: '<div class="ui-grid-cell-contents">******</div>'
+                        cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
+                        enableCellEdit: true
                     }
                 ],
                 paginationPageSizes: [10, 30, 50],

@@ -16,7 +16,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.grid.rowEdit",
     "ui.grid.pagination",
     "ui.grid.selection",
-    "ui.grid.moveColumns"
+    "ui.grid.moveColumns",
+    "ui.grid.cellNav"
 ]);
 
 MetronicApp.value('validationConfig', {
