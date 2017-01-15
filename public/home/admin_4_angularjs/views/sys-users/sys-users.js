@@ -3,16 +3,9 @@
 angular.module("MetronicApp").controller('dcuserCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog',
         function ($scope, Restangular, $q, $filter, ngDialog) {
-            var baseAccounts = Restangular.all('/users');
+            var tableDatas = Restangular.all('/users');
 
             $scope.addData = function () {
-                //var n = $scope.gridOpts.data.length + 1;
-                //$scope.gridOptions.data.push({
-                //    "id": "",
-                //    "name": "" ,
-                //    "email": "",
-                //    "password": "",
-                //});
                 ngDialog.openConfirm({
                     template: '/users/create',
                     className: 'ngdialog-theme-default',
@@ -25,9 +18,9 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     overlay: false,
                     closeByEscape: true
                 }).then(function (dcEdition) {
-                    console.log("save success", dcEdition);
+                    //console.log("save success", dcEdition);
 
-                    baseAccounts.post(dcEdition).then(
+                    tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
                                 $scope.gridOptions.data.push(res);
@@ -99,8 +92,8 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 enableCellEditOnFocus:true,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false},
-                    {name: 'name', field: 'name',enableCellEdit: true},
-                    {name: 'email', field: 'email',enableCellEdit: true},
+                    {name: '姓名', field: 'name',enableCellEdit: true},
+                    {name: '邮箱', field: 'email',enableCellEdit: true},
                     {
                         name: 'password',
                         field: 'password',
@@ -117,15 +110,13 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 },
             };
 
-            baseAccounts.getList().then(function (accounts) {
+            tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                console.log( $scope.gridOptions.data);
+                //console.log( $scope.gridOptions.data);
             });
 
         }
     ]
 )
 ;
-
-//showMsg('hello','测试','ruby',10000);
