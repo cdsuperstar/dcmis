@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module("MetronicApp").controller('dcuserCtrl',
-    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog',
-        function ($scope, Restangular, $q, $filter, ngDialog) {
+    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants',
+        function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants) {
             var tableDatas = Restangular.all('/users');
 
             $scope.addData = function () {
@@ -88,10 +88,10 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             $scope.gridOptions = {
                 enableSorting: true,
-                enableFiltering: true,
+                enableFiltering: false,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false},
+                    {name: 'id', field: 'id', enableCellEdit: false,enableFiltering: false,},
                     {name: '姓名', field: 'name',enableCellEdit: true},
                     {name: '邮箱', field: 'email',enableCellEdit: true},
                     {
@@ -109,6 +109,20 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 },
             };
+
+            $scope.toggleFiltering = function(){
+                $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+            };
+
+            $scope.refreshData = function(){
+                $scope.gridOptions.data = [];
+                tableDatas.getList().then(function (accounts) {
+                    var allAccounts = accounts;
+                    $scope.gridOptions.data = allAccounts;
+                    console.log( $scope.gridOptions.data);
+                });
+            }
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;

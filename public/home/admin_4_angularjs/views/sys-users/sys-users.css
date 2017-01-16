@@ -20,13 +20,13 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-bottom: 0;
-    top:-700px;
+    top:-580px;
     position: relative;
     width: 800px;
 }
 .jquery-notific8-container.top { top: 60px; }
 
-.userGrid {
+.grid {
     width: 600px;
-    height: 500px;
+    height: 300px;
 }
