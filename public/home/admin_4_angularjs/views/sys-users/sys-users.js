@@ -89,11 +89,12 @@ angular.module("MetronicApp").controller('dcuserCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
+                showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableFiltering: false,},
-                    {name: '姓名', field: 'name',enableCellEdit: true},
-                    {name: '邮箱', field: 'email',enableCellEdit: true},
+                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<div class="ui-grid-cell-contents" style="color: #000000">合计</div>' },
+                    {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
                     {
                         name: 'password',
                         field: 'password',
@@ -109,6 +110,8 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 },
             };
+
+            $scope.gridOptions.enableGridMenu = true;
 
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
