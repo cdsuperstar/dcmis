@@ -26,14 +26,12 @@ Route::group(['prefix' => '/home/{layout}'], function () {
     Route::get('js/main', 'HomeController@jsMain');
 });
 
-//Route::group(['prefix'=>'/dcmodel'],function(){
-//    Route::get('list','dcmodel\dcmodelController@getList');
-//    Route::get('data/{id}','dcmodel\dcmodelController@getData');
-//    Route::get('movenode','dcmodel\dcmodelController@postMovenode');
-//    Route::get('tree','dcmodel\dcmodelController@getTree');
-//    Route::get('edition','dcmodel\dcmodelController@getEdition');
-//});
-Route::resource('dcmodel','dcmodel\dcmodelController');
+Route::resource('dcmodels','dcmodel\dcmodelController');
+Route::group(['prefix' => '/dcmodels/dcmodelMove'], function () {
+    Route::get('tree','dcmodel\dcmodelController@getTree');
+    Route::post('movenode','dcmodel\dcmodelController@postMovenode');
+});
+
 Route::resource('users', 'User\userController');
 /*
 Route::group(['prefix'=>'/user'],function(){

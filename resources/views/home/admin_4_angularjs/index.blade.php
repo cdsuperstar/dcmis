@@ -175,6 +175,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/js/common/restangular.min.js" type="text/javascript"></script>
 <script src="/js/common/ui-grid.min.js" type="text/javascript"></script>
 <script src="/js/common/ngDialog.min.js" type="text/javascript"></script>
+<script src="/js/common/angular-animate.min.js" type="text/javascript"></script>
+
 <!-- END CORE ANGULARJS PLUGINS -->
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 

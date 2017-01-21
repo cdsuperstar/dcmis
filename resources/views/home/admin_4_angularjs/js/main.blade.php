@@ -4,6 +4,7 @@
 
 /* Metronic App */
 var MetronicApp = angular.module("MetronicApp", [
+    "ngAnimate",
     "ui.router",
     "ui.bootstrap",
     "oc.lazyLoad",
@@ -17,6 +18,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.grid.pagination",
     "ui.grid.selection",
     "ui.grid.moveColumns",
+    "ui.grid.resizeColumns",
     "ui.grid.cellNav"
 ]);
 
@@ -70,6 +72,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 //App.initComponents(); // init core components
 //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
+    $scope.mdTreeJson = JSON.parse('{!! addslashes($mdTreeJson) !!}');
 }])
 ;
 /***
@@ -88,7 +91,6 @@ MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
 /* Setup Layout Part - Sidebar */
 MetronicApp.controller('SidebarController', ['$state', '$scope', function ($state, $scope) {
     $scope.loaded = false;
-    $scope.mdTreeJson = JSON.parse('{!! addslashes($mdTreeJson) !!}');
     $scope.$on('$includeContentLoaded', function () {
         if (!$scope.loaded)Layout.initSidebar($state); // init sidebar
         $scope.loaded = true;
@@ -123,6 +125,22 @@ MetronicApp.controller('FooterController', ['$scope', function ($scope) {
         Layout.initFooter(); // init footer
     });
 }]);
+
+MetronicApp.directive('confirmationNeeded', function () {
+    return {
+        priority: 1,
+        terminal: true,
+        link: function (scope, element, attr) {
+            var msg = attr.confirmationNeeded || "确定要删除该条数据吗？";
+            var clickAction = attr.ngClick;
+            element.bind('click', function () {
+                if (window.confirm(msg)) {
+                    scope.$eval(clickAction)
+                }
+            });
+        }
+    };
+});
 
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {

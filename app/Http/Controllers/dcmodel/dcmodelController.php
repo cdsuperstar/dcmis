@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Log;
 
 class dcmodelController extends Controller
 {
@@ -45,11 +46,13 @@ class dcmodelController extends Controller
 
     public function getTree()
     {
+        dcMdGrp::rebuild(true);
         $tree = dcMdGrp::leftjoin('dcmodels', 'dcmdgrps.dcmodel_id', '=', 'dcmodels.id')->orderby('dcmdgrps.lft', 'asc')->get(['dcmdgrps.id as id', 'dcmdgrps.parent_id as parent', 'dcmodels.title as text', 'dcmodels.icon', 'dcmdgrps.dcmodel_id as data']);
         foreach ($tree as $node) {
             if ($node->parent == null) {
                 $node->parent = '#';
             }
+
         }
         return response()->json($tree);
     }
@@ -60,7 +63,12 @@ class dcmodelController extends Controller
         return response()->json($datas);
     }
 
-    public function getEdition()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
 
         return view('assets.edition')->with([
@@ -84,17 +92,17 @@ class dcmodelController extends Controller
             $recData->fill($request->input());
             if ($request->input('modelcss'))
                 $recData->files = $request->input('modelcss');
-            $recData->files .= sprintf("'/views/%s/%s.css',", $request->input('name'), $request->input('name'));
-            if ($request->input('modelscript'))
-                $recData->files .= $request->input('modelscript');
-            $recData->files .= sprintf("'/views/%s/%s.js',", $request->input('name'), $request->input('name'));
+            $recData->files .= sprintf("'views/%s/%s.css',", $request->input('name'), $request->input('name'));
+//            if ($request->input('modelscript'))
+//                $recData->files .= $request->input('modelscript');
+            $recData->files .= sprintf("'views/%s/%s.js',", $request->input('name'), $request->input('name'));
             $recData->files .= "'/js/controllers/GeneralPageController.js',";
 
             $recData->url = '/' . $request->input('name') . '.html';
             $recData->templateurl = '/dcassets/templateurl/' . $request->input('name');
 
             if ($recData->save()) {
-                $recData->makeModel($request->input('template'));
+//                $recData->makeModel($request->input('template'));
                 $md = dcmodel::where('name', '=', $recData->name)->first();
 
                 $pNode = dcMdGrp::where('id', '=', 1)->first();
@@ -130,7 +138,7 @@ class dcmodelController extends Controller
                 $recData->$key = $val;
             }
             if ($recData->updateUniques()) {
-                $recData->updateModel($oldName);
+//                $recData->updateModel($oldName);
                 return response()->json([
                     'messages' => trans('dcmodels.updatesuccess'),
                     'success' => true,
@@ -163,7 +171,7 @@ class dcmodelController extends Controller
 
         foreach ($aTodel as $key) {
             $recData = dcmodel::findOrFail($key);
-            $recData->delModel();
+//            $recData->delModel();
         }
         $deletedRows = dcmodel::destroy($aTodel);
 
