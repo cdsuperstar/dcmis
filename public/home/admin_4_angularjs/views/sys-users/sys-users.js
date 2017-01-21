@@ -18,7 +18,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     overlay: false,
                     closeByEscape: true
                 }).then(function (dcEdition) {
-                    //console.log("save success", dcEdition);
 
                     tableDatas.post(dcEdition).then(
                         function (res) {
@@ -32,14 +31,12 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         }
                     );
                 }, function (dcEdition) {
-                    console.log('Modal promise rejected. Reason: ', dcEdition);
                 });
             };
 
             $scope.delData = function () {
                 var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
                 selectUsers.forEach(function (deluser) {
-                        //console.log(deluser);
                         deluser.entity.remove().then(function (res) {
                             if (res.success) {
                                 $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
@@ -48,7 +45,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                             else {
                                 showMsg(res.errors.toString(), '错误', 'ruby');
                             }
-                            //console.log(res);
                         });
                     }
                 );
@@ -61,9 +57,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         return user.id === edituser.entity.id;
                     });
                     userWithId.password_confirmation = userWithId.password;
-                    //console.log(userWithId);
                     userWithId.put().then(function (res) {
-                        //console.log(res);
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
                             var dataRows = toEditRows.map(function (gridRow) {
@@ -123,14 +117,12 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 tableDatas.getList().then(function (accounts) {
                     var allAccounts = accounts;
                     $scope.gridOptions.data = allAccounts;
-                    console.log( $scope.gridOptions.data);
                 });
             }
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                //console.log( $scope.gridOptions.data);
             });
 
         }
