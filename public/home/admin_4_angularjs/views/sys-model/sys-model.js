@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module("MetronicApp").controller('dcmodelCtrl',
-    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog',
-        function ($scope, Restangular, $q, $filter, ngDialog) {
+    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','i18nService',
+        function ($scope, Restangular, $q, $filter, ngDialog,i18nService) {
             var tableDatas = Restangular.all('/dcmodels');
+            i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -18,7 +19,6 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     overlay: false,
                     closeByEscape: true
                 }).then(function (dcEdition) {
-                    //console.log("save success", dcEdition);
 
                     tableDatas.post(dcEdition).then(
                         function (res) {
@@ -144,7 +144,6 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                         }
                     });
                 });
-                //$scope.editdataids=[];
 
             }
             $scope.saveRow = function (rowEntity) {

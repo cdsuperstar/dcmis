@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module("MetronicApp").controller('dcuserCtrl',
-    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants',
-        function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants) {
+    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
+        function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
+            i18nService.setCurrentLang('zh-cn');
+
             var tableDatas = Restangular.all('/users');
 
             $scope.addData = function () {
@@ -87,7 +89,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
                     {
-                        name: 'password',
+                        name: '密码',
                         field: 'password',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true

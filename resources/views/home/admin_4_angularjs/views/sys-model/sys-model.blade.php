@@ -4,7 +4,7 @@
         <div class="portlet red-pink box">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-puzzle"></i>模块树编辑器
+                    <i class="icon-puzzle"></i>菜单树编辑器
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="remove" ng-click="closeThisDialog()">
