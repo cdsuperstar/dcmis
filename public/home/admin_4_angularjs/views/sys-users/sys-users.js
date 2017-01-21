@@ -60,10 +60,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     userWithId.put().then(function (res) {
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
-                            var dataRows = toEditRows.map(function (gridRow) {
-                                if (userWithId.id === gridRow.entity.id)return gridRow.entity;
-                            });
-                            $scope.gridApi.rowEdit.setRowsClean(dataRows);
+                            $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
                         } else {
                             showMsg(res.errors.toString(), '错误', 'ruby');
                         }
