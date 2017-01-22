@@ -81,7 +81,6 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                                     'data': {
                                         'url': '/dcmodels/dcmodelMove/tree',
                                         'data': function (node) {
-                                            console.log(node);
                                             return { 'id' : node.id };
                                         }
                                     }

@@ -96,10 +96,10 @@ class dcmodelController extends Controller
 //            if ($request->input('modelscript'))
 //                $recData->files .= $request->input('modelscript');
             $recData->files .= sprintf("'views/%s/%s.js',", $request->input('name'), $request->input('name'));
-            $recData->files .= "'/js/controllers/GeneralPageController.js',";
+            $recData->files .= "'js/controllers/GeneralPageController.js',";
 
             $recData->url = '/' . $request->input('name') . '.html';
-            $recData->templateurl = '/dcassets/templateurl/' . $request->input('name');
+            $recData->templateurl = 'dcviews/' . $request->input('name');
 
             if ($recData->save()) {
 //                $recData->makeModel($request->input('template'));
@@ -108,11 +108,10 @@ class dcmodelController extends Controller
                 $pNode = dcMdGrp::where('id', '=', 1)->first();
                 $pNode->children()->create(['dcmodel_id' => $md->id]);
 
-                return response()->json([
+                return response()->json(array_merge([
                     'messages' => trans('dcmodels.savesuccess'),
-                    'success' => true,
-                    'data' => $recData->toJson(),
-                ]);
+                    'success' => true],$recData->toArray())
+                );
             }
         }
 

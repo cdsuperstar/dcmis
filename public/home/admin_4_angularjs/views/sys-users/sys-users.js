@@ -85,7 +85,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<div class="ui-grid-cell-contents" style="color: #000000">合计</div>' },
+                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
                     {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
                     {
@@ -95,7 +95,10 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         enableCellEdit: true
                     }
                 ],
+                enablePagination: true, //是否分页，默认为true
+                enablePaginationControls: true, //使用默认的底部分页
                 paginationPageSizes: [10, 30, 50],
+                paginationCurrentPage: 1,
                 paginationPageSize: 10,
                 data: [],
                 onRegisterApi: function (gridApi) {
