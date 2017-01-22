@@ -19,18 +19,6 @@ class dcmodelsTableSeeder extends Seeder
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (1, 'root', 'System', 0, '', '', '', '', '2015-01-15 06:17:09', '1972-09-12 10:06:59');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (8, 'user-console', '个人中心', 1, 'icon-user', '', '', '', '1971-10-28 05:06:47', '2015-09-01 12:08:19');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (2, 'dashboard', '仪表盘', 1, 'icon-home', '/dashboard.html', 'dcviews/dashboard', '                            ''js/controllers/GeneralPageController.js''', '1991-05-16 20:15:46', '2011-07-13 22:06:19');
-INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (6, 'sys-addmodel', '模块编辑', 0, 'icon-direction', '/sys-addmodel.html', 'dcviews/sys-addmodel', '                            ''../assets/global/plugins/select2/select2.css'',
-                            ''../assets/global/plugins/bootstrap-select/bootstrap-select.min.css'',
-                            ''../assets/global/plugins/jquery-multi-select/css/multi-select.css'',
-                            ''views/sys-addmodel/sys-addmodel.css'',
-
-                            ''../assets/global/plugins/jquery-validation/js/jquery.validate.min.js'',
-                            ''../assets/global/plugins/jquery-validation/js/additional-methods.min.js'',
-                            ''../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js'',
-                            ''../assets/global/plugins/select2/select2.min.js'',
-                            ''../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js'',
-                            ''views/sys-addmodel/sys-addmodel.js'',
-                            ''js/controllers/GeneralPageController.js''', '1974-11-23 00:17:10', '2015-03-29 02:53:37');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (7, 'sys-model', '模块管理', 1, 'icon-puzzle', '/sys-model.html', 'dcviews/sys-model', '
                             ''../assets/global/plugins/jstree/dist/themes/default/style.min.css'',
                             ''views/sys-model/sys-model.css'',
@@ -39,30 +27,6 @@ INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, fi
                             ''views/sys-model/sys-model.js'',
                             ''js/controllers/GeneralPageController.js''
                             ', '2002-12-15 20:25:38', '1978-11-19 13:00:49');
-INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (5, 'sys-role', '角色管理', 1, 'icon-globe', '/sys-role.html', 'dcviews/sys-role', '                            ''../assets/global/plugins/jstree/dist/themes/default/style.min.css'',
-
-                            ''../assets/global/plugins/jstree/dist/jstree.min.js'',
-                            ''../assets/admin/pages/scripts/ui-tree.js'',
-                            ''views/sys-role/sys-role.js'',
-                            ''js/controllers/GeneralPageController.js''', '1989-04-28 02:26:40', '2004-03-02 14:47:52');
-INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (9, 'sys-msg', '消息管理', 1, 'icon-envelope-open', '/sys-msg.html', 'dcviews/sys-msg', '
-                    ''../assets/admin/pages/css/timeline.css'',
-                    ''../assets/global/plugins/bootstrap-select/bootstrap-select.min.css'',
-                    ''../assets/global/plugins/select2/select2.css'',
-                    ''../assets/global/plugins/jquery-multi-select/css/multi-select.css'',
-                    ''views/sys-msg/sys-msg.css'',
-
-                    ''../assets/global/plugins/bootstrap-select/bootstrap-select.min.js'',
-                    ''../assets/global/plugins/select2/select2.min.js'',
-                    ''../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js'',
-                    ''views/sys-msg/sys-msg.js'',
-                    ''js/controllers/GeneralPageController.js'',', '1999-09-26 08:41:30', '1996-03-04 03:23:24');
-INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (4, 'sys-users', '用户管理', 1, 'icon-users', '/sys-users.html', 'dcviews/sys-users', '
-                            ''views/sys-users/sys-users.css'',
-
-                            ''views/sys-users/sys-users.js'',
-                            ''js/controllers/GeneralPageController.js'',
-                            ', '1995-05-11 02:20:06', '2010-12-29 11:58:31');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (3, 'sys-setting', '系统设置', 1, 'icon-settings', null, null, '', '1975-01-03 21:45:55', '1980-04-24 22:26:43');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (13, 'sys-profile', '个人信息', 1, 'icon-user-following', '/sys-profile.html', 'dcviews/sys-profile', '                            ''../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css'',
                             ''../assets/global/plugins/typeahead/typeahead.css'',
@@ -79,14 +43,46 @@ INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, fi
                             ''../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'',
                             ''views/sys-profile/sys-profile.js'',
                             ''js/controllers/GeneralPageController.js''', '2015-09-01 01:19:17', '2015-09-01 12:08:01');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (2, 1, 2, 3, 1, 2, '2015-08-23 06:03:39', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (4, 1, 4, 5, 1, 3, '2015-08-23 06:10:09', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (6, 1, 6, 7, 1, 4, '2015-08-23 06:13:42', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (7, 1, 8, 9, 1, 5, '2015-08-23 06:13:47', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (5, 1, 10, 11, 1, 9, '2015-08-23 06:10:14', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (9, 1, 12, 13, 1, 7, '2015-08-23 06:14:39', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (8, 1, 14, 15, 1, 6, '2015-08-23 06:13:52', '2017-01-15 16:14:44');
-INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (1, null, 1, 16, 0, 1, '2015-08-23 06:01:37', '2017-01-15 16:14:44');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (15, 'user-management', '用户管理', 1, 'icon-users', '/user-management.html', 'dcviews/user-management', '''views/user-management/user-management.css'',''views/user-management/user-management.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:15:04', '2017-01-22 08:15:04');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (16, 'user-profile', '用户信息管理', 1, 'icon-user-following', '/user-profile.html', 'dcviews/user-profile', '''views/user-profile/user-profile.css'',''views/user-profile/user-profile.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:16:28', '2017-01-22 08:16:28');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (4, 'sys-users', '系统用户管理', 1, 'icon-user', '/sys-users.html', 'dcviews/sys-users', '
+                            ''views/sys-users/sys-users.css'',
+
+                            ''views/sys-users/sys-users.js'',
+                            ''js/controllers/GeneralPageController.js'',
+                            ', '1995-05-11 02:20:06', '2010-12-29 11:58:31');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (5, 'sys-role', '角色管理', 1, 'icon-globe', '/sys-role.html', 'dcviews/sys-role', '''views/sys-role/sys-role.css'', ''views/sys-role/sys-role.js'',                            ''js/controllers/GeneralPageController.js''', '1989-04-28 02:26:40', '2017-01-22 08:22:51');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (9, 'sys-msg', '消息管理', 1, 'icon-envelope-open', '/sys-msg.html', 'dcviews/sys-msg', '''views/sys-msg/sys-msg.css'', ''views/sys-msg/sys-msg.js'', ''js/controllers/GeneralPageController.js'',', '1999-09-26 08:41:30', '2017-01-22 08:24:13');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (20, 'user-department', '用户机构设置', 1, 'icon-social-dropbox', '/user-department.html', 'dcviews/user-department', '''views/user-department/user-department.css'',''views/user-department/user-department.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:48:46', '2017-01-22 08:48:46');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (26, 'icon-basket-loaded-list', '采购管理列表', 1, 'icon-book-open', '/icon-basket-loaded-list.html', 'dcviews/icon-basket-loaded-list', '''views/icon-basket-loaded-list/icon-basket-loaded-list.css'',''views/icon-basket-loaded-list/icon-basket-loaded-list.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 09:14:14', '2017-01-22 09:14:14');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (18, 'am-budget-management', '发起预算申报', 1, 'icon-screen-tablet', '/am-budget-management.html', 'dcviews/am-budget-management', '''views/am-budget-management/am-budget-management.css'',''views/am-budget-management/am-budget-management.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:43:00', '2017-01-22 08:54:29');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (17, 'am-budget', '预算管理', 1, 'icon-credit-card', '/am-budget.html', 'dcviews/am-budget', '''views/am-budget/am-budget.css'',''views/am-budget/am-budget.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:40:12', '2017-01-22 08:55:08');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (19, 'am-budget-list', '预算申报管理', 1, 'icon-notebook', '/am-budget-list.html', 'dcviews/am-budget-list', '''views/am-budget-list/am-budget-list.css'',''views/am-budget-list/am-budget-list.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:43:57', '2017-01-22 08:55:08');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (21, 'am-assets-management', '资产管理', 1, 'icon-briefcase', '/am-assets-management.html', 'dcviews/am-assets-management', '''views/am-assets-management/am-assets-management.css'',''views/am-assets-management/am-assets-management.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 08:59:10', '2017-01-22 08:59:10');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (22, 'am-assets-management-add', '登记固定资产', 1, 'icon-note', '/am-assets-management-add.html', 'dcviews/am-assets-management-add', '''views/am-assets-management-add/am-assets-management-add.css'',''views/am-assets-management-add/am-assets-management-add.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 09:01:04', '2017-01-22 09:01:04');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (23, 'am-assets-management-list', '固定资产列表', 1, 'icon-equalizer', '/am-assets-management-list.html', 'dcviews/am-assets-management-list', '''views/am-assets-management-list/am-assets-management-list.css'',''views/am-assets-management-list/am-assets-management-list.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 09:01:50', '2017-01-22 09:01:50');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (24, 'am-purchasing-management', '采购管理', 1, 'icon-basket-loaded', '/am-purchasing-management.html', 'dcviews/am-purchasing-management', '''views/am-purchasing-management/am-purchasing-management.css'',''views/am-purchasing-management/am-purchasing-management.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 09:12:07', '2017-01-22 09:12:07');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, templateurl, files, created_at, updated_at) VALUES (25, 'icon-basket-loaded-add', '发起采购申请', 1, 'icon-basket', '/icon-basket-loaded-add.html', 'dcviews/icon-basket-loaded-add', '''views/icon-basket-loaded-add/icon-basket-loaded-add.css'',''views/icon-basket-loaded-add/icon-basket-loaded-add.js'',''js/controllers/GeneralPageController.js'',', '2017-01-22 09:12:39', '2017-01-22 09:12:39');
+
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (2, 1, 2, 3, 1, 2, '2015-08-23 06:03:39', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (9, 4, 5, 6, 2, 7, '2015-08-23 06:14:39', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (5, 4, 7, 8, 2, 9, '2015-08-23 06:10:14', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (7, 4, 9, 10, 2, 5, '2015-08-23 06:13:47', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (4, 1, 4, 11, 1, 3, '2015-08-23 06:10:09', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (6, 11, 13, 14, 2, 4, '2015-08-23 06:13:42', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (12, 11, 15, 16, 2, 16, '2017-01-22 08:16:28', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (16, 11, 17, 18, 2, 20, '2017-01-22 08:48:46', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (11, 1, 12, 19, 1, 15, '2017-01-22 08:15:04', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (14, 13, 21, 22, 2, 18, '2017-01-22 08:43:01', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (15, 13, 23, 24, 2, 19, '2017-01-22 08:43:57', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (13, 1, 20, 25, 1, 17, '2017-01-22 08:40:13', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (18, 17, 27, 28, 2, 22, '2017-01-22 09:01:04', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (19, 17, 29, 30, 2, 23, '2017-01-22 09:01:50', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (17, 1, 26, 31, 1, 21, '2017-01-22 08:59:10', '2017-01-22 09:14:15');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (1, null, 1, 38, 0, 1, '2015-08-23 06:01:37', '2017-01-22 09:14:16');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (20, 1, 32, 37, 1, 24, '2017-01-22 09:12:07', '2017-01-22 09:14:22');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (22, 20, 35, 36, 2, 26, '2017-01-22 09:14:14', '2017-01-22 09:14:22');
+INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (21, 20, 33, 34, 2, 25, '2017-01-22 09:12:39', '2017-01-22 09:14:22');
 
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
 select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));

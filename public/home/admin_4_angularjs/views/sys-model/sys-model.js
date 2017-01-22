@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module("MetronicApp").controller('dcmodelCtrl',
-    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','i18nService',
-        function ($scope, Restangular, $q, $filter, ngDialog,i18nService) {
+    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
+        function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             var tableDatas = Restangular.all('/dcmodels');
             i18nService.setCurrentLang('zh-cn');
 
@@ -155,7 +155,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
 
             $scope.gridOptions = {
                 enableSorting: true,
-                enableFiltering: true,
+                enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '5%'},
@@ -181,6 +181,11 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 },
+            };
+
+            $scope.toggleFiltering = function(){
+                $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
             tableDatas.getList().then(function (accounts) {
