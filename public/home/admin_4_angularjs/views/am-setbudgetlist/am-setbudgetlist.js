@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("MetronicApp").controller('sysmsgCtrl',
+angular.module("MetronicApp").controller('setbudgetlistCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
@@ -82,15 +82,18 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter: false,
+                showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '发送者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '接收者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '消息内容', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '发送时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '浏览时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
+                    {name: '年度', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '类别名称', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '负责部门', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '申报时间', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '适用范围', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '申报须知', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '附件材料模板', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '预算类别模板', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页

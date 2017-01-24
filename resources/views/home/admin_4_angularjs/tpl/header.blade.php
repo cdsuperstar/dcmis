@@ -81,11 +81,62 @@
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 <li class="separator hide"></li>
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-light">
+                    <a href="#" class="dropdown-toggle" style="text-align: right;">
+                        欢迎你！
+                    </a>
+                </li>
+                <li class="separator hide"></li>
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-light" id="header_notification_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true" title="当前用户">
+                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> 王小波 </span>
+                    </a>
+                    <ul class="dropdown-menu" style="width: 110px;">
+                        <li>
+                            <ul class="dropdown-menu-list" style="height: 218px;" data-handle-color="#637283">
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="details">
+                                            <span class="label label-sm label-icon label-success">
+                                                <i class="icon-key"></i>
+                                            </span> 更改个人密码 </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="details">
+                                            <span class="label label-sm label-icon label-danger">
+                                                <i class="icon-user"></i>
+                                            </span> 查看个人信息 </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="details">
+                                            <span class="label label-sm label-icon label-warning">
+                                                <i class="icon-lock"></i>
+                                            </span> 锁定屏幕 </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/logout">
+                                        <span class="details">
+                                            <span class="label label-sm label-icon label-info">
+                                                <i class="icon-logout"></i>
+                                            </span> 注销登录 </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="separator hide"></li>
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-light" id="header_notification_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true">
+                       data-close-others="true" title="通知提醒">
                         <i class="icon-bell"></i>
                         <span class="badge badge-success"> 7 </span>
                     </a>
@@ -186,9 +237,9 @@
                 <li class="separator hide"></li>
                 <!-- BEGIN INBOX DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+                <li class="dropdown dropdown-extended dropdown-inbox dropdown-light" id="header_inbox_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true">
+                       data-close-others="true" title="消息提醒">
                         <i class="icon-envelope-open"></i>
                         <span class="badge badge-danger"> 4 </span>
                     </a>
@@ -268,9 +319,9 @@
                 <li class="separator hide"></li>
                 <!-- BEGIN TODO DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                <li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
+                <li class="dropdown dropdown-extended dropdown-tasks dropdown-light" id="header_task_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true">
+                       data-close-others="true" title="事项提醒">
                         <i class="icon-calendar"></i>
                         <span class="badge badge-primary"> 3 </span>
                     </a>
@@ -384,34 +435,43 @@
                         </li>
                     </ul>
                 </li>
-                <!-- END TODO DROPDOWN -->
-                <!-- BEGIN USER LOGIN DROPDOWN -->
-                <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                <li class="dropdown dropdown-user dropdown-dark">
+                <li class="separator hide"></li>
+                <li class="dropdown dropdown-extended dropdown-tasks dropdown-light" id="header_task_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true">
-                        <span class="username username-hide-on-mobile"> Nick </span>
-                        <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                        <img alt="" class="img-circle" src="@{{settings.layoutPath}}/img/avatar9.jpg"/> </a>
-                    <ul class="dropdown-menu dropdown-menu-default">
-                        <li>
-                            <a href="#/profile/dashboard">
-                                <i class="icon-user"></i> 个人信息 </a>
+                       data-close-others="true" title="帮助中心">
+                        <span> &nbsp;&nbsp; </span>
+                        <i class="icon-question"></i>
+                        <span> &nbsp;&nbsp; </span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks" style="width: 110px;">
+                        <li class="external">
+                            <h3>帮助中心</h3>
+                            <a href="#/profile/dashboard">查看全部</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="icon-calendar"></i> 待办事项 </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-lock"></i> 锁定屏幕 </a>
-                        </li>
-                        <li>
-                            <a href="/logout">
-                                <i class="icon-key"></i> 注销登录 </a>
+                            <ul class="dropdown-menu-list" style="height: 108px;" data-handle-color="#637283">
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="task">
+                                            <span class="desc">常见问题汇总</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="task">
+                                            <span class="desc">其他功能帮助</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
+
+                <!-- END TODO DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <!-- END USER LOGIN DROPDOWN -->
                 <!-- BEGIN QUICK SIDEBAR DROPDOWN -->
                 {{--<li class="dropdown dropdown-extended quick-sidebar-toggler">--}}

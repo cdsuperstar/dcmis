@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("MetronicApp").controller('sysmsgCtrl',
+angular.module("MetronicApp").controller('privilegemanagementCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
@@ -82,15 +82,18 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter: false,
+                showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '发送者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '接收者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '消息内容', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '发送时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '浏览时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
+                    {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
+                    {
+                        name: '密码',
+                        field: 'password',
+                        cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
+                        enableCellEdit: true
+                    }
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
