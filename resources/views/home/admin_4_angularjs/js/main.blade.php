@@ -19,7 +19,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.grid.selection",
     "ui.grid.moveColumns",
     "ui.grid.resizeColumns",
-    "ui.grid.cellNav"
+    "ui.grid.cellNav",
+    "ngTagsInput"
 ]);
 
 MetronicApp.value('validationConfig', {

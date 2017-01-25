@@ -76,12 +76,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-1">
-                            <a href="javascript:;" class="btn red" ng-click="showdetail()">
-                                <i class="fa fa-plus"></i>添加详情</a>
+                            <a href="javascript:;" class="btn purple-plum" ng-click="showdetail()">
+                                <i class="icon-reload"></i> 重获数据 </a>
                         </div>
                         <div class="col-md-offset-1 col-md-1">
                             <a href="javascript:;" class="btn green">
-                                <i class="fa fa-check"></i> 提交申报 </a>
+                                <i class="fa fa-check"></i> 确认修改 </a>
                         </div>
                     </div>
                 </form>

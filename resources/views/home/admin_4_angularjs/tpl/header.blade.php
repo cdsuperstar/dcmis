@@ -104,7 +104,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="#/sys-usersown.html">
                                         <span class="details">
                                             <span class="label label-sm label-icon label-danger">
                                                 <i class="icon-user"></i>

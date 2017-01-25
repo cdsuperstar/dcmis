@@ -32,6 +32,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
 
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
@@ -177,6 +178,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/js/common/ui-grid.min.js" type="text/javascript"></script>
 <script src="/js/common/ngDialog.min.js" type="text/javascript"></script>
 <script src="/js/common/angular-animate.min.js" type="text/javascript"></script>
+<script src="/js/common/ng-tags-input.min.js" type="text/javascript"></script>
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
