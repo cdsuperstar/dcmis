@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.28 on 2016-12-27.
+ * Generated for Laravel 5.3.28 on 2017-01-25.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2917,13 +2917,12 @@ namespace {
          *
          * @param string $query
          * @param array $bindings
-         * @param bool $useReadPdo
          * @return mixed 
          * @static 
          */
-        public static function selectOne($query, $bindings = array(), $useReadPdo = true){
+        public static function selectOne($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings, $useReadPdo);
+            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings);
         }
         
         /**
@@ -2954,12 +2953,8 @@ namespace {
         }
         
         /**
-         * Run a select statement against the database and returns a generator.
+         * 
          *
-         * @param string $query
-         * @param array $bindings
-         * @param bool $useReadPdo
-         * @return \Generator 
          * @static 
          */
         public static function cursor($query, $bindings = array(), $useReadPdo = true){
@@ -5526,18 +5521,6 @@ namespace {
          */
         public static function append($path, $data){
             return \Illuminate\Filesystem\Filesystem::append($path, $data);
-        }
-        
-        /**
-         * Get or set UNIX mode of a file or directory.
-         *
-         * @param string $path
-         * @param int $mode
-         * @return mixed 
-         * @static 
-         */
-        public static function chmod($path, $mode = null){
-            return \Illuminate\Filesystem\Filesystem::chmod($path, $mode);
         }
         
         /**

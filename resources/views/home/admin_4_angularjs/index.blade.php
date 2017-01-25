@@ -28,7 +28,13 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    {{--<link href="/css/app.css" rel="stylesheet" type="text/css"/>--}}
+    <link rel="stylesheet" href="{{ elixir('css/app.css') }}"  type="text/css"/>
+
     <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
@@ -171,11 +177,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
 
-<script src="/js/common/lodash.min.js" type="text/javascript"></script>
-<script src="/js/common/restangular.min.js" type="text/javascript"></script>
-<script src="/js/common/ui-grid.min.js" type="text/javascript"></script>
-<script src="/js/common/ngDialog.min.js" type="text/javascript"></script>
-<script src="/js/common/angular-animate.min.js" type="text/javascript"></script>
+<script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
@@ -196,6 +198,7 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 <!-- END APP LEVEL JQUERY SCRIPTS -->
 <!-- END JAVASCRIPTS -->
+
 </body>
 <!-- END BODY -->
 

@@ -25,11 +25,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home/admin_4_angularjs/index';
+//    protected $redirectTo = 'index';
 
-    public function showLoginForm()
+    public function showLoginForm(String $layout)
     {
-        return redirect('/home/admin_4_angularjs/login');
+        $sView = 'home.' . $layout . ".login";
+        return view($sView);
     }
     /**
      * Create a new controller instance.
@@ -38,6 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo=$this->getRedirectUrl().'/../index';
         $this->middleware('guest', ['except' => 'logout']);
     }
 }

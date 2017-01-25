@@ -109,6 +109,7 @@ class userController extends Controller
             foreach ($request->input() as $key => $val) {
                 $user->$key = $val;
             }
+//            Log::info($user->toArray());
 
             if ($user->updateUniques()) {
                 return response()->json([

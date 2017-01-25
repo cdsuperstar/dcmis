@@ -18,12 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::group(['prefix' => '/home/{layout}'], function () {
-    Route::get('login', 'HomeController@login');
+    Route::get('login', 'Auth\LoginController@showLoginForm');
     Route::get('dcviews/{view}', 'HomeController@views');
     Route::get('index', 'HomeController@index');
     Route::get('tpl/{tpl}', 'HomeController@tpl');
     Route::get('js/main', 'HomeController@jsMain');
+    Route::get('testit','HomeController@testit');
 });
 
 Route::resource('dcmodels','dcmodel\dcmodelController');
@@ -43,7 +45,6 @@ Route::group(['prefix'=>'/user'],function(){
     Route::get('delete/{id}','User\userController@deleteData');
 });
 */
-
 //Route::controllers([
 //    'auth' => 'Auth\AuthController',
 //    'password' => 'Auth\PasswordController',

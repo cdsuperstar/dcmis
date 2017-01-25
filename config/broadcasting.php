@@ -29,6 +29,9 @@ return [
     */
 
     'connections' => [
+//app_id = "283579"
+//key = "e86f1562ae3452f8437d"
+//secret = "f7dbbfc66214a5dfece3"
 
         'pusher' => [
             'driver' => 'pusher',
@@ -38,6 +41,8 @@ return [
             'options' => [
                 //
             ],
+            'host'=>'192.168.10.10',
+            'port'=>'4567',
         ],
 
         'redis' => [

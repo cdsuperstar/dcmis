@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home/admin_4_angularjs/index');
+            return redirect($request->url().'/../index');
         }
 
         return $next($request);

@@ -7,8 +7,16 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
+//window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
+//require('angular');
+require('angular-ui-grid');
+require('restangular');
+require('ng-dialog');
+require('angular-animate');
+
+require('laravel-echo');
+require('socket.io-client');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -16,7 +24,7 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+//window.Vue = require('vue');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -33,9 +41,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from "laravel-echo"
+ import Echo from "laravel-echo"
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
+ window.Echo = new Echo({
+     broadcaster: 'socket.io',
+     host: window.location.hostname + ':6001'
+ });
+
+ window.Echo.channel('test_channel')
+    .listen('testit', (e) => {
+        console.log(e);
+    });

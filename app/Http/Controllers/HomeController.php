@@ -19,7 +19,14 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
+    }
+
+    public function testit()
+    {
+//       \Log::info( event(new \App\Events\testit("shit on what ?".time())));
+
+        echo "shit";
     }
 
     /**
@@ -46,13 +53,7 @@ class HomeController extends Controller
             $aTitle[] = $e->dcmodel->title;
         });
         array_shift($aTitle);
-        return view("home.".$layout.".templateurl", ['sModel' => $views,'layout'=>$layout ,'aTitle' => $aTitle, 'user' => $req->user()]);
-    }
-
-    public function login(String $layout)
-    {
-        $sView = 'home.' . $layout . ".login";
-        return view($sView);
+        return view("home." . $layout . ".templateurl", ['sModel' => $views, 'layout' => $layout, 'aTitle' => $aTitle, 'user' => $req->user()]);
     }
 
     public function jsMain(String $layout)
