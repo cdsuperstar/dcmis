@@ -22,7 +22,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 
 <head>
-    <title data-ng-bind="'Metronic AngularJS | ' + $state.current.data.pageTitle"></title>
+    <title data-ng-bind="'物资管理系统 | ' + $state.current.data.pageTitle"></title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -38,6 +38,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
 
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
@@ -58,6 +59,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="../assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css"/>
 
     <link href="../assets/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
@@ -118,38 +120,38 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END FOOTER -->
 <!-- BEGIN QUICK NAV -->
 {{--<nav class="quick-nav">--}}
-    {{--<a class="quick-nav-trigger" href="#">--}}
-        {{--<span aria-hidden="true"></span>--}}
-    {{--</a>--}}
-    {{--<ul>--}}
-        {{--<li>--}}
-            {{--<a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"--}}
-               {{--target="_blank" class="active">--}}
-                {{--<span>Purchase Metronic</span>--}}
-                {{--<i class="icon-basket"></i>--}}
-            {{--</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-            {{--<a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/reviews/4021469?ref=keenthemes"--}}
-               {{--target="_blank">--}}
-                {{--<span>Customer Reviews</span>--}}
-                {{--<i class="icon-users"></i>--}}
-            {{--</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-            {{--<a href="http://keenthemes.com/showcast/" target="_blank">--}}
-                {{--<span>Showcase</span>--}}
-                {{--<i class="icon-user"></i>--}}
-            {{--</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-            {{--<a href="http://keenthemes.com/metronic-theme/changelog/" target="_blank">--}}
-                {{--<span>Changelog</span>--}}
-                {{--<i class="icon-graph"></i>--}}
-            {{--</a>--}}
-        {{--</li>--}}
-    {{--</ul>--}}
-    {{--<span aria-hidden="true" class="quick-nav-bg"></span>--}}
+{{--<a class="quick-nav-trigger" href="#">--}}
+{{--<span aria-hidden="true"></span>--}}
+{{--</a>--}}
+{{--<ul>--}}
+{{--<li>--}}
+{{--<a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"--}}
+{{--target="_blank" class="active">--}}
+{{--<span>Purchase Metronic</span>--}}
+{{--<i class="icon-basket"></i>--}}
+{{--</a>--}}
+{{--</li>--}}
+{{--<li>--}}
+{{--<a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/reviews/4021469?ref=keenthemes"--}}
+{{--target="_blank">--}}
+{{--<span>Customer Reviews</span>--}}
+{{--<i class="icon-users"></i>--}}
+{{--</a>--}}
+{{--</li>--}}
+{{--<li>--}}
+{{--<a href="http://keenthemes.com/showcast/" target="_blank">--}}
+{{--<span>Showcase</span>--}}
+{{--<i class="icon-user"></i>--}}
+{{--</a>--}}
+{{--</li>--}}
+{{--<li>--}}
+{{--<a href="http://keenthemes.com/metronic-theme/changelog/" target="_blank">--}}
+{{--<span>Changelog</span>--}}
+{{--<i class="icon-graph"></i>--}}
+{{--</a>--}}
+{{--</li>--}}
+{{--</ul>--}}
+{{--<span aria-hidden="true" class="quick-nav-bg"></span>--}}
 {{--</nav>--}}
 {{--<div class="quick-nav-overlay"></div>--}}
 <!-- END QUICK NAV -->
@@ -193,6 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 
 <script src="../assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
 <!--
 <script src="../assets/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
 -->
