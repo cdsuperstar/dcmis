@@ -5,9 +5,6 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Hash;
-use Log;
-use Psy\Exception\ErrorException;
 
 class userController extends Controller
 {
@@ -109,7 +106,6 @@ class userController extends Controller
             foreach ($request->input() as $key => $val) {
                 $user->$key = $val;
             }
-//            Log::info($user->toArray());
 
             if ($user->updateUniques()) {
                 return response()->json([

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.28 on 2017-01-25.
+ * Generated for Laravel 5.3.29 on 2017-01-26.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2691,7 +2691,7 @@ namespace {
         /**
          * Encrypt the given value.
          *
-         * @param string $value
+         * @param mixed $value
          * @return string 
          * @throws \Illuminate\Contracts\Encryption\EncryptException
          * @static 
@@ -2703,7 +2703,7 @@ namespace {
         /**
          * Decrypt the given value.
          *
-         * @param string $payload
+         * @param mixed $payload
          * @return string 
          * @throws \Illuminate\Contracts\Encryption\DecryptException
          * @static 
@@ -2917,12 +2917,13 @@ namespace {
          *
          * @param string $query
          * @param array $bindings
+         * @param bool $useReadPdo
          * @return mixed 
          * @static 
          */
-        public static function selectOne($query, $bindings = array()){
+        public static function selectOne($query, $bindings = array(), $useReadPdo = true){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings, $useReadPdo);
         }
         
         /**
@@ -2953,8 +2954,12 @@ namespace {
         }
         
         /**
-         * 
+         * Run a select statement against the database and returns a generator.
          *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return \Generator 
          * @static 
          */
         public static function cursor($query, $bindings = array(), $useReadPdo = true){
@@ -5524,6 +5529,18 @@ namespace {
         }
         
         /**
+         * Get or set UNIX mode of a file or directory.
+         *
+         * @param string $path
+         * @param int $mode
+         * @return mixed 
+         * @static 
+         */
+        public static function chmod($path, $mode = null){
+            return \Illuminate\Filesystem\Filesystem::chmod($path, $mode);
+        }
+        
+        /**
          * Delete the file at a given path.
          *
          * @param string|array $paths
@@ -7330,6 +7347,61 @@ namespace {
     }
 
 
+    class Redis extends \Illuminate\Support\Facades\Redis{
+        
+        /**
+         * Get a specific Redis connection instance.
+         *
+         * @param string $name
+         * @return \Predis\ClientInterface|null 
+         * @static 
+         */
+        public static function connection($name = 'default'){
+            return \Illuminate\Redis\Database::connection($name);
+        }
+        
+        /**
+         * Run a command against the Redis database.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @static 
+         */
+        public static function command($method, $parameters = array()){
+            return \Illuminate\Redis\Database::command($method, $parameters);
+        }
+        
+        /**
+         * Subscribe to a set of given channels for messages.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @param string $method
+         * @return void 
+         * @static 
+         */
+        public static function subscribe($channels, $callback, $connection = null, $method = 'subscribe'){
+            \Illuminate\Redis\Database::subscribe($channels, $callback, $connection, $method);
+        }
+        
+        /**
+         * Subscribe to a set of given channels with wildcards.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @return void 
+         * @static 
+         */
+        public static function psubscribe($channels, $callback, $connection = null){
+            \Illuminate\Redis\Database::psubscribe($channels, $callback, $connection);
+        }
+        
+    }
+
+
     class Request extends \Illuminate\Support\Facades\Request{
         
         /**
@@ -7910,7 +7982,7 @@ namespace {
          * @param array $cookies The COOKIE parameters
          * @param array $files The FILES parameters
          * @param array $server The SERVER parameters
-         * @return \Request The duplicated request
+         * @return static 
          * @static 
          */
         public static function duplicate($query = null, $request = null, $attributes = null, $cookies = null, $files = null, $server = null){
@@ -8080,7 +8152,7 @@ namespace {
         /**
          * Creates a new request with values from PHP's super globals.
          *
-         * @return \Request A new request
+         * @return static 
          * @static 
          */
         public static function createFromGlobals(){
@@ -8101,7 +8173,7 @@ namespace {
          * @param array $files The request files ($_FILES)
          * @param array $server The server parameters ($_SERVER)
          * @param string $content The raw body data
-         * @return \Request A Request instance
+         * @return static 
          * @static 
          */
         public static function create($uri, $method = 'GET', $parameters = array(), $cookies = array(), $files = array(), $server = array(), $content = null){

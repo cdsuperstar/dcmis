@@ -69,7 +69,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home/admin_4_angularjs/index') }}">Home</a>
                     @else
                         <a href="{{ url('/home/admin_4_angularjs/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
