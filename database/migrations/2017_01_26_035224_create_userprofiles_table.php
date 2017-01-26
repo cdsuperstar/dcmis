@@ -18,12 +18,14 @@ class CreateUserprofilesTable extends Migration
             $table->foreign('id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->string('no')->nullable()->unique();
             $table->string('name')->nullable();
             $table->string('sex', 1)->nullable();
             $table->string('phone')->nullable();
             $table->date('birth')->nullable();
             $table->string('tel')->nullable();
             $table->string('address')->nullable();
+            $table->string('signpic')->nullable();
 
             $table->text('memo')->nullable();
 

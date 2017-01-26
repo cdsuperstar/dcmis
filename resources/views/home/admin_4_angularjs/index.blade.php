@@ -195,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 
 <script src="../assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+{{--<script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>--}}
 <!--
 <script src="../assets/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
 -->

@@ -18,6 +18,8 @@ require('angular-animate');
 require('laravel-echo');
 require('socket.io-client');
 require('ng-tags-input');
+require('jasny-bootstrap/js/fileinput');
+require('ui-select');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
