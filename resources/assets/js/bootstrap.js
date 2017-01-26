@@ -17,6 +17,7 @@ require('angular-animate');
 
 require('laravel-echo');
 require('socket.io-client');
+require('ng-tags-input');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

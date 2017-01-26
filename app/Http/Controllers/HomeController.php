@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function testit()
     {
-//       \Log::info( event(new \App\Events\testit("shit on what ?".time())));
+       \Log::info( event(new \App\Events\testit("shit on what ?".time())));
 
         echo "shit";
     }
