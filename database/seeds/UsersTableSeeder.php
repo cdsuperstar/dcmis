@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use Laracasts\TestDummy\Factory as TestDummy;
 use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
@@ -21,16 +19,16 @@ class UsersTableSeeder extends Seeder
             'created_at' => '2015-08-14 21:47:12',
             'updated_at' => '2015-08-14 21:47:12',
         ]);
-        DB::table('users')->insert(TestDummy::times(20)->create('App\User')->toArray());
-//        TestDummy::times(10)->save('App\User');
+//        DB::table('users')->insert(TestDummy::times(20)->create(App\User::class)->toArray());
+        factory(App\User::class, 20)->create();
 
         //seed roles
         DB::table('roles')->delete();
-        TestDummy::times(20)->create('App\models\Role');
+        factory(App\models\Role::class, 20)->create();
 
         //seed permissions
         DB::table('permissions')->delete();
-        TestDummy::times(40)->create('App\models\Permission');
+        factory(App\models\Permission::class, 40)->create();
 
         //seed roles_user
         DB::table('role_user')->delete();

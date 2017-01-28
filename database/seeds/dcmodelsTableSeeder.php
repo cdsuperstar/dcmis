@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 class dcmodelsTableSeeder extends Seeder
 {
@@ -12,7 +11,6 @@ class dcmodelsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
         DB::table('dcmodels')->delete();
 
         DB::connection()->getPdo()->exec("

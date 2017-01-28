@@ -19,10 +19,9 @@
     "require-dev": {
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "fzaninotto/faker": "^1.6",
-        "laracasts/testdummy": "^2.3",
         "mockery/mockery": "^0.9.7",
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^5.7",
+        "fzaninotto/faker": "^1.6"
     },
     "autoload": {
         "classmap": [

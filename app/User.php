@@ -17,7 +17,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Zizaco\Entrust\Traits\EntrustRoleTrait;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Closure;
 
 /**
@@ -37,8 +37,8 @@ class User extends Ardent implements
 {
 
     use Notifiable, Authenticatable, Authorizable, CanResetPassword;
-    use EntrustRoleTrait {
-        EntrustRoleTrait::save as entrustRolesave;
+    use EntrustUserTrait {
+        EntrustUserTrait::can insteadof Authorizable;
     }
     public static $rules = array(
         'name' => 'required|between:1,16',
@@ -87,7 +87,7 @@ class User extends Ardent implements
                          Closure $afterSave = null
     )
     {
-        Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+        Cache::tags(Config::get('entrust.role_user_table'))->flush();
 
         return $this->internalSave($rules, $customMessages, $options, $beforeSave, $afterSave, false);
     }
@@ -123,7 +123,8 @@ class User extends Ardent implements
     protected $hidden = ['remember_token'];
 
     public static $relationsData = array(
-        'roles' => array(self::BELONGS_TO_MANY, 'App\models\role')
+//        'roles' => array(self::BELONGS_TO_MANY, 'App\models\role'),
+        'userprofile'=>array(self::HAS_ONE,'App\models\userprofile')
     );
 //    public function roles()
 //    {

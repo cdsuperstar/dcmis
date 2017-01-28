@@ -35,6 +35,13 @@ Route::group(['prefix' => '/dcmodels/dcmodelMove'], function () {
 });
 
 Route::resource('users', 'User\userController');
+Route::group(['prefix' => '/userprofile'], function () {
+    Route::get('self','User\userprofileController@getSelfdata');
+});
+Route::resource('userprofiles', 'User\userprofileController');
+Route::resource('roles','roleController');
+Route::resource('permission','permissionController');
+
 /*
 Route::group(['prefix'=>'/user'],function(){
     Route::get('data/{id}','User\userController@getData');
