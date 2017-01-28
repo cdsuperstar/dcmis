@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\models\userprofile;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Storage;
 use App\Http\Controllers\Controller;
 
@@ -24,10 +23,10 @@ class userprofileController extends Controller
 
     public function create()
     {
-        return view('assets.edition')->with([
-            'fields' => User::$angularrules,
-            'title' => '信息编辑',
-        ]);
+//        return view('assets.edition')->with([
+//            'fields' => User::$angularrules,
+//            'title' => '信息编辑',
+//        ]);
     }
 
     /**
