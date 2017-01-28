@@ -41,7 +41,7 @@ class User extends Ardent implements
         EntrustUserTrait::can insteadof Authorizable;
     }
     public static $rules = array(
-        'name' => 'required|between:1,16',
+        'name' => 'required|between:1,32',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed',
         'password_confirmation' => ''

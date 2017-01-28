@@ -28,13 +28,12 @@ $factory->define(App\models\dcmodel::class, function (Faker\Generator $faker) {
 );
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
+    $password=bcrypt('aaaaaa');
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('aaaaaa'),
-//        'remember_token' => str_random(10),
+        'password' => $password,
+        'password_confirmation'=>$password,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime
     ];

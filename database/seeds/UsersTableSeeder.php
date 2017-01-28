@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => '2015-08-14 21:47:12',
         ]);
 //        DB::table('users')->insert(TestDummy::times(20)->create(App\User::class)->toArray());
-        factory(App\User::class, 20)->create();
+        factory(App\User::class, 5)->create();
 
         //seed roles
         DB::table('roles')->delete();
