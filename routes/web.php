@@ -40,7 +40,7 @@ Route::group(['prefix' => '/userprofile'], function () {
 });
 Route::resource('userprofiles', 'User\userprofileController');
 Route::resource('roles','roleController');
-Route::resource('permission','permissionController');
+Route::resource('permissions','permissionController');
 
 /*
 Route::group(['prefix'=>'/user'],function(){

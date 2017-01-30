@@ -15,6 +15,9 @@ class permissionController extends Controller
     public function index()
     {
         //
+        $datas = Permission::all();
+        return response()->json($datas);
+
     }
 
     /**
@@ -36,6 +39,19 @@ class permissionController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new Permission($request->toArray());
+        if ($rec) {
+            if ($rec->save($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.add', ["data" => $rec->id]),
+                        'success' => true,
+                    ], $rec->toArray()
+                    )
+                );
+            }
+        }
+        return response()->json(['errors' => $rec->errors()->all()]);
+
     }
 
     /**
@@ -70,6 +86,21 @@ class permissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         //
+        if ($permission) {
+
+            if ($permission->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $permission->id]),
+                        'success' => true,
+                    ], $permission->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $permission->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +112,15 @@ class permissionController extends Controller
     public function destroy(Permission $permission)
     {
         //
+        if ($permission->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('users.deletesuccess', ['rows' => $permission->id . " with id ".$permission->id]),
+                'success' => true,
+            ],$permission->toArray()));
+        } else {
+            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $permission->id])]);
+        }
+
     }
 }
