@@ -8,7 +8,8 @@ use App\models\dcmodel;
 use App\User;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+//use App\Http\Requests;
+use Log;
 
 class HomeController extends Controller
 {
@@ -43,7 +44,7 @@ class HomeController extends Controller
     public function tpl(String $layout, String $tpl)
     {
         $sView = 'home.' . $layout . ".tpl." . $tpl;
-        return view($sView);
+        return view($sView,['user'=>\Auth::user()]);
     }
 
     public function views(String $layout, String $views, Request $req)

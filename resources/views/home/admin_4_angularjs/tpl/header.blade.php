@@ -388,7 +388,7 @@
                 <li class="dropdown dropdown-user dropdown-light">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true" title="当前用户">
-                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> 王小波 </span>
+                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> {{  $user->name }} </span>
                         <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default" style="width: 60px;">
