@@ -21,30 +21,30 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 }
             }
 
-            $scope.userslist = [];
 
-            $scope.loadUsers = function($query) {
-                //return $http.get('users.json', { cache: true}).then(function(response) {
-                //    var users = response.data;
-                    var users=[
-                        {"id":1,"ykth":"10201401573","name":"高成刚"},
-                        {"id":2,"ykth":"10201400124","name":"李  娴"},
-                        {"id":3,"ykth":"10201400939","name":"朱创业"},
-                        {"id":4,"ykth":"10201402485","name":"路婷婷"},
-                        {"id":5,"ykth":"10201401940","name":"何  铭"},
-                        {"id":6,"ykth":"10201401802","name":"涂  涯"},
-                        {"id":7,"ykth":"2015020765","name":"李伟博"}
-                    ];
-                    return users.filter(function(user) {
-                        //return user.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
-                        return user.ykth.toLowerCase().indexOf($query.toLowerCase()) != -1 || user.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
-                    });
-                //});
-            };
+            $scope.person = {};
+            $scope.people = [
+                {"id":1,"ykth":"10201401573","name":"高成刚"},
+                {"id":2,"ykth":"10201400124","name":"李娴"},
+                {"id":3,"ykth":"10201400939","name":"朱创业"},
+                {"id":4,"ykth":"10201402485","name":"路婷婷"},
+                {"id":5,"ykth":"10201401940","name":"何铭"},
+                {"id":6,"ykth":"10201401802","name":"涂涯"},
+                {"id":7,"ykth":"2015020765","name":"李伟博"}
+            ];
+
+
+
+
+
 
             $scope.savedata = function () {
                 showMsg($scope.userslist, '信息', 'lime');
             };
+
+
+
+
 
         }
     ]

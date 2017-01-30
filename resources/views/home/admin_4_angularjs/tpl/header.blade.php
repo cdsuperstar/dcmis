@@ -5,7 +5,7 @@
         <a ui-sref="dashboard">
             <img src="@{{settings.layoutPath}}/img/logo-light.png" alt="资产管理系统" class="logo-default"/>
             <!----155*25 PNG --->
-        {{--<span class="text-logo bold uppercase">资产管理系统</span>--}}
+            {{--<span class="text-logo bold uppercase">资产管理系统</span>--}}
         </a>
         <div class="menu-toggler sidebar-toggler">
             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -26,40 +26,40 @@
     <!-- BEGIN PAGE ACTIONS -->
     <!-- DOC: Remove "hide" class to enable the page header actions -->
     {{--<div class="page-actions">--}}
-        {{--<div class="btn-group">--}}
-            {{--<button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown"--}}
-                    {{--data-hover="dropdown" data-close-others="true">--}}
-                {{--<span class="hidden-sm hidden-xs">Actions&nbsp;</span>--}}
-                {{--<i class="fa fa-angle-down"></i>--}}
-            {{--</button>--}}
-            {{--<ul class="dropdown-menu" role="menu">--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="icon-docs"></i> New Post </a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="icon-tag"></i> New Comment </a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="icon-share"></i> Share </a>--}}
-                {{--</li>--}}
-                {{--<li class="divider"></li>--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="icon-flag"></i> Comments--}}
-                        {{--<span class="badge badge-success">4</span>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="icon-users"></i> Feedbacks--}}
-                        {{--<span class="badge badge-danger">2</span>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-            {{--</ul>--}}
-        {{--</div>--}}
+    {{--<div class="btn-group">--}}
+    {{--<button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown"--}}
+    {{--data-hover="dropdown" data-close-others="true">--}}
+    {{--<span class="hidden-sm hidden-xs">Actions&nbsp;</span>--}}
+    {{--<i class="fa fa-angle-down"></i>--}}
+    {{--</button>--}}
+    {{--<ul class="dropdown-menu" role="menu">--}}
+    {{--<li>--}}
+    {{--<a href="#">--}}
+    {{--<i class="icon-docs"></i> New Post </a>--}}
+    {{--</li>--}}
+    {{--<li>--}}
+    {{--<a href="#">--}}
+    {{--<i class="icon-tag"></i> New Comment </a>--}}
+    {{--</li>--}}
+    {{--<li>--}}
+    {{--<a href="#">--}}
+    {{--<i class="icon-share"></i> Share </a>--}}
+    {{--</li>--}}
+    {{--<li class="divider"></li>--}}
+    {{--<li>--}}
+    {{--<a href="#">--}}
+    {{--<i class="icon-flag"></i> Comments--}}
+    {{--<span class="badge badge-success">4</span>--}}
+    {{--</a>--}}
+    {{--</li>--}}
+    {{--<li>--}}
+    {{--<a href="#">--}}
+    {{--<i class="icon-users"></i> Feedbacks--}}
+    {{--<span class="badge badge-danger">2</span>--}}
+    {{--</a>--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--</div>--}}
     {{--</div>--}}
     <!-- END PAGE ACTIONS -->
     <!-- BEGIN PAGE TOP -->
@@ -67,70 +67,19 @@
         <!-- BEGIN HEADER SEARCH BOX -->
         <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
         {{--<form class="search-form" action="#" method="GET">--}}
-            {{--<div class="input-group">--}}
-                {{--<input type="text" class="form-control input-sm" placeholder="Search..." name="query">--}}
-                {{--<span class="input-group-btn">--}}
-                    {{--<a href="javascript:;" class="btn submit">--}}
-                        {{--<i class="icon-magnifier"></i>--}}
-                    {{--</a>--}}
-                {{--</span>--}}
-            {{--</div>--}}
+        {{--<div class="input-group">--}}
+        {{--<input type="text" class="form-control input-sm" placeholder="Search..." name="query">--}}
+        {{--<span class="input-group-btn">--}}
+        {{--<a href="javascript:;" class="btn submit">--}}
+        {{--<i class="icon-magnifier"></i>--}}
+        {{--</a>--}}
+        {{--</span>--}}
+        {{--</div>--}}
         {{--</form>--}}
         <!-- END HEADER SEARCH BOX -->
         <!-- BEGIN TOP NAVIGATION MENU -->
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-                <li class="separator hide"></li>
-                <li class="dropdown dropdown-extended dropdown-notification dropdown-light">
-                    <a href="#" class="dropdown-toggle" style="text-align: right;">
-                        欢迎你！
-                    </a>
-                </li>
-                <li class="separator hide"></li>
-                <li class="dropdown dropdown-extended dropdown-notification dropdown-light" id="header_notification_bar">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true" title="当前用户">
-                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> 王小波 </span>
-                    </a>
-                    <ul class="dropdown-menu" style="width: 110px;">
-                        <li>
-                            <ul class="dropdown-menu-list" style="height: 218px;" data-handle-color="#637283">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="details">
-                                            <span class="label label-sm label-icon label-success">
-                                                <i class="icon-key"></i>
-                                            </span> 更改个人密码 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#/sys-usersown.html">
-                                        <span class="details">
-                                            <span class="label label-sm label-icon label-danger">
-                                                <i class="icon-user"></i>
-                                            </span> 查看个人信息 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="details">
-                                            <span class="label label-sm label-icon label-warning">
-                                                <i class="icon-lock"></i>
-                                            </span> 锁定屏幕 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/logout">
-                                        <span class="details">
-                                            <span class="label label-sm label-icon label-info">
-                                                <i class="icon-logout"></i>
-                                            </span> 注销登录 </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
                 <li class="separator hide"></li>
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -436,48 +385,47 @@
                     </ul>
                 </li>
                 <li class="separator hide"></li>
-                <li class="dropdown dropdown-extended dropdown-tasks dropdown-light" id="header_task_bar">
+                <li class="dropdown dropdown-user dropdown-light">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true" title="帮助中心">
-                        <span> &nbsp;&nbsp; </span>
-                        <i class="icon-question"></i>
-                        <span> &nbsp;&nbsp; </span>
+                       data-close-others="true" title="当前用户">
+                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> 王小波 </span>
+                        <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg">
                     </a>
-                    <ul class="dropdown-menu extended tasks" style="width: 110px;">
-                        <li class="external">
-                            <h3>帮助中心</h3>
-                            <a href="#/profile/dashboard">查看全部</a>
+                    <ul class="dropdown-menu dropdown-menu-default" style="width: 60px;">
+                        <li>
+                            <a href="#/profile/dashboard">
+                                <i class="icon-key"></i> 更改密码 </a>
                         </li>
                         <li>
-                            <ul class="dropdown-menu-list" style="height: 108px;" data-handle-color="#637283">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">常见问题汇总</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">其他功能帮助</span>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+                            <a href="#">
+                                <i class="icon-user"></i> 个人信息 </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-question"></i> 帮助中心
+                            </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-lock"></i> 锁定屏幕 </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-arrow-right"></i> 注销登录 </a>
                         </li>
                     </ul>
-                </li>
 
+                </li>
                 <!-- END TODO DROPDOWN -->
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <!-- END USER LOGIN DROPDOWN -->
                 <!-- BEGIN QUICK SIDEBAR DROPDOWN -->
-                {{--<li class="dropdown dropdown-extended quick-sidebar-toggler">--}}
-                    {{--<span class="sr-only">Toggle Quick Sidebar</span>--}}
-                    {{--<i class="icon-logout"></i>--}}
-                {{--</li>--}}
+                <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                    <span class="sr-only">Toggle Quick Sidebar</span>
+                    <i class="icon-logout"></i>
+                </li>
                 <!-- END QUICK SIDEBAR DROPDOWN -->
             </ul>
         </div>

@@ -1,4 +1,4 @@
-<div>
+<div data-ng-controller="sysusersOwnCtrl">
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN: ACCORDION DEMO -->
@@ -24,10 +24,14 @@
                         </div>
                         <label class="col-md-2 control-label">性 别</label>
                         <div class="col-md-4">
-                            <select class="form-control" placeholder="性别">
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                            </select>
+                            <ui-select ng-model="sex.value">
+                                <ui-select-match>
+                                    <span ng-bind="$select.selected.name"></span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="sexarr in (sexarr | filter: sex.search) track by sexarr.id">
+                                    <span ng-bind="sexarr.name"></span>
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,7 +44,14 @@
                         </div>
                         <label class="col-md-2 control-label">出生日期</label>
                         <div class="col-md-4">
-                            <input type="number" class="form-control" placeholder="年-月-日（XXXX-XX-XX）"> </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="@{{format}}" ng-model="dat" is-open="tmppopup.opened" ng-required="true" close-text="关闭"
+                                       clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" datepicker-options="dateOptions" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="opendatepick()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">办公电话</label>

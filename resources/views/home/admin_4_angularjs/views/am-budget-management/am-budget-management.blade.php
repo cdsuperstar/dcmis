@@ -41,37 +41,13 @@
                         </div>
                         <label class="col-md-2 control-label">申报人姓名</label>
                         <div class="col-md-4">
-                            {{--<div class="input-icon right">--}}
-                                {{--<i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>--}}
-                                {{--<input type="text" class="form-control" placeholder="申报人姓名">--}}
-                            {{--</div>--}}
-                            <tags-input ng-model="userslist" display-property="name"
-                                        placeholder="添加申报人..."
-                                        replace-spaces-with-dashes="false"
-                                        add-from-autocomplete-only="true"
-                                        add-on-enter="true"
-                                        add-on-blur="false"
-                                        template="tag-template">
-                                <auto-complete source="loadUsers($query)"
-                                               min-length="0"
-                                               load-on-focus="true"
-                                               load-on-empty="false"
-                                               max-results-to-show="32"
-                                               template="User-custom-template"></auto-complete>
-                            </tags-input>
-                            <script type="text/ng-template" id="tag-template">
-                                <div class="tag-template">
-                                    <div class="center-panel">
-                                        <span>@{{data.ykth}} - @{{data.name}}</span>
-                                        <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
-                                    </div>
-                                </div>
-                            </script>
-                            <script type="text/ng-template" id="User-custom-template">
-                                <div class="right-panel">
-                                    <span>@{{data.ykth}} - @{{data.name}}</span>
-                                </div>
-                            </script>
+                            <ui-select ng-model="person.selected" theme="bootstrap">
+                                <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
+                                <ui-select-choices repeat="item in people | filter: $select.search">
+                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    <small ng-bind-html="item.ykth | highlight: $select.search"></small>
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
                     </div>
                     <div class="form-group">

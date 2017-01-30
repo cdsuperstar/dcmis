@@ -39,6 +39,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/select.css" rel="stylesheet" type="text/css"/>
 
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
@@ -182,8 +183,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
 
 <!-- END CORE ANGULARJS PLUGINS -->
+<script src="{{ elixir('js/angular-locale_zh-cn.js') }}" type="text/javascript"></script>
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
-
 
 <script src="js/main" type="text/javascript"></script>
 <script src="js/directives.js" type="text/javascript"></script>
