@@ -101,9 +101,14 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
                 ],
 
+                enableGridMenu: true,
+                //exporterMenuCsv:false,
+                //exporterMenuPdf:false,
+
                 enableSelectAll: true,
-                exporterCsvFilename: 'myFile.csv',
-                exporterPdfDefaultStyle: {fontSize: 9},
+                exporterOlderExcelCompatibility:true,
+                exporterCsvFilename: 'sysusers.csv',
+                exporterPdfDefaultStyle : {font:'simblack',fontSize: 9},
                 exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
                 exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
                 exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
@@ -119,10 +124,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 exporterPdfPageSize: 'LETTER',
                 exporterPdfMaxGridWidth: 500,
                 exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
-                onRegisterApi: function(gridApi){
-                    $scope.gridApi = gridApi;
-                },
-
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -136,9 +137,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 }
             };
 
-            $scope.gridOptions.enableGridMenu = true;
-
-
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
@@ -151,6 +149,15 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     $scope.gridOptions.data = allAccounts;
                 });
             }
+
+            $scope.export = function(signdata){
+                if (signdata == 'csv') {
+                    var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
+                    $scope.gridApi.exporter.csvExport( "all", "all", myElement );
+                } else if (signdata == 'pdf') {
+                    $scope.gridApi.exporter.pdfExport( "all", "all" );
+                };
+            };
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;

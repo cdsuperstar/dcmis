@@ -19,7 +19,7 @@
     <!----ADD COMMPANY LOGOPIC--->
     <div class="page-actions">
         <div class="btn-group">
-            <img src="@{{settings.layoutPath}}/img/commpany-logo.png" alt="公司logo" class="logo-default"/>
+{{--            <img src="@{{settings.layoutPath}}/img/commpany-logo.png" alt="公司logo" class="logo-default"/>--}}
             <!----330*30 PNG --->
         </div>
     </div>

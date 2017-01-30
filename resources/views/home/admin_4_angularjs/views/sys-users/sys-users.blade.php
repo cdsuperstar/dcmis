@@ -15,8 +15,24 @@
                 <button type="button"  class="btn btn-info" ng-click="editData()">保存</button>
                 <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">筛选</button>
                 <button id="refreshButton" type="button" class="btn purple-plum" ng-click="refreshData()">重获数据</button>
+
+                <div class="btn-group open" >
+                <button id="btnGroupVerticalDrop5" type="button" class="btn yellow dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Dropdown
+                    <i class="fa fa-angle-down"></i>
+                </button>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop5">
+                    <li>
+                        <a href="#" ng-click="export('pdf')"> 导出PDF </a>
+                    </li>
+                    <li>
+                        <a href="#" ng-click="export('csv')"> 导出EXCEL </a>
+                    </li>
+                </ul>
+                </div>
+
             </div>
-            <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="userGrid"></div>
+            <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="usergrid"></div>
         </div>
     </div>
 </div>

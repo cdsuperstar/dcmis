@@ -173,7 +173,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END CORE JQUERY PLUGINS -->
 <!-- BEGIN CORE ANGULARJS PLUGINS -->
 <script src="../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
-{{--<script src="/js/common/angular.min.js" type="text/javascript"></script>--}}
 <script src="../assets/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
@@ -183,10 +182,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
 
 <!-- END CORE ANGULARJS PLUGINS -->
-<script src="{{ elixir('js/angular-locale_zh-cn.js') }}" type="text/javascript"></script>
-<script src="{{ elixir('js/csv.js') }}" type="text/javascript"></script>
-<script src="{{ elixir('js/pdfmake.js') }}" type="text/javascript"></script>
-<script src="{{ elixir('js/vfs_fonts.js') }}" type="text/javascript"></script>
+<script src="/js/common/angular-locale_zh-cn.js" type="text/javascript"></script>
+<script src="/js/common/csv.js" type="text/javascript"></script>
+<script src="/js/common/pdfmake.js" type="text/javascript"></script>
+<script src="/js/common/vfs_fonts.js" type="text/javascript"></script>
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 
 <script src="js/main" type="text/javascript"></script>
