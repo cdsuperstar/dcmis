@@ -28,7 +28,7 @@
                                 <ui-select-match>
                                     <span ng-bind="$select.selected.name"></span>
                                 </ui-select-match>
-                                <ui-select-choices repeat="sexarr in (sexarr | filter: sex.search) track by sexarr.id">
+                                <ui-select-choices repeat="sexarr in sexarr | filter: $select.search">
                                     <span ng-bind="sexarr.name"></span>
                                 </ui-select-choices>
                             </ui-select>
@@ -73,10 +73,17 @@
                         </div>
                         <label class="col-md-2 control-label">所属部门</label>
                         <div class="col-md-4">
-                            <select class="form-control" placeholder="机构列表">
-                                <option value="财务部">财务部</option>
-                                <option value="营销部">营销部</option>
-                            </select>
+                            <ui-select
+                                    multiple
+                                    ng-model="categories.selected"
+                                    on-select="selectCategory($item, $model)"
+                                    on-remove="deselectCategory($item, $model)">
+                                <ui-select-match placeholder="选择部门...">@{{$item.name}}</ui-select-match>
+                                <ui-select-choices
+                                        repeat="category in categories track by category.id">
+                                    @{{category.name}}
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
                     </div>
                     <div class="form-group">

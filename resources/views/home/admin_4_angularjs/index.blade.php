@@ -99,7 +99,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE HEAD -->
-            <div data-ng-include="'tpl/page-head'" data-ng-controller="PageHeadController" class="page-head"></div>
+            {{--<div data-ng-include="'tpl/page-head'" data-ng-controller="PageHeadController" class="page-head"></div>--}}
             <!-- END PAGE HEAD -->
             <!-- BEGIN ACTUAL CONTENT -->
             <div ui-view class="fade-in-up"></div>
