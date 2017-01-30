@@ -108,11 +108,12 @@ class userController extends Controller
             }
 
             if ($user->updateUniques()) {
-                return response()->json([
-                    'messages' => trans('users.updatesuccess', ["data" => $user->name]),
-                    'success' => true,
-                    'data' => $user->toJson(),
-                ]);
+                return response()->json(array_merge([
+                        'messages' => trans('users.updatesuccess', ["data" => $user->name]),
+                        'success' => true,
+                    ], $user->toArray()
+                    )
+                );
             } else {
                 return response()->json(['errors' => $user->errors()->all()]);
             }

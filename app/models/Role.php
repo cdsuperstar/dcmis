@@ -28,5 +28,9 @@ class Role extends EntrustRole
     //
     protected $table = 'roles';
     protected $fillable = ['name', 'display_name', 'description'];
-
+    public static $angularrules = array(
+        'name' => 'required|between:4,16|min_len:1|max_len:255',
+        'display_name' => 'required',
+        'description' => '',
+    );
 }
