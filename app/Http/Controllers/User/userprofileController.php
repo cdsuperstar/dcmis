@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\models\userprofile;
 use Illuminate\Http\Request;
-use Storage;
 use App\Http\Controllers\Controller;
 
 class userprofileController extends Controller
@@ -16,62 +15,18 @@ class userprofileController extends Controller
      */
     public function index()
     {
+        //
         $datas = userprofile::all();
         return response()->json($datas);
-        //
+
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
-    {
-//        return view('assets.edition')->with([
-//            'fields' => User::$angularrules,
-//            'title' => '信息编辑',
-//        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  String $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(String $id)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  String $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(String $id)
-    {
-        //
-        if ($id == '') {
-            return false;
-        }
-
-        $userprofile = userprofile::find($id,'id');
-
-        return response()->json($userprofile);
-    }
-
-    public function getSelfdata(Request $request)
-    {
-        //
-        $userprofile = userprofile::firstOrCreate(['id' => $request->user()->id]);
-
-        return response()->json($userprofile);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User $appUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $appUser)
     {
         //
     }
@@ -79,54 +34,94 @@ class userprofileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
-        $userprofile = userprofile::firstOrCreate(['id' => $request->input('id')]);
-
-        $tmp = $request->input('uploadfile');
-        if (is_array($tmp)) {
-            $filestring = $tmp['result'];
-            $comma = strpos($filestring, ',');
-            $filedata = base64_decode(substr($filestring, $comma + 1));
-            $disk = Storage::disk('local_public');
-            if ($request->input('signpic') <> '') {
-                $signpic = str_random(30) . substr($request->input('signpic'), strripos($request->input('signpic'), '.'));
-                $request->merge(['signpic' => $signpic]);
+        $rec = new userprofile($request->toArray());
+        if ($rec) {
+            if ($rec->save($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.add', ["data" => $rec->id]),
+                        'success' => true,
+                    ], $rec->toArray()
+                    )
+                );
             }
         }
+        return response()->json(['errors' => $rec->errors()->all()]);
 
+    }
 
-        if ($userprofile->update($request->input())) {
-            if (is_array($tmp)) $disk->put('/images/users/' . $request->input('id') . '/' . $signpic, $filedata);
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\models\userprofile  $userprofile
+     * @return \Illuminate\Http\Response
+     */
+    public function show(userprofile $userprofile)
+    {
+        //
+    }
 
-            return response()->json([
-                'messages' => trans('userprofile.updatesuccess'),
-                'success' => true,
-                'data' => $userprofile->toJson(),
-            ]);
-        }
-
-        return response()->json(['errors' => trans('userprofile.nofound')]);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\models\userprofile  $userprofile
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(userprofile $userprofile)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  String $appUser
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\models\userprofile  $userprofile
      * @return \Illuminate\Http\Response
      */
-    public function update(String $id, Request $request)
+    public function update(Request $request, userprofile $userprofile)
     {
+        //
+        if ($userprofile) {
+
+            if ($userprofile->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $userprofile->id]),
+                        'success' => true,
+                    ], $userprofile->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $userprofile->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
-    public function storeSelfdata(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\models\userprofile  $userprofile
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(userprofile $userprofile)
     {
-        $request->merge(['id' => $request->user()->id]);
-        return $this->postData($request);
+        //
+        if ($userprofile->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('users.deletesuccess', ['rows' => $userprofile->id . " with id ".$userprofile->id]),
+                'success' => true,
+            ],$userprofile->toArray()));
+        } else {
+            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $userprofile->id])]);
+        }
+
     }
 }

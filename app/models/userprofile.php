@@ -37,7 +37,7 @@ use LaravelArdent\Ardent\Ardent;
  */
 class userprofile extends Ardent
 {
-
+    protected $table='userprofiles';
     protected $fillable = ['id','no', 'name', 'sex', 'phone', 'birth', 'tel', 'address', 'memo','signpic'];
     public static $relationsData = array(
         'user' => array(self::BELONGS_TO, 'App\User'),
