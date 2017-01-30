@@ -84,6 +84,8 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 enableFiltering: false,
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
+                enableVerticalScrollbar:2,
+                enableHorizontalScrollbar :2,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
                     {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -93,8 +95,35 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         field: 'password',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true
-                    }
+                    },
+                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:false},
+
                 ],
+
+                enableSelectAll: true,
+                exporterCsvFilename: 'myFile.csv',
+                exporterPdfDefaultStyle: {fontSize: 9},
+                exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
+                exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
+                exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
+                exporterPdfFooter: function ( currentPage, pageCount ) {
+                    return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+                },
+                exporterPdfCustomFormatter: function ( docDefinition ) {
+                    docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+                    docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+                    return docDefinition;
+                },
+                exporterPdfOrientation: 'portrait',
+                exporterPdfPageSize: 'LETTER',
+                exporterPdfMaxGridWidth: 500,
+                exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+                onRegisterApi: function(gridApi){
+                    $scope.gridApi = gridApi;
+                },
+
+
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
                 paginationPageSizes: [10, 30, 50],
@@ -104,10 +133,11 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
-                },
+                }
             };
 
             $scope.gridOptions.enableGridMenu = true;
+
 
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;

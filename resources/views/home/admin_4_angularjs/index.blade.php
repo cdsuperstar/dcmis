@@ -184,6 +184,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <script src="{{ elixir('js/angular-locale_zh-cn.js') }}" type="text/javascript"></script>
+<script src="{{ elixir('js/csv.js') }}" type="text/javascript"></script>
+<script src="{{ elixir('js/pdfmake.js') }}" type="text/javascript"></script>
+<script src="{{ elixir('js/vfs_fonts.js') }}" type="text/javascript"></script>
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 
 <script src="js/main" type="text/javascript"></script>

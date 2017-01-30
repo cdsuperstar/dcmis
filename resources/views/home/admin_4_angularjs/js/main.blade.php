@@ -15,11 +15,12 @@ var MetronicApp = angular.module("MetronicApp", [
     "ngDialog",
     "ui.grid.edit",
     "ui.grid.rowEdit",
+    "ui.grid.exporter",
+    "ui.grid.cellNav",
     "ui.grid.pagination",
     "ui.grid.selection",
     "ui.grid.moveColumns",
     "ui.grid.resizeColumns",
-    "ui.grid.cellNav",
     "ui.select",
     "ngTagsInput"
 ]);

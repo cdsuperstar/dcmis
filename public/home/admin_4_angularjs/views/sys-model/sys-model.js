@@ -157,13 +157,16 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                 enableSorting: true,
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
-                columnDefs: [
+                enableVerticalScrollbar:2,
+                enableHorizontalScrollbar :2,
+                    columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '5%'},
-                    {name: '名称', field: 'name', enableCellEdit: true},
-                    {name: '标题', field: 'title', enableCellEdit: true},
+                    {name: '名称', field: 'name', enableCellEdit: true,enableHiding: false,},
+                    {name: '标题', field: 'title', enableCellEdit: true,enableHiding: false,},
                     {
                         name: '菜单', field: 'ismenu', enableCellEdit: true, width: '5%',
                         editableCellTemplate: 'ui-grid/dropdownEditor',
+                        enableHiding: false,
                         cellFilter: 'mapIsmenu', editDropdownValueLabel: 'isMenu', editDropdownOptionsArray: [
                         {id: 1, isMenu: '是'},
                         {id: 0, isMenu: '否'}
@@ -173,7 +176,10 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     {name: 'URL', field: 'url', enableCellEdit: true},
                     {name: '模板URL', field: 'templateurl', enableCellEdit: true},
                     {name: '引用文件', field: 'files', enableCellEdit: true},
-                ],
+                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:false},
+
+                    ],
                 paginationPageSizes: [10, 30, 50],
                 paginationPageSize: 10,
                 data: [],

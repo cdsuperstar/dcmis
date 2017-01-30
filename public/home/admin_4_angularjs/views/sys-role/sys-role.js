@@ -84,13 +84,15 @@ angular.module("MetronicApp").controller('rolesCtrl',
                 enableFiltering: false,
                 showColumnFooter: false,
                 enableCellEditOnFocus:true,
+                enableVerticalScrollbar:2,
+                enableHorizontalScrollbar :2,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: true,enableFiltering: false},
                     {name: '名称', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: true},
                     {name: '显示名称', field: 'display_name',enableCellEdit: true,visible:true},
                     {name: '描述', field: 'description',enableCellEdit: true,visible:true},
-                    {name: '添加时间', field: 'created_at',enableCellEdit: true,visible:false},
-                    {name: '更新时间', field: 'updated_at',enableCellEdit: true,visible:true},
+                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:false},
+                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
