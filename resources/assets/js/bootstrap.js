@@ -8,7 +8,7 @@ window._ = require('lodash');
  */
 
 //window.$ = window.jQuery = require('jquery');
-require('bootstrap-sass');
+//require('bootstrap-sass');
 //require('angular');
 require('angular-ui-grid');
 require('restangular');
