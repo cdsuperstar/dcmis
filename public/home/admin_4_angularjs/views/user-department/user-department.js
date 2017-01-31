@@ -84,6 +84,8 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                 enableFiltering: false,
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
+                enableVerticalScrollbar:2,
+                enableHorizontalScrollbar :2,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
                     {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
