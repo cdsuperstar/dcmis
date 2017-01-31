@@ -183,8 +183,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <script src="/js/common/angular-locale_zh-cn.js" type="text/javascript"></script>
-<script src="/js/common/csv.js" type="text/javascript"></script>
 <script src="/js/common/pdfmake.js" type="text/javascript"></script>
+<script src="/js/common/csv.js" type="text/javascript"></script>
 <script src="/js/common/vfs_fonts.js" type="text/javascript"></script>
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 

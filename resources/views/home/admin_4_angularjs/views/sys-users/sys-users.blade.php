@@ -36,3 +36,19 @@
         </div>
     </div>
 </div>
+<script  type="text/javascript">
+    window.pdfMake.fonts = {
+        Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf'
+        },
+        微软雅黑: {
+            normal: 'msyh.ttf',
+            bold: 'msyhbd.ttf',
+            italics: 'msyh.ttf',
+            bolditalics: 'msyhbd.ttf',
+        }
+    };
+</script>

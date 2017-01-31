@@ -105,25 +105,68 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 //exporterMenuCsv:false,
                 //exporterMenuPdf:false,
 
-                enableSelectAll: true,
-                exporterOlderExcelCompatibility:true,
-                exporterCsvFilename: 'sysusers.csv',
-                exporterPdfDefaultStyle : {fontSize: 9},
-                exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
-                exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
-                exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
-                exporterPdfFooter: function ( currentPage, pageCount ) {
-                    return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+                //--------------导出----------------------------------
+                exporterAllDataFn: function(){
+                    return getPage(1,$scope.gridOptions.totalItems);
                 },
-                exporterPdfCustomFormatter: function ( docDefinition ) {
-                    docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
-                    docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+                exporterCsvColumnSeparator: ',',
+                exporterCsvFilename:'download.csv',
+                //exporterFieldCallback : function ( grid, row, col, value ){
+                //    if ( value == 50 ){
+                //        value = "可以退休";
+                //    }
+                //    return value;
+                //},
+                //exporterHeaderFilter :function( displayName ){
+                //    return 'col: ' + name;
+                //},
+                exporterHeaderFilterUseName : true,
+                exporterMenuCsv : true,
+                exporterMenuLabel : "Export",
+                exporterMenuPdf : true,
+                exporterOlderExcelCompatibility : true,
+                exporterPdfCustomFormatter : function ( docDefinition ) {
+                    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
                     return docDefinition;
                 },
-                exporterPdfOrientation: 'portrait',
-                exporterPdfPageSize: 'LETTER',
-                exporterPdfMaxGridWidth: 500,
-                exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+                exporterPdfFooter :{
+                    text: 'Powered by DcMis',
+                    style: '',
+                    alignment:'center'
+                },
+                exporterPdfDefaultStyle : {
+                    fontSize: 11,font:'微软雅黑' //font 设置自定义字体
+
+                },
+                exporterPdfFilename:'download.pdf',
+                /* exporterPdfFooter : {
+                 columns: [
+                 'Left part',
+                 { text: 'Right part', alignment: 'right' }
+                 ]
+                 },
+                 或 */
+                //exporterPdfFooter: function(currentPage, pageCount) {
+                //    return currentPage.toString() + ' of ' + pageCount;
+                //},
+                exporterPdfHeader : function(currentPage, pageCount) {
+                    return currentPage.toString() + ' of ' + pageCount;
+                },
+                exporterPdfMaxGridWidth : 720,
+                exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
+                exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
+                exporterPdfTableHeaderStyle : {
+                    bold: true,
+                    fontSize: 12,
+                    color: 'black'
+                },
+                exporterPdfTableLayout : null,
+                exporterPdfTableStyle: {
+                    margin: [0, 5, 0, 15]
+                },
+                exporterSuppressColumns : ['buttons'],
+                exporterSuppressMenu: false,
+
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
