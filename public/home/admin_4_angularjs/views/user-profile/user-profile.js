@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            var tableDatas = Restangular.all('/userprofiles');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -84,18 +84,20 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 enableFiltering: false,
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
+                enableVerticalScrollbar:2,
+                enableHorizontalScrollbar :2,
                 columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '工号', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '工号', field: 'no',enableCellEdit: true,enableColumnMenu: true},
                     {name: '昵称', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '性别', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '联系电话', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '出生日期', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '办公电话', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '办公地址', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '性别', field: 'sex',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '联系电话', field: 'phone',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '出生日期', field: 'birth',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '办公电话', field: 'tel',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '办公地址', field: 'address',enableCellEdit: true,enableColumnMenu: true},
                     {name: '个人职务', field: 'name',enableCellEdit: true,enableColumnMenu: true},
                     {name: '所属部门', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '个人简介', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '个人简介', field: 'memo',enableCellEdit: true,enableColumnMenu: true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
