@@ -67,8 +67,14 @@
                         <label class="col-md-2 control-label">个人职务</label>
                         <div class="col-md-4">
                             <select class="form-control" placeholder="职务列表">
-                                <option value="经理">经理</option>
                                 <option value="总经理">总经理</option>
+                                <option value="经理">经理</option>
+                                <option value="董事">董事</option>
+                                <option value="总监">总监</option>
+                                <option value="主任">主任</option>
+                                <option value="部长">部长</option>
+                                <option value="主管">主管</option>
+                                <option value="普通员工">普通员工</option>
                             </select>
                         </div>
                         <label class="col-md-2 control-label">所属部门</label>

@@ -5,7 +5,7 @@
         <div class="portlet-title">
             <div class="caption font-dark">
                 <i class="icon-puzzle font-dark"></i>
-                <span class="caption-subject bold uppercase"> 系统用户管理 </span>
+                <span class="caption-subject bold uppercase"> 系统用户 </span>
             </div>
         </div>
         <div class="portlet-body">

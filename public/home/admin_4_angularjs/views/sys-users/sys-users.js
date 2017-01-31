@@ -9,7 +9,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/users/create',
+                    template: '/sys-users/sys-edit-users',
                     className: 'ngdialog-theme-default',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
@@ -108,7 +108,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 enableSelectAll: true,
                 exporterOlderExcelCompatibility:true,
                 exporterCsvFilename: 'sysusers.csv',
-                exporterPdfDefaultStyle : {font:'simblack',fontSize: 9},
+                exporterPdfDefaultStyle : {fontSize: 9},
                 exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
                 exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
                 exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
