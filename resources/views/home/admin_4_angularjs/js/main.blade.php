@@ -76,6 +76,8 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
     $scope.mdTreeJson = JSON.parse('{!! addslashes($mdTreeJson) !!}');
+    $scope.dcBroadcast=[];
+    $scope.dcMessage=[];
 }])
 ;
 /***
@@ -86,6 +88,10 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
+    $scope.ReadNotifiCnt=0;
+    $scope.checkNotifi=function(){
+        $scope.ReadNotifiCnt=$scope.dcBroadcast.length;
+    }
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
     });

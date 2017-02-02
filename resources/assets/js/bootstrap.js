@@ -51,7 +51,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
      host: window.location.hostname + ':6001'
  });
 
- window.Echo.channel('test_channel')
-    .listen('testit', (e) => {
-        console.log(e);
+ window.Echo.channel('dcBroadcast')
+    .listen('normal', (e) => {
+         $scope.dcBroadcast.unshift(e);
+         $scope.$apply();
     });
