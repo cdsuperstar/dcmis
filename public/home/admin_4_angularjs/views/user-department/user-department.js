@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            var tableDatas = Restangular.all('/unitgrps');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -82,20 +82,14 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 enableVerticalScrollbar:2,
                 enableHorizontalScrollbar :2,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
-                    {
-                        name: '密码',
-                        field: 'password',
-                        cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
-                        enableCellEdit: true
-                    }
+                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '名称', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '介绍', field: 'brief',enableCellEdit: true,visible:true},
+                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
