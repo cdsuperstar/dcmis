@@ -121,9 +121,9 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 //    return 'col: ' + name;
                 //},
                 exporterHeaderFilterUseName : true,
-                exporterMenuCsv : true,
+                exporterMenuCsv : true, //导出Excel 开关
+                exporterMenuPdf : true, //导出pdf 开关
                 exporterMenuLabel : "Export",
-                exporterMenuPdf : true,
                 exporterOlderExcelCompatibility : true,
                 exporterPdfCustomFormatter : function ( docDefinition ) {
                     docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
@@ -131,29 +131,17 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 },
                 exporterPdfFooter :{
                     text: 'Powered by DcMis',
-                    style: '',
+                    style: 'footerStyle',
                     alignment:'center'
                 },
-                exporterPdfDefaultStyle : {
-                    fontSize: 11,font:'微软雅黑' //font 设置自定义字体
-
-                },
+                exporterPdfDefaultStyle : {font:'MicrosoftYaHei',fontSize: 9},
                 exporterPdfFilename:'download.pdf',
-                /* exporterPdfFooter : {
-                 columns: [
-                 'Left part',
-                 { text: 'Right part', alignment: 'right' }
-                 ]
-                 },
-                 或 */
-                //exporterPdfFooter: function(currentPage, pageCount) {
-                //    return currentPage.toString() + ' of ' + pageCount;
-                //},
+                exporterPdfAlign:'center', //定义整体样式
                 exporterPdfHeader : function(currentPage, pageCount) {
-                    return currentPage.toString() + ' of ' + pageCount;
+                    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
                 },
-                exporterPdfMaxGridWidth : 720,
-                exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
+                //exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
+                exporterPdfOrientation : 'portrait',//  'landscape' 或 'portrait' pdf横向或纵向
                 exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
                 exporterPdfTableHeaderStyle : {
                     bold: true,
@@ -162,10 +150,11 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 },
                 exporterPdfTableLayout : null,
                 exporterPdfTableStyle: {
-                    margin: [0, 5, 0, 15]
+                    margin: [0, 5, 0, 15]  //左上右下
                 },
                 exporterSuppressColumns : ['buttons'],
                 exporterSuppressMenu: false,
+                //--------------导出结束----------------------------------
 
 
                 enablePagination: true, //是否分页，默认为true
@@ -192,15 +181,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     $scope.gridOptions.data = allAccounts;
                 });
             }
-
-            $scope.export = function(signdata){
-                if (signdata == 'csv') {
-                    var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
-                    $scope.gridApi.exporter.csvExport( "all", "all", myElement );
-                } else if (signdata == 'pdf') {
-                    $scope.gridApi.exporter.pdfExport( "all", "all" );
-                };
-            };
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;

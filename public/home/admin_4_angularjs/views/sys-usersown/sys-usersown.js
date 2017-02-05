@@ -25,6 +25,14 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
             $scope.categories.selected = [$scope.categories[1],$scope.categories[3],$scope.categories[6]];
 
+
+            $scope.edituserprofile = function () {
+
+
+
+            }
+
+
             /////////start datepicker
             $scope.dat = new Date();
             $scope.format = "yyyy-MM-dd";

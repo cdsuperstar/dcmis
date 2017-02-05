@@ -19,7 +19,7 @@
                         <div class="col-md-4">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                <input type="text" class="form-control" placeholder="姓名">
+                                <input type="text" class="form-control" ng-model="name" placeholder="姓名">
                             </div>
                         </div>
                         <label class="col-md-2 control-label">性 别</label>
@@ -39,7 +39,7 @@
                         <div class="col-md-4">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                <input type="number" class="form-control" placeholder="1XXXXXXXXXX">
+                                <input type="number" class="form-control" ng-model="phone" placeholder="1XXXXXXXXXX">
                             </div>
                         </div>
                         <label class="col-md-2 control-label">出生日期</label>
@@ -48,7 +48,7 @@
                                 <input type="text" class="form-control" uib-datepicker-popup="@{{format}}" ng-model="dat" is-open="tmppopup.opened" ng-required="true" close-text="关闭"
                                        clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" datepicker-options="dateOptions" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="opendatepick()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-model="birth" ng-click="opendatepick()"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -56,11 +56,11 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">办公电话</label>
                         <div class="col-md-4">
-                            <input type="number" class="form-control" placeholder="XXXX-XXXXXXXX">
+                            <input type="number" class="form-control" ng-model="tel" placeholder="XXXX-XXXXXXXX">
                         </div>
                         <label class="col-md-2 control-label">办公地址</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="办公地址...">
+                            <input type="text" class="form-control" ng-model="address" placeholder="办公地址...">
                         </div>
                     </div>
                     <div class="form-group">
@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">个人简介</label>
                         <div class="col-md-10">
-                            <textarea name="xmjj" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="个人简介（1000字以内）"></textarea>
+                            <textarea name="xmjj" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  ng-model="memo" maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="个人简介（1000字以内）"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -104,7 +104,7 @@
                                 <i class="icon-reload"></i> 重获数据 </a>
                         </div>
                         <div class="col-md-offset-1 col-md-1">
-                            <a href="javascript:;" class="btn green">
+                            <a href="javascript:;" class="btn green" ng-click="edituserprofile()">
                                 <i class="fa fa-check"></i> 确认修改 </a>
                         </div>
                     </div>
