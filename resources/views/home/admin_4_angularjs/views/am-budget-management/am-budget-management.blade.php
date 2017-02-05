@@ -1,117 +1,100 @@
-<div  data-ng-controller="budgetmanagementCtrl">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- BEGIN: ACCORDION DEMO -->
-            <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption font-green-sharp">
-                        <i class="icon-settings font-green-sharp"></i>
-                        <span class="caption-subject bold uppercase"> 预算申请 </span>
-                    </div>
-                    <div class="tools">
-                        <a href="" class="reload"> </a>
-                        <a href="" class="fullscreen"> </a>
-                    </div>
+<div class="portlet-body" data-ng-controller="budgetmanagementCtrl">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-md-2 control-label">申报项目名称</label>
+            <div class="col-md-4">
+                <div class="input-icon right">
+                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                    <input type="text" class="form-control" placeholder="申报项目名称">
                 </div>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">申报项目名称</label>
-                        <div class="col-md-4">
-                            <div class="input-icon right">
-                                <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                <input type="text" class="form-control" placeholder="申报项目名称">
-                            </div>
+            </div>
+            <label class="col-md-2 control-label">申报部门</label>
+            <div class="col-md-4">
+                <select class="form-control" placeholder="部门列表">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">预算类别</label>
+            <div class="col-md-4">
+                <select class="form-control" ng-model="classlistName" ng-options="o.id as o.name for o in listnames">
+                </select>
+            </div>
+            <label class="col-md-2 control-label">申报人姓名</label>
+            <div class="col-md-4">
+                <ui-select ng-model="person.selected" theme="bootstrap">
+                    <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="item in people | filter: $select.search">
+                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                        <small ng-bind-html="item.ykth | highlight: $select.search"></small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">联系电话</label>
+            <div class="col-md-4">
+                <div class="input-icon right">
+                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                    <input type="number" class="form-control" placeholder="13XXXXXXXXX">
+                </div>
+            </div>
+            <label class="col-md-2 control-label">申报人邮箱</label>
+            <div class="col-md-4">
+                <input type="email" class="form-control" placeholder="EmailAddress"> </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">项目简介</label>
+            <div class="col-md-10">
+                <textarea name="xmjj" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="简略介绍项目（1000字以内）"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">备注</label>
+            <div class="col-md-10">
+                <textarea name="bz" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写申报预算项目备注信息（1000字以内）"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">确认函</label>
+            <div class="col-md-5">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="input-group input-large">
+                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                            <i class="fa fa-file fileinput-exists font-yellow"></i>&nbsp;
+                            <span class="fileinput-filename"> </span>
                         </div>
-                        <label class="col-md-2 control-label">申报部门</label>
-                        <div class="col-md-4">
-                            <select class="form-control" placeholder="部门列表">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                                <option>Option 4</option>
-                                <option>Option 5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">预算类别</label>
-                        <div class="col-md-4">
-                            <select class="form-control" ng-model="classlistName" ng-options="o.id as o.name for o in listnames">
-                            </select>
-                        </div>
-                        <label class="col-md-2 control-label">申报人姓名</label>
-                        <div class="col-md-4">
-                            <ui-select ng-model="person.selected" theme="bootstrap">
-                                <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
-                                <ui-select-choices repeat="item in people | filter: $select.search">
-                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
-                                    <small ng-bind-html="item.ykth | highlight: $select.search"></small>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">联系电话</label>
-                        <div class="col-md-4">
-                            <div class="input-icon right">
-                                <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                <input type="number" class="form-control" placeholder="13XXXXXXXXX">
-                            </div>
-                        </div>
-                        <label class="col-md-2 control-label">申报人邮箱</label>
-                        <div class="col-md-4">
-                            <input type="email" class="form-control" placeholder="EmailAddress"> </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">项目简介</label>
-                        <div class="col-md-10">
-                            <textarea name="xmjj" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="简略介绍项目（1000字以内）"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">备注</label>
-                        <div class="col-md-10">
-                            <textarea name="bz" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写申报预算项目备注信息（1000字以内）"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2">确认函</label>
-                        <div class="col-md-4">
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                <div class="input-group input-large">
-                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-                                        <i class="fa fa-file fileinput-exists font-yellow"></i>&nbsp;
-                                        <span class="fileinput-filename"> </span>
-                                    </div>
                                         <span class="input-group-addon btn default btn-file">
                                             <span class="fileinput-new"> 添加 </span>
                                             <span class="fileinput-exists"> 更改 </span>
                                             <input type="hidden"><input type="file" name="..." readonly> </span>
-                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a>
-                                </div>
-                            </div>
-                        </div>
-                        <label class="control-label">
-                            <i class="glyphicon glyphicon-hand-left tooltips font-green font-lg" data-original-title="提示" data-container="body"></i>
-                            单位领导审批确认函
-                        </label>
+                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-3 col-md-1">
-                            <a href="javascript:;" class="btn red" ng-click="showdetail()">
-                                <i class="fa fa-plus"></i>添加详情</a>
-                        </div>
-                        <div class="col-md-offset-1 col-md-1">
-                            <a href="#" ng-click="savedate()" class="btn green">
-                                <i class="fa fa-check"></i> 提交申报 </a>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-            <!-- END: ACCORDION DEMO -->
+            <div class="col-md-3">
+                <label class="control-label"  data-container="body">
+                    <i class="glyphicon glyphicon-hand-left tooltips font-green font-lg" data-original-title="提示"></i>
+                    单位领导审批确认函
+                </label>
+            </div>
         </div>
-    </div>
-
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-1">
+                <a href="javascript:;" class="btn red" ng-click="showdetail()">
+                    <i class="fa fa-plus"></i>添加详情</a>
+            </div>
+            <div class="col-md-offset-1 col-md-1">
+                <a href="#" ng-click="savedate()" class="btn green">
+                    <i class="fa fa-check"></i> 提交申报 </a>
+            </div>
+        </div>
+    </form>
     <div uib-collapse="isCollapsed" class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -207,7 +190,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2">附件</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="input-group input-large">
                                     <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
@@ -222,10 +205,12 @@
                                 </div>
                             </div>
                         </div>
-                        <label class="control-label">
-                            <i class="glyphicon glyphicon-hand-left tooltips font-green font-lg" data-original-title="提示" data-container="body"></i>
-                            如有详细技术参数请以附件形式在此处上传
-                        </label>
+                        <div class="col-md-5">
+                            <label class="control-label" data-container="body">
+                                <i class="glyphicon glyphicon-hand-left tooltips font-green font-lg" data-original-title="提示"></i>
+                                如有详细技术参数请以附件形式在此处上传
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-1">
@@ -242,3 +227,4 @@
         </div>
     </div>
 </div>
+

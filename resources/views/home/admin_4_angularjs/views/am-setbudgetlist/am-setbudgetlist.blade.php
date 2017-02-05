@@ -1,5 +1,5 @@
 <!-- BEGIN MAIN CONTENT -->
-<div class="row" data-ng-controller="setbudgetlistCtrl">
+<div class="portlet-body" data-ng-controller="setbudgetlistCtrl">
     <button type="button" id="addData" class="btn btn-success" ng-click="addData()">增加</button>
     <button type="button" id="delData" class="btn btn-danger" confirmation-needed="确定要删除这些用户吗？" ng-click="delData()">删除</button>
     <button type="button"  class="btn btn-info" ng-click="editData()">保存</button>

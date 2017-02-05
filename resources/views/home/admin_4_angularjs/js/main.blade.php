@@ -163,6 +163,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         .state('{{$model->name}}', {
             url: "{!! $model->url !!}",
             templateUrl: "{!! $model->templateurl !!}",
+            icon: {pageIcon: '{{$model->icon}}'},
             data: {pageTitle: '{{$model->title}}'},
             controller: "GeneralPageController",
             resolve: {
