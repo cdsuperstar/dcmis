@@ -9,7 +9,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/sys-users/sys-edit-users',
+                    template: 'views/sys-users/sys-edit-users.html',
                     className: 'ngdialog-theme-default',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
@@ -17,7 +17,9 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -126,6 +128,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
                 exporterPdfCustomFormatter : function ( docDefinition ) {
+                    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
                     docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
                     return docDefinition;
                 },
@@ -141,11 +144,12 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     return '页码：'+ currentPage.toString() + ' of ' + pageCount;
                 },
                 //exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
-                exporterPdfOrientation : 'portrait',//  'landscape' 或 'portrait' pdf横向或纵向
+                exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
                 exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
                 exporterPdfTableHeaderStyle : {
                     bold: true,
                     fontSize: 12,
+                    italics: true,
                     color: 'black'
                 },
                 exporterPdfTableLayout : null,

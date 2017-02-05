@@ -37,6 +37,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ui-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/ngDialog.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/select.css" rel="stylesheet" type="text/css"/>
