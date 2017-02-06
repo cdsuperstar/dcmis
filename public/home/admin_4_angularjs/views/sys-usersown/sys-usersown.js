@@ -27,7 +27,7 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
 
             $scope.edituserprofile = function () {
-
+                console.log($scope.name);
 
 
             }

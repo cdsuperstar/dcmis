@@ -58,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color"/>
-    <link href="../assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css"/>  {{--初始化  theme panel--}}
 
     <link href="../assets/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
@@ -197,6 +197,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../assets/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script src="../assets/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
+
 
 <script src="../assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
 {{--<script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>--}}
