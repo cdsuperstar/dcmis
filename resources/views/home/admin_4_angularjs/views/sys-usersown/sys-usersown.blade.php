@@ -32,7 +32,7 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="@{{format}}" ng-model="dat" is-open="tmppopup.opened" ng-required="true" close-text="关闭"
-                           clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" datepicker-options="dateOptions" />
+                           clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" datepicker-options="dateOptions" placeholder="XXXX-XX-XX"/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-model="birth" ng-click="opendatepick()"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
@@ -85,11 +85,11 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-3 col-md-1">
+            <div class="col-md-offset-3 col-md-2 col-sm-6 col-xs-6">
                 <a href="javascript:;" class="btn purple-plum" ng-click="showdetail()">
                     <i class="icon-reload"></i> 重获数据 </a>
             </div>
-            <div class="col-md-offset-1 col-md-1">
+            <div class="col-md-offset-1 col-md-3 col-sm-6 col-xs-6">
                 <a href="javascript:;" class="btn green" ng-click="edituserprofile()">
                     <i class="fa fa-check"></i> 确认修改 </a>
             </div>
