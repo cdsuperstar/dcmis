@@ -9,7 +9,7 @@ window._ = require('lodash');
 
 //window.$ = window.jQuery = require('jquery');
 //require('bootstrap-sass');
-//require('angular');
+import angular from 'angular'
 require('angular-ui-grid');
 require('restangular');
 require('ng-dialog');
@@ -51,8 +51,3 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
      host: window.location.hostname + ':6001'
  });
 
- window.Echo.channel('dcBroadcast')
-    .listen('normal', (e) => {
-         $scope.dcBroadcast.unshift(e);
-         $scope.$apply();
-    });

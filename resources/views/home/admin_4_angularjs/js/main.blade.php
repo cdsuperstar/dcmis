@@ -89,6 +89,12 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
     $scope.ReadNotifiCnt=0;
+    window.Echo.channel('dcBroadcast')
+        .listen('normal', (e) => {
+            $scope.dcBroadcast.unshift(e);
+            $scope.$apply();
+        });
+
     $scope.checkNotifi=function(){
         $scope.ReadNotifiCnt=$scope.dcBroadcast.length;
     }
