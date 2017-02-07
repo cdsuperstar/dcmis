@@ -86,12 +86,10 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 enableFiltering: false,
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
-                enableVerticalScrollbar:2,
-                enableHorizontalScrollbar :2,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
+                    {name: 'id', field: 'id',width: '5%',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
+                    {name: '姓名', field: 'name',width: '10%',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:true},
                     {
                         name: '密码',
                         field: 'password',
@@ -137,7 +135,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     style: 'footerStyle',
                     alignment:'center'
                 },
-                exporterPdfDefaultStyle : {font:'MicrosoftYaHei',fontSize: 9},
+                exporterPdfDefaultStyle : {font:'mcroyh',fontSize: 9}, //微软雅黑
                 exporterPdfFilename:'download.pdf',
                 exporterPdfAlign:'center', //定义整体样式
                 exporterPdfHeader : function(currentPage, pageCount) {

@@ -339,7 +339,7 @@
                                 <i class="icon-lock"></i> 锁定屏幕 </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/logout">
                                 <i class="icon-arrow-right"></i> 注销登录 </a>
                         </li>
                     </ul>

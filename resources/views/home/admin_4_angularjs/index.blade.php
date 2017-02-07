@@ -215,7 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
             italics: 'Roboto-Italic.ttf',
             bolditalics: 'Roboto-Italic.ttf'
         },
-        MicrosoftYaHei: {
+        mcroyh: {   //微软雅黑
             normal: 'msyh.ttf',
             bold: 'msyh.ttf',
             italics: 'msyh.ttf',
