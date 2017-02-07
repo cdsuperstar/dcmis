@@ -89,18 +89,28 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
                 columnDefs: [
-                    {name: 'id', field: 'id',width: '5%',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '项目名称', field: 'name',enableCellEdit: true},
-                    {name: '总金额', field: 'name',type:'float',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '项目摘要', field: 'email',enableCellEdit: true,visible:true},
-                    {name: '申报类别', field: 'email',enableCellEdit: true,visible:true},
-                    {name: '申报人', field: 'email',enableCellEdit: true,visible:true},
-                    {name: '申报部门', field: 'email',enableCellEdit: true,visible:true},
-                    {name: '联系电话', field: 'email',type:'int',enableCellEdit: true,visible:true},
-                    {name: '开始日期', field: 'email',enableCellEdit: true,visible:false,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
-                    {name: '截止日期', field: 'email',enableCellEdit: true,visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
-                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:false},
+                    {name: '操作',enableCellEdit: false,
+                        cellTemplate: '<div><button onclick="console.log($scope)">操作</button></div>'
+                    },
+                    {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,
+                        enableHiding: false,
+                        enableFiltering: false,
+                        footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
+                    {name: '编号', field: 'name',width: '100',enableCellEdit: true},
+                    {name: '项目名称', field: 'name',width: '200',enableCellEdit: true},
+                    {name: '总金额', field: 'name',width: '80',type:'float',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '项目摘要', field: 'email',width: '200',enableCellEdit: true,visible:true},
+                    {name: '申报类别', field: 'email',width: '150',enableCellEdit: true,visible:true},
+                    {name: '审批', field: 'email',width: '100',enableCellEdit: true,visible:true},
+                    {name: '执行', field: 'email',width: '100',enableCellEdit: true,visible:true},
+                    {name: '申报人', field: 'email',width: '100',enableCellEdit: true,visible:false},
+                    {name: '申报部门', field: 'email',width: '150',enableCellEdit: true,visible:false},
+                    {name: '联系电话', field: 'email',type:'int',width: '150',enableCellEdit: true,visible:false},
+                    {name: '简介', field: 'email',type:'string',width: '250',enableCellEdit: true,visible:false},
+                    {name: '开始日期', field: 'email',width: '100',enableCellEdit: true,visible:false,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
+                    {name: '截止日期', field: 'email',width: '100',enableCellEdit: true,visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
+                    {name: '添加时间', field: 'created_at',width: '100',enableCellEdit: false,visible:false},
+                    {name: '更新时间', field: 'updated_at',width: '100',enableCellEdit: false,visible:false},
 
                 ],
 
@@ -125,7 +135,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 //},
                 exporterHeaderFilterUseName : true,
                 exporterMenuCsv : true, //导出Excel 开关
-                exporterMenuPdf : true, //导出pdf 开关
+                exporterMenuPdf : false, //导出pdf 开关
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
                 exporterPdfCustomFormatter : function ( docDefinition ) {
@@ -173,6 +183,12 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
+
+
+            $scope.xxxxx = function() {
+                console.log('111');
+            };
+
 
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;

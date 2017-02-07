@@ -21,6 +21,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.grid.moveColumns",
     "ui.grid.resizeColumns",
     "ui.grid.exporter",
+    "ui.grid.importer",
     "ui.select",
     "ngTagsInput"
 ]);

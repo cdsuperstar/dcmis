@@ -184,9 +184,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <script src="/js/common/angular-locale_zh-cn.js" type="text/javascript"></script>
-<script src="/js/common/pdfmake.js" type="text/javascript"></script>
-<script src="/js/common/vfs_fonts.js" type="text/javascript"></script>
 <script src="/js/common/csv.js" type="text/javascript"></script>
+
+{{--pdfmake  lead-in start--}}
+{{--<script src="/js/common/pdfmake.js" type="text/javascript"></script>--}}
+{{--<script src="/js/common/vfs_fonts.js" type="text/javascript"></script>--}}
+{{--pdfmake  lead-in end--}}
 <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 
 <script src="js/main" type="text/javascript"></script>
@@ -207,22 +210,25 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 <!-- END APP LEVEL JQUERY SCRIPTS -->
 <!-- END JAVASCRIPTS -->
-<script  type="text/javascript">
-    window.pdfMake.fonts = {    // 加载导出pdf的字体
-        Roboto: {
-            normal: 'Roboto-Regular.ttf',
-            bold: 'Roboto-Medium.ttf',
-            italics: 'Roboto-Italic.ttf',
-            bolditalics: 'Roboto-Italic.ttf'
-        },
-        mcroyh: {   //微软雅黑
-            normal: 'msyh.ttf',
-            bold: 'msyh.ttf',
-            italics: 'msyh.ttf',
-            bolditalics: 'msyh.ttf',
-        }
-    };
-</script>
+{{--pdfmake  lead-in start--}}
+{{--<script  type="text/javascript">--}}
+    {{--window.pdfMake.fonts = {    // 加载导出pdf的字体--}}
+        {{--Roboto: {--}}
+            {{--normal: 'Roboto-Regular.ttf',--}}
+            {{--bold: 'Roboto-Medium.ttf',--}}
+            {{--italics: 'Roboto-Italic.ttf',--}}
+            {{--bolditalics: 'Roboto-Italic.ttf'--}}
+        {{--},--}}
+        {{--mcroyh: {   //微软雅黑--}}
+            {{--normal: 'msyh.ttf',--}}
+            {{--bold: 'msyh.ttf',--}}
+            {{--italics: 'msyh.ttf',--}}
+            {{--bolditalics: 'msyh.ttf',--}}
+        {{--}--}}
+    {{--};--}}
+{{--</script>--}}
+{{--pdfmake  lead-in end--}}
+<!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
 
 
 </body>
