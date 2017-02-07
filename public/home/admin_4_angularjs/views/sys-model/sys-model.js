@@ -61,9 +61,8 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     scope: $scope,
                     controller: ['$scope', 'Restangular',function ($scope,Restangular) {
                         //$scope.$validationOptions = validationConfig;
-
                         $scope.$on('ngDialog.opened', function () {
-                            //console.log($scope.$parent.$parent.mdTreeJson);
+
                             $("#modelTree").jstree({
                                 "core": {
                                     "themes": {
@@ -79,7 +78,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                                         return true; // allow everything else
                                     },
                                     'data': {
-                                        'url': '/dcmodels/dcmodelMove/tree',
+                                        'url': '/dcmodelopt/tree',
                                         'data': function (node) {
                                             return { 'id' : node.id };
                                         }
@@ -94,10 +93,9 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                                     }
                                 },
                                 "plugins": ["dnd", "state", "types", "json_data"]
-                            })
-                                .bind("move_node.jstree", function (e, data) {
+                            }).bind("move_node.jstree", function (e, data) {
                                     //console.log('the item being dragged ', data);
-                                    Restangular.all("/dcmodels/dcmodelMove/movenode").post(data).then(
+                                    Restangular.all("/dcmodelopt/movenode").post(data).then(
                                         function (res) {
                                             //console.log(res);
                                             if (res.success) {
@@ -115,8 +113,9 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
-                    closeByEscape: true
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                 }).then(function (dcEdition) {
 
                 }, function (dcEdition) {

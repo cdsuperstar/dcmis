@@ -29,9 +29,11 @@ Route::group(['prefix' => '/home/{layout}'], function () {
 });
 
 Route::resource('dcmodels','dcmodel\dcmodelController');
-Route::group(['prefix' => '/dcmodels/dcmodelMove'], function () {
+Route::group(['prefix' => '/dcmodelopt'], function () {
     Route::get('tree','dcmodel\dcmodelController@getTree');
     Route::post('movenode','dcmodel\dcmodelController@postMovenode');
+    Route::get('getModTree','dcmodel\dcmodelController@getModTree');
+    Route::get('getModList','dcmodel\dcmodelController@getModList');
 });
 
 Route::resource('users', 'User\userController');
@@ -41,24 +43,3 @@ Route::group(['prefix' => '/userprofile'], function () {
 Route::resource('userprofiles', 'User\userprofileController');
 Route::resource('roles','roleController');
 Route::resource('permissions','permissionController');
-
-/*
-Route::group(['prefix'=>'/user'],function(){
-    Route::get('data/{id}','User\userController@getData');
-    Route::get('list','User\userController@getList');
-    Route::get('putUserpwd','User\userController@postUserpwd');
-    Route::get('postData','User\userController@postData');
-    Route::get('putData','User\userController@putData');
-    Route::get('delete/{id}','User\userController@deleteData');
-});
-*/
-//Route::controllers([
-//    'auth' => 'Auth\AuthController',
-//    'password' => 'Auth\PasswordController',
-//    'dcassets'=>'dcResController',
-//    'user'=>'User\userController',
-//    'dcmodel'=>'dcmodel\dcmodelController',
-//    'pxunit'=>'pxunit\pxunitController',
-//    'sysmsg'=>'sysmsg\sysmsgController',
-//    'userprofile'=>'User\userprofileController',
-//]);

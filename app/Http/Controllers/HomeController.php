@@ -59,11 +59,10 @@ class HomeController extends Controller
 
     public function jsMain(String $layout)
     {
-        $mdTreeJson = dcMdGrp::with(['dcmodel' => function ($q) {
-            $q->addSelect(array('id', 'name', 'title', 'ismenu', 'icon', 'url', 'templateurl', 'files'));
-        }])->get()->tohierarchy()->toJson();
         $dcModels = dcmodel::where('url', '<>', '')->get();
         $sView = 'home.' . $layout . ".js.main";
+        $mdTreeJson="";
         return view($sView, ['mdTreeJson' => $mdTreeJson, 'dcModels' => $dcModels]);
     }
+
 }

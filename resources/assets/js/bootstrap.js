@@ -7,7 +7,7 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-//window.$ = window.jQuery = require('jquery');
+window.$ = window.jQuery = require('jquery');
 //require('bootstrap-sass');
 import angular from 'angular'
 require('angular-ui-grid');
@@ -20,6 +20,7 @@ require('socket.io-client');
 require('ng-tags-input');
 require('jasny-bootstrap/js/fileinput');
 require('ui-select');
+require('ui-router-extras');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

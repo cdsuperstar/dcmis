@@ -109,8 +109,8 @@ class dcmodelController extends Controller
                 $pNode->children()->create(['dcmodel_id' => $md->id]);
 
                 return response()->json(array_merge([
-                    'messages' => trans('dcmodels.savesuccess'),
-                    'success' => true],$recData->toArray())
+                        'messages' => trans('dcmodels.savesuccess'),
+                        'success' => true], $recData->toArray())
                 );
             }
         }
@@ -186,4 +186,21 @@ class dcmodelController extends Controller
         }
     }
 
+    public function show()
+    {
+    }
+
+    public function getModTree()
+    {
+        $mdTreeJson = dcMdGrp::with(['dcmodel' => function ($q) {
+            $q->addSelect(array('id', 'name', 'title', 'ismenu', 'icon', 'url', 'templateurl', 'files'));
+        }])->get()->tohierarchy();
+        return response($mdTreeJson);
+    }
+
+    public function getModList()
+    {
+        $dcModels = dcmodel::where('url', '<>', '')->get();
+        return response()->json($dcModels);
+    }
 }

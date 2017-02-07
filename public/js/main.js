@@ -1,9 +1,5 @@
-/***
- Metronic AngularJS App Main Script
- ***/
-
-/* Metronic App */
 var MetronicApp = angular.module("MetronicApp", [
+    "ct.ui.router.extras",
     "ngAnimate",
     "ui.router",
     "ui.bootstrap",
@@ -70,14 +66,19 @@ MetronicApp.factory('settings', ['$rootScope', function ($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular','$ocLazyLoad', function ($scope, $rootScope,Restangular,$ocLazyLoad) {
     $scope.$on('$viewContentLoaded', function () {
-//App.initComponents(); // init core components
-//Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
+        Restangular.one('/dcmodelopt/getModTree').get().then(function (res) {
+            $scope.mdTreeJson = res;
+
+        });
+        $scope.dcBroadcast = [];
+        $scope.dcMessage = [];
+
+        //App.initComponents(); // init core components
+        //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
-    $scope.mdTreeJson = JSON.parse('{!! addslashes($mdTreeJson) !!}');
-    $scope.dcBroadcast=[];
-    $scope.dcMessage=[];
+
 }])
 ;
 /***
@@ -88,15 +89,14 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function ($scop
 
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
-    $scope.ReadNotifiCnt=0;
+    $scope.ReadNotifiCnt = 0;
     window.Echo.channel('dcBroadcast')
         .listen('normal', (e) => {
             $scope.dcBroadcast.unshift(e);
             $scope.$apply();
         });
-
-    $scope.checkNotifi=function(){
-        $scope.ReadNotifiCnt=$scope.dcBroadcast.length;
+    $scope.checkNotifi = function () {
+        $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
     }
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
@@ -158,57 +158,57 @@ MetronicApp.directive('confirmationNeeded', function () {
 });
 
 /* Setup Rounting For All Pages */
-MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider', function ($stateProvider, $urlRouterProvider,$futureStateProvider) {
 // Redirect any unmatched url
+    var loadAndRegisterFutureStates = function (Restangular) {
+        return Restangular.all('/dcmodelopt/getModList').getList().then(function (res) {
+            angular.forEach(res, function (value, key) {
+                var fstate = {
+                    url: value.url,
+                    templateUrl: value.templateurl,
+                    icon: {pageIcon: value.icon},
+                    data: {pageTitle: value.title},
+                    controller: 'GeneralPageController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([{
+                                name: 'MetronicApp',
+                                files: value.files.split(',')
+                            }]);
+                        }]
+                    }
+                };
+                $stateProvider.state(value.name,fstate);
+            });
+        });
+    };
+    $futureStateProvider.addResolve(loadAndRegisterFutureStates);
     $urlRouterProvider.otherwise("/dashboard.html");
-
-    $stateProvider
-
-// Dashboard
-@foreach($dcModels as $model)
-        .state('{{$model->name}}', {
-            url: "{!! $model->url !!}",
-            templateUrl: "{!! $model->templateurl !!}",
-            icon: {pageIcon: '{{$model->icon}}'},
-            data: {pageTitle: '{{$model->title}}'},
-            controller: "GeneralPageController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            {!! $model->files !!}
-                    ]
-                    });
-                }]
-            }
-        })
-@endforeach
 
 }]);
 
-function showMsg(msg,title,style,secs,hor,ver,stk){
-    if(!title)title='提示';
-    if(!style)style='teal';
-    if(!secs)secs=5000;
-    if(!hor)hor='bottom';
-    if(!ver)ver='right';
-    if(!stk)stk=false;
+function showMsg(msg, title, style, secs, hor, ver, stk) {
+    if (!title)title = '提示';
+    if (!style)style = 'teal';
+    if (!secs)secs = 5000;
+    if (!hor)hor = 'bottom';
+    if (!ver)ver = 'right';
+    if (!stk)stk = false;
     var settings = {
         theme: style,
         sticky: stk,
         horizontalEdge: hor,
         verticalEdge: ver,
-        life:secs,
-        heading:title,
-        zindex:11500
+        life: secs,
+        heading: title,
+        zindex: 11500
     };
     $.notific8(msg, settings);
 }
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", function ($rootScope, settings, $state) {
+
+MetronicApp.run(["$rootScope", "settings", "$state",function ($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view
 }]);
