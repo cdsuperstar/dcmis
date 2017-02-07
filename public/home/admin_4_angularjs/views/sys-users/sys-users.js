@@ -81,38 +81,51 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 promise.reject();
             };
 
+            $scope.imdata = [];
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter: true,
+                showColumnFooter: false,
                 enableCellEditOnFocus:true,
-                enableVerticalScrollbar:2,
-                enableHorizontalScrollbar :2,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '姓名', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '邮箱', field: 'email',enableCellEdit: true,visible:false},
+                    {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '姓名', field: 'name',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '邮箱', field: 'email',width: '200',enableCellEdit: true,visible:true},
                     {
                         name: '密码',
+                        type:'string',
+                        width: '150',
+                        headerCellClass: 'nowrap="false"',
                         field: 'password',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true
                     },
-                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:false},
+                    {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true},
 
                 ],
 
                 enableGridMenu: true,
                 //exporterMenuCsv:false,
                 //exporterMenuPdf:false,
+                //--------------导入开始----------------------------------
+                imdata : 'data',
+                importerDataAddCallback: function ( grid, newObjects ) {
+                    $scope.imdata = $scope.imdata.concat( newObjects );
+                },
+                //--------------导入结束----------------------------------
 
                 //--------------导出----------------------------------
-                exporterAllDataFn: function(){
-                    return getPage(1,$scope.gridOptions.totalItems);
-                },
+                exporterHeaderFilterUseName : true,
+                exporterMenuCsv : false, //导出Excel 开关
+                exporterMenuPdf : false, //导出pdf 开关
+                exporterMenuLabel : "Export",
+                exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
                 exporterCsvFilename:'download.csv',
+                //exporterAllDataFn: function(){
+                //    return getPage(1,$scope.gridOptions.totalItems);
+                //},
                 //exporterFieldCallback : function ( grid, row, col, value ){
                 //    if ( value == 50 ){
                 //        value = "可以退休";
@@ -122,42 +135,39 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 //exporterHeaderFilter :function( displayName ){
                 //    return 'col: ' + name;
                 //},
-                exporterHeaderFilterUseName : true,
-                exporterMenuCsv : true, //导出Excel 开关
-                exporterMenuPdf : true, //导出pdf 开关
-                exporterMenuLabel : "Export",
-                exporterOlderExcelCompatibility : true,
-                exporterPdfCustomFormatter : function ( docDefinition ) {
-                    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
-                    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
-                    return docDefinition;
-                },
-                exporterPdfFooter :{
-                    text: 'Powered by DcMis',
-                    style: 'footerStyle',
-                    alignment:'center'
-                },
-                exporterPdfDefaultStyle : {font:'MicrosoftYaHei',fontSize: 9},
-                exporterPdfFilename:'download.pdf',
-                exporterPdfAlign:'center', //定义整体样式
-                exporterPdfHeader : function(currentPage, pageCount) {
-                    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
-                },
-                //exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
-                exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
-                exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
-                exporterPdfTableHeaderStyle : {
-                    bold: true,
-                    fontSize: 12,
-                    italics: true,
-                    color: 'black'
-                },
-                exporterPdfTableLayout : null,
-                exporterPdfTableStyle: {
-                    margin: [0, 5, 0, 15]  //左上右下
-                },
-                exporterSuppressColumns : ['buttons'],
-                exporterSuppressMenu: false,
+                //导出pdf 设置 开始
+                //exporterPdfCustomFormatter : function ( docDefinition ) {
+                //    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
+                //    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
+                //    return docDefinition;
+                //},
+                //exporterPdfFooter :{
+                //    text: 'Powered by DcMis',
+                //    style: 'footerStyle',
+                //    alignment:'center'
+                //},
+                //exporterPdfDefaultStyle : {font:'mcroyh',fontSize: 9}, //微软雅黑
+                //exporterPdfFilename:'download.pdf',
+                //exporterPdfAlign:'center', //定义整体样式
+                //exporterPdfHeader : function(currentPage, pageCount) {
+                //    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
+                //},
+                ////exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
+                //exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
+                //exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
+                //exporterPdfTableHeaderStyle : {
+                //    bold: true,
+                //    fontSize: 12,
+                //    italics: true,
+                //    color: 'black'
+                //},
+                //exporterPdfTableLayout : null,
+                //exporterPdfTableStyle: {
+                //    margin: [0, 5, 0, 15]  //左上右下
+                //},
+                //exporterSuppressColumns : ['buttons'],
+                //exporterSuppressMenu: false,
+                //导出pdf 设置 结束
                 //--------------导出结束----------------------------------
 
 
@@ -171,6 +181,11 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
+            };
+
+            $scope.exportxls = function(){
+                var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
+                $scope.gridApi.exporter.csvExport( 'all', 'all', myElement );
             };
 
             $scope.toggleFiltering = function(){

@@ -6,7 +6,7 @@
                 <i class="@{{$state.current.icon.pageIcon}} font-dark"></i>
                 <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
             </div>
-            <div class="page-toolbar" align="right">
+            <div class="tools">
                 <!-- BEGIN THEME PANEL -->
                 <div class="btn-group btn-theme-panel">
                     <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">

@@ -6,7 +6,12 @@
         <button type="button"  class="btn btn-info" ng-click="editData()">保存</button>
         <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">筛选</button>
         <button id="refreshButton" type="button" class="btn purple-plum" ng-click="refreshData()">重获数据</button>
+        <button type="button" class="btn blue-hoki pull-right" ng-click="exportxls()">
+            <i class="fa fa-file-excel-o"></i> 导出Excel</button>
+        <button type="button" class="btn green-meadow pull-right" ng-click="importxls()">
+            <i class="fa fa-file-excel-o"></i> 导入Excel</button>
     </div>
-    <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="usergrid"></div>
+    <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-importer ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="usergrid"></div>
 </div>
+
 

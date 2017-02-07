@@ -178,12 +178,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">备注</label>
-                    <div class="col-md-10">
-                        <textarea name="xmjj" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写备注信息（1000字以内）"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
                     <div class="col-md-offset-3 col-md-3 col-sm-6 col-xs-6">
                         <a href="javascript:;" class="btn green">
                             <i class="fa fa-check"></i> - 保  存 - </a>

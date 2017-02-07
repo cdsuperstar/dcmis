@@ -52,10 +52,10 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
 
 
             /////////start datepicker
-            $scope.startdate = new Date();
-            $scope.enddate = new Date();
-            $scope.gcstartdate = new Date();
-            $scope.gcenddate = new Date();
+            $scope.startdate = new Date();   //开始日期
+            $scope.enddate = new Date();     //截止日期
+            $scope.gcstartdate = new Date(); //工程施工日期
+            $scope.gcenddate = new Date();   //工程截止日期
             $scope.format = "yyyy-MM-dd";
             $scope.altInputFormats = ['yyyy-M!-d!'];
 

@@ -156,8 +156,6 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                 enableSorting: true,
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
-                enableVerticalScrollbar:2,
-                enableHorizontalScrollbar :2,
                     columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '5%'},
                     {name: '名称', field: 'name', enableCellEdit: true,enableHiding: false,},
