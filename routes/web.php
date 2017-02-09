@@ -43,3 +43,6 @@ Route::group(['prefix' => '/userprofile'], function () {
 Route::resource('userprofiles', 'User\userprofileController');
 Route::resource('roles','roleController');
 Route::resource('permissions','permissionController');
+
+Route::resource('unitgrps','unitgrpController');
+

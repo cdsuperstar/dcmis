@@ -32,11 +32,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">密 码</label>
+                        <label class="col-md-2 control-label">密码</label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                <input type="password" class="form-control" ng-model="dcEdition.password" placeholder="XXXXXX">
+                                <input type="password" class="form-control" ng-model="dcEdition.password" placeholder="******">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">确认密码</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                <input type="password" class="form-control" ng-model="dcEdition.password_confirmation" placeholder="******">
                             </div>
                         </div>
                     </div>

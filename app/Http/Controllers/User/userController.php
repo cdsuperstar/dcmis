@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
+use Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,10 +30,7 @@ class userController extends Controller
      */
     public function create()
     {
-        return view('assets.edition')->with([
-            'fields' => User::$angularrules,
-            'title' => '用户',
-        ]);
+        return view('home.'.Config::get('app.dctemplate').'.views.sys-users.edit');
     }
 
     /**

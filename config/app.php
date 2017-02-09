@@ -13,6 +13,7 @@ return [
     */
 
     'name' => 'Laravel',
+    'dctemplate' => 'admin_4_angularjs',
 
     /*
     |--------------------------------------------------------------------------
@@ -233,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
-        'UserXX' => App\Facades\UserX::class,
+//        'UserXX' => App\Facades\UserX::class,
 
     ],
 

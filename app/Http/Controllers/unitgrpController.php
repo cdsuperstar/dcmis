@@ -15,6 +15,8 @@ class unitgrpController extends Controller
     public function index()
     {
         //
+        $resData = unitgrp::all();
+        return response()->json($resData);
     }
 
     /**
@@ -36,6 +38,19 @@ class unitgrpController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new unitgrp($request->toArray());
+        if ($rec) {
+            if ($rec->save($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.add', ["data" => $rec->id]),
+                        'success' => true,
+                    ], $rec->toArray()
+                    )
+                );
+            }
+        }
+        return response()->json(['errors' => $rec->errors()->all()]);
+
     }
 
     /**
@@ -70,6 +85,21 @@ class unitgrpController extends Controller
     public function update(Request $request, unitgrp $unitgrp)
     {
         //
+        if ($unitgrp) {
+
+            if ($unitgrp->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $unitgrp->id]),
+                        'success' => true,
+                    ], $unitgrp->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $unitgrp->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +111,15 @@ class unitgrpController extends Controller
     public function destroy(unitgrp $unitgrp)
     {
         //
+        if ($unitgrp->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('users.deletesuccess', ['rows' => $unitgrp->id . " with id ".$unitgrp->id]),
+                'success' => true,
+            ],$unitgrp->toArray()));
+        } else {
+            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $unitgrp->id])]);
+        }
+
     }
 }
