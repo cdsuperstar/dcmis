@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\models\userprofile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Config;
 
 class userprofileController extends Controller
 {
@@ -29,6 +30,7 @@ class userprofileController extends Controller
     public function create()
     {
         //
+        return view('home.'.Config::get('app.dctemplate').'.views.user-profile.edit');
     }
 
     /**
