@@ -8,7 +8,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/dcmodels/create',
+                    template: '/userdepartment/create',
                     className: 'ngdialog-theme-default',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {

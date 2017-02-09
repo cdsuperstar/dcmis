@@ -14,7 +14,7 @@
                 </div>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-2 control-label"> 名 称 </label>
+                        <label class="col-md-3 control-label"> 名  称 </label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label"> 显示名称 </label>
+                        <label class="col-md-3 control-label"> 显示名称 </label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label"> 描 述 </label>
-                        <div class="col-md-10">
+                        <label class="col-md-3 control-label"> 描  述 </label>
+                        <div class="col-md-8">
                             <textarea name="xmjj" class="form-control" rows="3" ng-model="dcEdition.description" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写角色描述（1000字以内）"></textarea>
                         </div>
                     </div>

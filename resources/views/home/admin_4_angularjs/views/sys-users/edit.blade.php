@@ -14,7 +14,7 @@
                 </div>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-2 control-label"> 姓 名 </label>
+                        <label class="col-md-3 control-label"> 姓  名 </label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">邮箱</label>
+                        <label class="col-md-3 control-label"> 邮  箱 </label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">密码</label>
+                        <label class="col-md-3 control-label"> 密  码 </label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">确认密码</label>
+                        <label class="col-md-3 control-label">确认密码</label>
                         <div class="col-md-8">
                             <div class="input-icon right">
                                 <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
