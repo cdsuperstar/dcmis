@@ -20,13 +20,12 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-bottom: 0;
-    top:-780px;
     position: relative;
     width: 800px;
 }
 .jquery-notific8-container.top { top: 60px; }
 
-.grid {
-    /*width: 600px;*/
+.userdepartmentgrid {
+    /*width: 300px;*/
     height: 384px;
 }

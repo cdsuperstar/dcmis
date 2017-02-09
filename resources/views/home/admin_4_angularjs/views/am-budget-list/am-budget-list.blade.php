@@ -1,11 +1,12 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="ambudgetlistCtrl">
     <div class="btn-group btn-group-solid table-toolbar">
-        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">　筛　选　</button>
-        <button type="button" id='toggleFiltering' ng-click="printsource()" class="btn blue">　打　印　</button>
-        <button type="button" id="refreshButton" type="button" class="btn green" ng-click="refreshData()">重获数据</button>
+        <button type="button"  class="btn grey-gallery btn-outline" ng-click="editData()"><i class="fa fa-floppy-o"></i>　保　存　</button>
+        <button type="button" id="delData" class="btn grey-gallery btn-outline" confirmation-needed="确定要删除这些用户吗？" ng-click="delData()"><i class="fa fa-trash"></i>　删　除　</button>
+        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn grey-gallery btn-outline"><i class="fa fa-search"></i>　筛　选　</button>
+        <button type="button" id="refreshButton" type="button" class="btn grey-gallery btn-outline" ng-click="refreshData()"><i class="fa fa-refresh"></i>　重获数据</button>
         <div class="btn-group btn-group-solid">
-            <button type="button" class="btn purple" data-toggle="dropdown" aria-expanded="true">批量操作
+            <button type="button" class="btn grey-gallery btn-outline" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-cubes"></i>　批量操作
                 <i class="fa fa-angle-down"></i>
             </button>
             <ul class="dropdown-menu" >
@@ -21,8 +22,23 @@
                 </li>
             </ul>
         </div>
-        <button type="button" id="delData" class="btn red" confirmation-needed="确定要删除这些用户吗？" ng-click="delData()">　删　除　</button>
-        <button type="button"  class="btn blue" ng-click="editData()">　保　存　</button>
+        <div class="btn-group btn-group-solid">
+            <a class="btn grey-gallery btn-outline" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-file-excel-o"> </i>　导入/导出
+                <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+                <li>
+                    <a href="javascript:;" ng-click="exportxls()"> 导出CSV </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="javascript:;"> 导入CSV </a>
+                </li>
+            </ul>
+        </div>
+        <button type="button" id='toggleFiltering' ng-click="printsource()" class="btn grey-gallery btn-outline"><i class="fa fa-print"></i>　打　印　</button>
+
     </div>
 
 
