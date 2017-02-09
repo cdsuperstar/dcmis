@@ -28,6 +28,8 @@ class unitgrpController extends Controller
     public function create()
     {
         //
+
+        return view('home.'.Config::get('app.dctemplate').'.views.user-department.edit');
     }
 
     /**
@@ -42,6 +44,11 @@ class unitgrpController extends Controller
         $rec = new unitgrp($request->toArray());
         if ($rec) {
             if ($rec->save($request->toArray())) {
+                $pNode = unitgrp::where('parent_id', null)->orderby('id','asc')->first();
+                if($pNode)
+//                    $pNode->children()->create(['dcmodel_id' => $rec->id]);
+                    $rec->makeChildOf($pNode);
+
                 return response()->json(array_merge([
                         'messages' => trans('data.add', ["data" => $rec->id]),
                         'success' => true,

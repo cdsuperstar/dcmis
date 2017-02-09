@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Config;
 use Log;
 
 class dcmodelController extends Controller
@@ -70,11 +71,8 @@ class dcmodelController extends Controller
      */
     public function create()
     {
+        return view('home.'.Config::get('app.dctemplate').'.views.sys-model.edit');
 
-        return view('assets.edition')->with([
-            'fields' => dcmodel::$angularrules,
-            'title' => '模块编辑器',
-        ]);
     }
 
     /**
