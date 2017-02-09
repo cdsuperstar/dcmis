@@ -78,7 +78,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                                         return true; // allow everything else
                                     },
                                     'data': {
-                                        'url': '/dcmodelopt/tree',
+                                        'url': '/unitgrpopt/tree',
                                         'data': function (node) {
                                             return { 'id' : node.id };
                                         }
