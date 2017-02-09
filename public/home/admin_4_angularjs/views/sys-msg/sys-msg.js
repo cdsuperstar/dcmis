@@ -5,19 +5,41 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            //接收者数据
+            $scope.people = [
+                { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
+                { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
+                { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
+                { name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador' },
+                { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30, country: 'Ecuador' },
+                { name: 'Samantha',  email: 'samantha@email.com',  age: 30, country: 'United States' },
+                { name: 'Nicole',    email: 'nicole@email.com',    age: 43, country: 'Colombia' },
+                { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
+                { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
+                { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
+            ];
+
+            $scope.multiplePeple = {};
+            $scope.multiplePeple.selectedPeople = [];
+
+
+
+            //end
+            var tableDatas = Restangular.all('/msgs');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/users/create',
-                    className: 'ngdialog-theme-default',
+                    template: '/msgs/create',
+                    className: 'ngdialog-theme-default sysmsg',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
                         $scope.$validationOptions = validationConfig;
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -85,12 +107,12 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 showColumnFooter: false,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '发送者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '接收者', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '消息内容', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '发送时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '浏览时间', field: 'name',enableCellEdit: true,enableColumnMenu: true},
+                    {name: 'id', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '发送者', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '接收者', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '消息内容', field: 'name',width: '300',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '发送时间', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '浏览时间', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页

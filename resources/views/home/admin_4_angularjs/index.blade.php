@@ -41,6 +41,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/css/common/ngDialog-theme-default.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/common/select.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/select2.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/common/selectize.default.css" rel="stylesheet" type="text/css"/>
 
     <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>

@@ -118,6 +118,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                     overlay: true,        //是否用div覆盖当前页面
                     closeByDocument:false,  //是否点覆盖div 关闭会话
                     disableAnimation:true,  //是否显示动画
+                    closeByEscape: true
                 }).then(function (dcEdition) {
 
                 }, function (dcEdition) {

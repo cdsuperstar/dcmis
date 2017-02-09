@@ -89,8 +89,11 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
                 columnDefs: [
-                    {name: '操作',enableCellEdit: false,
-                        cellTemplate: '<div><button onclick="console.log($scope)">操作</button></div>'
+                    {name: '操作',field : 'action',enableCellEdit: false,
+                        cellTemplate : '<div class="container-fluid"><div class="row cell-action-style"><div class="col-xs-3 text-center">' +
+                        '<div class="div-click"  ng-click="grid.appScope.goToUpdate(row)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></div></div>' +
+                        '<div class="col-xs-3 text-center" ><div class="div-click"  ng-click="grid.appScope.goToDelete(row)">' +
+                        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div><div></div></div></div>'
                     },
                     {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,
                         enableHiding: false,
