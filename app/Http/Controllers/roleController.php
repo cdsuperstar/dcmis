@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Role;
 use Illuminate\Http\Request;
+use Config;
 use Log;
 
 class roleController extends Controller
@@ -28,6 +29,8 @@ class roleController extends Controller
     public function create()
     {
         //
+        return view('home.'.Config::get('app.dctemplate').'.views.sys-role.edit');
+
     }
 
     /**
