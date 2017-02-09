@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\unitgrp;
 use Illuminate\Http\Request;
+use DB;
 
 class unitgrpController extends Controller
 {
@@ -122,4 +123,35 @@ class unitgrpController extends Controller
         }
 
     }
+
+    public function getTree()
+    {
+        unitgrp::rebuild(true);
+        $tree = unitgrp::where('id','<>',0)->orderby('lft','asc')->select('id as id', 'parent_id as parent','name as text','brief as data',DB::raw('\'icon-users\' as icon'))->get();
+
+        foreach ($tree as $node) {
+            if ($node->parent == null) {
+                $node->parent = '#';
+            }
+
+        }
+        return response()->json($tree);
+    }
+
+    public function postMovenode(Request $req)
+    {
+        $pNode = unitgrp::where('id', '=', $req->parent)->first();
+        $cNode = unitgrp::where('id', '=', $req->node['id'])->first();
+        $cNode->makeFirstChildOf($pNode);
+        for ($i = 0; $i < $req->position; $i++) {
+            if ($cNode->getRightSibling() != null)
+                $cNode->moveRight();
+        }
+        return response()->json([
+            'messages' => trans('data.movesuccess', ['cNode' => $cNode->dcmodel->title, 'pNode' => $pNode->dcmodel->title]),
+            'success' => true,
+            'data' => '',
+        ]);
+    }
+
 }

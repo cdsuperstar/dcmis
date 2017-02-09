@@ -14,5 +14,6 @@ return [
     'update' => 'data ID :data updated',
     'destroy' => 'data ID :data deleted',
     'notfound' => 'data ID :data not found',
+    'movesuccess' =>'the :cNode moved to :pNode success'
 
 ];

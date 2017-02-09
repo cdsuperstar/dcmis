@@ -45,4 +45,8 @@ Route::resource('roles','roleController');
 Route::resource('permissions','permissionController');
 
 Route::resource('unitgrps','unitgrpController');
+Route::group(['prefix' => '/unitgrpopt'], function () {
+    Route::get('tree','dcmodel\dcmodelController@getTree');
+    Route::post('movenode','dcmodel\dcmodelController@postMovenode');
+});
 
