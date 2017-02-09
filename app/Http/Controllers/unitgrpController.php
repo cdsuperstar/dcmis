@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\unitgrp;
 use Illuminate\Http\Request;
+use Config;
 use DB;
 
 class unitgrpController extends Controller
