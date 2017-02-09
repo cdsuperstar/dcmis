@@ -36,4 +36,7 @@ class unitgrp extends Node
     // guard attributes from mass-assignment
     protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
 
+    protected $fillable = ['name',  'brief'];
+
+
 }

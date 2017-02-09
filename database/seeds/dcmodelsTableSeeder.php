@@ -58,9 +58,12 @@ INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created
 INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (20, 1, 36, 41, 1, 24, '2017-01-22 09:12:07', '2017-02-06 10:21:08');
 INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (1, null, 1, 42, 0, 1, '2015-08-23 06:01:37', '2017-02-06 10:21:08');
 
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (1, null, 1, 2, 0, 'root', '系统根机构', '2017-02-09 14:16:27', '2017-02-09 14:16:37');
+
+
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
 select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));
-
+select setval('unitgrps_id_seq', (select max(id) + 1 from dcmodels));
 
       ");
 

@@ -46,8 +46,7 @@ class unitgrpController extends Controller
         if ($rec) {
             if ($rec->save($request->toArray())) {
                 $pNode = unitgrp::where('parent_id', null)->orderby('id','asc')->first();
-                if($pNode)
-//                    $pNode->children()->create(['dcmodel_id' => $rec->id]);
+                if($pNode&&$pNode->id<>$rec->id)
                     $rec->makeChildOf($pNode);
 
                 return response()->json(array_merge([
