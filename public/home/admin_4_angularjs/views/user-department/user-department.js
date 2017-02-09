@@ -16,7 +16,9 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -157,10 +159,11 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '名称', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
-                    {name: '介绍', field: 'brief',enableCellEdit: true,visible:true},
-                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: 'id', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '名称', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
+                    {name: '介绍', field: 'brief',width: '300',enableCellEdit: true,visible:true},
+                    {name: '添加时间', field: 'created_at',width: '150',enableCellEdit: false,visible:true},
+                    {name: '更新时间',width: '150', field: 'updated_at',enableCellEdit: false,visible:true},
 
                 ],
                 paginationPageSizes: [10, 30, 50],

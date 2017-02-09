@@ -9,15 +9,17 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/users/create',
-                    className: 'ngdialog-theme-default',
+                    template: '/permissions/create',
+                    className: 'ngdialog-theme-default sysprivilege',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
                         $scope.$validationOptions = validationConfig;
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -85,12 +87,12 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: true,enableFiltering: false},
-                    {name: '名称', field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: true},
-                    {name: '显示名称', field: 'display_name',enableCellEdit: true,visible:true},
-                    {name: '描述', field: 'description',enableCellEdit: true,visible:true},
-                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:false},
-                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:true},
+                    {name: 'id', width: '40',field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: true,enableFiltering: false},
+                    {name: '名称', width: '150',field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: true},
+                    {name: '显示名称',width: '150', field: 'display_name',enableCellEdit: true,visible:true},
+                    {name: '描述', width: '260',field: 'description',enableCellEdit: true,visible:true},
+                    {name: '添加时间',width: '150', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间',width: '150', field: 'updated_at',enableCellEdit: false,visible:true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页

@@ -10,7 +10,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/users/create',
-                    className: 'ngdialog-theme-default',
+                    className: 'ngdialog-theme-default sysuser',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
                         $scope.$validationOptions = validationConfig;

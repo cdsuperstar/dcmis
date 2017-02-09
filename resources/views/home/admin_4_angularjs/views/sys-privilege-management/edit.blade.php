@@ -6,7 +6,7 @@
                 <div class="portlet-title">
                     <div class="caption font-green-sharp">
                         <i class="icon-settings font-green-sharp"></i>
-                        <span class="caption-subject bold uppercase"> 添加角色 </span>
+                        <span class="caption-subject bold uppercase"> 添加权限 </span>
                     </div>
                     <div class="tools">
                         <a href="" class="fullscreen"> </a>

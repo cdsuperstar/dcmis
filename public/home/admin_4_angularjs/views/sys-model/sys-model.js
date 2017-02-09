@@ -9,14 +9,16 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/dcmodels/create',
-                    className: 'ngdialog-theme-default',
+                    className: 'ngdialog-theme-default sysmodel',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
                     }],
                     showClose: false,
                     setBodyPadding: 1,
-                    overlay: false,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -157,11 +159,11 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                     columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false, width: '5%'},
-                    {name: '名称', field: 'name', enableCellEdit: true,enableHiding: false,},
-                    {name: '标题', field: 'title', enableCellEdit: true,enableHiding: false,},
+                    {name: 'id', field: 'id', enableCellEdit: false, width: '40'},
+                    {name: '名称', field: 'name',width: '100', enableCellEdit: true,enableHiding: false},
+                    {name: '标题', field: 'title', width: '100',enableCellEdit: true,enableHiding: false},
                     {
-                        name: '菜单', field: 'ismenu', enableCellEdit: true, width: '5%',
+                        name: '菜单', width: '60',field: 'ismenu', enableCellEdit: true,
                         editableCellTemplate: 'ui-grid/dropdownEditor',
                         enableHiding: false,
                         cellFilter: 'mapIsmenu', editDropdownValueLabel: 'isMenu', editDropdownOptionsArray: [
@@ -169,12 +171,12 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                         {id: 0, isMenu: '否'}
                     ]
                     },
-                    {name: '图标', field: 'icon', enableCellEdit: true},
-                    {name: 'URL', field: 'url', enableCellEdit: true},
-                    {name: '模板URL', field: 'templateurl', enableCellEdit: true},
-                    {name: '引用文件', field: 'files', enableCellEdit: true},
-                    {name: '添加时间', field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间', field: 'updated_at',enableCellEdit: false,visible:false},
+                    {name: '图标', width: '130',field: 'icon', enableCellEdit: true},
+                    {name: 'URL', width: '130',field: 'url', enableCellEdit: true},
+                    {name: '模板URL',width: '150', field: 'templateurl', enableCellEdit: true},
+                    {name: '引用文件',width: '200', field: 'files', enableCellEdit: true},
+                    {name: '添加时间', width: '150',field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', width: '150',field: 'updated_at',enableCellEdit: false,visible:false},
 
                     ],
                 paginationPageSizes: [10, 30, 50],

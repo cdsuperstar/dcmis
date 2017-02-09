@@ -1,13 +1,13 @@
 
 .ngdialog.ngdialog-theme-default {
     padding-bottom: 100px;
-    padding-top: 60px;
+    padding-top: 180px;
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content {
     -webkit-animation: ngdialog-flyin .5s;
     animation: ngdialog-flyin .5s;
-    background: #f0f0f0;
+    background: #ffffff;
     border-radius: 5px;
     color: #444;
     font-family: 'Helvetica',sans-serif;
@@ -20,13 +20,12 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-bottom: 0;
-    top:-780px;
     position: relative;
-    width: 800px;
+    width: 450px;
 }
 .jquery-notific8-container.top { top: 60px; }
 
-.grid {
-    width: 600px;
-    height: 300px;
+.sysModelgrid {
+    /*width: 300px;*/
+    height: 384px;
 }
