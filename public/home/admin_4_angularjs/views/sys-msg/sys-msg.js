@@ -24,6 +24,18 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
 
 
 
+
+            $scope.person = {};
+            $scope.people = [
+                {"id":1,"ykth":"10201401573","name":"高成刚"},
+                {"id":2,"ykth":"10201400124","name":"李娴"},
+                {"id":3,"ykth":"10201400939","name":"朱创业"},
+                {"id":4,"ykth":"10201402485","name":"路婷婷"},
+                {"id":5,"ykth":"10201401940","name":"何铭"},
+                {"id":6,"ykth":"10201401802","name":"涂涯"},
+                {"id":7,"ykth":"2015020765","name":"李伟博"}
+            ];
+
             //end
             var tableDatas = Restangular.all('/msgs');
 
