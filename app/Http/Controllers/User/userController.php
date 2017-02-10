@@ -159,5 +159,11 @@ class userController extends Controller
             'title' => '用户编辑器',
         ]);
     }
+
+    public function getOnlineUsers()
+    {
+        $recDatas=User::select('users.*')->join('sessions','users.id','=','sessions.user_id')->get();
+        return response()->json($recDatas);
+    }
 }
 

@@ -123,34 +123,20 @@ class User extends Ardent implements
     protected $hidden = ['remember_token'];
 
     public static $relationsData = array(
-//        'roles' => array(self::BELONGS_TO_MANY, 'App\models\role'),
-        'userprofile'=>array(self::HAS_ONE,'App\models\userprofile')
+//        'userprofile'=>array(self::HAS_ONE,'App\models\userprofile')
     );
-//    public function roles()
-//    {
-//        return $this->belongsToMany('App\models\role');
-//    }
-
-//    public function sysmemos()
-//    {
-//        return $this->hasMany('App\models\sysmemo');
-//    }
-//
-//    public function pxunit()
-//    {
-//        return $this->belongsTo('App\models\pxunit');
-//    }
-//
-//    public function sysmsgs()
-//    {
-//        return $this->hasMany('App\models\sysmsg');
-//    }
-//
-//    public function sysnotices()
-//    {
-//        return $this->hasMany('App\models\sysnotice');
-//    }
-//    public function userprofile(){
-//        return $this->hasOne('App\models\userprofile','id');
-//    }
+    public function userprofile(){
+        return $this->hasOne('App\models\userprofile');
+    }
+    public function recvmsgs()
+    {
+        return $this->hasMany('App\models\usermsg','recver_id');
+    }
+    public function sendmsgs()
+    {
+        return $this->hasMany('App\models\usermsg','sender_id');
+    }
+    public function session(){
+        return $this->hasOne('App\models\session');
+    }
 }
