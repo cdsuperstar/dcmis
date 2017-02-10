@@ -23,6 +23,10 @@ class userController extends Controller
         //
     }
 
+    public function getLoginUser(Request $request)
+    {
+        return response()->json($request->user());
+    }
     /**
      * Show the form for creating a new resource.
      *

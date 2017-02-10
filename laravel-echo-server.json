@@ -1,7 +1,12 @@
 {
-	"authHost": null,
+	"authHost": "http://192.168.10.10",
 	"authEndpoint": "/broadcasting/auth",
-	"clients": [],
+	"clients": [
+		{
+			"appId": "dcmis",
+			"key": "22185490f482e2d492aa725ce449dd38"
+		}
+	],
 	"database": "redis",
 	"databaseConfig": {
 		"redis": {},

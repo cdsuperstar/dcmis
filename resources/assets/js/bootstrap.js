@@ -49,6 +49,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
  window.Echo = new Echo({
      broadcaster: 'socket.io',
-     host: window.location.hostname + ':6001'
+     host: window.location.hostname + ':6001',
+     appId: 'dcmis',
+     key: '22185490f482e2d492aa725ce449dd38'
  });
 

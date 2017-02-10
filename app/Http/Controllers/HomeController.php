@@ -25,9 +25,11 @@ class HomeController extends Controller
 
     public function testit()
     {
-       \Log::info( event(new \App\Events\normal("测试，马上开会了！".time())));
+        event(new \App\Events\normal("测试，马上开会了！" . time()));
+//        event(new \App\Events\usermsg("测试私人频道，！" . time()));
+        event(new \App\Events\usercmd("\$scope.dcUser.name='fucking haead';"));
 
-        echo "shit";
+        echo "fucking head";
     }
 
     /**
@@ -44,7 +46,7 @@ class HomeController extends Controller
     public function tpl(String $layout, String $tpl)
     {
         $sView = 'home.' . $layout . ".tpl." . $tpl;
-        return view($sView,['user'=>\Auth::user()]);
+        return view($sView);
     }
 
     public function views(String $layout, String $views, Request $req)
@@ -61,7 +63,7 @@ class HomeController extends Controller
     {
         $dcModels = dcmodel::where('url', '<>', '')->get();
         $sView = 'home.' . $layout . ".js.main";
-        $mdTreeJson="";
+        $mdTreeJson = "";
         return view($sView, ['mdTreeJson' => $mdTreeJson, 'dcModels' => $dcModels]);
     }
 

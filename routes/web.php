@@ -37,6 +37,10 @@ Route::group(['prefix' => '/dcmodelopt'], function () {
 });
 
 Route::resource('users', 'User\userController');
+Route::group(['prefix' => '/useropt'], function () {
+    Route::get('dcUser','User\userController@getLoginUser');
+});
+
 Route::group(['prefix' => '/userprofile'], function () {
     Route::get('self','User\userprofileController@getSelfdata');
 });

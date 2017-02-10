@@ -67,18 +67,28 @@ MetronicApp.factory('settings', ['$rootScope', function ($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular','$ocLazyLoad', function ($scope, $rootScope,Restangular,$ocLazyLoad) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', function ($scope, $rootScope,Restangular) {
     $scope.$on('$viewContentLoaded', function () {
-        Restangular.one('/dcmodelopt/getModTree').get().then(function (res) {
-            $scope.mdTreeJson = res;
-
-        });
-        $scope.dcBroadcast = [];
-        $scope.dcMessage = [];
-
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
+    Restangular.one('/dcmodelopt/getModTree').get().then(function (res) {
+        $scope.mdTreeJson = res;
+
+    });
+    Restangular.one('/useropt/dcUser').get().then(function (res) {
+        $scope.dcUser = res;
+        window.Echo.private('App.User.' + $scope.dcUser.id)
+            .listen('usermsg', (e) => {
+                console.log(e,'App.User.' + $scope.dcUser.id);
+            })
+            .listen('usercmd', (e) => {
+                eval(e.cmd);
+            });
+    });
+
+    $scope.dcBroadcast = [];
+    $scope.dcMessage = [];
 
 }])
 ;
@@ -89,13 +99,14 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular','$
  ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
+MetronicApp.controller('HeaderController', ['$scope' ,function ($scope) {
     $scope.ReadNotifiCnt = 0;
     window.Echo.channel('dcBroadcast')
         .listen('normal', (e) => {
             $scope.dcBroadcast.unshift(e);
             $scope.$apply();
         });
+
     $scope.checkNotifi = function () {
         $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
     }
