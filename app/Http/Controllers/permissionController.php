@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Permission;
 use Illuminate\Http\Request;
+use Config;
 
 class permissionController extends Controller
 {
@@ -28,6 +29,8 @@ class permissionController extends Controller
     public function create()
     {
         //
+        return view('home.'.Config::get('app.dctemplate').'.views.sys-users.edit');
+
     }
 
     /**
