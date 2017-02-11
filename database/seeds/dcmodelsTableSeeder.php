@@ -59,6 +59,18 @@ INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created
 INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created_at, updated_at) VALUES (1, null, 1, 42, 0, 1, '2015-08-23 06:01:37', '2017-02-06 10:21:08');
 
 INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (1, null, 1, 2, 0, 'root', '系统根机构', '2017-02-09 14:16:27', '2017-02-09 14:16:37');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (3, 1, 2, 3, 1, '理工大资产经营有限公司', null, '2017-02-11 18:02:57', '2017-02-11 18:06:31');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (4, 1, 4, 5, 1, '办公室', null, '2017-02-11 18:03:22', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (5, 1, 6, 7, 1, '采购科', null, '2017-02-11 18:03:34', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (6, 1, 8, 9, 1, '云乐购办公室', null, '2017-02-11 18:04:00', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (7, 1, 10, 11, 1, '理工宾馆', null, '2017-02-11 18:04:18', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (8, 1, 12, 13, 1, '理工超市', null, '2017-02-11 18:04:30', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (9, 1, 14, 15, 1, '中兴物业管理有限公司', null, '2017-02-11 18:04:46', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (10, 1, 16, 17, 1, '物业管理中心', null, '2017-02-11 18:04:56', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (11, 1, 18, 19, 1, '物业管理办公室', null, '2017-02-11 18:05:07', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (12, 1, 20, 21, 1, '物业管理工程科', null, '2017-02-11 18:05:20', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (13, 1, 22, 23, 1, '商贸中心', null, '2017-02-11 18:05:38', '2017-02-11 18:06:32');
+INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (1, null, 1, 24, 0, 'root', '系统根机构', '2017-02-09 14:16:27', '2017-02-11 18:06:32');
 
 
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
