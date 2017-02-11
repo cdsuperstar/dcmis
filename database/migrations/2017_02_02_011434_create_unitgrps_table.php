@@ -20,7 +20,7 @@ class CreateUnitgrpsTable extends Migration
             $table->integer('rgt')->nullable()->index();
             $table->integer('depth')->nullable();
             $table->string('name'); //单位名称
-            $table->text('brief'); //单位介绍
+            $table->text('brief')->nullable(); //单位介绍
 
             $table->timestamps();
         });
