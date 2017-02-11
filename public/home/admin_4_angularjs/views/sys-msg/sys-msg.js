@@ -37,11 +37,11 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             ];
 
             //end
-            var tableDatas = Restangular.all('/msgs');
+            var tableDatas = Restangular.all('/usermsgs');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/msgs/create',
+                    template: '/usermsgs/create',
                     className: 'ngdialog-theme-default sysmsg',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
@@ -69,6 +69,38 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 }, function (dcEdition) {
                 });
             };
+
+
+            //$scope.showdetailmsg = function () {
+            //    ngDialog.openConfirm({
+            //        template: '/usermsgs/showdetailmsg',
+            //        className: 'ngdialog-theme-default showdetailmsg',
+            //        scope: $scope,
+            //        controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
+            //            $scope.$validationOptions = validationConfig;
+            //        }],
+            //        showClose: false,
+            //        setBodyPadding: 1,
+            //        overlay: true,        //是否用div覆盖当前页面
+            //        closeByDocument:false,  //是否点覆盖div 关闭会话
+            //        disableAnimation:true,  //是否显示动画
+            //        closeByEscape: true
+            //    }).then(function (dcEdition) {
+            //
+            //        tableDatas.post(dcEdition).then(
+            //            function (res) {
+            //                if (res.success) {
+            //                    $scope.gridOptions.data.push(res);
+            //                    showMsg(res.messages.toString(), '信息', 'lime');
+            //                } else {
+            //                    // TODO add error message to system
+            //                    showMsg(res.errors.toString(), '错误', 'ruby');
+            //                }
+            //            }
+            //        );
+            //    }, function (dcEdition) {
+            //    });
+            //};
 
             $scope.delData = function () {
                 var selectUsers = $scope.gridApi.selection.getSelectedGridRows();

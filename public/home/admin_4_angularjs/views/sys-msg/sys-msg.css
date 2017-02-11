@@ -1,5 +1,7 @@
 .ngdialog.sysmsg .ngdialog-content{width : 600px;background: #ffffff;}
 
+.ngdialog.showdetailmsg .ngdialog-content{width : 600px;background: #ffffff;}
+
 .jquery-notific8-container.top { top: 60px; }
 
 .sysModelgrid {
