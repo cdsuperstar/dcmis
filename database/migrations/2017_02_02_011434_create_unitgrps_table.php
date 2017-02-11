@@ -24,6 +24,19 @@ class CreateUnitgrpsTable extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('unitgrp_user', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('unitgrp_id')->unsigned();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('unitgrp_id')->references('id')->on('unitgrps')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->primary(['user_id', 'unitgrp_id']);
+        });
+
     }
 
     /**
@@ -33,6 +46,7 @@ class CreateUnitgrpsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('unitgrp_user');
         Schema::dropIfExists('unitgrps');
     }
 }

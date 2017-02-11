@@ -63,7 +63,7 @@ INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, create
 
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
 select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));
-select setval('unitgrps_id_seq', (select max(id) + 1 from dcmodels));
+select setval('unitgrps_id_seq', (select max(id) + 1 from unitgrps));
 
       ");
 

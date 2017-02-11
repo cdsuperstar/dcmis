@@ -25,11 +25,11 @@ class HomeController extends Controller
     {
 //        Log::info($data);
         event(new \App\Events\normal("测试，马上开会了！" . time()));
-        $rec=usermsg::all()[0];
+        $rec=User::find(6);
         $msg=(object)null;
         $msg->photo="../assets/layouts/layout4/img/avatar3.jpg";
-        $msg->sendername=$rec->sender->name;
-        $msg->body=$rec->body;
+        $msg->sendername=$rec->name;
+        $msg->body="just test shit!";
 //        $msg->created_at=Carbon::now()->diffForHumans(Carbon::now()->addSeconds(10));
         $msg->created_at=$rec->created_at->toTimeString();
         event(new \App\Events\usermsg(1,$msg));
