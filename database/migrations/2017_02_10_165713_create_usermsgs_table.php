@@ -20,6 +20,8 @@ class CreateUsermsgsTable extends Migration
             $table->integer('recver_id')->unsigned();
             $table->text('body');
             $table->dateTime('readtime')->nullable();
+            $table->dateTime('s_delat')->nullable();
+            $table->dateTime('r_delat')->nullable();
             $table->timestamps();
         });
     }

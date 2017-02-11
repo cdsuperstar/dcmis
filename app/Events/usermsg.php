@@ -8,21 +8,23 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Request;
+use Log;
 
 class usermsg implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
     public $msg;
+    private $touserid;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($msg)
+    public function __construct($touserid,$msg)
     {
         //
         $this->msg=$msg;
+        $this->touserid=$touserid;
     }
 
     /**
@@ -32,7 +34,7 @@ class usermsg implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('App.User.'.Request::user()->id);
+        return new PrivateChannel('App.User.'.$this->touserid);
     }
 
 }

@@ -24,7 +24,6 @@ Route::group(['prefix' => '/home/{layout}'], function () {
     Route::get('dcviews/{view}', 'HomeController@views');
     Route::get('index', 'HomeController@index');
     Route::get('tpl/{tpl}', 'HomeController@tpl');
-    Route::get('js/main', 'HomeController@jsMain');
     Route::get('testit','HomeController@testit');
 });
 
@@ -45,8 +44,11 @@ Route::group(['prefix' => '/useropt'], function () {
 Route::group(['prefix' => '/userprofile'], function () {
     Route::get('self','User\userprofileController@getSelfdata');
 });
+
 Route::resource('userprofiles', 'User\userprofileController');
+
 Route::resource('roles','roleController');
+
 Route::resource('permissions','permissionController');
 
 Route::resource('unitgrps','unitgrpController');
@@ -55,3 +57,7 @@ Route::group(['prefix' => '/unitgrpopt'], function () {
     Route::post('movenode','unitgrpController@postMovenode');
 });
 
+Route::resource('usermsgs','usermsgController');
+Route::group(['prefix' => '/usermsgopt'], function () {
+    Route::get('unreadmsgs','usermsgController@getUnreadMsgs');
+});

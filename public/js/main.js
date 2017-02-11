@@ -68,6 +68,9 @@ MetronicApp.factory('settings', ['$rootScope', function ($rootScope) {
 
 /* Setup App Main Controller */
 MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', function ($scope, $rootScope,Restangular) {
+    $scope.dcUserMsgs = [];
+    $scope.dcBroadcast = [];
+
     $scope.$on('$viewContentLoaded', function () {
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
@@ -76,19 +79,21 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         $scope.mdTreeJson = res;
 
     });
+    Restangular.all('/usermsgopt/unreadmsgs').getList().then(function (res) {
+        $scope.dcUserMsgs = res;
+    });
+
     Restangular.one('/useropt/dcUser').get().then(function (res) {
         $scope.dcUser = res;
         window.Echo.private('App.User.' + $scope.dcUser.id)
             .listen('usermsg', (e) => {
-                console.log(e,'App.User.' + $scope.dcUser.id);
+                $scope.dcUserMsgs.unshift(e.msg);
+                $scope.$apply();
             })
             .listen('usercmd', (e) => {
                 eval(e.cmd);
             });
     });
-
-    $scope.dcBroadcast = [];
-    $scope.dcMessage = [];
 
 }])
 ;

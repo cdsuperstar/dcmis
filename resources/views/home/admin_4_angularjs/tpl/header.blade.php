@@ -118,74 +118,26 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true" title="消息提醒">
                         <i class="icon-envelope-open"></i>
-                        <span class="badge badge-danger"> 4 </span>
+                        <span class="badge badge-danger"> @{{ dcUserMsgs.length }} </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
-                            <h3>You have
-                                <span class="bold">7 New</span> Messages</h3>
+                            <h3>你有
+                                <span class="bold">@{{ dcUserMsgs.length }} 条新</span> 消息</h3>
                             <a href="#/profile/dashboard">view all</a>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                                <li>
+                                <li ng-repeat="messageitem in dcUserMsgs" >
                                     <a href="#">
                                         <span class="photo">
-                                            <img src="@{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
+                                            <img src="../assets/layouts/layout4/img/avatar2.jpg" class="img-circle"
                                                  alt=""> </span>
                                         <span class="subject">
-                                            <span class="from"> Lisa Wong </span>
-                                            <span class="time">Just Now </span>
+                                            <span class="from"> @{{ messageitem.sendername }} </span>
+                                            <span class="time"> @{{ messageitem.created_at }}</span>
                                         </span>
-                                        <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="photo">
-                                            <img src="@{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
-                                                 alt=""> </span>
-                                        <span class="subject">
-                                            <span class="from"> Richard Doe </span>
-                                            <span class="time">16 mins </span>
-                                        </span>
-                                        <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="photo">
-                                            <img src="@{{settings.layoutPath}}/img/avatar1.jpg" class="img-circle"
-                                                 alt=""> </span>
-                                        <span class="subject">
-                                            <span class="from"> Bob Nilson </span>
-                                            <span class="time">2 hrs </span>
-                                        </span>
-                                        <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="photo">
-                                            <img src="@{{settings.layoutPath}}/img/avatar2.jpg" class="img-circle"
-                                                 alt=""> </span>
-                                        <span class="subject">
-                                            <span class="from"> Lisa Wong </span>
-                                            <span class="time">40 mins </span>
-                                        </span>
-                                        <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="photo">
-                                            <img src="@{{settings.layoutPath}}/img/avatar3.jpg" class="img-circle"
-                                                 alt=""> </span>
-                                        <span class="subject">
-                                            <span class="from"> Richard Doe </span>
-                                            <span class="time">46 mins </span>
-                                        </span>
-                                        <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                        <span class="message"> @{{ messageitem.body }} </span>
                                     </a>
                                 </li>
                             </ul>

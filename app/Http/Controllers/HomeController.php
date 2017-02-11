@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\models\dcMdGrp;
 use App\models\dcmodel;
 
 use App\User;
 use Illuminate\Http\Request;
-
-//use App\Http\Requests;
 use Log;
-
+use Carbon\Carbon;
+use App\models\usermsg;
 class HomeController extends Controller
 {
     /**
@@ -23,11 +21,19 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function testit()
+    public function testit(Request $request)
     {
+//        Log::info($data);
         event(new \App\Events\normal("测试，马上开会了！" . time()));
-//        event(new \App\Events\usermsg("测试私人频道，！" . time()));
-        event(new \App\Events\usercmd("\$scope.dcUser.name='fucking haead';"));
+        $rec=usermsg::all()[0];
+        $msg=(object)null;
+        $msg->photo="../assets/layouts/layout4/img/avatar3.jpg";
+        $msg->sendername=$rec->sender->name;
+        $msg->body=$rec->body;
+//        $msg->created_at=Carbon::now()->diffForHumans(Carbon::now()->addSeconds(10));
+        $msg->created_at=$rec->created_at->toTimeString();
+        event(new \App\Events\usermsg(1,$msg));
+//        event(new \App\Events\usercmd("\$scope.dcUser.name='fucking haead';"));
 
         echo "fucking head";
     }
@@ -58,13 +64,4 @@ class HomeController extends Controller
         array_shift($aTitle);
         return view("home." . $layout . ".templateurl", ['sModel' => $views, 'layout' => $layout, 'aTitle' => $aTitle, 'user' => $req->user()]);
     }
-
-    public function jsMain(String $layout)
-    {
-        $dcModels = dcmodel::where('url', '<>', '')->get();
-        $sView = 'home.' . $layout . ".js.main";
-        $mdTreeJson = "";
-        return view($sView, ['mdTreeJson' => $mdTreeJson, 'dcModels' => $dcModels]);
-    }
-
 }
