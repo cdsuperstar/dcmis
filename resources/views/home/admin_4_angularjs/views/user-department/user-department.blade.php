@@ -5,7 +5,7 @@
             <div class="portlet red-pink box">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="icon-puzzle"></i>菜单树编辑器
+                        <i class="icon-puzzle"></i>机构树编辑器
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="remove" ng-click="closeThisDialog()">
@@ -22,7 +22,7 @@
         <button type="button" id="delData" class="btn btn-danger" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()">删除</button>
         <button type="button"  class="btn btn-info" ng-click="editData()">保存</button>
         <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">筛选</button>
-        <button type="button"  class="btn purple-plum" ng-click="editTree()"> - 编辑菜单树 - </button>
+        <button type="button"  class="btn purple-plum" ng-click="editTree()"> - 编辑机构树 - </button>
     </div>
     <div id="userdepartmentgrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-resize-columns ui-grid-cellNav ui-grid-move-columns class="sysModelgrid"></div>
 </div>

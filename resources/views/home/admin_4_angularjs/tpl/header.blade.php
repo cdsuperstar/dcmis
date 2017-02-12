@@ -277,7 +277,7 @@
                                 <i class="icon-key"></i> 更改密码 </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#/sys-usersown.html">
                                 <i class="icon-user"></i> 个人信息 </a>
                         </li>
                         <li>

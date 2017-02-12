@@ -55,6 +55,7 @@ Route::resource('unitgrps','unitgrpController');
 Route::group(['prefix' => '/unitgrpopt'], function () {
     Route::get('tree','unitgrpController@getTree');
     Route::post('movenode','unitgrpController@postMovenode');
+    Route::post('setmember','unitgrpController@postSetMember'); //参数1为机构 参数2为用户
 });
 
 Route::resource('usermsgs','usermsgController');

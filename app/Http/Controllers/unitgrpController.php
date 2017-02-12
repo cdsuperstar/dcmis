@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\unitgrp;
 use Illuminate\Http\Request;
+use App\User;
 use Config;
 use DB;
 
@@ -30,13 +31,13 @@ class unitgrpController extends Controller
     {
         //
 
-        return view('home.'.Config::get('app.dctemplate').'.views.user-department.edit');
+        return view('home.' . Config::get('app.dctemplate') . '.views.user-department.edit');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,8 +46,8 @@ class unitgrpController extends Controller
         $rec = new unitgrp($request->toArray());
         if ($rec) {
             if ($rec->save($request->toArray())) {
-                $pNode = unitgrp::where('parent_id', null)->orderby('id','asc')->first();
-                if($pNode&&$pNode->id<>$rec->id)
+                $pNode = unitgrp::where('parent_id', null)->orderby('id', 'asc')->first();
+                if ($pNode && $pNode->id <> $rec->id)
                     $rec->makeChildOf($pNode);
 
                 return response()->json(array_merge([
@@ -64,7 +65,7 @@ class unitgrpController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\unitgrp  $unitgrp
+     * @param  \App\models\unitgrp $unitgrp
      * @return \Illuminate\Http\Response
      */
     public function show(unitgrp $unitgrp)
@@ -75,7 +76,7 @@ class unitgrpController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\unitgrp  $unitgrp
+     * @param  \App\models\unitgrp $unitgrp
      * @return \Illuminate\Http\Response
      */
     public function edit(unitgrp $unitgrp)
@@ -86,8 +87,8 @@ class unitgrpController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\unitgrp  $unitgrp
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\models\unitgrp $unitgrp
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, unitgrp $unitgrp)
@@ -113,7 +114,7 @@ class unitgrpController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\unitgrp  $unitgrp
+     * @param  \App\models\unitgrp $unitgrp
      * @return \Illuminate\Http\Response
      */
     public function destroy(unitgrp $unitgrp)
@@ -122,11 +123,11 @@ class unitgrpController extends Controller
         if ($unitgrp->delete()) {
 
             return response()->json(array_merge([
-                'messages' => trans('users.deletesuccess', ['rows' => $unitgrp->id . " with id ".$unitgrp->id]),
+                'messages' => trans('data.destroy', ['rows' => $unitgrp->id . " with id " . $unitgrp->id]),
                 'success' => true,
-            ],$unitgrp->toArray()));
+            ], $unitgrp->toArray()));
         } else {
-            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $unitgrp->id])]);
+            return response()->json(['errors' => trans('data.destroyfailed', ['rows' => $unitgrp->id])]);
         }
 
     }
@@ -134,7 +135,7 @@ class unitgrpController extends Controller
     public function getTree()
     {
         unitgrp::rebuild(true);
-        $tree = unitgrp::where('id','<>',0)->orderby('lft','asc')->select('id as id', 'parent_id as parent','name as text','brief as data',DB::raw('\'icon-users\' as icon'))->get();
+        $tree = unitgrp::where('id', '<>', 0)->orderby('lft', 'asc')->select('id as id', 'parent_id as parent', 'name as text', 'brief as data', DB::raw('\'icon-users\' as icon'))->get();
 
         foreach ($tree as $node) {
             if ($node->parent == null) {
@@ -155,10 +156,27 @@ class unitgrpController extends Controller
                 $cNode->moveRight();
         }
         return response()->json([
-            'messages' => trans('data.movesuccess', ['cNode' => $cNode->dcmodel->title, 'pNode' => $pNode->dcmodel->title]),
+            'messages' => trans('data.movesuccess', ['cNode' => $cNode->name, 'pNode' => $pNode->name]),
             'success' => true,
             'data' => '',
         ]);
+    }
+
+    public function postSetMember(unitgrp $unitgrp, User $user)
+    {
+
+        try {
+            $user->unitgrps()->attach($unitgrp);
+        } catch (Exception $e) {
+            return response()->json(['errors' => trans('data.addfailed', ['rows' => $unitgrp->id."(".$e->getMessage().")"])]);
+        }
+
+        return response()->json([
+            'messages' => trans('data.add', ['data' => $user->name]),
+            'success' => true,
+            'data' => '',
+        ]);
+
     }
 
 }
