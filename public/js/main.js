@@ -87,13 +87,33 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         $scope.dcUser = res;
         window.Echo.private('App.User.' + $scope.dcUser.id)
             .listen('usermsg', (e) => {
-                $scope.dcUserMsgs.unshift(e.msg);
-                $scope.$apply();
-            })
-            .listen('usercmd', (e) => {
-                eval(e.cmd);
-            });
-    });
+            $scope.dcUserMsgs.unshift(e.msg);
+        $scope.$apply();
+    })
+        .listen('usercmd', (e) => {
+        eval(e.cmd);
+});
+});
+
+//theme 导航设置
+$scope.isnavmodelhelp=false;
+$scope.isnavmodelset=true;
+$scope.isnavthemeset=true;
+$scope.navmodelhelp = function(){
+    $scope.isnavmodelhelp=false;
+    $scope.isnavmodelset=true;
+    $scope.isnavthemeset=true;
+}
+$scope.navmodelset = function(){
+    $scope.isnavmodelhelp=true;
+    $scope.isnavmodelset=false;
+    $scope.isnavthemeset=true;
+}
+$scope.navthemeset = function(){
+    $scope.isnavmodelhelp=true;
+    $scope.isnavmodelset=true;
+    $scope.isnavthemeset=false;
+}
 
 }])
 ;
@@ -108,16 +128,16 @@ MetronicApp.controller('HeaderController', ['$scope' ,function ($scope) {
     $scope.ReadNotifiCnt = 0;
     window.Echo.channel('dcBroadcast')
         .listen('normal', (e) => {
-            $scope.dcBroadcast.unshift(e);
-            $scope.$apply();
-        });
+        $scope.dcBroadcast.unshift(e);
+    $scope.$apply();
+});
 
-    $scope.checkNotifi = function () {
-        $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
-    }
-    $scope.$on('$includeContentLoaded', function () {
-        Layout.initHeader(); // init header
-    });
+$scope.checkNotifi = function () {
+    $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
+}
+$scope.$on('$includeContentLoaded', function () {
+    Layout.initHeader(); // init header
+});
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -173,7 +193,9 @@ MetronicApp.directive('confirmationNeeded', function () {
         }
     };
 });
+//图片上传开始
 
+//图片上传结束
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider', function ($stateProvider, $urlRouterProvider,$futureStateProvider) {
 // Redirect any unmatched url

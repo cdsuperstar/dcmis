@@ -32,6 +32,7 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
             }
 
+            //图片上传
 
             /////////start datepicker
             $scope.dat = new Date();
