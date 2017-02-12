@@ -97,7 +97,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                                 "plugins": ["dnd", "state", "types", "json_data"]
                             }).bind("move_node.jstree", function (e, data) {
                                 //console.log('the item being dragged ', data);
-                                Restangular.all("/dcmodelopt/movenode").post(data).then(
+                                Restangular.all("/unitgrpopt/movenode").post(data).then(
                                     function (res) {
                                         //console.log(res);
                                         if (res.success) {
