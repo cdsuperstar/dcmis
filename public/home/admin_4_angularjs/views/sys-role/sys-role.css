@@ -6,3 +6,19 @@
     /*width: 300px;*/
     height: 384px;
 }
+
+.sysRoleGrid .ui-grid-header{
+    background: #8775A7;
+}
+.sysRoleGrid .ui-grid-top-panel{
+    background: #8775A7;
+}
+.sysRoleGrid .ui-grid-top-panel-background{
+    background: #8775A7;
+}
+.sysRoleGrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysRoleGrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

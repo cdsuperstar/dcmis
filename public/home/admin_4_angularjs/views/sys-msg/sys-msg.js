@@ -37,7 +37,7 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             ];
 
             //end
-            var tableDatas = Restangular.all('/usermsgs');
+            var tableDatas = Restangular.all('/users');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -117,46 +117,18 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                     }
                 );
             };
-            //$scope.editdataids = [];
-            $scope.editData = function () {
-                var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
-                    var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
-                    });
-                    userWithId.password_confirmation = userWithId.password;
-                    userWithId.put().then(function (res) {
-                        if (res.success) {
-                            showMsg(res.messages.toString(), '信息', 'lime');
-                            $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
-                        } else {
-                            showMsg(res.errors.toString(), '错误', 'ruby');
-                        }
-                    });
-                });
-                //$scope.editdataids=[];
-
-            }
-            $scope.saveRow = function (rowEntity) {
-                //$scope.editdataids.push(rowEntity.id);
-                var promise = $q.defer();
-                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
-                //promise.resolve();
-                promise.reject();
-            };
 
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter: false,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: 'id', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '发送者', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '接收者', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '消息内容', field: 'name',width: '300',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '发送时间', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '浏览时间', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: true},
+                    {name: 'id', field: 'id', width: '40',enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '发送者', field: 'name',width: '100',enableColumnMenu: false},
+                    {name: '接收者', field: 'name',width: '100',enableColumnMenu: false},
+                    {name: '消息内容', field: 'name',width: '300',enableColumnMenu: false},
+                    {name: '发送时间', field: 'created_at',width: '150',enableColumnMenu: false},
+                    {name: '浏览时间', field: 'updated_at',width: '150',enableColumnMenu: false},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -166,7 +138,6 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
-                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 },
             };
 

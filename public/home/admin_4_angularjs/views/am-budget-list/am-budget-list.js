@@ -7,36 +7,6 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
 
             var tableDatas = Restangular.all('/users');
 
-            $scope.addData = function () {
-                ngDialog.openConfirm({
-                    template: 'views/sys-users/sys-edit-users.html',
-                    className: 'ngdialog-theme-default',
-                    scope: $scope,
-                    controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
-                        $scope.$validationOptions = validationConfig;
-                    }],
-                    showClose: false,
-                    setBodyPadding: 1,
-                    overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
-                    closeByEscape: true
-                }).then(function (dcEdition) {
-
-                    tableDatas.post(dcEdition).then(
-                        function (res) {
-                            if (res.success) {
-                                $scope.gridOptions.data.push(res);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            } else {
-                                // TODO add error message to system
-                                showMsg(res.errors.toString(), '错误', 'ruby');
-                            }
-                        }
-                    );
-                }, function (dcEdition) {
-                });
-            };
 
             $scope.delData = function () {
                 var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
@@ -56,64 +26,35 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
             //$scope.editdataids = [];
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
-                    var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
-                    });
-                    userWithId.password_confirmation = userWithId.password;
-                    userWithId.put().then(function (res) {
-                        if (res.success) {
-                            showMsg(res.messages.toString(), '信息', 'lime');
-                            $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
-                        } else {
-                            showMsg(res.errors.toString(), '错误', 'ruby');
-                        }
-                    });
-                });
-                //$scope.editdataids=[];
+                //修改跳至修过页面
 
             }
-            $scope.saveRow = function (rowEntity) {
-                //$scope.editdataids.push(rowEntity.id);
-                var promise = $q.defer();
-                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
-                //promise.resolve();
-                promise.reject();
-            };
 
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
                 showColumnFooter:true,
-                enableCellEditOnFocus:true,
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
                 columnDefs: [
-                    {name: '操作',field : 'action',enableCellEdit: false,
-                        cellTemplate : '<div class="container-fluid"><div class="row cell-action-style"><div class="col-xs-3 text-center">' +
-                        '<div class="div-click"  ng-click="grid.appScope.goToUpdate(row)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></div></div>' +
-                        '<div class="col-xs-3 text-center" ><div class="div-click"  ng-click="grid.appScope.goToDelete(row)">' +
-                        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div><div></div></div></div>'
-                    },
-                    {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,
+                    {name: 'id', field: 'id',width: '40',enableColumnMenu: false,
                         enableHiding: false,
                         enableFiltering: false,
                         footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '编号', field: 'name',width: '100',enableCellEdit: true},
-                    {name: '项目名称', field: 'name',width: '200',enableCellEdit: true},
-                    {name: '总金额', field: 'name',width: '80',type:'float',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '项目摘要', field: 'email',width: '200',enableCellEdit: true,visible:true},
-                    {name: '申报类别', field: 'email',width: '150',enableCellEdit: true,visible:true},
-                    {name: '审批', field: 'email',width: '100',enableCellEdit: true,visible:true},
-                    {name: '执行', field: 'email',width: '100',enableCellEdit: true,visible:true},
-                    {name: '申报人', field: 'email',width: '100',enableCellEdit: true,visible:false},
-                    {name: '申报部门', field: 'email',width: '150',enableCellEdit: true,visible:false},
-                    {name: '联系电话', field: 'email',type:'int',width: '150',enableCellEdit: true,visible:false},
-                    {name: '简介', field: 'email',type:'string',width: '250',enableCellEdit: true,visible:false},
-                    {name: '开始日期', field: 'email',width: '100',enableCellEdit: true,visible:false,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
-                    {name: '截止日期', field: 'email',width: '100',enableCellEdit: true,visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
-                    {name: '添加时间', field: 'created_at',width: '100',enableCellEdit: false,visible:false},
-                    {name: '更新时间', field: 'updated_at',width: '100',enableCellEdit: false,visible:false},
+                    {name: '编号', field: 'name',width: '100',enableColumnMenu: true,pinnedLeft:true},
+                    {name: '项目名称', field: 'name',width: '200',enableColumnMenu: true,pinnedLeft:true},
+                    {name: '总金额', field: 'name',width: '80',type:'float',enableColumnMenu: true,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '项目摘要', field: 'email',width: '200',enableColumnMenu: true,visible:true},
+                    {name: '申报类别', field: 'email',width: '150',visible:true},
+                    {name: '审批', field: 'email',width: '100',visible:true},
+                    {name: '申报人', field: 'email',width: '100',visible:false},
+                    {name: '申报部门', field: 'email',width: '150',visible:false},
+                    {name: '联系电话', field: 'email',type:'int',width: '150',visible:false},
+                    {name: '简介', field: 'email',type:'string',width: '250',visible:false},
+                    {name: '开始日期', field: 'email',width: '100',visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
+                    {name: '截止日期', field: 'email',width: '100',visible:false,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
+                    {name: '添加时间', field: 'created_at',width: '100',visible:false},
+                    {name: '更新时间', field: 'updated_at',width: '100',visible:false},
 
                 ],
 
@@ -141,35 +82,35 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 exporterMenuPdf : false, //导出pdf 开关
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
-                exporterPdfCustomFormatter : function ( docDefinition ) {
-                    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
-                    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
-                    return docDefinition;
-                },
-                exporterPdfFooter :{
-                    text: 'Powered by DcMis',
-                    style: 'footerStyle',
-                    alignment:'center'
-                },
-                exporterPdfDefaultStyle : {font:'MicrosoftYaHei',fontSize: 9},
-                exporterPdfFilename:'download.pdf',
-                exporterPdfAlign:'center', //定义整体样式
-                exporterPdfHeader : function(currentPage, pageCount) {
-                    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
-                },
-                //exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
-                exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
-                exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
-                exporterPdfTableHeaderStyle : {
-                    bold: true,
-                    fontSize: 12,
-                    italics: true,
-                    color: 'black'
-                },
-                exporterPdfTableLayout : null,
-                exporterPdfTableStyle: {
-                    margin: [0, 5, 0, 15]  //左上右下
-                },
+                //exporterPdfCustomFormatter : function ( docDefinition ) {
+                //    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
+                //    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
+                //    return docDefinition;
+                //},
+                //exporterPdfFooter :{
+                //    text: 'Powered by DcMis',
+                //    style: 'footerStyle',
+                //    alignment:'center'
+                //},
+                //exporterPdfDefaultStyle : {font:'MicrosoftYaHei',fontSize: 9},
+                //exporterPdfFilename:'download.pdf',
+                //exporterPdfAlign:'center', //定义整体样式
+                //exporterPdfHeader : function(currentPage, pageCount) {
+                //    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
+                //},
+                ////exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
+                //exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
+                //exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
+                //exporterPdfTableHeaderStyle : {
+                //    bold: true,
+                //    fontSize: 12,
+                //    italics: true,
+                //    color: 'black'
+                //},
+                //exporterPdfTableLayout : null,
+                //exporterPdfTableStyle: {
+                //    margin: [0, 5, 0, 15]  //左上右下
+                //},
                 exporterSuppressColumns : ['buttons'],
                 exporterSuppressMenu: false,
                 //--------------导出结束----------------------------------
@@ -183,7 +124,6 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
-                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
 

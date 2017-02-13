@@ -8,5 +8,5 @@
         <button id='showdetailmsg' ng-click="showdetailmsg()" class="btn btn-info">查看历史消息</button>
         <button id="refreshButton" type="button" class="btn purple-plum" ng-click="refreshData()">重获数据</button>
     </div>
-    <div id="usergrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="userGrid"></div>
+    <div id="userMsggrid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns class="sysMsggrid"></div>
 </div>

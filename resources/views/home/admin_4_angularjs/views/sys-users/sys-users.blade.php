@@ -22,7 +22,7 @@
             </ul>
         </div>
     </div>
-    <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-importer ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="usergrid"></div>
+    <div id="usergrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-importer ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="sysusergrid"></div>
 </div>
 
 

@@ -4,11 +4,25 @@
 
 .jquery-notific8-container.top { top: 60px; }
 
-.sysModelgrid {
+.sysMsggrid {
     /*width: 300px;*/
     height: 384px;
 }
-
+.sysMsggrid .ui-grid-header{
+    background: #1BBC9B;
+}
+.sysMsggrid .ui-grid-top-panel{
+    background: #1BBC9B;
+}
+.sysMsggrid .ui-grid-top-panel-background{
+    background: #1BBC9B;
+}
+.sysMsggrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysMsggrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}
 /*ÁÄÌì´°¿Úcss*/
 span.emotion { width: 42px; height: 20px; padding-left: 20px; cursor: pointer }
 span.emotion:hover { background-position: 2px -28px }

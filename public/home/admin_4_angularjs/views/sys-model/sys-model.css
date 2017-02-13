@@ -7,3 +7,19 @@
     /*width: 300px;*/
     height: 384px;
 }
+
+.sysModelgrid .ui-grid-header{
+    background: #95A5A6;
+}
+.sysModelgrid .ui-grid-top-panel{
+    background: #95A5A6;
+}
+.sysModelgrid .ui-grid-top-panel-background{
+    background: #95A5A6;
+}
+.sysModelgrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysModelgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

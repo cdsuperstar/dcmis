@@ -7,3 +7,19 @@
     /*width: 300px;*/
     height: 384px;
 }
+
+.sysusergrid .ui-grid-header{
+    background: #578ebe;
+}
+.sysusergrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.sysusergrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.sysusergrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysusergrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

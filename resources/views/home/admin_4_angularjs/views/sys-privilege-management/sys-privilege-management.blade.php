@@ -8,5 +8,5 @@
         <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">筛选</button>
         <button id="refreshButton" type="button" class="btn purple-plum" ng-click="refreshData()">重获数据</button>
     </div>
-    <div id="privilegrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="userGrid"></div>
+    <div id="privilegrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="sysPrivilegeGrid"></div>
 </div>

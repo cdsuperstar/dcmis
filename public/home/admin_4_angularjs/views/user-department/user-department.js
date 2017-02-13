@@ -9,7 +9,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/unitgrps/create',
-                    className: 'ngdialog-theme-default',
+                    className: 'ngdialog-theme-default userdepartment',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;

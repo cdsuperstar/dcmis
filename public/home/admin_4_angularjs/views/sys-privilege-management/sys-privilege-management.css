@@ -21,3 +21,19 @@
 .pdL4 {
     padding-left: 20px;
 }
+
+.sysPrivilegeGrid .ui-grid-header{
+    background: #E26A6A;
+}
+.sysPrivilegeGrid .ui-grid-top-panel{
+    background: #E26A6A;
+}
+.sysPrivilegeGrid .ui-grid-top-panel-background{
+    background: #E26A6A;
+}
+.sysPrivilegeGrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysPrivilegeGrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

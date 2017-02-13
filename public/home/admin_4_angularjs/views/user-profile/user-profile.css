@@ -3,7 +3,23 @@
 
 .jquery-notific8-container.top { top: 60px; }
 
-.sysModelgrid {
+.userProfileGrid {
     /*width: 300px;*/
     height: 384px;
+}
+
+.userProfileGrid .ui-grid-header{
+    background: #C49F47;
+}
+.userProfileGrid .ui-grid-top-panel{
+    background: #C49F47;
+}
+.userProfileGrid .ui-grid-top-panel-background{
+    background: #C49F47;
+}
+.userProfileGrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.userProfileGrid .ui-grid-header-cell-label{
+    color:#ffffff;
 }
