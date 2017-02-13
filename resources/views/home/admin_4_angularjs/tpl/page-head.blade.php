@@ -49,7 +49,7 @@
                         </div>
                         <div uib-collapse="isnavthemeset" class="row">
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <h3>顶部颜色</h3>
+                                <h3>主题颜色</h3>
                                 <ul class="theme-colors">
                                     <li class="theme-color theme-color-default active" data-theme="default">
                                         <span class="theme-color-view"></span>
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-sm-8 col-xs-12 seperator">
-                                <h3>样式设置</h3>
+                                <h3>页面样式</h3>
                                 <ul class="theme-settings">
                                     <li> 主题样式
                                         <select class="layout-style-option form-control input-small input-sm">

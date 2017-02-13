@@ -14,6 +14,7 @@ require('angular-ui-grid');
 require('restangular');
 require('ng-dialog');
 require('angular-animate');
+require('angular-jsoneditor');
 
 require('laravel-echo');
 require('socket.io-client');

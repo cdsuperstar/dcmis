@@ -6,3 +6,18 @@
     /*width: 300px;*/
     height: 384px;
 }
+
+/*json editor*/
+.wrapper {
+    margin: 50px auto;
+    width: 1000px;
+}
+
+.col {
+    float: left;
+    width: 50%
+}
+
+.pdL4 {
+    padding-left: 20px;
+}

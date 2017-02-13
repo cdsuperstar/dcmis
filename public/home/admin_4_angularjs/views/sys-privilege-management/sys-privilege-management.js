@@ -7,6 +7,35 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
 
             var tableDatas = Restangular.all('/permissions');
 
+
+            //json editor start
+            var json = {
+                "Array": [1, 2, 3], "Boolean": true, "Null": null, "Number": 123,
+                "Object": {"a": "b", "c": "d"}, "String": "Hello World",
+                "auto": "$Hello World"
+            };
+            $scope.obj = {data: json, options: {mode: 'tree'}};
+            $scope.onLoad = function (instance) {
+                instance.expandAll();
+                this.options.mode = 'code';
+                this.options.completer = [
+                    {value: "$sameer", score: 1000, meta: "custom"},
+                    {value: "$rathore", score: 1000, meta: "custom"}
+                ];
+            };
+            $scope.changeData = function () {
+                $scope.obj.data = json;
+            };
+            $scope.changeOptions = function (tmpoption) {
+                //$scope.obj.options.mode = $scope.obj.options.mode == 'tree' ? 'code': 'tree';
+                $scope.obj.options.mode = tmpoption;
+            };
+            $scope.pretty = function (obj) {
+                return obj;
+            };
+            //json editor end
+
+
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/permissions/create',

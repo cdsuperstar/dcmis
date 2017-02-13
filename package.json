@@ -18,6 +18,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
+    "angular-jsoneditor": "0.0.1",
     "angular-ui-grid": "^4.0.2",
     "bootstrap": "^3.3.7",
     "jasny-bootstrap": "^3.1.3",
