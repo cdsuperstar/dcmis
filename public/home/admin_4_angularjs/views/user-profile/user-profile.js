@@ -100,7 +100,12 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [ { value: '男', label: '男' }, { value: '女', label: '女' } ],
                             disableCancelFilterButton: false
-                        }
+                        },
+                        editableCellTemplate: 'ui-grid/dropdownEditor',
+                        cellFilter: 'mapGender', editDropdownValueLabel: 'label', editDropdownOptionsArray: [
+                        { id:'男', label: '男' },
+                        { id:'女', label: '女' }
+                    ]
                     },
                     {name: '联系电话', field: 'phone',width: '120',enableCellEdit: true,enableColumnMenu: true},
                     {name: '出生日期', field: 'birth',width: '100',enableCellEdit: true,enableColumnMenu: true},
@@ -204,4 +209,20 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         }
     ]
 )
+    .filter('mapGender', function() {
+        var genderHash = {
+            '男': '男',
+            '女': '女'
+        };
+
+        return function(input) {
+            if (!input){
+                return '';
+            } else {
+                return genderHash[input];
+            }
+        };
+    })
+
 ;
+
