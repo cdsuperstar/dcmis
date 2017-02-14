@@ -135,7 +135,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     userWithId.password_confirmation = userWithId.password;
                     //console.log(userWithId);
                     userWithId.put().then(function (res) {
-                        //console.log(res);
+                        console.log(res);
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
                             $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
@@ -160,8 +160,8 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                 enableCellEditOnFocus: true,
                     columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '40'},
-                    {name: '名称', field: 'name',width: '100', enableCellEdit: true,enableHiding: false},
-                    {name: '标题', field: 'title', width: '100',enableCellEdit: true,enableHiding: false},
+                    {name: '名称', field: 'name',width: '150', enableCellEdit: true,enableHiding: false},
+                    {name: '标题', field: 'title', width: '110',enableCellEdit: true,enableHiding: false},
                     {
                         name: '菜单', width: '60',field: 'ismenu', enableCellEdit: true,
                         editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -171,10 +171,10 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                         {id: 0, isMenu: '否'}
                     ]
                     },
-                    {name: '图标', width: '130',field: 'icon', enableCellEdit: true},
+                    {name: '图标', width: '120',field: 'icon', enableCellEdit: true},
                     {name: 'URL', width: '130',field: 'url', enableCellEdit: true},
                     {name: '模板URL',width: '150', field: 'templateurl', enableCellEdit: true},
-                    {name: '引用文件',width: '200', field: 'files', enableCellEdit: true},
+                    {name: '引用文件',width: '300', field: 'files', enableCellEdit: true},
                     {name: '添加时间', width: '150',field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '150',field: 'updated_at',enableCellEdit: false,visible:false},
 
