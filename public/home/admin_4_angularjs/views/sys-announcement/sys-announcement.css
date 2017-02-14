@@ -1,0 +1,25 @@
+
+.ngdialog.sysannouncement .ngdialog-content{width : 500px;background: #ffffff;}
+
+.jquery-notific8-container.top { top: 60px; }
+
+.sysAnnouncementgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.sysAnnouncementgrid .ui-grid-header{
+    background: #95A5A6;
+}
+.sysAnnouncementgrid .ui-grid-top-panel{
+    background: #95A5A6;
+}
+.sysAnnouncementgrid .ui-grid-top-panel-background{
+    background: #95A5A6;
+}
+.sysAnnouncementgrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.sysAnnouncementgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

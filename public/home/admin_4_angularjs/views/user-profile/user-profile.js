@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/userprofiles');
+            var tableDatas = Restangular.all('/users');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -89,10 +89,19 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 enableVerticalScrollbar:2,
                 enableHorizontalScrollbar :2,
                 columnDefs: [
-                    {name: 'id', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '昵称', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true},
+                    {name: 'ID', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
+                    {name: '昵称', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
+                    {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true,
+                        filter: {
+                            term: 'sex',
+                            condition: uiGridConstants.filter.STARTS_WITH,
+                            flags: { caseSensitive: false },         //区分大小写,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [ { value: '男', label: '男' }, { value: '女', label: '女' } ],
+                            disableCancelFilterButton: false
+                        }
+                    },
                     {name: '联系电话', field: 'phone',width: '120',enableCellEdit: true,enableColumnMenu: true},
                     {name: '出生日期', field: 'birth',width: '100',enableCellEdit: true,enableColumnMenu: true},
                     {name: '办公电话', field: 'tel',width: '120',enableCellEdit: true,enableColumnMenu: true},

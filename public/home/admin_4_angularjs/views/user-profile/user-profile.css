@@ -9,17 +9,17 @@
 }
 
 .userProfileGrid .ui-grid-header{
-    background: #C49F47;
+    background: #d3f3af;
 }
 .userProfileGrid .ui-grid-top-panel{
-    background: #C49F47;
+    background: #d3f3af;
 }
 .userProfileGrid .ui-grid-top-panel-background{
-    background: #C49F47;
+    background: #d3f3af;
 }
 .userProfileGrid .ui-grid-header-cell{
-    color:#ffffff;
+    color:#22313F;
 }
 .userProfileGrid .ui-grid-header-cell-label{
-    color:#ffffff;
+    color:#22313F;
 }
