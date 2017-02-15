@@ -100,6 +100,14 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true
                     },
+                    {name: '用户配置', width: '120',field: 'usercfg',enableCellEdit: false,visible:true,
+                        cellTemplate: '<div ng-dblclick="grid.appScope.showusercfg(row)"> {{row.entity.usercfg}}</div>'
+
+                    },
+                    {name: '系统配置', width: '120',field: 'syscfg',enableCellEdit: false,visible:true,
+                        cellTemplate: '<div ng-dblclick="grid.appScope.showsyscfg(row)"> {{row.entity.syscfg}}</div>'
+
+                    },
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true},
 
@@ -181,6 +189,48 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
+            };
+
+            $scope.showusercfg=function(row){
+                var json =angular.fromJson(row.entity.usercfg);  //转换为JSON
+
+                ngDialog.openConfirm({
+                    showClose: false,
+                    setBodyPadding: 1,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
+                    template: 'jsoneditor',
+                    className: 'ngdialog-theme-default sysuserjson',
+                    scope: $scope,
+                    controller: ['$scope',function ($scope) {
+                        $scope.$on('ngDialog.opened', function () {
+                            $scope.obj = {data: json, options: {mode: 'tree'}};
+
+                            $scope.changeOptions = function (tmpoption) {
+                                $scope.obj.options.mode = tmpoption;
+                            };
+                            $scope.changeData = function () {
+                                $scope.obj.data = json;
+                            };
+                            $scope.pretty = function (obj) {
+                                return obj;
+                            };
+
+                        });
+                    }],
+
+                }).then(function (dcEdition) {
+
+                }, function (dcEdition) {
+
+                });
+
+            };
+
+            $scope.showsyscfg=function(row){
+                var json = row.entity.syscfg;
+
             };
 
             $scope.exportxls = function(){

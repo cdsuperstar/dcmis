@@ -18,10 +18,10 @@
                         <div class="col-md-8">
                             <ui-select multiple
                                        ng-model="multiplePeple.selectedPeople" title="请选择接收者">
-                                <ui-select-match placeholder="请选择接收者...">@{{$item.name}} - @{{$item.country}}</ui-select-match>
-                                <ui-select-choices group-by="'country'" repeat="person in people | filter:{name: $select.search.name, email: $select.search.email}">
+                                <ui-select-match placeholder="请选择接收者...">@{{$item.name}} - @{{$item.depart}}</ui-select-match>
+                                <ui-select-choices group-by="'depart'" repeat="person in people | filter:{name: $select.search.name,ykth: $select.search.ykth}">
                                     <span ng-bind-html="person.name | highlight: $select.search"></span>
-                                    <small ng-bind-html="person.email | highlight: $select.search"></small>
+                                    <small ng-bind-html="person.ykth | highlight: $select.search"></small>
                                 </ui-select-choices>
                             </ui-select>
                         </div>

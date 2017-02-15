@@ -39,7 +39,7 @@ span.emotion:hover { background-position: 2px -28px }
 }
 #speecscroll::-webkit-scrollbar
 {
-    width: 5px;
+    width: 10px;
     background-color: #F5F5F5;
 }
 #speecscroll::-webkit-scrollbar-thumb
