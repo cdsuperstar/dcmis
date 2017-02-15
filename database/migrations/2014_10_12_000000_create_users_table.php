@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->increments('id')->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->text('syscfg'); //系统配置 json
-            $table->text('usercfg'); //用户配置 json
+            $table->text('syscfg')->nullable(); //系统配置 json
+            $table->text('usercfg')->nullable(); //用户配置 json
 
             $table->string('password');
             $table->char('api_token', 60)->nullable();
