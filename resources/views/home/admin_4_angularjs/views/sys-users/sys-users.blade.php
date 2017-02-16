@@ -56,7 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <a href="javascript:;" class="btn blue" ng-click="savedate()">
+                                    <a href="javascript:;" class="btn blue" ng-click="savejsondate()">
                                         <i class="fa fa-check"></i> 保 存 </a>
                                 </div>
                                 <div class="col-md-offset-1 col-md-4 col-sm-6 col-xs-6">

@@ -216,6 +216,9 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                             $scope.pretty = function (obj) {
                                 return obj;
                             };
+                            $scope.savejsondate = function (obj) {
+                                return obj; //怎么保存 有id ,有obj.data
+                            };
 
                         });
                     }],
