@@ -3,12 +3,12 @@
 angular.module("MetronicApp").controller('dcmodelCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('/dcmodels');
+            var tableDatas = Restangular.all('/sys-model');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/dcmodels/create',
+                    template: '/sys-model/create',
                     className: 'ngdialog-theme-default sysmodel',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
@@ -80,7 +80,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                                         return true; // allow everything else
                                     },
                                     'data': {
-                                        'url': '/dcmodelopt/tree',
+                                        'url': '/sys-model/tree',
                                         'data': function (node) {
                                             return { 'id' : node.id };
                                         }
@@ -97,7 +97,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                                 "plugins": ["dnd", "state", "types", "json_data"]
                             }).bind("move_node.jstree", function (e, data) {
                                     //console.log('the item being dragged ', data);
-                                    Restangular.all("/dcmodelopt/movenode").post(data).then(
+                                    Restangular.all("/sys-model/movenode").post(data).then(
                                         function (res) {
                                             //console.log(res);
                                             if (res.success) {

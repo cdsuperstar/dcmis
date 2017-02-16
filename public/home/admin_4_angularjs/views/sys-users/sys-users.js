@@ -5,11 +5,11 @@ angular.module("MetronicApp").controller('dcuserCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            var tableDatas = Restangular.all('/sys-users');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/users/create',
+                    template: '/sys-users/create',
                     className: 'ngdialog-theme-default sysuser',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {

@@ -5,11 +5,11 @@ angular.module("MetronicApp").controller('rolesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/roles');
+            var tableDatas = Restangular.all('/sys-role');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/roles/create',
+                    template: '/sys-role/create',
                     className: 'ngdialog-theme-default sysrole',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {

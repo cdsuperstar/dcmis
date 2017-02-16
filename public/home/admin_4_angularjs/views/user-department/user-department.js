@@ -3,12 +3,12 @@
 angular.module("MetronicApp").controller('userdepartmentCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('/unitgrps');
+            var tableDatas = Restangular.all('/user-department');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/unitgrps/create',
+                    template: '/user-department/create',
                     className: 'ngdialog-theme-default userdepartment',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
@@ -80,7 +80,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                                         return true; // allow everything else
                                     },
                                     'data': {
-                                        'url': '/unitgrpopt/tree',
+                                        'url': '/user-department/tree',
                                         'data': function (node) {
                                             return { 'id' : node.id };
                                         }
@@ -97,7 +97,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                                 "plugins": ["dnd", "state", "types", "json_data"]
                             }).bind("move_node.jstree", function (e, data) {
                                 //console.log('the item being dragged ', data);
-                                Restangular.all("/unitgrpopt/movenode").post(data).then(
+                                Restangular.all("/user-department/movenode").post(data).then(
                                     function (res) {
                                         //console.log(res);
                                         if (res.success) {

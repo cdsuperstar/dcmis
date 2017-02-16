@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/permissions');
+            var tableDatas = Restangular.all('/sys-privilege-management');
 
 
             //json editor start
@@ -38,7 +38,7 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/permissions/create',
+                    template: '/sys-privilege-management/create',
                     className: 'ngdialog-theme-default sysprivilege',
                     scope: $scope,
                     controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {

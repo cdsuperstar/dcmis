@@ -32,14 +32,16 @@ use Closure;
  */
 class User extends Ardent implements
     AuthenticatableContract,
-    AuthorizableContract,
+//    AuthorizableContract,
     CanResetPasswordContract
 {
 
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword;
-    use EntrustUserTrait {
-        EntrustUserTrait::can insteadof Authorizable;
-    }
+    use Notifiable, Authenticatable, CanResetPassword;
+    //Authorizable
+    use EntrustUserTrait;
+//    use EntrustUserTrait {
+//        EntrustUserTrait::can insteadof Authorizable;
+//    }
     public static $rules = array(
         'name' => 'required|between:1,32',
         'email' => 'required|email|unique:users',

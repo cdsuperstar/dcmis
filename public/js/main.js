@@ -78,7 +78,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
-    Restangular.one('/dcmodelopt/getModTree').get().then(function (res) {
+    Restangular.one('/sys-model/getModTree').get().then(function (res) {
         $scope.mdTreeJson = res;
 
     });
@@ -86,7 +86,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         $scope.dcUserMsgs = res;
     });
 
-    Restangular.one('/useropt/dcUser').get().then(function (res) {
+    Restangular.one('/sys-users/dcUser').get().then(function (res) {
         $scope.dcUser = res;
         window.Echo.private('App.User.' + $scope.dcUser.id)
             .listen('usermsg', (e) => {
@@ -203,7 +203,7 @@ MetronicApp.directive('confirmationNeeded', function () {
 MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider', function ($stateProvider, $urlRouterProvider,$futureStateProvider) {
 // Redirect any unmatched url
     var loadAndRegisterFutureStates = function (Restangular) {
-        return Restangular.all('/dcmodelopt/getModList').getList().then(function (res) {
+        return Restangular.all('/sys-model/getModList').getList().then(function (res) {
             angular.forEach(res, function (value, key) {
                 var fstate = {
                     url: value.url,
