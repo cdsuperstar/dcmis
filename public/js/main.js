@@ -82,7 +82,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         $scope.mdTreeJson = res;
 
     });
-    Restangular.all('/usermsgopt/unreadmsgs').getList().then(function (res) {
+    Restangular.all('/sys-msg/unreadmsgs').getList().then(function (res) {
         $scope.dcUserMsgs = res;
     });
 
