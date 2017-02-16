@@ -101,11 +101,11 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         enableCellEdit: true
                     },
                     {name: '用户配置', width: '120',field: 'usercfg',enableCellEdit: false,visible:true,
-                        cellTemplate: '<div ng-dblclick="grid.appScope.showusercfg(row)"> {{row.entity.usercfg}}</div>'
+                        cellTemplate: '<div ng-dblclick="grid.appScope.showcfg(row.entity.usercfg)"> {{row.entity.usercfg}}</div>'
 
                     },
                     {name: '系统配置', width: '120',field: 'syscfg',enableCellEdit: false,visible:true,
-                        cellTemplate: '<div ng-dblclick="grid.appScope.showsyscfg(row)"> {{row.entity.syscfg}}</div>'
+                        cellTemplate: '<div ng-dblclick="grid.appScope.showcfg(row.entity.syscfg)"> {{row.entity.syscfg}}</div>'
 
                     },
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
@@ -191,8 +191,8 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 }
             };
 
-            $scope.showusercfg=function(row){
-                var json =angular.fromJson(row.entity.usercfg);  //转换为JSON
+            $scope.showcfg=function(tmpcfg){
+                var json =angular.fromJson(tmpcfg);  //转换为JSON
 
                 ngDialog.openConfirm({
                     showClose: false,
@@ -228,10 +228,6 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             };
 
-            $scope.showsyscfg=function(row){
-                var json = row.entity.syscfg;
-
-            };
 
             $scope.exportxls = function(){
                 var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
