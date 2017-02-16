@@ -19,6 +19,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.grid.exporter",
     "ui.grid.importer",
     "ui.grid.pinning",
+    "ui.grid.expandable",
     "ui.select",
     "angular-jsoneditor",
     "ngTagsInput"

@@ -8,7 +8,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/dcmodels/create',
+                    template: '/sysmatters/create',
                     className: 'ngdialog-theme-default sysmatters',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
@@ -159,7 +159,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                     columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false, width: '40'},
+                    {name: 'id', field: 'id', enableCellEdit: false, width: '40',enableFiltering: false,enableColumnResizing:false},
                     {name: '标题', field: 'title', width: '200',enableCellEdit: true,enableHiding: false},
                     {name: '事项内容',width: '350', field: 'content', enableCellEdit: true},
                     {name: '提醒时间',width: '150',field: 'txdate', enableCellEdit: true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},

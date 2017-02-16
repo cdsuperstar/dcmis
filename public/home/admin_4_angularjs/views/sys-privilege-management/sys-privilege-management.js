@@ -119,10 +119,7 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
                     {name: 'id', width: '40',field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: true,enableFiltering: false},
                     {name: '名称', width: '150',field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: true},
                     {name: '显示名称',width: '150', field: 'display_name',enableCellEdit: true,visible:true},
-                    {name: '描述', width: '65',field: 'description',enableCellEdit: false,visible:true,
-                        cellTemplate: '<div><button class="btn btn-default btn-outline btn-sm" ng-click="grid.appScope.showDescriPtion(row)"><i class="icon-eye"></i> 查 看 </button></div>'
-
-                    },
+                    {name: '描述', width: '260',field: 'description',enableCellEdit: false,visible:true,},
                     {name: '添加时间',width: '150', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间',width: '150', field: 'updated_at',enableCellEdit: false,visible:true},
                 ],
@@ -137,14 +134,6 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 },
-            };
-
-            // ===============show the update modal dialog ==================
-            var tempSelectedRowEntity = {};
-            $scope.showDescriPtion=function(row){
-                tempSelectedRowEntity = row.entity;
-                console.log(tempSelectedRowEntity);
-
             };
 
             $scope.toggleFiltering = function(){

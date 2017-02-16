@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            var tableDatas = Restangular.all('500_complex.json');
 
 
             $scope.delData = function () {
@@ -24,11 +24,6 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 );
             };
             //$scope.editdataids = [];
-            $scope.editData = function () {
-                var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                //修改跳至修过页面
-
-            }
 
             $scope.gridOptions = {
                 enableSorting: true,
@@ -37,23 +32,27 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
                 columnDefs: [
-                    {name: 'id', field: 'id',width: '40',enableColumnMenu: false,
+                    {name: '操作', field: 'id',width: '50',enableColumnMenu: false,enableColumnResizing:false,enableSorting:false,pinnedLeft:true,
                         enableHiding: false,
                         enableFiltering: false,
-                        footerCellTemplate: '<span class="ui-grid-cell-contents" style="color: #000000">合计</span>' },
-                    {name: '编号', field: 'name',width: '100',enableColumnMenu: true,pinnedLeft:true},
-                    {name: '项目名称', field: 'name',width: '200',enableColumnMenu: true,pinnedLeft:true},
-                    {name: '总金额', field: 'name',width: '80',type:'float',enableColumnMenu: true,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                        cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
+                        '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
+                        '<span class="fa fa-edit icon-hand" ng-click="grid.appScope.editdata(row)"  title="修改数据"></span>' +
+                        ' </div>',
+                        footerCellTemplate: '<div class="ui-grid-cell-contents" style="color: #000000">合计</div>' },
+                    {name: '编号', field: 'name',width: '100',enableColumnMenu: true},
+                    {name: '项目名称', field: 'name',width: '200',enableColumnMenu: true},
+                    {name: '总金额', field: 'age',width: '80',type:'float',enableColumnMenu: true,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '项目摘要', field: 'email',width: '200',enableColumnMenu: true,visible:true},
-                    {name: '申报类别', field: 'email',width: '150',visible:true},
-                    {name: '审批状态', field: 'email',width: '100',visible:true},
-                    {name: '申报人', field: 'email',width: '100',visible:true},
+                    {name: '申报类别', field: 'company',width: '150',visible:true},
+                    {name: '审批状态', field: 'gender',width: '100',visible:true},
+                    {name: '申报人', field: 'name',width: '100',visible:true},
                     {name: '申报部门', field: 'email',width: '150',visible:true},
-                    {name: '联系电话', field: 'email',type:'int',width: '150',visible:true},
-                    {name: '简介', field: 'email',type:'string',width: '250',visible:true},
+                    {name: '联系电话', field: 'phone',type:'int',width: '150',visible:true},
+                    {name: '简介', field: 'about',type:'string',width: '250',visible:true},
                     {name: '开始日期', field: 'email',width: '100',visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
                     {name: '截止日期', field: 'email',width: '100',visible:false,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
-                    {name: '添加时间', field: 'created_at',width: '100',visible:true},
+                    {name: '添加时间', field: 'registered',width: '100',visible:true},
                     {name: '更新时间', field: 'updated_at',width: '100',visible:false},
 
                 ],
@@ -128,23 +127,23 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
             };
 
 
-            $scope.xxxxx = function() {
-                console.log('111');
+            $scope.showdetail = function(row) {
+                console.log(row.entity.name);
             };
+
+            $scope.editdata = function (row) {
+                console.log(row.entity.company);
+                //var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
+                //修改跳至修过页面
+
+            }
+
 
 
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
-
-            $scope.refreshData = function(){
-                $scope.gridOptions.data = [];
-                tableDatas.getList().then(function (accounts) {
-                    var allAccounts = accounts;
-                    $scope.gridOptions.data = allAccounts;
-                });
-            }
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;

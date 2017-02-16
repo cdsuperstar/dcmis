@@ -94,7 +94,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     {
                         name: '密码',
                         type:'string',
-                        width: '150',
+                        width: '100',
                         headerCellClass: 'nowrap="false"',
                         field: 'password',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',

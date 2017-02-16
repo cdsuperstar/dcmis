@@ -8,7 +8,7 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/dcmodels/create',
+                    template: '/sysannouncement/create',
                     className: 'ngdialog-theme-default sysannouncement',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
@@ -61,9 +61,10 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                     columnDefs: [
-                    {name: 'id', field: 'id', enableColumnMenu: false,width: '40',enableHiding: false},
+                    {name: 'id', field: 'id', enableColumnMenu: false,width: '40',enableHiding: false,enableFiltering: false,enableColumnResizing:false},
                     {name: '标题', field: 'title', width: '200',enableColumnMenu: false,enableHiding: false},
-                    {name: '公告内容',width: '500', field: 'content', enableColumnMenu: false,enableHiding: false},
+                    {name: '发送人',width: '150', field: 'name', enableColumnMenu: false,enableHiding: false},
+                    {name: '公告内容',width: '350', field: 'content', enableColumnMenu: false,enableHiding: false},
                     {name: '添加时间', width: '150',field: 'created_at',enableColumnMenu: false,visible:true,enableHiding: false},
 
                     ],
@@ -88,4 +89,4 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
 
         }
     ]
-)
+);

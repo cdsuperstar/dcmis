@@ -1,4 +1,4 @@
-.ngdialog.sysuser .ngdialog-content{width : 450px;background: #ffffff;}
+.ngdialog.am-budgetlist .ngdialog-content{width : 450px;background: #ffffff;}
 
 .jquery-notific8-container.top { top: 60px; }
 
@@ -6,7 +6,9 @@
     /*width: 300px;*/
     height: 384px;
 }
-
+.icon-hand{
+    cursor: pointer;
+}
 .am-budgetlistgrid .ui-grid-header{
     background: #578ebe;
 }

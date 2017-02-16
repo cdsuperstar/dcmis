@@ -1,10 +1,14 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="sysannouncementCtrl">
     <div class="table-toolbar">
-        <button type="button" id="addData" class="btn btn-success" ng-click="addData()">　增　加　</button>
-        <button type="button" id="delData" class="btn btn-danger" confirmation-needed="确定要删除这些消息吗？" ng-click="delData()">　删　除　</button>
-        <button id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow">　筛　选　</button>
-        <button id="refreshButton" type="button" class="btn purple-plum" ng-click="refreshData()">重获数据</button>
+
+
+        <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
+        <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些公告数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
+        <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
+        <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选</button>
+        <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
+
     </div>
-    <div id="userMsggrid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns class="sysAnnouncementgrid"></div>
+    <div id="sysannouncementgrid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns class="sysAnnouncementgrid"></div>
 </div>
