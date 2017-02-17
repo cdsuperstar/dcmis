@@ -23,10 +23,26 @@ class userController extends Controller
         //
     }
 
-    public function getLoginUser(Request $request)
+    public function getUsersByUnitgrpOrEmptyunitgrp(Request $request)
+    {
+        $arrUnits = array();
+        $request->user()->unitgrps()->each(function ($e) use (&$arrUnits) {
+            $arrUnits = array_unique(array_merge($arrUnits, $e->getDescendantsAndSelf()->pluck('id')->all()));
+        });
+        $recUsers = User::wherein('id', function ($query) use ($arrUnits) {
+            $query->select('user_id')->from('unitgrp_user')->wherein('unitgrp_id', $arrUnits);
+        })->union(User::wherenotin('id', function ($query) {
+            $query->select('user_id')->from('unitgrp_user');
+        }))->get();
+        return response()->json($recUsers);
+
+    }
+
+    public function getLoginedUser(Request $request)
     {
         return response()->json($request->user());
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +50,7 @@ class userController extends Controller
      */
     public function create()
     {
-        return view('home.'.Config::get('app.dctemplate').'.views.sys-users.edit');
+        return view('home.' . Config::get('app.dctemplate') . '.views.sys-users.edit');
     }
 
     /**
@@ -162,7 +178,7 @@ class userController extends Controller
 
     public function getOnlineUsers()
     {
-        $recDatas=User::select('users.*')->join('sessions','users.id','=','sessions.user_id')->get();
+        $recDatas = User::select('users.*')->join('sessions', 'users.id', '=', 'sessions.user_id')->get();
         return response()->json($recDatas);
     }
 }

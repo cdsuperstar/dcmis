@@ -44,12 +44,14 @@ Route::group(['prefix' => '/sys-model'], function () {
 //用户管理
 Route::group(['prefix' => '/sys-users'], function () {
     //得到全部用户
-    Route::get('','User\userController@index');
+//    Route::get('','User\userController@index');
+    Route::get('','User\userController@getUsersByUnitgrpOrEmptyunitgrp');
     Route::get('create','User\userController@create');
     Route::put('{dcmodel}','User\userController@update');
     Route::delete('{dcmodel}','User\userController@destroy');
 
-    Route::get('dcUser','User\userController@getLoginUser');
+    Route::get('dcUser','User\userController@getLoginedUser');
+//    Route::get('managedUsers','User\userController@getUsersByUnitgrpOrEmptyunitgrp');
     Route::get('onlineusers','User\userController@getOnlineUsers');
 });
 
@@ -98,4 +100,10 @@ Route::group(['prefix' => '/sys-msg'], function () {
     Route::delete('{dcmodel}', 'usermsgController@destroy');
 
     Route::get('unreadmsgs','usermsgController@getUnreadMsgs');
+});
+
+// Debug all sqls
+DB::listen(function ($event) {
+    Log::info($event->sql);
+    Log::info($event->bindings);
 });

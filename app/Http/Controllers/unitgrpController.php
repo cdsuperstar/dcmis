@@ -121,7 +121,7 @@ class unitgrpController extends Controller
     {
         //
         if ($unitgrp->delete()) {
-
+            unitgrp::rebuild(true);
             return response()->json(array_merge([
                 'messages' => trans('data.destroy', ['rows' => $unitgrp->id . " with id " . $unitgrp->id]),
                 'success' => true,
