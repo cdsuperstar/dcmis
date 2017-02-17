@@ -26,11 +26,15 @@
 .sysusergrid .ui-grid-header-cell-label{
     color:#ffffff;
 }
-.sysusergrid .ui-grid-row, .ui-grid-cell {
-    height: auto !important;
-}
+/*自动行高，自动换行*/
+/*.sysusergrid .ui-grid-row{*/
+    /*height: auto !important;*/
+/*}*/
+/*.sysusergrid .ui-grid-cell{*/
+    /*height: auto !important;*/
+/*}*/
 
-.wrap {
-    white-space: normal;
-}
+/*.sysusergrid.wrap {*/
+    /*white-space: normal;*/
+/*}*/
 
