@@ -100,13 +100,23 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true
                     },
-                    {name: '用户配置', width: '120',field: 'usercfg',enableCellEdit: false,visible:true,
-                        cellTemplate: '<div ng-dblclick="grid.appScope.showcfg(row,\'usercfg\')"> {{row.entity.usercfg}}</div>'
+                    {name: '用户配置', width: '200',field: 'usercfg',enableCellEdit: true,visible:true,
+                        cellTooltip: function(row){ return row.entity.usercfg; },
+                        cellTemplate: '<div class="ui-grid-cell-contents" title="TOOLTIP">{{grid.getCellValue(row, col)}}</div>',
+                        editableCellTemplate: '<div>' +
+                        '<form name="inputForm">' +
+                        '<input type="text" ng-class="\'colt\' + col.uid" ui-grid-editor ng-model="MODEL_COL_FIELD" ng-dblclick="grid.appScope.showcfg(row,\'usercfg\')">' +
+                        '</form></div>'
 
                     },
-                    {name: '系统配置', width: '120',field: 'syscfg',enableCellEdit: false,visible:true,
-                        cellTemplate: '<div ng-dblclick="grid.appScope.showcfg(row,\'syscfg\')"> {{row.entity.syscfg}}</div>'
-
+                    {name: '系统配置', width: '120',field: 'syscfg',enableCellEdit: true,visible:true,
+                        cellTooltip: function(row){ return row.entity.syscfg; },
+                        //cellTemplate: '<div class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                        cellTemplate: '<div class="ui-grid-cell-contents" title="TOOLTIP">{{grid.getCellValue(row, col)}}</div>',
+                        editableCellTemplate: '<div>' +
+                        '<form name="inputForm">' +
+                        '<input type="text" ng-class="\'colt\' + col.uid" ui-grid-editor ng-model="MODEL_COL_FIELD" ng-dblclick="grid.appScope.showcfg(row,\'syscfg\')">' +
+                        '</form></div>'
                     },
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true},
@@ -211,19 +221,19 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                                 $scope.obj.options.mode = tmpoption;
                             };
                             $scope.changeData = function () {
-                                $scope.obj.data = json;
+                                $scope.obj.data = angular.fromJson((tmpcfg=='usercfg') ? row.entity.usercfg : row.entity.syscfg);
                             };
                             $scope.pretty = function (obj) {
                                 return obj;
-                            };
-                            $scope.savejsondate = function (obj) {
-                                return obj; //怎么保存 有id ,有obj.data
                             };
 
                         });
                     }],
 
                 }).then(function (dcEdition) {
+                    //console.log(dcEdition);
+                    (tmpcfg=='usercfg') ? row.entity.usercfg=angular.toJson(dcEdition) : row.entity.syscfg=angular.toJson(dcEdition);
+                    $scope.gridApi.rowEdit.setRowsDirty(Array(row.entity) );
 
                 }, function (dcEdition) {
 

@@ -26,3 +26,11 @@
 .sysusergrid .ui-grid-header-cell-label{
     color:#ffffff;
 }
+.sysusergrid .ui-grid-row, .ui-grid-cell {
+    height: auto !important;
+}
+
+.wrap {
+    white-space: normal;
+}
+
