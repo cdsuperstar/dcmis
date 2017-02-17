@@ -214,20 +214,17 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     className: 'ngdialog-theme-default sysuserjson',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {
-                        $scope.$on('ngDialog.opened', function () {
-                            $scope.obj = {data: json, options: {mode: 'tree'}};
+                        $scope.obj = {data: json, options: {mode: 'tree'}};
 
-                            $scope.changeOptions = function (tmpoption) {
-                                $scope.obj.options.mode = tmpoption;
-                            };
-                            $scope.changeData = function () {
-                                $scope.obj.data = angular.fromJson((tmpcfg=='usercfg') ? row.entity.usercfg : row.entity.syscfg);
-                            };
-                            $scope.pretty = function (obj) {
-                                return obj;
-                            };
-
-                        });
+                        $scope.changeOptions = function (tmpoption) {
+                            $scope.obj.options.mode = tmpoption;
+                        };
+                        $scope.changeData = function () {
+                            $scope.obj.data = angular.fromJson((tmpcfg=='usercfg') ? row.entity.usercfg : row.entity.syscfg);
+                        };
+                        $scope.pretty = function (obj) {
+                            return obj;
+                        };
                     }],
 
                 }).then(function (dcEdition) {
