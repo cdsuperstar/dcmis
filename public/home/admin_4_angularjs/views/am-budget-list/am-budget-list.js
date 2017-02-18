@@ -39,15 +39,15 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         '<span class="fa fa-edit icon-hand" ng-click="grid.appScope.editdata(row)"  title="修改数据"></span>' +
                         ' </div>',
-                        footerCellTemplate: '<div class="ui-grid-cell-contents" style="color: #000000">合计</div>' },
-                    {name: '编号', field: 'name',width: '100',enableColumnMenu: true},
-                    {name: '项目名称', field: 'name',width: '200',enableColumnMenu: true},
-                    {name: '总金额', field: 'age',width: '80',type:'float',enableColumnMenu: true,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '项目摘要', field: 'email',width: '200',enableColumnMenu: true,visible:true},
-                    {name: '申报类别', field: 'company',width: '150',visible:true},
+                        footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                    {name: '编号', field: 'no',width: '100',enableColumnMenu: true},
+                    {name: '项目名称', field: 'budgetname',width: '200',enableColumnMenu: true},
+                    {name: '总金额', field: 'total',width: '80',type:'float',enableColumnMenu: true,enableHiding: false,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '项目摘要', field: 'summary',width: '200',enableColumnMenu: true,visible:true},
+                    {name: '项目类别', field: 'type',width: '150',visible:true},
                     {name: '审批状态', field: 'gender',width: '100',visible:true},
-                    {name: '申报人', field: 'name',width: '100',visible:true},
-                    {name: '申报部门', field: 'email',width: '150',visible:true},
+                    {name: '申报人', field: 'requester',width: '100',visible:true},
+                    {name: '申报部门', field: 'unit',width: '150',visible:true},
                     {name: '联系电话', field: 'phone',type:'int',width: '150',visible:true},
                     {name: '简介', field: 'about',type:'string',width: '250',visible:true},
                     {name: '开始日期', field: 'email',width: '100',visible:true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
@@ -128,7 +128,174 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
 
 
             $scope.showdetail = function(row) {
-                console.log(row.entity.name);
+                //var detaildata=angular.fromJson(row.entity);
+                ngDialog.openConfirm({
+                    showClose: false,
+                    setBodyPadding: 1,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
+                    template: 'approval-detail',
+                    className: 'ngdialog-theme-default am-budgtlistdetail',
+                    scope: $scope,
+                    controller: ['$scope',function ($scope) {
+                        $scope.tmpobjdata = row.entity;  //显示值
+                        var sourceDatas = Restangular.all('data.json'); //临时数据
+
+                        switch(row.entity.type)
+                        {
+                            case 1:
+                            {
+                                $scope.soucegridOptions={
+                                    enableSorting: true,
+                                    enableFiltering: false,
+                                    showColumnFooter:true,
+                                    showGridFooter:true,
+                                    enableVerticalScrollbar:1,
+                                    enableHorizontalScrollbar :1,
+                                    enableGridMenu: true,
+                                    //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
+                                    columnDefs: [
+                                        {name: '物资名称', field: 'asname',width: '200',enableColumnMenu: true,
+                                            cellTooltip: function(row){ return row.entity.asname; },
+                                            //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                            cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                            footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                                        {name: '金额', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '单位', field: 'meas',width: '60',enableColumnMenu: true},
+                                        {name: '物资参数', field: 'aspara',width: '600',enableColumnMenu: true,
+                                            cellTooltip: function(row){ return row.entity.aspara; },
+                                            //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                            cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                        },
+                                        {name: '添加时间', field: 'registered',width: '100',visible:true},
+                                        {name: '更新时间', field: 'updated_at',width: '100',visible:false},
+                                    ],
+
+                                    data: [],
+                                    onRegisterApi: function (gridApi) {
+                                        $scope.gridApi = gridApi;
+                                    }
+                                };
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                                var sourceDatas = Restangular.all('data.json');
+                            }
+                                break;
+                            case 2:
+                            {
+                                $scope.soucegridOptions={
+                                    enableSorting: true,
+                                    enableFiltering: false,
+                                    showColumnFooter:true,
+                                    showGridFooter:true,
+                                    enableVerticalScrollbar:1,
+                                    enableHorizontalScrollbar :1,
+                                    enableGridMenu: true,
+                                    //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
+                                    columnDefs: [
+                                        {name: '合同名称', field: 'contrname',width: '200',enableColumnMenu: true,
+                                            cellTooltip: function(row){ return row.entity.contrname; },
+                                            //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                            cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                            footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                                        {name: '合同金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '合同编号', field: 'contrno',width: '120',enableColumnMenu: true},
+                                        {name: '合同地点', field: 'contraddr',width: '120',enableColumnMenu: true},
+                                        {name: '负责人', field: 'contrpicharge',width: '120',enableColumnMenu: true},
+                                        {name: '负责人电话', field: 'contrpicphone',width: '120',enableColumnMenu: true},
+                                        {name: '合同要求', field: 'contrworkreq',width: '600',enableColumnMenu: true,
+                                            cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                            //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                            cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                        },
+                                        {name: '付款用途', field: 'paymentp',width: '120',enableColumnMenu: true},
+                                        {name: '合同开始日期', field: 'contrbegindate',width: '100',visible:true},
+                                        {name: '合同截止日期', field: 'contrenddate',width: '100',visible:true},
+                                        {name: '添加时间', field: 'registered',width: '100',visible:true},
+                                        {name: '更新时间', field: 'updated_at',width: '100',visible:false},
+                                    ],
+                                    data: [],
+                                    onRegisterApi: function (gridApi) {
+                                        $scope.gridApi = gridApi;
+                                    }
+                                };
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                                var sourceDatas = Restangular.all('data.json');
+                            }
+                                break;
+                            case 3:
+                            {
+                                $scope.soucegridOptions={
+                                    enableSorting: true,
+                                    enableFiltering: false,
+                                    showColumnFooter:true,
+                                    showGridFooter:true,
+                                    enableVerticalScrollbar:1,
+                                    enableHorizontalScrollbar :1,
+                                    enableGridMenu: true,
+                                    //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
+                                    columnDefs: [
+                                        {name: '合同地点', field: 'svpicphone',width: '120',enableColumnMenu: true},
+                                        {name: '负责人', field: 'svpicharge',width: '120',enableColumnMenu: true},
+                                        {name: '负责人电话', field: 'svaddr',width: '120',enableColumnMenu: true},
+                                    ],
+
+                                    data: [],
+                                    onRegisterApi: function (gridApi) {
+                                        $scope.gridApi = gridApi;
+                                    }
+                                };
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                                var sourceDatas = Restangular.all('data.json');
+                            }
+                                break;
+                            case 4:
+                            {
+                                $scope.soucegridOptions={
+                                    enableSorting: true,
+                                    enableFiltering: false,
+                                    showColumnFooter:true,
+                                    showGridFooter:true,
+                                    enableVerticalScrollbar:1,
+                                    enableHorizontalScrollbar :1,
+                                    enableGridMenu: true,
+                                    //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
+                                    columnDefs: [
+                                        {name: '合同地点', field: 'otaddr',width: '120',enableColumnMenu: true},
+                                        {name: '负责人', field: 'otpicharge',width: '120',enableColumnMenu: true},
+                                        {name: '负责人电话', field: 'otpicphone',width: '120',enableColumnMenu: true},
+                                    ],
+
+                                    data: [],
+                                    onRegisterApi: function (gridApi) {
+                                        $scope.gridApi = gridApi;
+                                    }
+                                };
+                                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                                var sourceDatas = Restangular.all('data.json');
+                            }
+                                break;
+                            default:
+                                console.log(row.entity.type);
+                                break;
+                        }
+
+                        sourceDatas.getList().then(function (accounts) {
+                            var allAccounts = accounts;
+                            $scope.soucegridOptions.data = allAccounts;
+                        });
+                    }],
+
+                }).then(function (dcEdition) {
+                    var tmpdcdata=angular.toJson(dcEdition);
+
+
+                }, function (dcEdition) {
+
+                });
+
+
             };
 
             $scope.editdata = function (row) {

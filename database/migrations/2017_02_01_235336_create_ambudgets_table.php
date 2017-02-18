@@ -24,8 +24,11 @@ class CreateAmbudgetsTable extends Migration
             $table->date('begindate')->nullable(); //开始日期
             $table->date('enddate')->nullable(); //截止日期
             $table->text('summary')->nullable(); //摘要
+            $table->text('introduce')->nullable(); //介绍
             $table->decimal('total')->nullable(); //总金额
-            $table->boolean('isappr')->nullable(); //审批通过
+            $table->boolean('isappr')->nullable(); //审批状态
+            $table->boolean('isapproption')->nullable(); //审批意见approval opinions
+            $table->boolean('theappr')->nullable(); //审批人
             $table->boolean('isdone')->nullable(); //是否执行完毕
             $table->boolean('isabort')->nullable(); //是否终止执行
             $table->text('abortsum')->nullable(); //终止执行原因

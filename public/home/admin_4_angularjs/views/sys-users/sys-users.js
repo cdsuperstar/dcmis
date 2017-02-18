@@ -228,10 +228,13 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     }],
 
                 }).then(function (dcEdition) {
-                    //console.log(dcEdition);
-                    (tmpcfg=='usercfg') ? row.entity.usercfg=angular.toJson(dcEdition) : row.entity.syscfg=angular.toJson(dcEdition);
-                    $scope.gridApi.rowEdit.setRowsDirty(Array(row.entity) );
-
+                    var tmpdcdata=angular.toJson(dcEdition);
+                    if((row.entity.usercfg == tmpdcdata) || (row.entity.syscfg == tmpdcdata)){
+                        //console.log('no action');
+                    }else{
+                        (tmpcfg=='usercfg') ? row.entity.usercfg=tmpdcdata : row.entity.syscfg=tmpdcdata;
+                        $scope.gridApi.rowEdit.setRowsDirty(Array(row.entity) );
+                    }
                 }, function (dcEdition) {
 
                 });

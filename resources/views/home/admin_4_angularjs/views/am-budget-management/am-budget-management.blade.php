@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">预算类别</label>
+            <label class="col-md-2 control-label">项目类别</label>
             <div class="col-md-4">
                 <select class="form-control" ng-model="classlistName" ng-options="o.id as o.name for o in listnames">
                 </select>
