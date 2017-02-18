@@ -34,39 +34,39 @@ class UsersTableSeeder extends Seeder
         factory(App\User::class, 5)->create();
 
         //seed roles
-        DB::table('roles')->delete();
-        factory(App\models\Role::class, 20)->create();
-
-        //seed permissions
-        DB::table('permissions')->delete();
-        factory(App\models\Permission::class, 40)->create();
+//        DB::table('roles')->delete();
+//        factory(App\models\Role::class, 20)->create();
+//
+//        //seed permissions
+//        DB::table('permissions')->delete();
+//        factory(App\models\Permission::class, 40)->create();
 
         //seed roles_user
-        DB::table('role_user')->delete();
-        $usersId = App\User::all()->pluck('id')->toArray();
-        $rolesId = App\models\Role::all()->pluck('id')->toArray();
-        foreach (range(1, 10) as $index) {
-            $a = $faker->randomElement($rolesId);
-            $b = $faker->randomElement($usersId);
-            DB::table('role_user')->where('role_id', '=', $a, 'and')->where('user_id', '=', $b)->delete();
-            DB::table('role_user')->insert([
-                'role_id' => $a,
-                'user_id' => $b,
-            ]);
-        }
+//        DB::table('role_user')->delete();
+//        $usersId = App\User::all()->pluck('id')->toArray();
+//        $rolesId = App\models\Role::all()->pluck('id')->toArray();
+//        foreach (range(1, 10) as $index) {
+//            $a = $faker->randomElement($rolesId);
+//            $b = $faker->randomElement($usersId);
+//            DB::table('role_user')->where('role_id', '=', $a, 'and')->where('user_id', '=', $b)->delete();
+//            DB::table('role_user')->insert([
+//                'role_id' => $a,
+//                'user_id' => $b,
+//            ]);
+//        }
 
         //seed permission_role
-        DB::table('permission_role')->delete();
-        $permission_id = App\models\Permission::all()->pluck('id')->toArray();
-        foreach (range(1, 20) as $index) {
-            $a = $faker->randomElement($rolesId);
-            $b = $faker->randomElement($permission_id);
-            DB::table('permission_role')->where('role_id', '=', $a, 'and')->where('permission_id', '=', $b)->delete();
-            DB::table('permission_role')->insert([
-                'role_id' => $a,
-                'permission_id' => $b,
-            ]);
-        }
+//        DB::table('permission_role')->delete();
+//        $permission_id = App\models\Permission::all()->pluck('id')->toArray();
+//        foreach (range(1, 20) as $index) {
+//            $a = $faker->randomElement($rolesId);
+//            $b = $faker->randomElement($permission_id);
+//            DB::table('permission_role')->where('role_id', '=', $a, 'and')->where('permission_id', '=', $b)->delete();
+//            DB::table('permission_role')->insert([
+//                'role_id' => $a,
+//                'permission_id' => $b,
+//            ]);
+//        }
 
 //        DB::table('sysmsgs')->delete();
 //        foreach (range(1, 300) as $index) {

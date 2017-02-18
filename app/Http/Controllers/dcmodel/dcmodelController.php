@@ -18,14 +18,10 @@ class dcmodelController extends Controller
      *
      * @return Response
      */
-    public function index($id = '')
+    public function index()
     {
         //
-        if ($id == '') {
-            $dcmodel = dcmodel::all();
-        } else {
-            $dcmodel = dcmodel::where('id', $id)->get();
-        }
+        $dcmodel = dcmodel::all();
         return response()->json($dcmodel);
     }
 
@@ -71,7 +67,7 @@ class dcmodelController extends Controller
      */
     public function create()
     {
-        return view('home.'.Config::get('app.dctemplate').'.views.sys-model.edit');
+        return view('home.' . Config::get('app.dctemplate') . '.views.sys-model.edit');
 
     }
 

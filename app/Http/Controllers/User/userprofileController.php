@@ -126,4 +126,10 @@ class userprofileController extends Controller
         }
 
     }
+
+    public function getMyProfile(Request $request)
+    {
+        return response()->json($request->user()->userprofile);
+
+    }
 }

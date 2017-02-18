@@ -6,6 +6,7 @@ use App\User;
 use Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Log;
 
 class userController extends Controller
 {
@@ -145,25 +146,22 @@ class userController extends Controller
      * @param  String $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(String $id)
+    public function destroy(User $user)
     {
-        $aTodel = array();
-        $aTmp = json_decode($id);
-        if (is_array($aTmp)) {
-            $aTodel = $aTmp;
-        } else {
-            $aTodel[] = $id;
-        }
+        $user->delete();
 
-        $deletedRows = User::destroy($aTodel);
-        if ($deletedRows) {
-            return response()->json([
-                'messages' => trans('users.deletesuccess', ['rows' => $deletedRows . " with id $id"]),
+        if (!User::find($user->id)) {
+            return response()->json(
+                array_merge(
+                    [
+                'messages' => trans('users.deletesuccess', ['rows' => 1 . " with id ".$user->id]),
                 'success' => true,
-                'data' => $deletedRows,
-            ]);
+                ],
+                    $user->toArray()
+                )
+            );
         } else {
-            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $deletedRows])]);
+            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $user->id])]);
         }
     }
 

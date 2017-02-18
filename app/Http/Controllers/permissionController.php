@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Permission;
 use Illuminate\Http\Request;
 use Config;
+use Log;
 
 class permissionController extends Controller
 {
@@ -29,7 +30,7 @@ class permissionController extends Controller
     public function create()
     {
         //
-        return view('home.'.Config::get('app.dctemplate').'.views.sys-users.edit');
+        return view('home.'.Config::get('app.dctemplate').'.views.sys-privilege-management.edit');
 
     }
 
@@ -42,18 +43,17 @@ class permissionController extends Controller
     public function store(Request $request)
     {
         //
+        Log::info($request->toArray());
         $rec = new Permission($request->toArray());
-        if ($rec) {
-            if ($rec->save($request->toArray())) {
-                return response()->json(array_merge([
-                        'messages' => trans('data.add', ["data" => $rec->id]),
-                        'success' => true,
-                    ], $rec->toArray()
-                    )
-                );
-            }
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
         }
-        return response()->json(['errors' => $rec->errors()->all()]);
+        return response()->json(['errors' => $rec->id ]);
 
     }
 
@@ -115,14 +115,18 @@ class permissionController extends Controller
     public function destroy(Permission $permission)
     {
         //
+
+        Log::info("-----");
+        Log::info($permission);
+        Log::info("-----");
         if ($permission->delete()) {
 
             return response()->json(array_merge([
-                'messages' => trans('users.deletesuccess', ['rows' => $permission->id . " with id ".$permission->id]),
+                'messages' => trans('data.destroy', ['rows' => $permission->id . " with id ".$permission->id]),
                 'success' => true,
             ],$permission->toArray()));
         } else {
-            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $permission->id])]);
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $permission->id])]);
         }
 
     }

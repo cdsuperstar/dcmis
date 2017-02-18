@@ -53,6 +53,7 @@ angular.module("MetronicApp").controller('privilegemanagementCtrl',
                     }
                 );
             };
+
             //$scope.editdataids = [];
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);

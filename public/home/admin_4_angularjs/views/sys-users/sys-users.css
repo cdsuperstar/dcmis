@@ -21,12 +21,12 @@
     background: #578ebe;
 }
 .sysusergrid .ui-grid-header-cell{
-    color:#ffffff;
+    color:#000000;
 }
 .sysusergrid .ui-grid-header-cell-label{
     color:#ffffff;
 }
-/*×Ô¶¯ÐÐ¸ß£¬×Ô¶¯»»ÐÐ*/
+/*ï¿½Ô¶ï¿½ï¿½Ð¸ß£ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 /*.sysusergrid .ui-grid-row{*/
     /*height: auto !important;*/
 /*}*/
