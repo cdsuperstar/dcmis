@@ -179,5 +179,16 @@ class userController extends Controller
         $recDatas = User::select('users.*')->join('sessions', 'users.id', '=', 'sessions.user_id')->get();
         return response()->json($recDatas);
     }
+
+    /**
+     * get perms of login user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUserPerms(Request $request){
+        $resPerms=$request->user()->roles->pluck('perms')[0];
+        return response()->json($resPerms);
+    }
+
 }
 

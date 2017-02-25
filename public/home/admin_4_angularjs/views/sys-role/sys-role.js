@@ -1,11 +1,98 @@
 'use strict';
 
 angular.module("MetronicApp").controller('rolesCtrl',
-    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
-        function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
+    ['$scope', 'Restangular', '$q', '$filter', 'ngDialog', 'uiGridConstants', 'i18nService',
+        function ($scope, Restangular, $q, $filter, ngDialog, uiGridConstants, i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
             var tableDatas = Restangular.all('/sys-role');
+
+            $scope.roleModelTreeSelecter = function () {
+                if($scope.gridApi.selection.getSelectedRows().length==0) return false;
+
+                ngDialog.openConfirm({
+                    template: 'treeTemp',
+                    className: 'ngdialog-theme-default ngdialog-content',
+                    scope: $scope,
+                    controller: ['$scope', 'Restangular', function ($scope, Restangular) {
+                        //$scope.$validationOptions = validationConfig;
+                        $scope.$on('ngDialog.opened', function () {
+
+                            $scope.role_display_name=$scope.gridApi.selection.getSelectedRows()[0].display_name;
+                            $("#modelTree").jstree({
+                                "plugins": ["state", "types", "json_data", "checkbox","wholerow"],
+                                "core": {
+                                    "themes": {
+                                        "responsive": false
+                                    },
+                                    // so that create works
+                                    "check_callback": function (operation, node, parent, position, more) {
+                                        if (operation === "copy_node" || operation === "move_node") {
+                                            if (parent.id === "#") {
+                                                return false; // prevent moving a child above or below the root
+                                            }
+                                        }
+                                        return true; // allow everything else
+                                    },
+                                    'data': {
+                                        'url': '/sys-model/tree',
+                                        'data': function (node) {
+                                            return {'id': node.id};
+                                        }
+                                    }
+                                },
+                                "checkbox":{
+                                    three_state: false,
+                                    whole_node : false,
+                                    tie_selection : true,
+                                    cascade: 'undetermined'
+                                },
+                                "types": {
+                                    "default": {
+                                        "icon": "fa fa-folder icon-state-warning icon-lg"
+                                    },
+                                    "file": {
+                                        "icon": "fa fa-file icon-state-warning icon-lg"
+                                    }
+                                }
+                            })
+                                .bind("changed.jstree", function (e,data) {
+                                    $scope.selectedTreeData=data.instance.get_selected();
+                                })
+                                //.bind("check_node.jstree", function (e,data) {
+                                //    console.log('checked!');
+                                //
+                                //})
+                                .bind("ready.jstree", function (e,data) {
+                                    data.instance.uncheck_all();
+                                    var role = $scope.gridApi.selection.getSelectedRows()[0];
+                                    role.getList('rolemodels').then(function(res){
+                                        $.each(res, function(idx, obj) {
+                                            data.instance.check_node(obj.id)
+                                        });
+                                    });
+                                })
+                            ;
+                        });
+                    }],
+                    showClose: false,
+                    setBodyPadding: 1,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument: false,  //是否点覆盖div 关闭会话
+                    disableAnimation: true,  //是否显示动画
+                }).then(function (selectedTreeData) {
+                    var role = $scope.gridApi.selection.getSelectedRows()[0];
+                    role.post(JSON.stringify(selectedTreeData)).then(function(res){
+                        if (res.success) {
+                            showMsg(res.messages.toString(), '信息', 'lime');
+                        } else {
+                            showMsg(res.errors.toString(), '错误', 'ruby');
+                        }
+                    });
+                }, function (dcEdition) {
+                    //console.log('cancel');
+                });
+            }
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -18,8 +105,8 @@ angular.module("MetronicApp").controller('rolesCtrl',
                     showClose: false,
                     setBodyPadding: 1,
                     overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
+                    closeByDocument: false,  //是否点覆盖div 关闭会话
+                    disableAnimation: true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
 
@@ -85,16 +172,31 @@ angular.module("MetronicApp").controller('rolesCtrl',
                 enableSorting: true,
                 enableFiltering: false,
                 showColumnFooter: false,
-                enableCellEditOnFocus:true,
-                enableVerticalScrollbar:2,
-                enableHorizontalScrollbar :2,
+                enableCellEditOnFocus: true,
+                enableVerticalScrollbar: 2,
+                enableHorizontalScrollbar: 2,
                 columnDefs: [
-                    {name: 'id', width: '40',field: 'id', enableCellEdit: false,enableColumnMenu: false,enableHiding: true,enableFiltering: false},
-                    {name: '名称', width: '150',field: 'name',enableCellEdit: true,enableColumnMenu: false,enableHiding: true},
-                    {name: '显示名称',width: '150', field: 'display_name',enableCellEdit: true,visible:true},
-                    {name: '描述', width: '260',field: 'description',enableCellEdit: true,visible:true},
-                    {name: '添加时间',width: '150', field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间',width: '150', field: 'updated_at',enableCellEdit: false,visible:true},
+                    {
+                        name: 'id',
+                        width: '40',
+                        field: 'id',
+                        enableCellEdit: false,
+                        enableColumnMenu: false,
+                        enableHiding: true,
+                        enableFiltering: false
+                    },
+                    {
+                        name: '名称',
+                        width: '150',
+                        field: 'name',
+                        enableCellEdit: true,
+                        enableColumnMenu: false,
+                        enableHiding: true
+                    },
+                    {name: '显示名称', width: '150', field: 'display_name', enableCellEdit: true, visible: true},
+                    {name: '描述', width: '260', field: 'description', enableCellEdit: true, visible: true},
+                    {name: '添加时间', width: '150', field: 'created_at', enableCellEdit: false, visible: true},
+                    {name: '更新时间', width: '150', field: 'updated_at', enableCellEdit: false, visible: true},
                 ],
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -110,12 +212,12 @@ angular.module("MetronicApp").controller('rolesCtrl',
 
             $scope.gridOptions.enableGridMenu = true;
 
-            $scope.toggleFiltering = function(){
+            $scope.toggleFiltering = function () {
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
-                $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
             };
 
-            $scope.refreshData = function(){
+            $scope.refreshData = function () {
                 $scope.gridOptions.data = [];
                 tableDatas.getList().then(function (accounts) {
                     var allAccounts = accounts;

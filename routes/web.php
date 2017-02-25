@@ -53,6 +53,7 @@ Route::group(['prefix' => '/sys-users'], function () {
     Route::post('','User\userController@store')->middleware(['permission:sys-users.store']); //sys-users.store
     Route::delete('{user}','User\userController@destroy')->middleware(['permission:sys-users.destroy']); //sys-users.destroy
 
+    Route::get('userperms','User\userController@getUserPerms');
     Route::get('dcUser','User\userController@getLoginedUser')->middleware(['permission:sys-users.logineduser']); //sys-users.logineduser
     Route::get('onlineusers','User\userController@getOnlineUsers')->middleware(['permission:sys-users.onlineusers']); //sys-users.onlineusers
 });
@@ -69,6 +70,10 @@ Route::group(['prefix' => '/sys-role'], function () {
     Route::get('','roleController@index')->middleware(['permission:sys-role.allroles']); //sys-role.allroles
     Route::get('create','roleController@create')->middleware(['permission:sys-role.create']); //sys-role.create
     Route::post('','roleController@store')->middleware(['permission:sys-role.store']); //sys-role.store
+    Route::post('{role}/{dcmodels}','roleController@postSetModels');
+
+    Route::get('{role}/rolemodels','roleController@getRoleModels');
+    Route::get('{role}/roleperms','roleController@getRolePerms');
 
     Route::put('{dcmodel}','roleController@update')->middleware(['permission:sys-role.update']); //sys-role.update
     Route::delete('{dcmodel}','roleController@destroy')->middleware(['permission:sys-role.destroy']); //sys-role.destroy
@@ -108,7 +113,7 @@ Route::group(['prefix' => '/sys-msg'], function () {
 });
 
 // Debug all sqls
-DB::listen(function ($event) {
-    Log::info($event->sql);
-    Log::info($event->bindings);
-});
+//DB::listen(function ($event) {
+//    Log::info($event->sql);
+//    Log::info($event->bindings);
+//});

@@ -31,6 +31,11 @@ use File;
  * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereFiles($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereUpdatedAt($value)
+ * @property string $syscfg
+ * @property string $usercfg
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\Role[] $roles
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereSyscfg($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\dcmodel whereUsercfg($value)
  */
 class dcmodel extends Ardent
 {
@@ -116,5 +121,10 @@ class dcmodel extends Ardent
     public function dcmdgrp()
     {
         return $this->hasOne('App\models\dcMdGrp');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\models\Role');
     }
 }

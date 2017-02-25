@@ -33,4 +33,9 @@ class Role extends EntrustRole
         'display_name' => 'required',
         'description' => '',
     );
+
+    public function models()
+    {
+        return $this->belongsToMany('App\models\dcmodel');
+    }
 }

@@ -82,6 +82,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereUnit($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $budgetname
+ * @property string $begindate
+ * @property string $enddate
+ * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereBegindate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereBudgetname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereEnddate($value)
  */
 class ambudget extends Model
 {

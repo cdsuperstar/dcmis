@@ -34,6 +34,7 @@ use LaravelArdent\Ardent\Ardent;
  * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereTel($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\User $user
  */
 class userprofile extends Ardent
 {

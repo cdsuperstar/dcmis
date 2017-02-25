@@ -15,6 +15,25 @@ use Baum\Node;
  * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutRoot()
  * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutSelf()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int $parent_id
+ * @property int $lft
+ * @property int $rgt
+ * @property int $depth
+ * @property string $name
+ * @property string $brief
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereBrief($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereDepth($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereLft($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereParentId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereRgt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\unitgrp whereUpdatedAt($value)
  */
 class unitgrp extends Node
 {

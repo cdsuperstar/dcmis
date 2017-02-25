@@ -54,6 +54,21 @@ class EntrustSetupTables extends Migration
 
             $table->primary(['permission_id', 'role_id']);
         });
+
+
+        Schema::create('dcmodel_role', function (Blueprint $table) {
+            $table->integer('dcmodel_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+
+            $table->foreign('dcmodel_id')->references('id')->on('dcmodels')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->primary(['dcmodel_id', 'role_id']);
+        });
+
+
     }
 
     /**
@@ -63,6 +78,7 @@ class EntrustSetupTables extends Migration
      */
     public function down()
     {
+        Schema::drop('dcmodel_role');
         Schema::drop('permission_role');
         Schema::drop('permissions');
         Schema::drop('role_user');

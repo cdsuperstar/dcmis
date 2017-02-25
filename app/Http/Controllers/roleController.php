@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\models\Role;
+use App\models\dcMdGrp;
 use Illuminate\Http\Request;
 use Config;
 use Log;
+
 
 class roleController extends Controller
 {
@@ -29,14 +31,14 @@ class roleController extends Controller
     public function create()
     {
         //
-        return view('home.'.Config::get('app.dctemplate').'.views.sys-role.edit');
+        return view('home.' . Config::get('app.dctemplate') . '.views.sys-role.edit');
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,7 +62,7 @@ class roleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Role  $role
+     * @param  \App\models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -76,7 +78,7 @@ class roleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Role  $role
+     * @param  \App\models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -87,8 +89,8 @@ class roleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Role  $role
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
@@ -114,7 +116,7 @@ class roleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Role  $role
+     * @param  \App\models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
@@ -122,12 +124,45 @@ class roleController extends Controller
         if ($role->delete()) {
 
             return response()->json(array_merge([
-                'messages' => trans('users.deletesuccess', ['rows' => $role->id . " with id ".$role->id]),
+                'messages' => trans('users.deletesuccess', ['rows' => $role->id . " with id " . $role->id]),
                 'success' => true,
-            ],$role->toArray()));
+            ], $role->toArray()));
         } else {
             return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $role->id])]);
         }
         //
+    }
+
+    public function postSetModels(Role $role, $dcmodels = '')
+    {
+        $arrMod = json_decode($dcmodels);
+        $role->models()->detach();
+        foreach ($arrMod as $key => $val) {
+            $role->models()->attach(dcMdGrp::find($val)->dcmodel_id);
+        }
+
+        return response()->json(array_merge([
+            'messages' => trans('data.add', ['data' => "X" . count($arrMod)]),
+            'success' => true,
+        ], []));
+
+    }
+
+    public function getRoleModels(Role $role)
+    {
+        $resMdGrps=dcMdGrp::wherein('dcmodel_id',$role->models->pluck('id'))->get();
+        return response()->json($resMdGrps);
+    }
+
+    /**
+     * get perms of the role
+     * @param Role $role
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRolePerms(Role $role)
+    {
+        $resPerms=$role->perms->sortBy('name')->values();
+
+        return response()->json($resPerms);
     }
 }
