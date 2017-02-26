@@ -310,13 +310,8 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                 //$scope.printdate=$scope.gridApi.getRow();
                 var currentSelection = $scope.gridApi.selection.getSelectedRows();
                 if(currentSelection.length==1){
-                    //$scope.printdata = currentSelection[0];
-                    console.log(currentSelection[0].budgetname);
-                    window.open('views/am-budget-list/am-budgetprint.html');
-                    //var popupWindow = window.open('views/am-budget-list/am-budgetprint.html');
-                    //popupWindow.PrintSharedData = currentSelection[0];
-                    $scope.PrintSharedData = currentSelection[0];
-
+                    var popupWindow = window.open('views/am-budget-list/am-budgetprint.html');
+                    popupWindow.PrintSharedData = currentSelection[0];
                 }else{
                     showMsg('选取行数错误。打印仅支持一条记录！<br>(当前状态：未选择或者选择大于2)', '错误', 'ruby');
                 }

@@ -12,30 +12,25 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
             $scope.sex = { value: $scope.sexarr[0] };
 
-            ////////////multipleselect
-            $scope.categories =[
-                {"id":1,"ykth":"10201401573","name":"高成刚"},
-                {"id":2,"ykth":"10201400124","name":"李娴"},
-                {"id":3,"ykth":"10201400939","name":"朱创业"},
-                {"id":4,"ykth":"10201402485","name":"路婷婷"},
-                {"id":5,"ykth":"10201401940","name":"何铭"},
-                {"id":6,"ykth":"10201401802","name":"涂涯"},
-                {"id":7,"ykth":"2015020765","name":"李伟博"}
-                ];
+            ////////////机构
+            Restangular.all('/user-department').getList().then(function (accounts) {
+                $scope.untigrps = accounts;
+            });
 
-            $scope.categories.selected = [$scope.categories[1],$scope.categories[3],$scope.categories[6]];
+            $scope.edituserprofile = function () { //修改
+                console.log($scope.userprofile);
+                $scope.userprole
 
+            }
 
-            $scope.edituserprofile = function () {
+            $scope.showdetail = function () { //重获数据
                 console.log($scope.name);
-
-
             }
 
             //图片上传
 
             /////////start datepicker
-            $scope.dat = new Date();
+            $scope.birth = new Date();
             $scope.format = "yyyy-MM-dd";
             $scope.altInputFormats = ['yyyy-M!-d!'];
 
@@ -92,10 +87,24 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
             //}
             //////end datepicker
 
-
-
-
         }
     ]
 )
 ;
+MetronicApp.directive('file', function() {
+    return {
+        restrict: 'E',
+        template: '<input type="file" />',
+        replace: true,
+        require: 'ngModel',
+        link: function(scope, element, attr, ctrl) {
+            var listener = function() {
+                scope.$apply(function() {
+                    attr.multiple ? ctrl.$setViewValue(element[0].files) : ctrl.$setViewValue(element[0].files[0]);
+                });
+            }
+            element.bind('change', listener);
+        }
+    }
+});
+
