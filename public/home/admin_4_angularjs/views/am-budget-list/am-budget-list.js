@@ -136,7 +136,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                     closeByDocument:false,  //是否点覆盖div 关闭会话
                     disableAnimation:true,  //是否显示动画
                     template: 'approval-detail',
-                    className: 'ngdialog-theme-default am-budgtlistdetail',
+                    className: 'ngdialog-theme-default ambudgtlistdetail',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {
                         $scope.tmpobjdata = row.entity;  //显示值

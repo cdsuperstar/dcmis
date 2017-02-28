@@ -4,26 +4,26 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <title>物资采购审批表</title>
  </head>
- <script src="../../../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
+  <script src="../../../assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
  <body ng-controller="PrintController">
   <div>
    <p style="margin:0pt; orphans:0; text-align:justify; widows:0">
     <div style="font-family:宋体; font-size:16pt; font-weight:bold;float: left">附件1：</div>
-    <div style="font-family:宋体; font-size:16pt; font-weight:bold;float: right">编号：例WZCG201601</div></p>
+    <div style="font-family:宋体; font-size:16pt; font-weight:bold;float: right">编号：{{printdata.no}}</div></p>
    <p>&nbsp;</p>
    <p style="font-size:22pt; line-height:115%; margin:0pt; orphans:0; text-align:center; widows:0"><span style="font-family:宋体; font-size:22pt; font-weight:bold">成都理工大资产经营有限责任公司</span></p>
-   <p style="font-size:22pt; line-height:115%; margin:0pt; orphans:0; text-align:center; widows:0"><span style="font-family:宋体; font-size:22pt; font-weight:bold">物资采购审批表 {{printdata.budgetname}}</span></p>
+   <p style="font-size:22pt; line-height:115%; margin:0pt; orphans:0; text-align:center; widows:0"><span style="font-family:宋体; font-size:22pt; font-weight:bold">物资采购审批表</span></p>
    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; " align="center">
     <tbody>
      <tr style="height:22.95pt">
       <td colspan="3" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-left-color:#000000; border-left-style:solid; border-left-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:4.9pt; padding-right:4.9pt; vertical-align:bottom; width:91.05pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">申 请 单 位</span></p></td>
-      <td colspan="9" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:370.9pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p></td>
+      <td colspan="9" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:370.9pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">{{printdata.unit}}</span></p></td>
      </tr>
      <tr style="height:22.95pt">
       <td colspan="3" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-left-color:#000000; border-left-style:solid; border-left-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:4.9pt; padding-right:4.9pt; vertical-align:bottom; width:91.05pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">申 请 人</span></p></td>
-      <td colspan="4" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:208.25pt"><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p></td>
+      <td colspan="4" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:208.25pt"><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">{{printdata.requester}}</span></p></td>
       <td colspan="2" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:57.3pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">申请日期</span></p></td>
-      <td colspan="3" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:83.75pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p></td>
+      <td colspan="3" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; border-top-color:#000000; border-top-style:solid; border-top-width:1pt; padding-left:5.4pt; padding-right:4.9pt; vertical-align:bottom; width:83.75pt"><p style="margin:0pt; text-align:center"><span style="font-family:仿宋_GB2312; font-size:14pt">{{printdata.registered | date:'yyyy-MM-dd'}}</span></p></td>
      </tr>
      <tr style="height:22.95pt">
       <td rowspan="7" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1pt; border-left-color:#000000; border-left-style:solid; border-left-width:1pt; border-right-color:#000000; border-right-style:solid; border-right-width:1pt; padding-left:4.9pt; padding-right:4.9pt; vertical-align:middle; width:20.4pt"><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">采</span></p><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">购</span></p><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">物</span></p><p style="margin:0pt; text-align:justify"><span style="font-family:仿宋_GB2312; font-size:14pt">　</span></p><p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:仿宋_GB2312; font-size:14pt">资</span></p></td>
@@ -140,9 +140,16 @@
   <script>
       var printApp = angular.module('printApp', []);
       printApp.controller('PrintController', function($scope) {
-          console.log(window.PrintSharedData);
           $scope.printdata = window.PrintSharedData;
+          console.log($scope.printdata);
       });
+
+      window.onbeforeunload = function() {
+          window.unloadTimer = setInterval(
+              "alert('此页面不允许重新加载，否则将清空数据！');clearInterval(window.unloadTimer);",500);
+          window.onunload = function() {clearInterval(window.unloadTimer);}
+          return "此页面不允许重新加载，否则将清空数据！";
+      }
 
   </script>
  </body>
