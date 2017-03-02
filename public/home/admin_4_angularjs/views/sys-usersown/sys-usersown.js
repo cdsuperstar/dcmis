@@ -5,14 +5,16 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
+            $scope.userprofile = { sex : '女',untigrps:[{id:3},{id:6}]};  //有值的情况下定义选择项
+
             $scope.sexarr = ['男','女'];
 
             ////////////机构
             Restangular.all('/user-department').getList().then(function (accounts) {
                 $scope.untigrps = accounts;
+                console.log(accounts);
             });
 
-            $scope.userprofile = { sex : '女'};  //有值的情况下定义选择项
 
             $scope.edituserprofile = function () { //修改
                 console.log($scope.userprofile);

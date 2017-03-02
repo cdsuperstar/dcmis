@@ -72,7 +72,7 @@
                         ng-model="userprofile.untigrps" limit="3">
                     <ui-select-match placeholder="选择部门...">@{{$item.name}}</ui-select-match>
                     <ui-select-choices
-                            repeat="category in untigrps track by category.id">
+                            repeat="category as category in untigrps track by category.id">
                         @{{category.name}}
                     </ui-select-choices>
                 </ui-select>

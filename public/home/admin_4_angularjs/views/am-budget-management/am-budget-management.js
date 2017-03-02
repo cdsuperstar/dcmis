@@ -5,75 +5,43 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            $scope.ismaterial=true;
-            $scope.isproject=true;
-            $scope.isother=true;
+            //获得年度列表
+            var currentYear = new Date().getFullYear();
+            var yeararr = new Array();
+            for(var val = (currentYear-3); val <= (currentYear+3); val++){
+                yeararr.push(val);}
+            $scope.tyear = yeararr;
+            $scope.budget = { syear : currentYear};  //初始化为当前年度
+
+            //预算类别
             $scope.listnames = [{ id: 1, name: '物资预算' }, { id: 2, name: '工程预算' }, { id: 3, name: '服务预算' }, { id: 4, name: '其他预算' }];
-
-            $scope.classlistName=1; //初始值为物资预算
-
-            $scope.showdetail = function(){
-                console.log($scope.classlistName);
-                if($scope.classlistName==1){
-                    $scope.ismaterial = !$scope.ismaterial;
-                    $scope.isproject=true;
-                    $scope.isother=true;
-                }else if($scope.classlistName==2){
-                    $scope.isproject = !$scope.isproject;
-                    $scope.ismaterial=true;
-                    $scope.isother=true;
-                }else{
-                    $scope.isother = !$scope.isother;
-                    $scope.ismaterial=true;
-                    $scope.isproject=true;
-                }
-            }
+            $scope.budget.classlistName = 1; //初始值为物资预算
 
 
-            $scope.person = {};
-            $scope.people = [
-                {"id":1,"ykth":"10201401573","name":"高成刚"},
-                {"id":2,"ykth":"10201400124","name":"李娴"},
-                {"id":3,"ykth":"10201400939","name":"朱创业"},
-                {"id":4,"ykth":"10201402485","name":"路婷婷"},
-                {"id":5,"ykth":"10201401940","name":"何铭"},
-                {"id":6,"ykth":"10201401802","name":"涂涯"},
-                {"id":7,"ykth":"2015020765","name":"李伟博"}
-            ];
-
-
-
+            ////////////机构
+            Restangular.all('/user-department').getList().then(function (accounts) {
+                $scope.untigrps = accounts;
+            });
 
 
 
             $scope.savedata = function () {
-                showMsg($scope.userslist, '信息', 'lime');
+                console.log($scope.budget);
             };
-
 
             /////////start datepicker
             $scope.startdate = new Date();   //开始日期
             $scope.enddate = new Date();     //截止日期
-            $scope.gcstartdate = new Date(); //工程施工日期
-            $scope.gcenddate = new Date();   //工程截止日期
             $scope.format = "yyyy-MM-dd";
             $scope.altInputFormats = ['yyyy-M!-d!'];
 
             $scope.tmppopupstart = {opened: false};
             $scope.tmppopupend = {opened: false};
-            $scope.tmppopupgcstart = {opened: false};
-            $scope.tmppopupgcend = {opened: false};
             $scope.opendatepickstart = function () {
                 $scope.tmppopupstart.opened = true;
             };
             $scope.opendatepickend = function () {
                 $scope.tmppopupend.opened = true;
-            };
-            $scope.opendatepickgcstart = function () {
-                $scope.tmppopupgcstart.opened = true;
-            };
-            $scope.opendatepickgcend = function () {
-                $scope.tmppopupgcend.opened = true;
             };
             $scope.dateOptions = {
                 customClass: getDayClass,//自定义类名
