@@ -16,22 +16,10 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('ambudgets', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->text('budgetname')->nullable(); //预算名称
+            $table->text('syear')->nullable(); //预算年度
             $table->enum('type',['物资预算','工程预算','服务预算','其他预算']); //预算类别
-            $table->string('no')->unique(); //申请表编号
             $table->string('unit')->nullable(); //申请部门
-            $table->string('requester')->nullable(); //申请人     ??????
-            $table->date('begindate')->nullable(); //开始日期
-            $table->date('enddate')->nullable(); //截止日期
-            $table->text('summary')->nullable(); //摘要
-            $table->text('introduce')->nullable(); //介绍
             $table->decimal('total')->nullable(); //总金额
-            $table->boolean('isappr')->nullable(); //审批状态
-            $table->boolean('isapproption')->nullable(); //审批意见approval opinions
-            $table->boolean('theappr')->nullable(); //审批人
-            $table->boolean('isdone')->nullable(); //是否执行完毕
-            $table->boolean('isabort')->nullable(); //是否终止执行
-            $table->text('abortsum')->nullable(); //终止执行原因
             $table->text('remark')->nullable(); //备注
 
             $table->timestamps();

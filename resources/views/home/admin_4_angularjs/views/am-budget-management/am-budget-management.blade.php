@@ -1,66 +1,98 @@
 <div class="portlet-body" data-ng-controller="budgetmanagementCtrl">
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="col-md-2 control-label">年度</label>
-            <div class="col-md-4">
-                <ui-select ng-model="budget.syear" theme="bootstrap">
-                    <ui-select-match placeholder="选择年度...">@{{$select.selected}}</ui-select-match>
-                    <ui-select-choices repeat="tmparr in tyear | filter: $select.search">
-                        @{{tmparr}}
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-            <label class="col-md-2 control-label">预算类别</label>
-            <div class="col-md-4">
-                <ui-select ng-model="budget.classlistName">
-                    <ui-select-match placeholder="选择类别...">@{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices
-                            repeat="tmplist.id as tmplist in listnames track by tmplist.id">
-                        @{{tmplist.name}}
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">预算部门</label>
-            <div class="col-md-4">
-                <ui-select ng-model="budget.untigrps">
-                    <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices
-                            repeat="category.id as category in untigrps track by category.id">
-                        @{{category.name}}
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-            <label class="col-md-2 control-label">总金额</label>
-            <div class="col-md-4">
-                <div class="input-icon right">
-                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                    <input type="number" class="form-control" ng-model="budget.total" placeholder="¥0.00">
+    <script type="text/ng-template" id="addambudgetmanagement">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN: ACCORDION DEMO -->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="icon-settings font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 预算设置 </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 年  度 </label>
+                            <div class="col-md-8">
+                                <ui-select ng-model="dcEdition.syear" theme="bootstrap">
+                                    <ui-select-match placeholder="选择年度...">@{{$select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="tmparr in tyear | filter: $select.search">
+                                        @{{tmparr}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 类  别 </label>
+                            <div class="col-md-8">
+                                <ui-select ng-model="dcEdition.type">
+                                    <ui-select-match placeholder="选择类别...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices
+                                            repeat="tmplist.id as tmplist in listnames track by tmplist.id">
+                                        @{{tmplist.name}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 部  门 </label>
+                            <div class="col-md-8">
+                                <ui-select ng-model="dcEdition.unit">
+                                    <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices
+                                            repeat="category.id as category in untigrps track by category.id">
+                                        @{{category.name}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 金  额 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="number" class="form-control" ng-model="dcEdition.total" placeholder="¥0.00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 备 注 </label>
+                            <div class="col-md-8">
+                                <textarea ng-model="dcEdition.remark" class="form-control" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 50px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写备注信息（1000字以内）"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" align="center">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">
+                                    <i class="fa fa-check"></i>  确 认 </a>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcEdition)">
+                                    <i class="icon-reload"></i>  取 消  </a>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END: ACCORDION DEMO -->
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-3 col-md-2 col-sm-6 col-xs-6">
-                <a href="javascript:;" class="btn green" ng-click="savedata()">
-                    <i class="fa fa-save"></i> 设 置 </a>
-            </div>
-        </div>
-    </form>
-</div>
+    </script>
+    <div class="table-toolbar">
 
-<SCRIPT LANGUAGE="JavaScript">
-    window.onload = function()
-    {
-        var sel = document.createElement('select');
-        var date = new Date();
-        for(var i=0;i<5;i++)
-        {
-            var opt = document.createElement("option");
-            opt.value = i;
-            opt.innerHTML = (date.getYear()-i-1)+"-"+(date.getYear()-i);
-            sel.appendChild(opt);
-        }
-        document.body.appendChild(sel);
-    }
-</SCRIPT>
+        <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
+        <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
+        <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
+        <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选</button>
+        <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
+        <div class="pull-right">
+            <button id="exportButton" type="button"  class="btn green-meadow" ng-click="exportxls()"><i class="fa fa-file-excel-o"></i> 导出CSV</button>
+        </div>
+
+    </div>
+    <div id="ambudgetmanagement" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="ambudgetmanagementid"></div>
+
+</div>
