@@ -29,10 +29,10 @@
                             <label class="col-md-3 control-label"> 类  别 </label>
                             <div class="col-md-8">
                                 <ui-select ng-model="dcEdition.type">
-                                    <ui-select-match placeholder="选择类别...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-match placeholder="选择类别...">@{{$select.selected.label}}</ui-select-match>
                                     <ui-select-choices
-                                            repeat="tmplist.id as tmplist in listnames track by tmplist.id">
-                                        @{{tmplist.name}}
+                                            repeat="tmplist.value as tmplist in listnames track by tmplist.value">
+                                        @{{tmplist.label}}
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
