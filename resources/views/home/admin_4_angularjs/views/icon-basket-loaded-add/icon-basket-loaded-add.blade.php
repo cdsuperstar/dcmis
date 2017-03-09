@@ -1,46 +1,103 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="iconbasketloadedCtrl">
-    <div class="btn-group btn-group-solid table-toolbar">
-        <button type="button"  class="btn blue-dark btn-outline" ng-click="editData()"><i class="fa fa-floppy-o"></i>　修　改　</button>
-        <button type="button" id="delData" class="btn blue-dark btn-outline" confirmation-needed="确定要删除这些用户吗？" ng-click="delData()"><i class="fa fa-trash"></i>　删　除　</button>
-        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn blue-dark btn-outline"><i class="fa fa-search"></i>　筛　选　</button>
-        <button type="button" id="refreshButton" type="button" class="btn blue-dark btn-outline" ng-click="refreshData()"><i class="fa fa-refresh"></i>　重获数据</button>
-        <div class="btn-group btn-group-solid">
-            <button type="button" class="btn blue-dark btn-outline" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-stack-overflow"></i>　审　批
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu" >
-                <li>
-                    <a href="javascript:;"> 审 批 </a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="javascript:;"> 批量审批通过 </a>
-                </li>
-                <li>
-                    <a href="javascript:;"> 批量审批不通过 </a>
-                </li>
-            </ul>
+    <script type="text/ng-template" id="iconbasketload">
+        <div class="row">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption font-green-sharp">
+                        <i class="fa fa-plus font-red"></i>
+                        <span class="caption-subject bold uppercase"> 添加详情 </span>
+                    </div>
+                    <div class="tools">
+                        <a href="" class="fullscreen"> </a>
+                        <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
+                        </a>
+                    </div>
+                </div>
+                <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
+                <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
+                <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
+                <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选</button>
+                <div class="portlet-body">
+                    <div ui-grid="soucegridOptions" ui-grid-exporter ui-grid-importer ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbasketloadedgrid"></div>
+                </div>
+            </div>
         </div>
-        <div class="btn-group btn-group-solid">
-            <a class="btn blue-dark btn-outline" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-file-excel-o"> </i>　导入/导出
-                <i class="fa fa-angle-down"></i>
-            </a>
-            <ul class="dropdown-menu pull-right">
-                <li>
-                    <a href="javascript:;" ng-click="exportxls()"> 导出CSV </a>
-                </li>
-                <li>
-                    <a href="javascript:;"> 导入CSV </a>
-                </li>
-            </ul>
-        </div>
-        <button type="button" id='toggleFiltering' ng-click="printsource()" class="btn blue-dark btn-outline"><i class="fa fa-print"></i>　打　印　</button>
-
-    </div>
-    <div class="row" style="padding-left: 15px;padding-right: 15px;">
-        <div id="iconbasketgrid" style="padding-left: 0px;padding-right: 0px;" ui-grid="gridOptions" ui-grid-selection  ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns ui-grid-expandable class="icon-basketloadedgrid col-md-12"></div>
+    </script>
+    <div class="table-toolbar">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label"> 年  度 </label>
+                <div class="col-md-4">
+                    <ui-select ng-model="basket.syear" theme="bootstrap">
+                        <ui-select-match placeholder="选择年度...">@{{$select.selected}}</ui-select-match>
+                        <ui-select-choices repeat="tmparr in tyear | filter: $select.search">
+                            <div ng-bind-html="tmparr | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <label class="col-md-2 control-label"> 类  别 </label>
+                <div class="col-md-4">
+                    <ui-select ng-model="basket.type" theme="bootstrap">
+                        <ui-select-match placeholder="选择类别...">@{{$select.selected.label}}</ui-select-match>
+                        <ui-select-choices
+                                repeat="tmplist.value as tmplist in listnames track by tmplist.value">
+                            @{{tmplist.label}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"> 部  门 </label>
+                <div class="col-md-4">
+                    <ui-select ng-model="basket.unit" theme="bootstrap">
+                        <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices
+                                repeat="category in untigrps | filter: $select.search">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <label class="col-md-2 control-label">申报人</label>
+                <div class="col-md-4">
+                    <ui-select ng-model="basket.selected" theme="bootstrap">
+                        <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="tmpperson in peoplegrps | filter: $select.search">
+                            <div ng-bind-html="tmpperson.name | highlight: $select.search"></div>
+                            <small ng-bind-html="tmpperson.email | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"> 项目名称 </label>
+                <div class="col-md-4">
+                    <div class="input-icon right">
+                        <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                        <input type="text" ng-model="basket.summary" class="form-control" placeholder="项目名称">
+                    </div>
+                </div>
+                <label class="col-md-2 control-label">总金额</label>
+                <div class="col-md-4">
+                    <input type="number" ng-model="basket.total" class="form-control" placeholder="￥0.00" readonly>
+                    <p class="help-block">该项自动计算，毋须填写。</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2 col-sm-4 col-xs-4">
+                    <a href="javascript:;" class="btn red" ng-click="showdetail()">
+                        <i class="fa fa-plus"></i>添加详情</a>
+                </div>
+                <div class="col-md-offset-1 col-md-3 col-sm-4 col-xs-4">
+                    <a href="#" ng-click="savedate()" class="btn green">
+                        <i class="fa fa-check"></i> 提交申报 </a>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-4">
+                    <a href="#" ng-click="savedate()" class="btn blue-oleo">
+                        <i class="fa fa-print"></i> - 打 印 - </a>
+                </div>
+            </div>
+            {{--<p class="help-block"> 第一步 ：点击 提交申报 按钮；  第二步 ：点击 添加详情 按钮。 </p>--}}
+        </form>
     </div>
 </div>
-

@@ -1,40 +1,21 @@
-.ngdialog.icon-basketloadedgrid .ngdialog-content{width : 450px;background: #ffffff;}
+.ngdialog.iconbasketload .ngdialog-content{width : 850px;background: #ffffff;}
 
 .jquery-notific8-container.top { top: 60px; }
 
-.icon-basketloadedgrid {
+.iconbasketloadedgrid {
     /*width: 800px;*/
     height: 384px;
 }
 
-.icon-basketloadedgrid .ui-grid-header{
+.iconbasketloadedgrid .ui-grid-header{
     background: #1BA39C;
 }
-.icon-basketloadedgrid .ui-grid-top-panel{
+.iconbasketloadedgrid .ui-grid-top-panel{
     background: #1BA39C;
 }
-.icon-basketloadedgrid .ui-grid-top-panel-background{
+.iconbasketloadedgrid .ui-grid-top-panel-background{
     background: #1BA39C;
 }
-.icon-basketloadedgrid .ui-grid-header-cell{
-    color:#ffffff;
-}
-.icon-basketloadedgrid .ui-grid-header-cell-label{
-    color:#ffffff;
-}
-
-.iconbasketloadedgridrows .ui-grid-header{
-    background: #d8de72;
-}
-.iconbasketloadedgridrows .ui-grid-top-panel{
-    background: #d8de72;
-}
-.iconbasketloadedgridrows .ui-grid-top-panel-background{
-    background: #d8de72;
-}
-.iconbasketloadedgridrows .ui-grid-header-cell{
-    color:#ffffff;
-}
-.iconbasketloadedgridrows .ui-grid-header-cell-label{
+.iconbasketloadedgrid .ui-grid-header-cell-label{
     color:#ffffff;
 }

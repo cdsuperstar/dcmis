@@ -180,53 +180,6 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
                 exporterCsvFilename:'download.csv',
-                //exporterAllDataFn: function(){
-                //    return getPage(1,$scope.gridOptions.totalItems);
-                //},
-                //exporterFieldCallback : function ( grid, row, col, value ){
-                //    if ( value == 50 ){
-                //        value = "可以退休";
-                //    }
-                //    return value;
-                //},
-                //exporterHeaderFilter :function( displayName ){
-                //    return 'col: ' + name;
-                //},
-                //导出pdf 设置 开始
-                //exporterPdfCustomFormatter : function ( docDefinition ) {
-                //    docDefinition.styles.headerStyle = {fontSize: 22, bold: true};
-                //    docDefinition.styles.footerStyle = { bold: true, fontSize: 10 };
-                //    return docDefinition;
-                //},
-                //exporterPdfFooter :{
-                //    text: 'Powered by DcMis',
-                //    style: 'footerStyle',
-                //    alignment:'center'
-                //},
-                //exporterPdfDefaultStyle : {font:'mcroyh',fontSize: 9}, //微软雅黑
-                //exporterPdfFilename:'download.pdf',
-                //exporterPdfAlign:'center', //定义整体样式
-                //exporterPdfHeader : function(currentPage, pageCount) {
-                //    return '页码：'+ currentPage.toString() + ' of ' + pageCount;
-                //},
-                ////exporterPdfMaxGridWidth : 720, //Defaults to 720 (for A4 landscape), use 670 for LETTER
-                //exporterPdfOrientation : 'landscape',//  'landscape' 或 'portrait' pdf横向或纵向
-                //exporterPdfPageSize : 'A4',// 'A4' or 'LETTER'
-                //exporterPdfTableHeaderStyle : {
-                //    bold: true,
-                //    fontSize: 12,
-                //    italics: true,
-                //    color: 'black'
-                //},
-                //exporterPdfTableLayout : null,
-                //exporterPdfTableStyle: {
-                //    margin: [0, 5, 0, 15]  //左上右下
-                //},
-                //exporterSuppressColumns : ['buttons'],
-                //exporterSuppressMenu: false,
-                //导出pdf 设置 结束
-                //--------------导出结束----------------------------------
-
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
