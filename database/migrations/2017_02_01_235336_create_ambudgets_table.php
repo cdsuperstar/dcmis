@@ -23,6 +23,7 @@ class CreateAmbudgetsTable extends Migration
             $table->string('unit')->nullable(); //申请部门
             $table->decimal('total')->nullable(); //总金额
             $table->decimal('requester')->nullable(); //申报人
+            $table->decimal('urchasingstatus')->nullable(); //采购状态
             $table->text('remark')->nullable(); //备注
 
             $table->timestamps();

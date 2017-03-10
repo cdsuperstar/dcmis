@@ -2,6 +2,10 @@
 
 .jquery-notific8-container.top { top: 60px; }
 
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+}
+
 .iconbasketloadedgrid {
     /*width: 800px;*/
     height: 384px;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
+angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
