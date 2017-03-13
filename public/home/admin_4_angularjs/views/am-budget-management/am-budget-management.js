@@ -33,8 +33,8 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 }
                 $scope.uigrunitgrps = untarr; //转换成uigrid可识别的模式
                 $scope.untigrps = accounts;
-                console.log($scope.uigrunitgrps);
             });
+            console.log($scope.untigrps); //有问题，返回的是undefine
             //
             var tableDatas = Restangular.all('500_data.json');
 
@@ -133,6 +133,8 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
                     {name: '年度', field: 'syear',width: '80',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>',
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: $scope.uigrtyear,cellFilter: 'yearGender',
                         filter: {
                             term: currentYear,
                             type: uiGridConstants.filter.SELECT,
@@ -140,6 +142,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     },
                     {name: '部门', field: 'unit',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         filter: {
+                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrunitgrps}
                     },
@@ -221,6 +224,16 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
         }
     ]
 )
+    .filter('yearGender', function() {
+        return function(input) {
+            if (!input){
+                return '';
+            } else {
+                return input;
+            }
+        };
+    })
+
     .filter('yslbGender', function() {
         var yslbHash = {
             1: '物资预算',

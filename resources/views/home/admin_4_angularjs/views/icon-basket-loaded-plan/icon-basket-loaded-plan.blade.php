@@ -44,7 +44,7 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                    <label class="col-md-1 control-label"> 项目名称 </label>
+                    <label class="col-md-1 control-label"> 名  称 </label>
                     <div class="col-md-3">
                         <div class="input-icon right">
                             <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -52,9 +52,9 @@
                         </div>
                     </div>
                     <div class="col-md-2 btn-group btn-group-solid">
-                        <button type="button" id="icon-basketset" class="btn btn-primary"><i class="fa fa-search"></i> 搜 索
+                        <button type="button" id="icon-basketset" class="btn btn-warning"><i class="fa fa-search"></i> 搜 索
                         </button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                             <span class="sr-only">切换下拉菜单</span>
                         </button>
