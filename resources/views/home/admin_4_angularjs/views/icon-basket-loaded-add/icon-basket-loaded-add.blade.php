@@ -20,8 +20,8 @@
                             <label class="col-md-3 control-label"> 物资名称 </label>
                             <div class="col-md-8">
                                 <ui-select ng-model="dcEdition.asname" theme="bootstrap">
-                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected}}</ui-select-match>
-                                    <ui-select-choices repeat="tmparr.id as tmparr in wzgrps | filter: $select.search">
+                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="tmparr.mno as tmparr in wzgrps | filter: $select.search">
                                         <div ng-bind-html="tmparr.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
