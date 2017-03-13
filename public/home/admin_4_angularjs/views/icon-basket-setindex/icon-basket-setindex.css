@@ -1,0 +1,25 @@
+
+.ngdialog.addmaterial .ngdialog-content{width : 500px;background: #ffffff;}
+
+.jquery-notific8-container.top { top: 60px; }
+
+.iconbasketsetindexgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.iconbasketsetindexgrid .ui-grid-header{
+    background: #578ebe;
+}
+.iconbasketsetindexgrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.iconbasketsetindexgrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.iconbasketsetindexgrid .ui-grid-header-cell{
+    color:#000000;
+}
+.iconbasketsetindexgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

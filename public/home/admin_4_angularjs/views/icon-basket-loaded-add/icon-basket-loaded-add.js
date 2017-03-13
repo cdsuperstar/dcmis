@@ -18,6 +18,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 // console.log(accounts);
                 $scope.untigrps = accounts;
             });
+            //物资列表
+            Restangular.all('wz.json').getList().then(function (accounts) {
+                // console.log(accounts);
+                $scope.wzgrps = accounts;
+            });
             //人员列表
             Restangular.all('/sys-users').getList().then(function (accounts) {
                 $scope.peoplegrps = accounts;
@@ -100,10 +105,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterCsvFilename:'download.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
-                                {name: '物资名称', field: 'asname',width: '200',enableColumnMenu: true,
-                                    cellTooltip: function(row){ return row.entity.asname; },
-                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
-                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                {name: '物资名称', field: 'asname',width: '200',enableCellEdit: false,enableColumnMenu: true,
                                     footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                 {name: '规格、型号', field: 'aspara',width: '200',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.aspara; },
@@ -111,7 +113,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                 },
                                 {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
+                                {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,enableCellEdit: false,editableCellTemplate: 'ui-grid/dropdownEditor',
                                     editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
                                 },
                                 {name: '预算单价', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -124,16 +126,51 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         };
                         var sourceDatas = Restangular.all('data.json');
 
-                        $scope.addData = function() {
-                            var n = $scope.soucegridOptions.data.length + 1;
-                            $scope.soucegridOptions.data.push({
-                                "asname": "新建物资 " + n,
-                                "price": "0",
-                                "amt": "1",
-                                "meas": "个",
-                                "aspara": "参数"
+                        // $scope.addData = function() {
+                        //     var n = $scope.soucegridOptions.data.length + 1;
+                        //     $scope.soucegridOptions.data.push({
+                        //         "asname": "新建物资 " + n,
+                        //         "price": "0",
+                        //         "amt": "1",
+                        //         "meas": "个",
+                        //         "aspara": "参数"
+                        //     });
+                        //
+                        //
+                        //
+                        // };
+                        $scope.addData = function () {
+                            ngDialog.openConfirm({
+                                template: 'add-material',
+                                className: 'ngdialog-theme-default iconaddmaterial',
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    //$scope.$validationOptions = validationConfig;
+                                }],
+                                showClose: false,
+                                setBodyPadding: 1,
+                                overlay: true,        //是否用div覆盖当前页面
+                                closeByDocument:false,  //是否点覆盖div 关闭会话
+                                disableAnimation:true,  //是否显示动画
+                                closeByEscape: true
+                            }).then(function (dcEdition) {
+                                console.log(dcEdition);
+                                tableDatas.post(dcEdition).then(
+                                    function (res) {
+                                        if (res.success) {
+                                            $scope.gridOptions.data.push(res);
+                                            showMsg(res.messages.toString(), '信息', 'lime');
+                                        } else {
+                                            // TODO add error message to system
+                                            showMsg(res.errors.toString(), '错误', 'ruby');
+                                        }
+                                    }
+                                );
+                            }, function (dcEdition) {
+                                console.log('Modal promise rejected. Reason: ', dcEdition);
                             });
                         };
+
                         $scope.delData = function () {
 
                         };

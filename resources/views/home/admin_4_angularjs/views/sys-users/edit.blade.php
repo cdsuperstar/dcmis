@@ -10,6 +10,8 @@
                     </div>
                     <div class="tools">
                         <a href="" class="fullscreen"> </a>
+                        <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
+                        </a>
                     </div>
                 </div>
                 <form class="form-horizontal" role="form">
