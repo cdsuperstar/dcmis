@@ -15,7 +15,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.listnames = [{ value: 1, label: '物资预算' }, { value: 2, label: '工程预算' }, { value: 3, label: '服务预算' }, { value: 4, label: '其他预算' }];
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
-                //console.log(accounts);
+                // console.log(accounts);
                 $scope.untigrps = accounts;
             });
             //人员列表
@@ -26,6 +26,23 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
             $scope.SPFilter = function (tArray,actual) {
                     return listnames.name;
+            };
+
+            //转换函数  遍历数组
+            // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
+            //     for (var x in mArray){
+            //         if(mArray[x][mkey] == mvalue) var t = mArray[x][mlabel];
+            //     }
+            //     return t;
+            // };
+            //转换函数  遍历json
+            var changeJsonData = function (mJson,mkey,mvalue,mlabel) {
+                if(mvalue){
+                    for (var item=0;item<mJson.length;item++){
+                        if(mJson[item][mkey] == mvalue) var t = mJson[item][mlabel];
+                    }
+                    return t;
+                }
             };
 
             $scope.checkform = function() {
@@ -44,6 +61,14 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }
             }
 
+            $scope.stepthrid = function () {
+                //转换开始
+                $scope.listtyname = changeJsonData($scope.listnames,'value',$scope.basket.type,'label');
+                $scope.listusname = changeJsonData($scope.peoplegrps,'id',$scope.basket.requester,'name');
+                $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unit,'name');
+                // console.log($scope.basket.unit+'--->'+$scope.listunname);
+                //转换结束
+            }
             $scope.changestep = function() {
                 // console.log($scope.basket.type);
                 switch($scope.basket.type)

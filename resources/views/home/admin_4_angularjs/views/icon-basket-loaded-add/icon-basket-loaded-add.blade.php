@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li class="col-md-4 bg-grey mt-step-col">
-                    <a href="" data-target="#tab3" data-toggle="tab">
+                    <a href="" data-target="#tab3" data-toggle="tab" ng-click="stepthrid()">
                         <div class="mt-step-number bg-white font-grey">3</div>
                         <div class="mt-step-title uppercase font-grey-cascade"> 提交申报 </div>
                     </a>
@@ -102,13 +102,13 @@
                     </tr>
                     <tr>
                         <th colspan="3" style="text-align:center;">申请单位</th>
-                        <td colspan="6">@{{ basket.unit }}</td>
+                        <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
                         <th colspan="3" style="text-align:center;">预算类别</th>
-                        <td colspan="3">@{{ basket.type }}</td>
+                        <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
                     </tr>
                     <tr>
                         <th colspan="3" style="text-align:center;">申请人</th>
-                        <td colspan="6">@{{ basket.requester }}</td>
+                        <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
                         <th colspan="3" style="text-align:center;">申请日期</th>
                         <td colspan="3">2017-03-10</td>
                     </tr>

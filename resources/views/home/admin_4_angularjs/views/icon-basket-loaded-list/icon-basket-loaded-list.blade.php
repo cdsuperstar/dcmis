@@ -22,9 +22,9 @@
         </div>
     </script>
     <div class="table-toolbar">
-        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow"><i class="fa fa-search"></i> 筛选</button>
-        <button type="button" id="delData" class="btn red" confirmation-needed="确定要删除这些用户吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
-        <button type="button" id="basketshopping" class="btn blue"><i class="fa fa-contao"></i> 受理采购申请 </button>
+        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow"><i class="fa fa-search"></i> 筛选数据 </button>
+        <button type="button" id="delData" class="btn red" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除数据 </button>
+        <button type="button" id="delData" class="btn green" confirmation-needed="确定要修改此项数据吗？" ng-click="ModifyData()"><i class="fa fa-pencil"></i> 修改数据 </button>
 
     </div>
 
