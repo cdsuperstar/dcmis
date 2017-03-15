@@ -1,5 +1,60 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="iconbasketloadplanCtrl">
+    <script type="text/ng-template" id="baket-load-plan">
+        <div class="row">
+            <div class ="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-social-youtube font-red-thunderbird"></i>
+                            <span class="caption-subject font-red-thunderbird sbold">采购项目详细（编号：@{{tmpobjdata.no}}&nbsp;）</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-toolbar">
+                            <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选</button>
+                            <div class="btn-group btn-group-solid">
+                                <button type="button" id="icon-basketset" class="btn btn-primary"><i class="fa fa-cog"></i> 操作
+                                </button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">切换下拉菜单</span>
+                                </button>
+                                <ul class="dropdown-menu" >
+                                    <li>
+                                        <a href="javascript:;"> 固定资产【标记】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 固定资产【取消】 </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> 报销状态【已报销】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 报销状态【未报销】 </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【直接购买】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【公开招标】 </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-selection ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
     <form id="fm" class="form-horizontal" role="form">
         <div class="table-toolbar">
                 <div class="form-group">

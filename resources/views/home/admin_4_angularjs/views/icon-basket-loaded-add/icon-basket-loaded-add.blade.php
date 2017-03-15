@@ -84,19 +84,19 @@
         <div class="mt-element-step">
             <ul class="nav step-thin">
                 <li class="col-md-4 bg-grey mt-step-col active">
-                    <a href="" data-target="#tab1" data-toggle="tab">
+                    <a href="" data-target="#basic" data-toggle="tab">
                         <div class="mt-step-number bg-white font-grey">1</div>
                         <div class="mt-step-title uppercase font-grey-cascade"> 基本信息 </div>
                     </a>
                 </li>
                 <li class="col-md-4 bg-grey mt-step-col">
-                    <a href="" data-target="#tab2" data-toggle="tab" ng-click="changestep()">
+                    <a href="" data-target="#details" data-toggle="tab" ng-click="changestep()">
                         <div class="mt-step-number bg-white font-grey">2</div>
                         <div class="mt-step-title uppercase font-grey-cascade"> 添加详情 </div>
                     </a>
                 </li>
                 <li class="col-md-4 bg-grey mt-step-col">
-                    <a href="" data-target="#tab3" data-toggle="tab" ng-click="stepthrid()">
+                    <a href="" data-target="#preview" data-toggle="tab" ng-click="stepthrid()">
                         <div class="mt-step-number bg-white font-grey">3</div>
                         <div class="mt-step-title uppercase font-grey-cascade"> 提交申报 </div>
                     </a>
@@ -104,7 +104,7 @@
             </ul>
         </div>
         <div class="tab-content" style="margin-top: 15px;">
-            <div class="tab-pane active" id="tab1">
+            <div class="tab-pane active" id="basic">
                 <div class="form-group">
                     <label class="col-md-2 control-label"> 年  度 </label>
                     <div class="col-md-4">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="tab2"  data-ng-init="changestep()">
+            <div class="tab-pane" id="details"  data-ng-init="changestep()">
                 <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
                 <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
                 <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
@@ -172,58 +172,109 @@
                     <div ui-grid="soucegridOptions" ui-grid-exporter ui-grid-importer ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbasketloadedgrid"></div>
                 </div>
             </div>
-            <div class="tab-pane" id="tab3">
-                <table class="table table-bordered table-hover">
-                    <tbody>
-                    <tr>
-                        <th colspan="2" style="text-align:center;">预算年度</th>
-                        <td colspan="2">@{{ basket.syear }}</td>
-                        <th colspan="3" style="text-align:center;">预算名称</th>
-                        <td colspan="8">@{{ basket.summary }}</td>
-                    </tr>
-                    <tr>
-                        <th colspan="3" style="text-align:center;">申请单位</th>
-                        <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
-                        <th colspan="3" style="text-align:center;">预算类别</th>
-                        <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
-                    </tr>
-                    <tr>
-                        <th colspan="3" style="text-align:center;">申请人</th>
-                        <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
-                        <th colspan="3" style="text-align:center;">申请日期</th>
-                        <td colspan="3">2017-03-10</td>
-                    </tr>
-                    <tr>
-                        <th rowspan="3" style=" text-align: center;line-height: 30px;">采购物资</th>
-                        <th style="text-align:center;">序号</th>
-                        <th colspan="3" style="text-align:center;">采购项目名称</th>
-                        <th colspan="3" style="text-align:center;">规格、型号</th>
-                        <th style="text-align:center;">数量</th>
-                        <th style="text-align:center;">单位</th>
-                        <th style="text-align:center;">预算单价</th>
-                        <th colspan="2" style="text-align:center;">备注</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td colspan="3">采购项目名称</td>
-                        <td colspan="3">规格、型号</td>
-                        <td>数量</td>
-                        <td>单位</td>
-                        <td>预算单价</td>
-                        <td colspan="2">备注</td>
-                    </tr>
-                    <tr>
-                        <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                        <th colspan="5" style="text-align:center;"> </th>
-                    </tr>
-                    <tr>
-                        <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                        <th colspan="2" style="text-align:center;"> </th>
-                        <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
-                        <th colspan="3" style="text-align:center;"> </th>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="tab-pane" id="preview">
+                <div class="table-scrollable"  uib-collapse="isMaterialbudget">
+                    <table class="table table-bordered table-hover" width="800">
+                        <tbody>
+                        <tr>
+                            <th colspan="2" style="text-align:center;">预算年度</th>
+                            <td colspan="2">@{{ basket.syear }}</td>
+                            <th colspan="3" style="text-align:center;">预算名称</th>
+                            <td colspan="8">@{{ basket.summary }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
+                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
+                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3">2017-03-10</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="3" style=" text-align: center;line-height: 30px;">采购物资</th>
+                            <th style="text-align:center;">序号</th>
+                            <th colspan="3" style="text-align:center;">采购项目名称</th>
+                            <th colspan="3" style="text-align:center;">规格、型号</th>
+                            <th style="text-align:center;">数量</th>
+                            <th style="text-align:center;">单位</th>
+                            <th style="text-align:center;">预算单价</th>
+                            <th colspan="2" style="text-align:center;">备注</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td colspan="3">采购项目名称</td>
+                            <td colspan="3">规格、型号</td>
+                            <td>数量</td>
+                            <td>单位</td>
+                            <td>预算单价</td>
+                            <td colspan="2">备注</td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
+                            <th colspan="5" style="text-align:center;"> </th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
+                            <th colspan="2" style="text-align:center;"> </th>
+                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="3" style="text-align:center;"> </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-scrollable"  uib-collapse="isOtherlbudget">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <th colspan="2" style="text-align:center;">预算年度</th>
+                            <td colspan="1">@{{ basket.syear }}</td>
+                            <th colspan="2" style="text-align:center;">项目名称</th>
+                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="text-align:center;">申请单位</th>
+                            <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
+                            <th colspan="2" style="text-align:center;">预算类别</th>
+                            <td colspan="5">@{{ listtyname }} [@{{ basket.type }}]</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="text-align:center;">申请人</th>
+                            <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
+                            <th colspan="2" style="text-align:center;">申请日期</th>
+                            <td colspan="5">2017-03-10</td>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
+                            <th colspan="2" style="text-align:center;"> </th>
+                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="3" style="text-align:center;"> </th>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" style=" text-align: center;line-height: 30px;">工程列表</th>
+                            <th style="text-align:center;">序号</th>
+                            <th colspan="3" style="text-align:center;">采购内容</th>
+                            <th colspan="3" style="text-align:center;">工期要求</th>
+                            <th style="text-align:center;">工程预算</th>
+                            <th style="text-align:center;">地点</th>
+                            <th style="text-align:center;">负责人</th>
+                            <th colspan="2" style="text-align:center;">负责人电话</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">序号</td>
+                            <td colspan="3" style="text-align:center;word-break:break-all;">采购内容采购内容采购内容采购内容采购采购内容采购内容内容采购内容</td>
+                            <td colspan="3" style="text-align:center;word-break:break-all;">工期要采购内容采购内容采购内容采购内容采购内容采购内容求</td>
+                            <td style="text-align:center;">工程预算</td>
+                            <td style="text-align:center;">地点</td>
+                            <td style="text-align:center;">负责人</td>
+                            <td colspan="2" style="text-align:center;">负责人电话</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
                 <div class="form-group">
@@ -232,7 +283,7 @@
                             <i class="fa fa-check"></i> 提交申报 </a>
                     </div>
                     <div class="col-md-3 col-sm-4 col-xs-4">
-                        <a href="#" ng-click="savedata()" class="btn blue-oleo">
+                        <a href="#" ng-click="printdata()" class="btn blue-oleo">
                             <i class="fa fa-print"></i> - 打 印 - </a>
                     </div>
                 </div>

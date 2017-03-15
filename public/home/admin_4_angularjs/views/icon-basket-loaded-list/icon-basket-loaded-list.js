@@ -126,7 +126,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     overlay: true,        //是否用div覆盖当前页面
                     closeByDocument:false,  //是否点覆盖div 关闭会话
                     disableAnimation:true,  //是否显示动画
-                    template: 'approval-detail',
+                    template: 'basket-load-list',
                     className: 'ngdialog-theme-default iconbasketloadlist',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {

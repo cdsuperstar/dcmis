@@ -1,31 +1,26 @@
 
-.ngdialog.ngdialog-theme-default {
-    padding-bottom: 100px;
-    padding-top: 180px;
-}
+.ngdialog.amassetmangementadd .ngdialog-content{width : 450px;background: #ffffff;}
 
-.ngdialog.ngdialog-theme-default .ngdialog-content {
-    -webkit-animation: ngdialog-flyin .5s;
-    animation: ngdialog-flyin .5s;
-    background: #ffffff;
-    border-radius: 5px;
-    color: #444;
-    font-family: 'Helvetica',sans-serif;
-    font-size: 1.1em;
-    line-height: 0.5em;
-    margin: 0 auto;
-    max-width: 100%;
-    padding: 0em;
-    padding-top: 0.5em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-bottom: 0;
-    position: relative;
-    width: 450px;
-}
 .jquery-notific8-container.top { top: 60px; }
 
-.sysModelgrid {
+.amassetmangementaddgrid {
     /*width: 300px;*/
     height: 384px;
 }
+
+.amassetmangementaddgrid .ui-grid-header{
+    background: #578ebe;
+}
+.amassetmangementaddgrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.amassetmangementaddgrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.amassetmangementaddgrid .ui-grid-header-cell{
+    color:#000000;
+}
+.amassetmangementaddgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}
+

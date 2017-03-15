@@ -1,6 +1,6 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="iconbasketloadlistCtrl">
-    <script type="text/ng-template" id="approval-detail">
+    <script type="text/ng-template" id="basket-load-list">
         <div class="row">
             <div class ="col-md-12">
                 <div class="portlet light">

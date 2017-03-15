@@ -73,6 +73,27 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unit,'name');
                 // console.log($scope.basket.unit+'--->'+$scope.listunname);
                 //转换结束
+
+                $scope.isMaterialbudget = false;
+                $scope.isOtherlbudget = true;
+                switch($scope.basket.type)
+                {
+                    case 1:{
+                        $scope.isMaterialbudget = false;
+                        $scope.isOtherlbudget = true;
+                    }
+                    break;
+                    default:
+                    {
+                        $scope.isMaterialbudget = true;
+                        $scope.isOtherlbudget = false;
+                    }
+                        break;
+                }
+                //end
+
+
+
             }
             $scope.changestep = function() {
                 // console.log($scope.basket.type);
