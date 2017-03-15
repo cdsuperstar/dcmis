@@ -13,6 +13,19 @@ class CreateAmbudgetsTable extends Migration
      */
     public function up()
     {
+//        Schema::create('ambudgetindexs', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->string('mclass')->unique(); //材料类别
+//            $table->increments('mno')->nullable(); //材料编号
+//            $table->string('name')->nullable(); //材料名称
+//            $table->string('mspell')->nullable(); //材料简写
+//            $table->string('mspell')->nullable(); //材料简写
+//            $table->decimal('munit')->nullable(); //材料单位
+//            $table->text('remark')->nullable(); //备注
+//
+//            $table->timestamps();
+//        });
+
         Schema::create('ambudgets', function (Blueprint $table) {
             $table->increments('id');
 
