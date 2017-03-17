@@ -161,6 +161,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
                 enableCellEditOnFocus: true,
                 columnDefs: [
                     {name: 'id', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '编号', field: 'no',width: '80',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
                     {name: '名称', field: 'name',width: '150',enableCellEdit: true,enableColumnMenu: false,enableHiding: false},
                     {name: '介绍', field: 'brief',width: '300',enableCellEdit: true,visible:true},
                     {name: '添加时间', field: 'created_at',width: '150',enableCellEdit: false,visible:true},

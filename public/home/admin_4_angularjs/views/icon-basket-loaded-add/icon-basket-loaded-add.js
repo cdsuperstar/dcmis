@@ -74,23 +74,44 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 // console.log($scope.basket.unit+'--->'+$scope.listunname);
                 //转换结束
 
+                //导航开始
                 $scope.isMaterialbudget = false;
-                $scope.isOtherlbudget = true;
+                $scope.isProjectbudget = true;
+                $scope.isServicebudget = true;
+                $scope.isOthersbudget = true;
                 switch($scope.basket.type)
                 {
                     case 1:{
                         $scope.isMaterialbudget = false;
-                        $scope.isOtherlbudget = true;
+                        $scope.isProjectbudget = true;
+                        $scope.isServicebudget = true;
+                        $scope.isOthersbudget = true;
                     }
                     break;
+                    case 2:{
+                        $scope.isMaterialbudget = true;
+                        $scope.isProjectbudget = false;
+                        $scope.isServicebudget = true;
+                        $scope.isOthersbudget = true;
+                    }
+                        break;
+                    case 3:{
+                        $scope.isMaterialbudget = true;
+                        $scope.isProjectbudget = true;
+                        $scope.isServicebudget = false;
+                        $scope.isOthersbudget = true;
+                    }
+                        break;
                     default:
                     {
                         $scope.isMaterialbudget = true;
-                        $scope.isOtherlbudget = false;
+                        $scope.isProjectbudget = true;
+                        $scope.isServicebudget = true;
+                        $scope.isOthersbudget = false;
                     }
                         break;
                 }
-                //end
+                //导航结束
 
 
 
@@ -272,7 +293,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '工程概算', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '预算金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                 {name: '工期要求', field: 'contrworkreq',width: '200',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.contrworkreq; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
@@ -354,6 +375,17 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterCsvFilename:'download.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
+                                {name: '采购内容', field: 'contrname',width: '150',enableColumnMenu: true,
+                                    cellTooltip: function(row){ return row.entity.contrname; },
+                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                    footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                                {name: '预算金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '服务期限', field: 'contrworkreq',width: '200',enableColumnMenu: true,
+                                    cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                },
                                 {name: '合同地点', field: 'svaddr',width: '150',enableColumnMenu: true},
                                 {name: '负责人', field: 'svpicharge',width: '120',enableColumnMenu: true},
                                 {name: '负责人电话', field: 'svpicphone',width: '120',enableColumnMenu: true}
@@ -427,6 +459,17 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterCsvFilename:'download.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
+                                {name: '采购内容', field: 'contrname',width: '150',enableColumnMenu: true,
+                                    cellTooltip: function(row){ return row.entity.contrname; },
+                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                    footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                                {name: '预算金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '其他说明', field: 'contrworkreq',width: '200',enableColumnMenu: true,
+                                    cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                },
                                 {name: '合同地点', field: 'otaddr',width: '150',enableColumnMenu: true},
                                 {name: '负责人', field: 'otpicharge',width: '120',enableColumnMenu: true},
                                 {name: '负责人电话', field: 'otpicphone',width: '120',enableColumnMenu: true}

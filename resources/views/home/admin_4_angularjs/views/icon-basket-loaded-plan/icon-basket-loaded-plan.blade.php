@@ -40,10 +40,31 @@
                                     </li>
                                     <li class="divider"> </li>
                                     <li>
-                                        <a href="javascript:;"> 采购方式【直接购买】 </a>
+                                        <a href="javascript:;"> 采购方式【取消采购】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【自行采购】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【询价采购】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【定点采购】 </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;"> 采购方式【公开招标】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【邀请招标】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【竞争性谈判】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【单一来源采购】 </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> 采购方式【协议供货采购】 </a>
                                     </li>
                                 </ul>
                             </div>
@@ -129,10 +150,31 @@
                             </li>
                             <li class="divider"> </li>
                             <li>
-                                <a href="javascript:;"> 采购方式【直接购买】 </a>
+                                <a href="javascript:;"> 采购方式【取消采购】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【自行采购】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【询价采购】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【定点采购】 </a>
                             </li>
                             <li>
                                 <a href="javascript:;"> 采购方式【公开招标】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【邀请招标】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【竞争性谈判】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【单一来源采购】 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> 采购方式【协议供货采购】 </a>
                             </li>
                         </ul>
                     </div>
