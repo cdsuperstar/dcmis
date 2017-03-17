@@ -71,6 +71,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                 showColumnFooter: false,
                 enableCellEditOnFocus:true,
                 columnDefs: [
+                    {name: '物资编号', field: 'mno',width: '150',enableColumnMenu: true},
                     {name: '物资名称', field: 'asname',width: '200',enableColumnMenu: true,
                         cellTooltip: function(row){ return row.entity.asname; },
                         //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',

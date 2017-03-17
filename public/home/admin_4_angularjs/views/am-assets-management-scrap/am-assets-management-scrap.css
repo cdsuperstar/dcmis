@@ -1,0 +1,24 @@
+
+.jquery-notific8-container.top { top: 60px; }
+
+.amassetmangementscrapgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.amassetmangementscrapgrid .ui-grid-header{
+    background: #578ebe;
+}
+.amassetmangementscrapgrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.amassetmangementscrapgrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.amassetmangementscrapgrid .ui-grid-header-cell{
+    color:#000000;
+}
+.amassetmangementscrapgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}
+

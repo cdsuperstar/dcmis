@@ -92,5 +92,5 @@
             <button id="refreshButton" type="button"  class="btn green-meadow" ng-click="exportxls()"><i class="fa fa-file-excel-o"> </i>  导出Excel</button>
         </div>
     </div>
-    <div id="amassetmangementlistgrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementlistgrid"></div>
+    <div id="amassetmangementlistgrid" ui-grid="gridOptions"  ui-grid-pinning ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementlistgrid"></div>
 </div>

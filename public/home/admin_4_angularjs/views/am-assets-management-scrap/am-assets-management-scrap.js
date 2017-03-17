@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("MetronicApp").controller('amassetmangementlistCtrl',
+angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
@@ -16,37 +16,6 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
             });
 
             var tableDatas = Restangular.all('/sys-users');
-
-            $scope.addData = function () {
-                ngDialog.openConfirm({
-                    template: 'assets-managementlist',
-                    className: 'ngdialog-theme-default amassetmangementlist',
-                    scope: $scope,
-                    controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
-                        $scope.$validationOptions = validationConfig;
-                    }],
-                    showClose: false,
-                    setBodyPadding: 1,
-                    overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
-                    closeByEscape: true
-                }).then(function (dcEdition) {
-
-                    tableDatas.post(dcEdition).then(
-                        function (res) {
-                            if (res.success) {
-                                $scope.gridOptions.data.push(res);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            } else {
-                                // TODO add error message to system
-                                showMsg(res.errors.toString(), '错误', 'ruby');
-                            }
-                        }
-                    );
-                }, function (dcEdition) {
-                });
-            };
 
             $scope.delData = function () {
                 var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
@@ -89,6 +58,8 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                     {name: '领用人', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '领用单位', field: 'price',width: '150',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '领用时间', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '报废人', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '报废时间', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '物资状态', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                 ],
