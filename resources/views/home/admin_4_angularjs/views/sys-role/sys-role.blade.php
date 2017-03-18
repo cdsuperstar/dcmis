@@ -1,6 +1,6 @@
 <!-- BEGIN MAIN CONTENT -->
 <div data-ng-controller="rolesCtrl">
-    <script type="text/ng-template" id="treeTemp">
+    <script type="text/ng-template" id="role-treeTemp">
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">

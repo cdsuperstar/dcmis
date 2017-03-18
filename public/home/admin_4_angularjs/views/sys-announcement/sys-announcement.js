@@ -8,11 +8,17 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/sysannouncement/create',
+                    template: 'sysannouncement-add',
                     className: 'ngdialog-theme-default sysannouncement',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+                        console.log($scope);
+                        //加载editor
+                        jQuery(document).ready(function() {
+                            $('#summernote_sysannouncement').summernote({height: 300});
+                        });
+
                     }],
                     showClose: false,
                     setBodyPadding: 1,

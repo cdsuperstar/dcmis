@@ -43,6 +43,7 @@
     <!-- END DYMANICLY LOADED CSS FILES -->
     <!-- BEGIN THEME STYLES -->
     <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="../assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/css/components-rounded.min.css" id="style_components" rel="stylesheet" type="text/css"/>
     <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <link href="../assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css"/>
@@ -168,6 +169,8 @@
 <script src="../assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+
 
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
 
@@ -190,7 +193,6 @@
 <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 <script src="../assets/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
-
 
 <script src="../assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
 {{--<script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>--}}

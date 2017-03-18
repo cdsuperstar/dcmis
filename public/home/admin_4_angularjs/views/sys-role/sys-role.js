@@ -11,8 +11,8 @@ angular.module("MetronicApp").controller('rolesCtrl',
                 if($scope.gridApi.selection.getSelectedRows().length==0) return false;
 
                 ngDialog.openConfirm({
-                    template: 'treeTemp',
-                    className: 'ngdialog-theme-default ngdialog-content',
+                    template: 'role-treeTemp',
+                    className: 'ngdialog-theme-default rolengdialogcontent',
                     scope: $scope,
                     controller: ['$scope', 'Restangular', function ($scope, Restangular) {
                         //$scope.$validationOptions = validationConfig;
