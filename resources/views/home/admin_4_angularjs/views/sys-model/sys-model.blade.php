@@ -2,17 +2,17 @@
 <div class="portlet-body" data-ng-controller="dcmodelCtrl">
     <div class="table-toolbar">
         <script type="text/ng-template" id="treeTemp">
-            <div class="portlet green-jungle box">
+            <div class="portlet light" style="padding: 5px;margin-bottom: 1px;">
                 <div class="portlet-title">
-                    <div class="caption">
-                        <i class="fa fa-list-ul"></i>菜单树编辑器
+                    <div class="caption font-purple-studio">
+                        <i class="fa fa-list-ul font-purple-studio"></i>菜单树编辑器
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="remove" ng-click="closeThisDialog()">
                         </a>
                     </div>
                 </div>
-                <div class="portlet-body">
+                <div class="portlet-body" style="margin-left: 15px;">
                     <div id="modelTree" class="tree-demo">
                     </div>
                 </div>

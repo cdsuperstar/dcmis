@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN: ACCORDION DEMO -->
-            <div class="portlet light">
+            <div class="portlet light" style="padding: 5px;margin-bottom: 1px;">
                 <div class="portlet-title">
                     <div class="caption font-green-sharp">
                         <i class="icon-settings font-green-sharp"></i>
@@ -51,8 +51,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" align="center">
-                        <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="form-action" align="center">
+                        <div class="col-md-offset-1 col-md-4 col-sm-6 col-xs-6">
                             <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">
                                 <i class="fa fa-check"></i>  确 认 </a>
                         </div>

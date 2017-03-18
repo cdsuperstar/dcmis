@@ -1,26 +1,24 @@
 <!-- BEGIN MAIN CONTENT -->
 <div data-ng-controller="rolesCtrl">
     <script type="text/ng-template" id="role-treeTemp">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-list-ul"></i>模块树配置器[当前配置角色： @{{ role_display_name }}]
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="remove" ng-click="closeThisDialog()">
-                    </a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div id="modelTree" class="tree-demo"></div>
-                    </div>
-                </div>
+        <div class="modal-header" style="padding: 1px;">
+            <button type="button" title="关闭窗口" class="bootbox-close-button close" data-dismiss="modal" ng-click="closeThisDialog()" aria-hidden="true">&times;</button>
+            <h3 class="modal-title font-blue-steel">
+                <i class="fa fa-list-ul"></i>  模块树配置器
+            </h3>
+            <div style="text-align: right;">
+                <h5 class="font-red-soft">[当前配置角色： @{{ role_display_name }}]</h5>
             </div>
         </div>
-        <a href="javascript:;" class="btn green" ng-click="confirm( selectedTreeData )" >
-            <i class="fa fa-check"></i>  配 置 模 块 </a>
+        <div class="bootbox-body">
+            <div id="modelTree" class="tree-demo"></div>
+        </div>
+        <div class="modal-footer" style="padding: 1px;">
+            <div style="text-align: right;">
+                <a href="javascript:;" class="btn btn-info" ng-click="confirm( selectedTreeData )" >
+                    <i class="fa fa-check"></i>  配 置 模 块 </a>
+            </div>
+        </div>
     </script>
 
     <div class="table-toolbar">

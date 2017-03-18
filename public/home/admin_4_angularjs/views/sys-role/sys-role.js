@@ -78,8 +78,9 @@ angular.module("MetronicApp").controller('rolesCtrl',
                     showClose: false,
                     setBodyPadding: 1,
                     overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument: false,  //是否点覆盖div 关闭会话
-                    disableAnimation: true,  //是否显示动画
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
+                    closeByEscape: true
                 }).then(function (selectedTreeData) {
                     var role = $scope.gridApi.selection.getSelectedRows()[0];
                     role.post(JSON.stringify(selectedTreeData)).then(function(res){

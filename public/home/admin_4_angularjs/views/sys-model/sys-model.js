@@ -59,7 +59,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
             $scope.editTree = function () {
                 ngDialog.openConfirm({
                     template: 'treeTemp',
-                    className: 'ngdialog-theme-default',
+                    className: 'ngdialog-theme-default sysmodeltree',
                     scope: $scope,
                     controller: ['$scope', 'Restangular',function ($scope,Restangular) {
                         //$scope.$validationOptions = validationConfig;
@@ -159,7 +159,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                     columnDefs: [
-                    {name: 'id', field: 'id', enableCellEdit: false, width: '40'},
+                    {name: 'id', field: 'id', enableCellEdit: false, enableFiltering: false,width: '40'},
                     {name: '名称', field: 'name',width: '150', enableCellEdit: true,enableHiding: false},
                     {name: '标题', field: 'title', width: '110',enableCellEdit: true,enableHiding: false},
                     {
