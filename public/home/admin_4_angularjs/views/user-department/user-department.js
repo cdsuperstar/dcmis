@@ -59,7 +59,7 @@ angular.module("MetronicApp").controller('userdepartmentCtrl',
             $scope.editTree = function () {
                 ngDialog.openConfirm({
                     template: 'treeTemp',
-                    className: 'ngdialog-theme-default',
+                    className: 'ngdialog-theme-default userdepartmenttree',
                     scope: $scope,
                     controller: ['$scope', 'Restangular',function ($scope,Restangular) {
                         //$scope.$validationOptions = validationConfig;

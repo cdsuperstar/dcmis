@@ -2,7 +2,7 @@
 <div class="portlet-body" data-ng-controller="sysmsgCtrl">
     <div class="inbox">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="inbox-sidebar" style="border: 1px solid #e7ecf1;">
                     <div class="form-group">
                         <a href="javascript:;" data-title="人员列表" class="btn green compose-btn btn-block">
@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="inbox-body" style="border: 1px solid #e7ecf1;padding: 15px;">
                     <div class="inbox-header">
                         <div class="form-group">

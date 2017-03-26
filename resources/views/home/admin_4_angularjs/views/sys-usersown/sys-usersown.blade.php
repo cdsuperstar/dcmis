@@ -69,7 +69,7 @@
             <div class="col-md-4">
                 <ui-select
                         multiple
-                        ng-model="userprofile.untigrps" limit="3">
+                        ng-model="userprofile.untigrps" limit="1">
                     <ui-select-match placeholder="选择部门...">@{{$item.name}}</ui-select-match>
                     <ui-select-choices
                             repeat="category.id as category in untigrps | filter: $select.search">
