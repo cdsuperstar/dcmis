@@ -11,15 +11,26 @@
                         </div>
                         <div class="tools">
                             <a href="" class="fullscreen"> </a>
-                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcaddMaterial)">
                             </a>
                         </div>
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
+                            <label class="col-md-3 control-label"> 物资分类 </label>
+                            <div class="col-md-8">
+                                <ui-select ng-model="dcaddMaterial.aswzfl" theme="bootstrap" on-select="chanagewzdata()">
+                                    <ui-select-match placeholder="选择物资分类...">@{{$select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="twzflarr in wzfl | filter: $select.search">
+                                        @{{twzflarr}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label"> 物资名称 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.asname" theme="bootstrap">
+                                <ui-select ng-model="dcaddMaterial.asname" theme="bootstrap">
                                     <ui-select-match placeholder="选择物资名称...">@{{$select.selected.name}} 【@{{$select.selected.munit}}】</ui-select-match>
                                     <ui-select-choices repeat="tmparr.mno as tmparr in wzgrps | filter: $select.search">
                                         <div ng-bind-html="tmparr.name | highlight: $select.search"></div>
@@ -35,7 +46,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 规格型号 </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="dcEdition.aspara" placeholder="规格型号">
+                                <input type="text" class="form-control" ng-model="dcaddMaterial.aspara" placeholder="规格型号">
                             </div>
                         </div>
                         <div class="form-group">
@@ -43,7 +54,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.amt" placeholder="数量">
+                                    <input type="number" class="form-control" ng-model="dcaddMaterial.amt" placeholder="数量">
                                 </div>
                             </div>
                         </div>
@@ -52,24 +63,24 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.price" placeholder="预算单价">
+                                    <input type="number" class="form-control" ng-model="dcaddMaterial.price" placeholder="预算单价">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 备 注 </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="dcEdition.remark" placeholder="备注">
+                                <input type="text" class="form-control" ng-model="dcaddMaterial.remark" placeholder="备注">
                             </div>
                         </div>
                         <div class="form-action" align="center">
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcaddMaterial)" ng-disabled="dcaddMaterialFm.$invalid">
                                     <i class="fa fa-check"></i>  确 认 </a>
                             </div>
 
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcEdition)">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcaddMaterial)">
                                     <i class="icon-reload"></i>  取 消  </a>
                             </div>
                         </div>
