@@ -36,7 +36,7 @@ use LaravelArdent\Ardent\Ardent;
  * @mixin \Eloquent
  * @property-read \App\User $user
  */
-class userprofile extends Ardent
+class userprofile extends Model
 {
     protected $table='userprofiles';
     protected $fillable = ['id','no', 'name', 'sex', 'phone', 'birth', 'tel', 'address', 'memo','signpic'];
@@ -44,6 +44,6 @@ class userprofile extends Ardent
 //        'user' => array(self::BELONGS_TO, 'App\User'),
 //    );
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','id');
     }
 }

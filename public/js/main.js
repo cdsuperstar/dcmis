@@ -85,9 +85,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     Restangular.all('/sys-msg/unreadmsgs').getList().then(function (res) {
         $scope.dcUserMsgs = res;
     });
-    Restangular.all('/sys-users/userperms').getList().then(function (res) {
-        $scope.dcUserPerms = res;
-    });
 
     Restangular.one('/sys-users/dcUser').get().then(function (res) {
         $scope.dcUser = res;

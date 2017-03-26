@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\models\userprofile;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Config;
+use Storage;
+use Image;
+use Log;
+
 
 class userprofileController extends Controller
 {
@@ -42,16 +47,38 @@ class userprofileController extends Controller
     public function store(Request $request)
     {
         //
-        $rec = new userprofile($request->toArray());
-        if ($rec) {
-            if ($rec->save($request->toArray())) {
-                return response()->json(array_merge([
-                        'messages' => trans('data.add', ["data" => $rec->id]),
-                        'success' => true,
-                    ], $rec->toArray()
-                    )
-                );
+        $rec=userprofile::find($request->user()->id);
+        $arrInput=$request->input();
+
+        if(isset($arrInput['signpic'])){
+            $imgTmp=Image::make(base64_decode(explode(',',$arrInput['signpic']['result'])[1]));
+            if($request->user()->signpic==''){
+                $sUni='signpic'.uniqid();
+                $arrInput['signpic']=$sUni;
             }
+            $urlFilename='images/users/'.$request->user()->id."/$sUni.jpg";
+        }else{
+            unset($arrInput['signpic']);
+        }
+
+        if(!$rec){
+            $rec=new  userprofile($arrInput);
+            $request->user()->userprofile()->save($rec);
+        }else{
+            $rec->update($arrInput);
+        }
+
+        if ($rec) {
+            if(!is_dir('images/users/'.$request->user()->id)){
+                mkdir('images/users/'.$request->user()->id);
+            }
+            if(isset($imgTmp))$imgTmp->save($urlFilename);
+            return response()->json(array_merge([
+                    'messages' => trans('data.update', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
         }
         return response()->json(['errors' => $rec->errors()->all()]);
 
@@ -63,9 +90,12 @@ class userprofileController extends Controller
      * @param  \App\models\userprofile  $userprofile
      * @return \Illuminate\Http\Response
      */
-    public function show(userprofile $userprofile)
+    public function show(Request $request)
     {
+        $rec=userprofile::find($request->user()->id);
+        return response()->json($rec);
         //
+
     }
 
     /**
@@ -112,23 +142,24 @@ class userprofileController extends Controller
      * @param  \App\models\userprofile  $userprofile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(userprofile $userprofile)
-    {
-        //
-        if ($userprofile->delete()) {
-
-            return response()->json(array_merge([
-                'messages' => trans('users.deletesuccess', ['rows' => $userprofile->id . " with id ".$userprofile->id]),
-                'success' => true,
-            ],$userprofile->toArray()));
-        } else {
-            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $userprofile->id])]);
-        }
-
-    }
+//    public function destroy(userprofile $userprofile)
+//    {
+//        //
+//        if ($userprofile->delete()) {
+//
+//            return response()->json(array_merge([
+//                'messages' => trans('users.deletesuccess', ['rows' => $userprofile->id . " with id ".$userprofile->id]),
+//                'success' => true,
+//            ],$userprofile->toArray()));
+//        } else {
+//            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $userprofile->id])]);
+//        }
+//
+//    }
 
     public function getMyProfile(Request $request)
     {
+
         return response()->json($request->user()->userprofile);
 
     }

@@ -62,6 +62,7 @@ Route::group(['prefix' => '/sys-users'], function () {
 Route::group(['prefix' => '/sys-usersown'], function () {
     //得到自己信息
     Route::get('self','User\userprofileController@show')->middleware(['permission:sys-usersown.selfdata']); //sys-usersown.selfdata
+    Route::post('','User\userprofileController@store');
 });
 
 //角色管理

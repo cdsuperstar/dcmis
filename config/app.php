@@ -170,6 +170,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 //        Vinkla\Pusher\PusherServiceProvider::class,
 
         //
@@ -234,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 //        'UserXX' => App\Facades\UserX::class,
 
     ],

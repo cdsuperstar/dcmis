@@ -128,7 +128,7 @@ class User extends Ardent implements
 //        'userprofile'=>array(self::HAS_ONE,'App\models\userprofile')
     );
     public function userprofile(){
-        return $this->hasOne('App\models\userprofile');
+        return $this->hasOne('App\models\userprofile','id');
     }
     public function recvmsgs()
     {
