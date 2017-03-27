@@ -51,7 +51,7 @@ class userprofileController extends Controller
         $arrInput=$request->input();
 
         if(isset($arrInput['signpic'])){
-            $imgTmp=Image::make(base64_decode(explode(',',$arrInput['signpic']['result'])[1]));
+            $imgTmp=Image::make(base64_decode(explode(',',$arrInput['signpic']['result'])[1]))->resize(150, 150);;
             if($request->user()->signpic==''){
                 $sUni='signpic'.uniqid();
                 $arrInput['signpic']=$sUni;

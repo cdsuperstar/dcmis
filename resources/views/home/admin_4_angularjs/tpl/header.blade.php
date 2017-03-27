@@ -267,8 +267,7 @@
                 <li class="separator hide"></li>
                 <li class="dropdown dropdown-user dropdown-light">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                       data-close-others="true" title="当前用户">
-                        <span class="username username-hide-on-mobile bold" style="text-align: left;"> @{{  dcUser.name }} </span>
+                       data-close-others="true" title="@{{  dcUser.name }}">
                         <img alt="" class="img-circle" src="/images/users/@{{  dcUser.id }}/@{{  dcUser.signpic }}.jpg ">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default" style="width: 60px;">
