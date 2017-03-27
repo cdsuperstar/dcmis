@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/users');
+            var tableDatas = Restangular.all('sys-usersown');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({

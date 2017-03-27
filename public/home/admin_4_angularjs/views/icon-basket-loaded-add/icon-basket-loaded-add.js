@@ -18,61 +18,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 // console.log(accounts);
                 $scope.untigrps = accounts;
             });
-            //物资分类列表
-            // Restangular.all('wz.json').getList().then(function (accounts) {
-            //     // console.log(accounts);
-            //
-            //     $scope.wzfl = accounts;
-            // });
-            $scope.wzfl = ['各类纸张',
-                '办公文具',
-                '文件袋夹',
-                '各类用笔',
-                '财务用品',
-                '生活用品',
-                '打印耗材',
-                '办公胶类',
-                '其它用品',
-                '电线电源',
-                '插头插座',
-                '开关控制',
-                '照明电子',
-                '配电管材',
-                '各类锁',
-                '焊材类',
-                '金属丝',
-                '螺丝钉',
-                '门窗件',
-                '钻头类',
-                '水龙头',
-                '接头类',
-                '阀门类',
-                '管材类',
-                '油漆',
-                '油类',
-                '气体',
-                '胶类',
-                '空调配件',
-                '电梯配件',
-                '通讯材料',
-                '电器',
-                '家具',
-                '搬钳工具',
-                '量具工具',
-                '维修工具',
-                '易损易耗',
-                '安全防护',
-                '办公工具',
-                '小型电器',
-                '工作服装',
-                '床上用品',
-                '厨房用品',
-                '清洁用品',
-                '绿化用品',
-                '消防监控',
-                '建筑材料',
-                '其它材料'
-            ];
             //物资列表
             Restangular.all('wz.json').getList().then(function (accounts) {
                 $scope.datawzgrps = accounts;
@@ -222,19 +167,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         };
                         var sourceDatas = Restangular.all('data.json');
 
-                        // $scope.addData = function() {
-                        //     var n = $scope.soucegridOptions.data.length + 1;
-                        //     $scope.soucegridOptions.data.push({
-                        //         "asname": "新建物资 " + n,
-                        //         "price": "0",
-                        //         "amt": "1",
-                        //         "meas": "个",
-                        //         "aspara": "参数"
-                        //     });
-                        //
-                        //
-                        //
-                        // };
                         $scope.addData = function () {
                             ngDialog.openConfirm({
                                 template: 'add-material',
@@ -244,11 +176,25 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     //$scope.$validationOptions = validationConfig;
                                     // console.log($scope.aswzfl);
                                     //二级联动start 物品分类
-                                    $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]};
-                                    $scope.wzgrps = $filter("filter")($scope.datawzgrps,{mclass:$scope.dcaddMaterial.aswzfl});
+                                    //distinct json mclass字段  开始
+                                    var lookup = {};
+                                    var items = $scope.datawzgrps;
+                                    var result = [];
+                                    for (var item, i = 0; item = items[i++];) {
+                                        var name = item.mclass;
+
+                                        if (!(name in lookup)) {
+                                            lookup[name] = 1;
+                                            result.push(name);
+                                        }
+                                    }
+                                    //结束
+                                    $scope.wzfl =result; //将物资分类的数组赋过去
+                                    $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
+                                    $scope.wzgrps = $filter("filter")($scope.datawzgrps,{mclass:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
 
                                     $scope.chanagewzdata = function() {
-                                        console.log($scope.dcaddMaterial.aswzfl);
+                                        $scope.dcaddMaterial.asname = undefined; //如果分类改变，该值置为空
                                         $scope.wzgrps = $filter("filter")($scope.datawzgrps,{mclass:$scope.dcaddMaterial.aswzfl});
                                     }
                                     //end
