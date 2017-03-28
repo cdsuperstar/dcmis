@@ -24,7 +24,7 @@
     color:#ffffff;
 }
 
-/*¡ƒÃÏ¥∞ø⁄css*/
+/*ËÅäÂ§©Á™óÂè£css*/
 span.emotion { width: 42px; height: 20px; padding-left: 20px; cursor: pointer }
 span.emotion:hover { background-position: 2px -28px }
 .qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
@@ -34,20 +34,27 @@ span.emotion:hover { background-position: 2px -28px }
 
 #speecscroll::-webkit-scrollbar-track
 {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: #f5f8fd;
 }
 #speecscroll::-webkit-scrollbar
 {
-    width: 10px;
-    background-color: #F5F5F5;
+    width: 8px;
+    background-color: #f5f8fd;
 }
 #speecscroll::-webkit-scrollbar-thumb
 {
-    background-color: #AAA;
+    background-color: #eade3e;
+    opacity:0.4;
+    border-radius:7px;
+    position: absolute;
 }
 div.spscroller{
     float: left;
+    overflow: hidden;
+}
+div.spscroller:hover{
+    overflow-y: scroll;
 }
 div.speech {
     margin: 10px 0;

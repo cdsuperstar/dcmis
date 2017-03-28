@@ -31,21 +31,22 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-12" style="margin-top: 10px;padding-left:1px;">
-                                <div class="col-md-8 col-sm-9 col-xs-9">
+                            <label class="col-md-1 control-label bold">  </label>
+                            <div class="col-md-11" style="margin-top: 10px;padding-left:1px;">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
                                     <button type="button" class="btn purple-plum" title="群发消息" ng-click="addData()"><i class="icon-plane"></i> 群发 </button>
                                     <button type="button" class="btn red" title="删除消息记录" confirmation-needed="确定要删除当前会话的所有消息记录吗？" ng-click="delData()"><i class="fa fa-trash"></i> 清空 </button>
                                     <button type="button"  class="emotion btn yellow" title="插入表情"><i class="icon-emoticon-smile"></i></button>
-                                </div>
-                                <div class="col-md-1 col-sm-3 col-xs-3 pull-right" style="padding-right: 5px;">
-                                    <button type="button" class="btn green" title="发送当前消息"><i class="icon-paper-plane"></i> 发送 </button>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn green" title="发送当前消息"><i class="icon-paper-plane"></i> 发送 </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <div id="speecscroll" class="spscroller" style="height: 450px; overflow: auto; width: auto;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;">
+                                <div id="speecscroll" class="spscroller" style="height: 450px; width: auto;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;padding-right: 7px;">
 
                                     <div class="leftd">
                                         <div class="speechtime">2017-02-10 10:42</div>
