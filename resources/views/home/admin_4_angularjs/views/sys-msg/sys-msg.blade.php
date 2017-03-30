@@ -46,8 +46,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <div id="speecscroll" class="spscroller" style="height: 450px; width: auto;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;padding-right: 7px;">
-
+                                <div id="speecscroll" class="spscroller" style="height: 450px; width: auto;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;padding-right: 8px;">
                                     <div class="leftd">
                                         <div class="speechtime">2017-02-10 10:42</div>
                                         <div class="leftimg"><strong>张三</strong> </div>

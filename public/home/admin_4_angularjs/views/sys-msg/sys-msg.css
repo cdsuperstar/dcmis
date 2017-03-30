@@ -44,18 +44,18 @@ span.emotion:hover { background-position: 2px -28px }
 }
 #speecscroll::-webkit-scrollbar-thumb
 {
-    background-color: #eade3e;
+    background-color: rgba(219, 214, 235, 0.69);
     opacity:0.4;
     border-radius:7px;
     position: absolute;
 }
 div.spscroller{
     float: left;
-    overflow: hidden;
+    overflow: auto;
 }
-div.spscroller:hover{
-    overflow-y: scroll;
-}
+/*div.spscroller:hover{*/
+    /*overflow-y: scroll;*/
+/*}*/
 div.speech {
     margin: 10px 0;
     padding: 8px;
