@@ -34,11 +34,13 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"> 是否显示 </label>
                         <div class="col-md-8">
-                            <select class="form-control" ng-model="dcEdition.ismenu">
-                                <option value='' disabled selected style='display:none;'>请选择是否显示在菜单上...</option>
-                                <option value="1" ng-selected="dcEdition.ismenu==1">显示</option>
-                                <option value="0" ng-selected="dcEdition.ismenu==0">隐藏</option>
-                            </select>
+                            <ui-select ng-model="dcEdition.ismenu" theme="bootstrap">
+                                <ui-select-match placeholder="请选择是否显示在菜单上...">@{{$select.selected.label}}</ui-select-match>
+                                <ui-select-choices
+                                        repeat="tmplist.value as tmplist in tmclass track by tmplist.value">
+                                    @{{tmplist.label}}
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
                     </div>
                     <div class="form-group">

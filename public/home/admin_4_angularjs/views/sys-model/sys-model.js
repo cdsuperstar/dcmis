@@ -6,6 +6,8 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
             var tableDatas = Restangular.all('/sys-model');
             i18nService.setCurrentLang('zh-cn');
 
+            $scope.tmclass=[{value:1,label:"显示"},{value:0,label:"隐藏"}];
+
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/sys-model/create',
@@ -13,6 +15,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+                        $scope.dcEdition={ismenu:1}; //默认菜单树显示模块
                     }],
                     showClose: false,
                     setBodyPadding: 1,
@@ -21,7 +24,7 @@ angular.module("MetronicApp").controller('dcmodelCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
-
+                    // console.log(dcEdition);
                     tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
