@@ -9,6 +9,7 @@
                         <div class="caption font-green-sharp">
                             <i class="icon-settings font-green-sharp"></i>
                             <span class="caption-subject bold uppercase"> 添加物资目录 </span>
+                            <span class="caption-helper"> 最近物资编号为:[@{{ tmno }}] </span>
                         </div>
                         <div class="tools">
                             <a href="" class="fullscreen"> </a>
@@ -22,7 +23,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.id" placeholder="wz000000">
+                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="wz000000">
                                 </div>
                             </div>
                         </div>
@@ -34,6 +35,9 @@
                                     <ui-select-choices repeat="tmparr in tmclass | filter: $select.search">
                                         <div ng-bind-html="tmparr | highlight: $select.search"></div>
                                     </ui-select-choices>
+                                    <ui-select-no-choice>
+                                        <font color="red">暂无相关分类信息，请与联系开发人员...</font>
+                                    </ui-select-no-choice>
                                 </ui-select>
                             </div>
                         </div>

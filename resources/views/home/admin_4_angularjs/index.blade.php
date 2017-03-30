@@ -10,7 +10,7 @@
 <!-- BEGIN HEAD -->
 
 <head>
-    <title data-ng-bind="'物资管理系统 | ' + $state.current.data.pageTitle"></title>
+    <title data-ng-bind="'资产管理系统 | ' + $state.current.data.pageTitle"></title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>

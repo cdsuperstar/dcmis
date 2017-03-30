@@ -119,7 +119,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         '</form></div>'
                     },
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 
                 ],
 

@@ -24,6 +24,9 @@
                                     <ui-select-choices repeat="twzflarr in wzfl | filter: $select.search">
                                         @{{twzflarr}}
                                     </ui-select-choices>
+                                    <ui-select-no-choice>
+                                        <font color="red">暂无相关分类信息，请与管理员联系...</font>
+                                    </ui-select-no-choice>
                                 </ui-select>
                             </div>
                         </div>
@@ -40,6 +43,9 @@
                                             单位：<span ng-bind-html="''+tmparr.munit | highlight: $select.search"></span>
                                         </small>
                                     </ui-select-choices>
+                                    <ui-select-no-choice>
+                                        <font color="red">暂无相关物资信息，请与管理员联系...</font>
+                                    </ui-select-no-choice>
                                 </ui-select>
                             </div>
                         </div>

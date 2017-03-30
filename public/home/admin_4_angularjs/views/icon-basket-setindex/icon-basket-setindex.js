@@ -13,6 +13,27 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+                        //二级联动start 物品分类
+                        //distinct json mclass字段  开始
+                        var lookup = {};
+                        var items = $scope.datawzgrps;
+                        var result = [];
+                        for (var item, i = 0; item = items[i++];) {
+                            var name = item.mclass;
+                            var tmno = item.mno;
+
+                            if (!(name in lookup)) {
+                                lookup[name] = 1;
+                                result.push(name);
+                            }
+                        }
+                        //结束
+                        $scope.tmclass =result; //将物资分类的数组赋过去
+                        $scope.tmno=tmno; //显示最近编号
+
+                        $scope.dcEdition={mclass:$scope.tmclass[0]}; //初始化第一个分类为默认值
+
+                        //end
                     }],
                     showClose: false,
                     setBodyPadding: 1,
@@ -90,12 +111,13 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: '编号', field: 'mno', enableCellEdit: true, width: '100',enableFiltering: true,enableColumnResizing:false},
-                    {name: '物资分类', field: 'mclass', width: '100',enableCellEdit: true,enableHiding: false},
-                    {name: '物资名称',width: '180', field: 'name', enableCellEdit: true},
-                    {name: '单位',width: '50',field: 'munit', enableCellEdit: true},
+                    {name: '编号', field: 'mno', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
+                    {name: '物资分类', field: 'mclass', width: '120',enableCellEdit: true,enableHiding: false},
+                    {name: '物资名称',width: '260', field: 'name', enableCellEdit: true},
+                    {name: '单位',width: '100',field: 'munit', enableCellEdit: true},
                     {name: '物资简拼', width: '150',field: 'mspell',enableCellEdit: true,visible:true},
-                    {name: '添加时间', width: '150',field: 'created_at',enableCellEdit: false,visible:false},
+                    {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
+                    {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 
                 ],
                 paginationPageSizes: [10, 30, 50],
@@ -122,60 +144,10 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                $scope.datawzgrps = accounts;
                 $scope.gridOptions.data = allAccounts;
                 //console.log( $scope.gridOptions.data);
             });
-
-            $scope.tmclass=[
-                '安全防护',
-                '搬钳工具',
-                '办公工具',
-                '办公胶类',
-                '办公文具',
-                '财务用品',
-                '插头插座',
-                '厨房用品',
-                '床上用品',
-                '打印耗材',
-                '电器',
-                '电梯配件',
-                '电线电源',
-                '阀门类',
-                '各类锁',
-                '各类用笔',
-                '各类纸张',
-                '工作服装',
-                '管材类',
-                '焊材类',
-                '家具',
-                '建筑材料',
-                '胶类',
-                '接头类',
-                '金属丝',
-                '开关控制',
-                '空调配件',
-                '量具工具',
-                '螺丝钉',
-                '绿化用品',
-                '门窗件',
-                '配电管材',
-                '其它材料',
-                '其它用品',
-                '气体',
-                '清洁用品',
-                '生活用品',
-                '水龙头',
-                '通讯材料',
-                '维修工具',
-                '文件袋夹',
-                '消防监控',
-                '小型电器',
-                '易损易耗',
-                '油类',
-                '油漆',
-                '照明电子',
-                '钻头类',
-            ];
 
         }
     ]
