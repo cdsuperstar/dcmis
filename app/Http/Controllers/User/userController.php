@@ -41,7 +41,8 @@ class userController extends Controller
 
     public function getLoginedUser(Request $request)
     {
-        $aMerge=array_merge($request->user()->toArray(),$request->user()->userprofile->toArray());
+        isset($request->user()->userprofile)?
+            $aMerge=array_merge($request->user()->toArray(),$request->user()->userprofile->toArray()):$aMerge=$request->user()->toArray();
         return response()->json($aMerge);
     }
 
