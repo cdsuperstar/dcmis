@@ -13,7 +13,7 @@
                             <a href="" class="fullscreen"> </a>
                         </div>
                     </div>
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="addBudgetFm">
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 年  度 </label>
                             <div class="col-md-8">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group" align="center">
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <a href="javascript:;" class="btn green" ng-click="confirm(addBudget)" ng-disabled="addBudgetFm.$invalid">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(addBudget)">
                                     <i class="fa fa-check"></i>  确 认 </a>
                             </div>
 

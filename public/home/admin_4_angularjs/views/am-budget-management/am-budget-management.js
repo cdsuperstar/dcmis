@@ -39,8 +39,6 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 $scope.gridOptions.columnDefs[2].editDropdownOptionsArray=untarr;
                 $scope.gridOptions.columnDefs[2].unitHash =  unitHash ;
             });
-
-            console.log($scope.untigrps); //有问题，返回的是undefine
             //
             var tableDatas = Restangular.all('/am-budget-management');
 
@@ -53,11 +51,11 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                         $scope.$validationOptions = validationConfig;
 
                         //初始化
-                        $scope.dcEdition = { syear : currentYear};  //初始化为当前年度
+                        $scope.addBudget = { syear : currentYear};  //初始化为当前年度
                         //预算类别
-                        $scope.dcEdition.type = 1; //初始值为物资预算
+                        $scope.addBudget.type = 1; //初始值为物资预算
                         ////////////机构
-                        $scope.dcEdition.unit = 3;  //有值的情况下定义选择项
+                        $scope.addBudget.unit = 3;  //有值的情况下定义选择项
 
 
                     }],
@@ -68,20 +66,22 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (addBudget) {
-
-                    console.log(addBudget)
-                    tableDatas.post(addBudget).then(
-                        function (res) {
-                            if (res.success) {
-                                $scope.gridOptions.data.push(res);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            } else {
-                                // TODO add error message to system
-                                showMsg(res.errors.toString(), '错误', 'ruby');
+                    if(addBudget.syear||addBudget.type||addBudget.unit||addBudget.total){
+                        showMsg('必要的信息未填写！', '错误', 'ruby');
+                    }else{
+                        console.log(addBudget)
+                        tableDatas.post(addBudget).then(
+                            function (res) {
+                                if (res.success) {
+                                    $scope.gridOptions.data.push(res);
+                                    showMsg(res.messages.toString(), '信息', 'lime');
+                                } else {
+                                    // TODO add error message to system
+                                    showMsg(res.errors.toString(), '错误', 'ruby');
+                                }
                             }
-                        }
-                    );
-
+                        );
+                    }
                 }, function (addBudget) {
                 });
             };
