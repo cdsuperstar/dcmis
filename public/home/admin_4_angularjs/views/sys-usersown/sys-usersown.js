@@ -5,11 +5,18 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            $scope.userprofile = { sex : '女',untigrps:[6]};  //有值的情况下定义选择项
-            // Restangular.all('/sys-usersown/self').getList().then(function (accounts) {
-            //     $scope.userprofile = accounts;
-            //     console.log(accounts);
-            // });
+            // $scope.userprofile = { sex : '女',untigrps:[6],birth:'2017-03-19'};  //有值的情况下定义选择项
+
+            //获得已有数据
+            Restangular.one('/sys-usersown','self').get().then(function (accounts) {
+                console.log(accounts.signpic);
+                if(accounts.signpic == undefined ){
+                    $scope.pictname ="150";
+                }else{
+                    $scope.pictname = accounts.id+"/"+accounts.signpic;
+                }
+                $scope.userprofile = accounts;
+            });
 
 
             $scope.sexarr = ['男','女'];
@@ -17,7 +24,7 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
             ////////////机构
             Restangular.all('/user-department').getList().then(function (accounts) {
                 $scope.untigrps = accounts;
-                console.log(accounts);
+                // console.log(accounts);
             });
 
 

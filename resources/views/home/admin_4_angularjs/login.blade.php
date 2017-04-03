@@ -7,7 +7,7 @@
 <html lang="en"><!--<![endif]--><!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8">
-    <title>系统</title>
+    <title>资产管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="login " name="description">
@@ -41,7 +41,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="index.html">
-        <img src="../assets/pages/img/logo-big.png" alt=""> </a>
+        <img src="../assets/layouts/layout4/img/logo-light-login.png" alt="资产管理系统"> </a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -74,15 +74,15 @@
         </div>
         <div class="form-actions">
             <label class="rememberme mt-checkbox mt-checkbox-outline">
-                <input type="checkbox" name="remember" value="1">记住我 <span></span>
+                <input type="checkbox" name="remember" value="1">记住我 <span></span>
             </label>
             <button type="submit" class="btn green pull-right">登录</button>
         </div>
         <div class="login-options">
-            <h4>或者用以下登录方式</h4>
+            <h4>或者用以下登录方式</h4>
             <ul class="social-icons">
                 <li>
-                    <a class="facebook" data-original-title="微信" href="javascript:;"> </a>
+                    <a class="facebook" title="微信" href="javascript:;"> </a>
                 </li>
 
 
@@ -91,11 +91,11 @@
         <div class="forget-password">
             <h4>忘记密码了？</h4>
 
-            <p> 没关系, 点击
+            <p>没关系, 点击
                 <a href="javascript:;" id="forget-password">这里</a>来重置您的密码。</p>
         </div>
         <div class="create-account">
-            <p>还没有登录帐户？<a href="javascript:;" id="register-btn">建立一个帐户</a>
+            <p>还没有登录帐户？<a href="javascript:;" id="register-btn">建立一个帐户</a>
             </p>
         </div>
     </form>
