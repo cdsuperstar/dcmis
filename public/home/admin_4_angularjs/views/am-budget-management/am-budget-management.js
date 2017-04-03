@@ -200,7 +200,6 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
-                    $scope.filterUnitF=888;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
