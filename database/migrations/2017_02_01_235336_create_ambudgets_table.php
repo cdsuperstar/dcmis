@@ -30,13 +30,13 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('no')->unique(); //申请表编号
-            $table->text('summary')->nullable(); //项目名称
+//            $table->text('summary')->nullable(); //项目名称
             $table->text('syear')->nullable(); //年度
             $table->enum('type',['物资预算','工程预算','服务预算','其他预算']); //类别
             $table->string('unit')->nullable(); //申请部门
             $table->decimal('total')->nullable(); //总金额
-            $table->decimal('requester')->nullable(); //申报人
-            $table->decimal('urchasingstatus')->nullable(); //采购状态
+//            $table->decimal('requester')->nullable(); //申报人
+//            $table->decimal('urchasingstatus')->nullable(); //采购状态
             $table->text('remark')->nullable(); //备注
 
             $table->timestamps();
