@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\ambudget;
 use Illuminate\Http\Request;
+use Log;
 
 class ambudgetController extends Controller
 {
@@ -41,7 +42,7 @@ class ambudgetController extends Controller
     public function store(Request $request)
     {
         //
-        Log::info($request->toArray());
+//        Log::info($request->toArray());
         $rec = new ambudget($request->toArray());
         if ($rec->save()) {
             return response()->json(array_merge([
