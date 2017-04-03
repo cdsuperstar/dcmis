@@ -9,7 +9,7 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
             //获得已有数据
             Restangular.one('/sys-usersown','self').get().then(function (accounts) {
-                console.log(accounts.signpic);
+                // console.log(accounts.signpic);
                 if(accounts.signpic == undefined ){
                     $scope.pictname ="150";
                 }else{
