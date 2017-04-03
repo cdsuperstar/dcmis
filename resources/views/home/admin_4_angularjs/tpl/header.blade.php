@@ -123,8 +123,8 @@
                     <ul class="dropdown-menu">
                         <li class="external">
                             <h3>你有
-                                <span class="bold">@{{ dcUserMsgs.length }} 条新</span> 消息</h3>
-                            <a href="#/profile/dashboard">view all</a>
+                                <span class="bold">@{{ dcUserMsgs.length }} 条</span> 新消息</h3>
+                            <a href="#/profile/dashboard">查看全部</a>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
@@ -156,9 +156,9 @@
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li class="external">
-                            <h3>You have
-                                <span class="bold">12 pending</span> tasks</h3>
-                            <a href="#/profile/dashboard">view all</a>
+                            <h3>你有
+                                <span class="bold">12 条</span> 新日历项</h3>
+                            <a href="#/profile/dashboard">查看全部</a>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
