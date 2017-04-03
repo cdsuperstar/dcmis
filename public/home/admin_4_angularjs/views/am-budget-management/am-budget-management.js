@@ -42,7 +42,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
 
             console.log($scope.untigrps); //有问题，返回的是undefine
             //
-            var tableDatas = Restangular.all('500_data.json');
+            var tableDatas = Restangular.all('/am-budget-management');
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -67,22 +67,22 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     closeByDocument:false,  //是否点覆盖div 关闭会话
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
-                }).then(function (dcEdition) {
+                }).then(function (addBudget) {
 
-                    console.log(dcEdition)
-                    // tableDatas.post(dcEdition).then(
-                    //     function (res) {
-                    //         if (res.success) {
-                    //             $scope.gridOptions.data.push(res);
-                    //             showMsg(res.messages.toString(), '信息', 'lime');
-                    //         } else {
-                    //             // TODO add error message to system
-                    //             showMsg(res.errors.toString(), '错误', 'ruby');
-                    //         }
-                    //     }
-                    // );
+                    console.log(addBudget)
+                    tableDatas.post(addBudget).then(
+                        function (res) {
+                            if (res.success) {
+                                $scope.gridOptions.data.push(res);
+                                showMsg(res.messages.toString(), '信息', 'lime');
+                            } else {
+                                // TODO add error message to system
+                                showMsg(res.errors.toString(), '错误', 'ruby');
+                            }
+                        }
+                    );
 
-                }, function (dcEdition) {
+                }, function (addBudget) {
                 });
             };
 

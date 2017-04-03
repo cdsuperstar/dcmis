@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 年  度 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.syear" theme="bootstrap">
+                                <ui-select ng-model="addBudget.syear" theme="bootstrap">
                                     <ui-select-match placeholder="选择年度...">@{{$select.selected}}</ui-select-match>
                                     <ui-select-choices repeat="tmparr in tyear | filter: $select.search">
                                         @{{tmparr}}
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 类  别 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.type">
+                                <ui-select ng-model="addBudget.type">
                                     <ui-select-match placeholder="选择类别...">@{{$select.selected.label}}</ui-select-match>
                                     <ui-select-choices
                                             repeat="tmplist.value as tmplist in listnames track by tmplist.value">
@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 部  门 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.unit">
+                                <ui-select ng-model="addBudget.unit">
                                     <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices
                                             repeat="category.id as category in untigrps track by category.id">
@@ -54,24 +54,24 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.total" placeholder="¥0.00">
+                                    <input type="number" class="form-control" ng-model="addBudget.total" placeholder="¥0.00">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 备 注 </label>
                             <div class="col-md-8">
-                                <textarea ng-model="dcEdition.remark" class="form-control" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 50px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写备注信息（1000字以内）"></textarea>
+                                <textarea ng-model="addBudget.remark" class="form-control" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 50px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写备注信息（1000字以内）"></textarea>
                             </div>
                         </div>
                         <div class="form-group" align="center">
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(addBudget)" ng-disabled="addBudgetFm.$invalid">
                                     <i class="fa fa-check"></i>  确 认 </a>
                             </div>
 
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcEdition)">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(addBudget)">
                                     <i class="icon-reload"></i>  取 消  </a>
                             </div>
                         </div>
