@@ -26,14 +26,21 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 //console.log(accounts);
                 var untarr = [];
                 var tmpu = {};
+                var unitHash=[];
                 for(var i=0;i<accounts.length;i++){
                     //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
                     tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    unitHash[accounts[i].id]=accounts[i].name;
                     untarr.push(tmpu);
                 }
                 $scope.uigrunitgrps = untarr; //转换成uigrid可识别的模式
                 $scope.untigrps = accounts;
+                $scope.gridOptions.columnDefs[2].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[2].editDropdownOptionsArray=untarr;
+
+                console.log(unitHash[3]);
             });
+
             console.log($scope.untigrps); //有问题，返回的是undefine
             //
             var tableDatas = Restangular.all('500_data.json');
@@ -141,10 +148,12 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                             selectOptions: $scope.uigrtyear}
                     },
                     {name: '部门', field: 'unit',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: '',
                         filter: {
-                            term:3,
+                            term:1,
                             type: uiGridConstants.filter.SELECT,
-                            selectOptions: $scope.uigrunitgrps}
+                            selectOptions: [] }
                     },
                     {name: '预算类别', field: 'type',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -192,6 +201,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
+                    $scope.filterUnitF=888;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
@@ -249,4 +259,5 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
             }
         };
     })
+
 ;
