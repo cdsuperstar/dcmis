@@ -115,10 +115,6 @@ class permissionController extends Controller
     public function destroy(Permission $permission)
     {
         //
-
-        Log::info("-----");
-        Log::info($permission);
-        Log::info("-----");
         if ($permission->delete()) {
 
             return response()->json(array_merge([
