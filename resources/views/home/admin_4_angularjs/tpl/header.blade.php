@@ -268,7 +268,7 @@
                 <li class="dropdown dropdown-user dropdown-light">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true" title="@{{  dcUser.name }}">
-                        <img alt="" class="img-circle" src="/images/users/@{{  dcUser.id }}/@{{  dcUser.signpic }}.jpg ">
+                        <img alt="" class="img-circle" src="/images/users/@{{  signpictname }}.jpg ">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default" style="width: 60px;">
                         <li>

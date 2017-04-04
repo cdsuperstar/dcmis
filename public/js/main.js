@@ -88,6 +88,12 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
 
     Restangular.one('/sys-users/dcUser').get().then(function (res) {
         $scope.dcUser = res;
+        if(res.signpic == undefined || res.signpic == '' ){
+            $scope.signpictname ="defaultuser";
+        }else{
+            $scope.signpictname = res.id+"/"+res.signpic;
+        }
+
         window.Echo.private('App.User.' + $scope.dcUser.id)
             .listen('usermsg', (e) => {
             $scope.dcUserMsgs.unshift(e.msg);
