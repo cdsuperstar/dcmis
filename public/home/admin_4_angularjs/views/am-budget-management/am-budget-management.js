@@ -66,7 +66,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (addBudget) {
-                    if(addBudget.syear||addBudget.type||addBudget.unit||addBudget.total){
+                    if(!addBudget.syear||!addBudget.type||!addBudget.unit||!addBudget.total){
                         showMsg('必要的信息未填写！', '错误', 'ruby');
                     }else{
                         console.log(addBudget)
