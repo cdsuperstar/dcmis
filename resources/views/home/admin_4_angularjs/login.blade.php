@@ -82,6 +82,9 @@
             <h4>或者用以下登录方式</h4>
             <ul class="social-icons">
                 <li>
+                    <a class="reddit" title="QQ" href="javascript:;"> </a>
+                </li>
+                <li>
                     <a class="facebook" title="微信" href="javascript:;"> </a>
                 </li>
 
