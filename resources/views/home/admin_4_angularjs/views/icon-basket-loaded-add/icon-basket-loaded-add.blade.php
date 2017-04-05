@@ -34,7 +34,7 @@
                             <label class="col-md-3 control-label"> 物资名称 </label>
                             <div class="col-md-8">
                                 <ui-select ng-model="dcaddMaterial.asname" theme="bootstrap">
-                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected.name}} 【@{{$select.selected.munit}}】</ui-select-match>
+                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected.mname}} 【@{{$select.selected.munit}}】</ui-select-match>
                                     <ui-select-choices repeat="tmparr.mno as tmparr in wzgrps | filter: $select.search">
                                         <div ng-bind-html="tmparr.name | highlight: $select.search"></div>
                                         <small>
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 备 注 </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="dcaddMaterial.remark" placeholder="备注">
+                                <textarea class="form-control" rows="3" ng-model="dcaddMaterial.remark" maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="请输入备注（1000字以内）"></textarea>
                             </div>
                         </div>
                         <div class="form-action" align="center">
@@ -87,6 +87,288 @@
 
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcaddMaterial)">
+                                    <i class="icon-reload"></i>  取 消  </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- END: ACCORDION DEMO -->
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="add-contr">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN: ACCORDION DEMO -->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="icon-settings font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 添加工程项目 </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcaddContr)">
+                            </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 采购内容 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddContr.contrname" placeholder="采购内容">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 工期要求 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddContr.contrworkreq" placeholder="工期要求">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 预算金额 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="number" class="form-control" ng-model="dcaddContr.contrprice" placeholder="预算金额">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 工程地点 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddContr.contraddr" placeholder="地点">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddContr.contrpicharge" placeholder="负责人">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人电话 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddContr.contrpicphone" placeholder="负责人电话">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 备 注 </label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="3" ng-model="dcaddContr.remark" maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="请输入备注（1000字以内）"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-action" align="center">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcaddContr)">
+                                    <i class="fa fa-check"></i>  确 认 </a>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcaddContr)">
+                                    <i class="icon-reload"></i>  取 消  </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- END: ACCORDION DEMO -->
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="add-sv">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN: ACCORDION DEMO -->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="icon-settings font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 添加服务项目 </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcaddSv)">
+                            </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 采购内容 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddSv.svrname" placeholder="采购内容">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 服务期限 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddSv.svrworkreq" placeholder="服务期限">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 预算金额 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="number" class="form-control" ng-model="dcaddSv.svrprice" placeholder="预算金额">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 服务地点 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddSv.svaddr" placeholder="服务地点">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddSv.svpicharge" placeholder="负责人">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人电话 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddSv.svpicphone" placeholder="负责人电话">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 备 注 </label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="3" ng-model="dcaddSv.remark" maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="请输入备注（1000字以内）"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-action" align="center">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcaddSv)">
+                                    <i class="fa fa-check"></i>  确 认 </a>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcaddSv)">
+                                    <i class="icon-reload"></i>  取 消  </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- END: ACCORDION DEMO -->
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="add-ot">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN: ACCORDION DEMO -->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="icon-settings font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 添加其他项目 </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcaddOt)">
+                            </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 采购内容 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otrname" placeholder="采购内容">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 其他说明 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otrworkreq" placeholder="其他说明">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 预算金额 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="number" class="form-control" ng-model="dcaddOt.otrprice" placeholder="预算金额">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 地  点 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otaddr" placeholder="地点">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otpicharge" placeholder="负责人">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 负责人电话 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otpicphone" placeholder="负责人电话">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 备 注 </label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="3" ng-model="dcaddOt.remark" maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="请输入备注（1000字以内）"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-action" align="center">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcaddOt)">
+                                    <i class="fa fa-check"></i>  确 认 </a>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcaddOt)">
                                     <i class="icon-reload"></i>  取 消  </a>
                             </div>
                         </div>

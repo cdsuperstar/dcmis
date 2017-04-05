@@ -321,17 +321,41 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         };
                         var sourceDatas = Restangular.all('data.json');
 
-                        $scope.addData = function() {
-                            var n = $scope.soucegridOptions.data.length + 1;
-                            $scope.soucegridOptions.data.push({
-                                "contrname": "新建工程 " + n,
-                                "contrprice": "0",
-                                "contrworkreq": "工期要求",
-                                "contraddr": "地点",
-                                "contrpicharge": "负责人",
-                                "contrpicphone": "负责电话"
+                        $scope.addData = function () {
+                            ngDialog.openConfirm({
+                                template: 'add-contr',
+                                className: 'ngdialog-theme-default iconaddmaterial',
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    //$scope.$validationOptions = validationConfig;
+                                    // console.log($scope.aswzfl);
+
+                                }],
+                                showClose: false,
+                                setBodyPadding: 1,
+                                overlay: true,        //是否用div覆盖当前页面
+                                closeByDocument:false,  //是否点覆盖div 关闭会话
+                                disableAnimation:true,  //是否显示动画
+                                closeByEscape: true
+                            }).then(function (dcaddContr) {
+                                console.log(dcaddContr);
+                                // tableDatas.post(dcaddContr).then(
+                                //     function (res) {
+                                //         if (res.success) {
+                                //             $scope.gridOptions.data.push(res);
+                                //             showMsg(res.messages.toString(), '信息', 'lime');
+                                //         } else {
+                                //             // TODO add error message to system
+                                //             showMsg(res.errors.toString(), '错误', 'ruby');
+                                //         }
+                                //     }
+                                // );
+                            }, function (dcaddContr) {
+                                console.log('Modal promise rejected. Reason: ', dcaddContr);
                             });
                         };
+
+
                         $scope.delData = function () {
 
                         };
@@ -386,18 +410,18 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterCsvFilename:'download.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
-                                {name: '采购内容', field: 'contrname',width: '150',enableColumnMenu: true,
+                                {name: '采购内容', field: 'svrname',width: '150',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.contrname; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '预算金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '服务期限', field: 'contrworkreq',width: '200',enableColumnMenu: true,
+                                {name: '预算金额', field: 'svrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '服务期限', field: 'svrworkreq',width: '200',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.contrworkreq; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                 },
-                                {name: '合同地点', field: 'svaddr',width: '150',enableColumnMenu: true},
+                                {name: '地点', field: 'svaddr',width: '150',enableColumnMenu: true},
                                 {name: '负责人', field: 'svpicharge',width: '120',enableColumnMenu: true},
                                 {name: '负责人电话', field: 'svpicphone',width: '120',enableColumnMenu: true}
                             ],
@@ -408,14 +432,41 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         };
                         var sourceDatas = Restangular.all('data.json');
 
-                        $scope.addData = function() {
-                            var n = $scope.soucegridOptions.data.length + 1;
-                            $scope.soucegridOptions.data.push({
-                                "svaddr": "新建服务 " + n,
-                                "svpicharge": "负责人",
-                                "svpicphone": "负责电话"
+                        $scope.addData = function () {
+                            ngDialog.openConfirm({
+                                template: 'add-sv',
+                                className: 'ngdialog-theme-default iconaddmaterial',
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    //$scope.$validationOptions = validationConfig;
+                                    // console.log($scope.aswzfl);
+
+                                }],
+                                showClose: false,
+                                setBodyPadding: 1,
+                                overlay: true,        //是否用div覆盖当前页面
+                                closeByDocument:false,  //是否点覆盖div 关闭会话
+                                disableAnimation:true,  //是否显示动画
+                                closeByEscape: true
+                            }).then(function (dcaddSv) {
+                                console.log(dcaddSv);
+                                // tableDatas.post(dcaddSv).then(
+                                //     function (res) {
+                                //         if (res.success) {
+                                //             $scope.gridOptions.data.push(res);
+                                //             showMsg(res.messages.toString(), '信息', 'lime');
+                                //         } else {
+                                //             // TODO add error message to system
+                                //             showMsg(res.errors.toString(), '错误', 'ruby');
+                                //         }
+                                //     }
+                                // );
+                            }, function (dcaddSv) {
+                                console.log('Modal promise rejected. Reason: ', dcaddSv);
                             });
                         };
+
+
                         $scope.delData = function () {
 
                         };
@@ -470,13 +521,13 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterCsvFilename:'download.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
-                                {name: '采购内容', field: 'contrname',width: '150',enableColumnMenu: true,
+                                {name: '采购内容', field: 'otrname',width: '150',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.contrname; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                     footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '预算金额', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '其他说明', field: 'contrworkreq',width: '200',enableColumnMenu: true,
+                                {name: '预算金额', field: 'otrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '其他说明', field: 'otrworkreq',width: '200',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.contrworkreq; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
@@ -492,14 +543,41 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         };
                         var sourceDatas = Restangular.all('data.json');
 
-                        $scope.addData = function() {
-                            var n = $scope.soucegridOptions.data.length + 1;
-                            $scope.soucegridOptions.data.push({
-                                "otaddr": "新建其他 " + n,
-                                "otpicharge": "负责人",
-                                "otpicphone": "负责电话"
+                        $scope.addData = function () {
+                            ngDialog.openConfirm({
+                                template: 'add-ot',
+                                className: 'ngdialog-theme-default iconaddmaterial',
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    //$scope.$validationOptions = validationConfig;
+                                    // console.log($scope.aswzfl);
+
+                                }],
+                                showClose: false,
+                                setBodyPadding: 1,
+                                overlay: true,        //是否用div覆盖当前页面
+                                closeByDocument:false,  //是否点覆盖div 关闭会话
+                                disableAnimation:true,  //是否显示动画
+                                closeByEscape: true
+                            }).then(function (dcaddOt) {
+                                console.log(dcaddOt);
+                                // tableDatas.post(dcaddOt).then(
+                                //     function (res) {
+                                //         if (res.success) {
+                                //             $scope.gridOptions.data.push(res);
+                                //             showMsg(res.messages.toString(), '信息', 'lime');
+                                //         } else {
+                                //             // TODO add error message to system
+                                //             showMsg(res.errors.toString(), '错误', 'ruby');
+                                //         }
+                                //     }
+                                // );
+                            }, function (dcaddOt) {
+                                console.log('Modal promise rejected. Reason: ', dcaddOt);
                             });
                         };
+
+
                         $scope.delData = function () {
 
                         };

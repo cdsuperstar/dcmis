@@ -113,7 +113,7 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                 columnDefs: [
                     {name: '编号', field: 'mno', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
                     {name: '物资分类', field: 'mclass', width: '120',enableCellEdit: true,enableHiding: false},
-                    {name: '物资名称',width: '260', field: 'name', enableCellEdit: true},
+                    {name: '物资名称',width: '260', field: 'mname', enableCellEdit: true},
                     {name: '单位',width: '100',field: 'munit', enableCellEdit: true},
                     {name: '物资简拼', width: '150',field: 'mspell',enableCellEdit: true,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
