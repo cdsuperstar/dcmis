@@ -3,7 +3,7 @@
     <!-- BEGIN LOGO -->
     <div class="page-logo">
         <a ui-sref="dashboard">
-            <img src="@{{settings.layoutPath}}/img/logo-light.png" alt="资产管理系统" class="logo-default"/>
+            <img src="/images/sys/logo-light.png" alt="资产管理系统" class="logo-default"/>
             <!----155*25 PNG --->
             {{--<span class="text-logo bold uppercase">资产管理系统</span>--}}
         </a>

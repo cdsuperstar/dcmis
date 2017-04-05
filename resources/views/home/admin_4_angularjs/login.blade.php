@@ -41,7 +41,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="index.html">
-        <img src="../assets/layouts/layout4/img/logo-light-login.png" alt="资产管理系统"> </a>
+        <img src="/images/sys/logo-light-login.png" alt="资产管理系统"> </a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
