@@ -186,18 +186,18 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     enableGridMenu: true,
                                     //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                                     columnDefs: [
-                                        {name: '采购内容', field: 'contrname',width: '150',enableColumnMenu: true,
+                                        {name: '工程项目名称', field: 'contrname',width: '150',enableColumnMenu: true,
                                             cellTooltip: function(row){ return row.entity.contrname; },
                                             //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                             cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                             footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                        {name: '工程概算', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '工程预算', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                         {name: '工期要求', field: 'contrworkreq',width: '200',enableColumnMenu: true,
                                             cellTooltip: function(row){ return row.entity.contrworkreq; },
                                             //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                             cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                         },
-                                        {name: '地点', field: 'contraddr',width: '120',enableColumnMenu: true},
+                                        {name: '工程  地点', field: 'contraddr',width: '120',enableColumnMenu: true},
                                         {name: '负责人', field: 'contrpicharge',width: '120',enableColumnMenu: true},
                                         {name: '负责人电话', field: 'contrpicphone',width: '120',enableColumnMenu: true}
                                     ],

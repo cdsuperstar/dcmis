@@ -1,0 +1,25 @@
+
+.ngdialog.iconbasketsetsupplier .ngdialog-content{width : 580px;background: #ffffff;}
+
+.jquery-notific8-container.top { top: 60px; }
+
+.iconbasketsetsuppliergrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.iconbasketsetsuppliergrid .ui-grid-header{
+    background: #1BA39C;
+}
+.iconbasketsetsuppliergrid .ui-grid-top-panel{
+    background: #1BA39C;
+}
+.iconbasketsetsuppliergrid .ui-grid-top-panel-background{
+    background: #1BA39C;
+}
+.iconbasketsetsuppliergrid .ui-grid-header-cell{
+    color:#000000;
+}
+.iconbasketsetsuppliergrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

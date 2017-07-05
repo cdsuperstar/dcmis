@@ -6,7 +6,6 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             i18nService.setCurrentLang('zh-cn');
 
             //获得年度列表
-            //获得年度列表
             var currentYear = new Date().getFullYear();
             var yeararr = new Array();
             for(var val = (currentYear-3); val <= (currentYear+3); val++){
@@ -93,7 +92,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrunitgrps}
                     },
-                    {name: '采购状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true}
+                    {name: '审批状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true}
                 ],
 
                 enableGridMenu: true,
@@ -152,16 +151,24 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                             //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                             cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                             footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                        {name: '规格、型号', field: 'aspara',width: '200',enableColumnMenu: true,
+                                        {name: '规格、型号（可修改）', field: 'aspara',width: '200',enableColumnMenu: true,
                                             cellTooltip: function(row){ return row.entity.aspara; },
                                             //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                             cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                         },
-                                        {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '数量（可修改）', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                         {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
                                             editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
                                         },
                                         {name: '预算单价', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '采购方式', field: 'price',width: '120',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '采购状态', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '报销状态', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '采购价格', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '采购单位（选择）', field: 'price',width: '200',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '合同编号', field: 'price',width: '120',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '物资状态（是否为固定资产）', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                        {name: '合计金额', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                         {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                                     ],
 

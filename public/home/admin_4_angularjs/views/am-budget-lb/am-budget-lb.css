@@ -1,0 +1,25 @@
+
+.ngdialog.ambudgetlb .ngdialog-content{width : 500px;background: #ffffff;}
+
+.jquery-notific8-container.top { top: 60px; }
+
+.ambudgetlbgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.ambudgetlbgrid .ui-grid-header{
+    background: #578ebe;
+}
+.ambudgetlbgrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.ambudgetlbgrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.ambudgetlbgrid .ui-grid-header-cell{
+    color:#000000;
+}
+.ambudgetlbgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

@@ -114,7 +114,7 @@
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 采购内容 </label>
+                            <label class="col-md-3 control-label"> 工程项目名称 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 预算金额 </label>
+                            <label class="col-md-3 control-label"> 工程预算 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -208,7 +208,7 @@
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 采购内容 </label>
+                            <label class="col-md-3 control-label"> 服务内容 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
@@ -479,7 +479,7 @@
                             <th colspan="2" style="text-align:center;">预算年度</th>
                             <td colspan="2">@{{ basket.syear }}</td>
                             <th colspan="3" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} 【项目编号 年度+部门编号+预算类别编号+总序号】</td>
+                            <td colspan="8">@{{ basket.summary }} 【项目编号 年度+预算类别(类别简拼)编号+总序号】</td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>
@@ -532,7 +532,7 @@
                             <th colspan="2" style="text-align:center;">预算年度</th>
                             <td colspan="1">@{{ basket.syear }}</td>
                             <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+部门编号+预算类别编号+总序号】</td>
+                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
                         </tr>
                         <tr>
                             <th colspan="2" style="text-align:center;">申请单位</th>
@@ -554,10 +554,10 @@
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
-                            <th colspan="4" style="text-align:center;">采购内容</th>
+                            <th colspan="4" style="text-align:center;">工程项目名称</th>
                             <th colspan="3" style="text-align:center;">工期要求</th>
-                            <th style="text-align:center;">预算金额</th>
-                            <th style="text-align:center;">地点</th>
+                            <th style="text-align:center;">工程预算</th>
+                            <th style="text-align:center;">工程地点</th>
                             <th style="text-align:center;">负责人</th>
                             <th colspan="2" style="text-align:center;">负责人电话</th>
                         </tr>
@@ -580,7 +580,7 @@
                             <th colspan="2" style="text-align:center;">预算年度</th>
                             <td colspan="1">@{{ basket.syear }}</td>
                             <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+部门编号+预算类别编号+总序号】</td>
+                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
                         </tr>
                         <tr>
                             <th colspan="2" style="text-align:center;">申请单位</th>
@@ -628,7 +628,7 @@
                             <th colspan="2" style="text-align:center;">预算年度</th>
                             <td colspan="1">@{{ basket.syear }}</td>
                             <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+部门编号+预算类别编号+总序号】</td>
+                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
                         </tr>
                         <tr>
                             <th colspan="2" style="text-align:center;">申请单位</th>

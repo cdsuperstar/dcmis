@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"> 引入文件 </label>
                         <div class="col-md-8">
-                            <textarea class="form-control" ng-model="dcEdition.files" rows="3" ng-model="dcEdition.brief" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写引入文件（1000字以内）"></textarea>
+                            <textarea class="form-control" ng-model="dcEdition.files" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 91px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写引入文件（1000字以内）"></textarea>
                         </div>
                     </div>
                     <div class="form-action" style="text-align: center;">

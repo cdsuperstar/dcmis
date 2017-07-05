@@ -1,0 +1,6 @@
+<!-- BEGIN MAIN CONTENT -->
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+
+<!-- BEGIN MAIN JS & CSS -->
