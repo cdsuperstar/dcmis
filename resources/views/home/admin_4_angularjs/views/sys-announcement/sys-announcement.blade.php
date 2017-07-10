@@ -29,7 +29,8 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 内  容 </label>
                             <div class="col-md-8">
-                                <div ng-model="dcEdition.content" id="summernote_sysannouncement"> </div>
+                                {{--<div ng-model="dcEdition.content" id="summernote_sysannouncement"> </div>--}}
+                                <textarea ng-model="dcEdition.content" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 200px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写公告内容（1000字以内）"></textarea>
                             </div>
                         </div>
                         <div class="form-action" align="center">

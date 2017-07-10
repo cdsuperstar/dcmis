@@ -13,11 +13,11 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+                        // //加载editor
+                        // jQuery(document).ready(function() {
+                        //     $('#summernote_sysannouncement').summernote({height: 300});
+                        // });
                         console.log($scope);
-                        //加载editor
-                        jQuery(document).ready(function() {
-                            $('#summernote_sysannouncement').summernote({height: 300});
-                        });
 
                     }],
                     showClose: false,

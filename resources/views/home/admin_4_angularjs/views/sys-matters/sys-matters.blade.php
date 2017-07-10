@@ -1,5 +1,68 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="portlet-body" data-ng-controller="sysmattersCtrl">
+    <script type="text/ng-template" id="sysmatters-add">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN: ACCORDION DEMO -->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="fa fa-bullhorn font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 新事项 </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
+                            </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 标 题 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcEdition.title" placeholder="事项标题">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 提醒时间 </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" title="必填项" data-container="body"></i>
+                                    <input type="text" class="form-control" ng-model="dcEdition.dtime"  placeholder="提醒时间">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 内  容 </label>
+                            <div class="col-md-8">
+                                {{--<div ng-model="dcEdition.content" id="summernote_sysannouncement"> </div>--}}
+                                <textarea ng-model="dcEdition.content" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 200px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写事项内容（1000字以内）"></textarea>
+
+                            </div>
+                        </div>
+                        <div class="form-action" align="center">
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">
+                                    <i class="fa fa-check"></i>  确 认 </a>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <a href="javascript:;" class="btn purple-plum" ng-click="closeThisDialog(dcEdition)">
+                                    <i class="icon-reload"></i>  取 消  </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- END: ACCORDION DEMO -->
+            </div>
+        </div>
+    </script>
+
     <div class="table-toolbar">
         <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
         <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些事项数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>

@@ -92,7 +92,8 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrunitgrps}
                     },
-                    {name: '审批状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true}
+                    {name: '审批状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true},
+                    {name: '采购状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true}
                 ],
 
                 enableGridMenu: true,

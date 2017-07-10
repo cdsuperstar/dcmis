@@ -8,7 +8,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
-                    template: '/sysmatters/create',
+                    template: 'sysmatters-add',
                     className: 'ngdialog-theme-default sysmatters',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {

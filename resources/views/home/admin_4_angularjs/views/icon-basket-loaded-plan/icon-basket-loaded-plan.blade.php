@@ -150,10 +150,10 @@
                         </button>
                         <ul class="dropdown-menu" >
                             <li>
-                                <a href="javascript:;"> 受理采购申请【已审批】 </a>
+                                <a href="javascript:;"> 受理采购申请【审批通过】 </a>
                             </li>
                             <li>
-                                <a href="javascript:;"> 退回采购申请【已驳回】 </a>
+                                <a href="javascript:;"> 驳回采购申请【驳回申请】 </a>
                             </li>
                             <li class="divider"> </li>
                             <li>
