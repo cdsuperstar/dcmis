@@ -10,13 +10,22 @@
                 <h5 class="font-red-soft">[当前配置角色： @{{ role_display_name }}]</h5>
             </div>
         </div>
-        <div class="bootbox-body">
-            <div id="modelTree" class="tree-demo"></div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col col-md-6" style="border-right:1px solid #e5e5e5;">
+                    模块列表（右键展开权限列表）
+                    <div id="modelTree" class="tree-demo"></div>
+                </div>
+                <div class="col col-md-6">
+                    权限列表
+                    <div id="privilegeTree" class="tree-demo"></div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer" style="padding: 1px;">
             <div style="text-align: right;">
                 <a href="javascript:;" class="btn btn-info" ng-click="confirm( selectedTreeData )" >
-                    <i class="fa fa-check"></i>  配 置 模 块 </a>
+                    <i class="fa fa-check"></i>  配 置 完 成 </a>
             </div>
         </div>
     </script>

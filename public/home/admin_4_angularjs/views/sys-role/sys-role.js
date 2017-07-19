@@ -20,7 +20,7 @@ angular.module("MetronicApp").controller('rolesCtrl',
 
                             $scope.role_display_name=$scope.gridApi.selection.getSelectedRows()[0].display_name;
                             $("#modelTree").jstree({
-                                "plugins": ["state", "types", "json_data", "checkbox","wholerow"],
+                                "plugins": ["state", "types", "json_data", "checkbox","wholerow","contextmenu"],
                                 "core": {
                                     "themes": {
                                         "responsive": false
@@ -63,6 +63,64 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                 //    console.log('checked!');
                                 //
                                 //})
+                                .bind("show_contextmenu.jstree",function (e,data) {
+                                    $("#privilegeTree").jstree({
+                                        "plugins": ["state", "types", "json_data", "checkbox","wholerow"],
+                                        "core": {
+                                            "themes": {
+                                                "responsive": false
+                                            },
+                                            // so that create works
+                                            "check_callback": function (operation, node, parent, position, more) {
+                                                if (operation === "copy_node" || operation === "move_node") {
+                                                    if (parent.id === "#") {
+                                                        return false; // prevent moving a child above or below the root
+                                                    }
+                                                }
+                                                return true; // allow everything else
+                                            },
+                                            'data': {
+                                                'url': '/sys-model/tree',
+                                                'data': function (node) {
+                                                    return {'id': node.id};
+                                                }
+                                            }
+                                        },
+                                        "checkbox":{
+                                            three_state: false,
+                                            whole_node : false,
+                                            tie_selection : true,
+                                            cascade: 'undetermined'
+                                        },
+                                        "types": {
+                                            "default": {
+                                                "icon": "fa fa-folder icon-state-warning icon-lg"
+                                            },
+                                            "file": {
+                                                "icon": "fa fa-file icon-state-warning icon-lg"
+                                            }
+                                        }
+                                    })
+                                        .bind("changed.jstree", function (e,data) {
+                                            $scope.selectedTreeData=data.instance.get_selected();
+                                        })
+                                        //.bind("check_node.jstree", function (e,data) {
+                                        //    console.log('checked!');
+                                        //
+                                        //})
+                                        .bind("ready.jstree", function (e,data) {
+                                            data.instance.uncheck_all();
+                                            var role = $scope.gridApi.selection.getSelectedRows()[0];
+                                            role.getList('rolemodels').then(function(res){
+                                                $.each(res, function(idx, obj) {
+                                                    data.instance.check_node(obj.id)
+                                                });
+                                            });
+                                        })
+                                    ;
+
+                                    console.log(e);
+                                })
                                 .bind("ready.jstree", function (e,data) {
                                     data.instance.uncheck_all();
                                     var role = $scope.gridApi.selection.getSelectedRows()[0];

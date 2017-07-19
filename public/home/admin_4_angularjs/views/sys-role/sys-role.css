@@ -1,9 +1,9 @@
-.ngdialog.rolengdialogcontent .ngdialog-content{width : 450px;background: #ffffff;}
+.ngdialog.rolengdialogcontent .ngdialog-content{width : 550px;background: #ffffff;}
 .ngdialog.sysrole .ngdialog-content{width : 450px;background: #ffffff;}
 
 .jquery-notific8-container.top { top: 60px; }
 
-.sysModelgrid {
+.sysRoleGrid {
     /*width: 300px;*/
     height: 384px;
 }
