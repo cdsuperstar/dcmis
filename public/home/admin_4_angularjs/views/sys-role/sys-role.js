@@ -45,6 +45,7 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                     three_state: false,
                                     whole_node : false,
                                     tie_selection : true,
+                                    keep_selected_style:false,
                                     cascade: 'undetermined'
                                 },
                                 "types": {
