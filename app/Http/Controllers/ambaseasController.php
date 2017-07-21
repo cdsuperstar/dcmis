@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\amsvbudgets;
+use App\models\ambaseas;
 use Illuminate\Http\Request;
 
-class amsvbudgetsController extends Controller
+class ambaseasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class amsvbudgetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amsvbudgets  $amsvbudgets
+     * @param  \App\models\ambaseas  $ambaseas
      * @return \Illuminate\Http\Response
      */
-    public function show(amsvbudgets $amsvbudgets)
+    public function show(ambaseas $ambaseas)
     {
         //
     }
@@ -52,10 +52,10 @@ class amsvbudgetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amsvbudgets  $amsvbudgets
+     * @param  \App\models\ambaseas  $ambaseas
      * @return \Illuminate\Http\Response
      */
-    public function edit(amsvbudgets $amsvbudgets)
+    public function edit(ambaseas $ambaseas)
     {
         //
     }
@@ -64,10 +64,10 @@ class amsvbudgetsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amsvbudgets  $amsvbudgets
+     * @param  \App\models\ambaseas  $ambaseas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, amsvbudgets $amsvbudgets)
+    public function update(Request $request, ambaseas $ambaseas)
     {
         //
     }
@@ -75,10 +75,10 @@ class amsvbudgetsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amsvbudgets  $amsvbudgets
+     * @param  \App\models\ambaseas  $ambaseas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(amsvbudgets $amsvbudgets)
+    public function destroy(ambaseas $ambaseas)
     {
         //
     }

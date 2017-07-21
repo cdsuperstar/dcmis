@@ -42,7 +42,7 @@ class ambudgetController extends Controller
     public function store(Request $request)
     {
         //
-//        Log::info($request->toArray());
+        Log::info($request->toArray());
         $rec = new ambudget($request->toArray());
         if ($rec->save()) {
             return response()->json(array_merge([
@@ -87,6 +87,7 @@ class ambudgetController extends Controller
     public function update(Request $request, ambudget $ambudget)
     {
         //
+//        Log::info($request->toArray());
         if ($ambudget) {
 
             if ($ambudget->update($request->toArray())) {

@@ -92,4 +92,7 @@ use Illuminate\Database\Eloquent\Model;
 class ambudget extends Model
 {
     //
+    protected $fillable = ['syear','type','unit','total','remark'];
+
+
 }

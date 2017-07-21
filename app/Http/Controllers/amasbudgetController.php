@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\amasbudgets;
+use App\models\amasbudget;
 use Illuminate\Http\Request;
 
-class amasbudgetsController extends Controller
+class amasbudgetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class amasbudgetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amasbudgets  $amasbudgets
+     * @param  \App\models\amasbudget  $amasbudget
      * @return \Illuminate\Http\Response
      */
-    public function show(amasbudgets $amasbudgets)
+    public function show(amasbudget $amasbudget)
     {
         //
     }
@@ -52,10 +52,10 @@ class amasbudgetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amasbudgets  $amasbudgets
+     * @param  \App\models\amasbudget  $amasbudget
      * @return \Illuminate\Http\Response
      */
-    public function edit(amasbudgets $amasbudgets)
+    public function edit(amasbudget $amasbudget)
     {
         //
     }
@@ -64,10 +64,10 @@ class amasbudgetsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amasbudgets  $amasbudgets
+     * @param  \App\models\amasbudget  $amasbudget
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, amasbudgets $amasbudgets)
+    public function update(Request $request, amasbudget $amasbudget)
     {
         //
     }
@@ -75,10 +75,10 @@ class amasbudgetsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amasbudgets  $amasbudgets
+     * @param  \App\models\amasbudget  $amasbudget
      * @return \Illuminate\Http\Response
      */
-    public function destroy(amasbudgets $amasbudgets)
+    public function destroy(amasbudget $amasbudget)
     {
         //
     }

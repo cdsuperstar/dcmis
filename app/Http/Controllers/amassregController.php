@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\amotbudgets;
+use App\models\amassreg;
 use Illuminate\Http\Request;
 
-class amotbudgetsController extends Controller
+class amassregController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class amotbudgetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amotbudgets  $amotbudgets
+     * @param  \App\models\amassreg  $amassreg
      * @return \Illuminate\Http\Response
      */
-    public function show(amotbudgets $amotbudgets)
+    public function show(amassreg $amassreg)
     {
         //
     }
@@ -52,10 +52,10 @@ class amotbudgetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amotbudgets  $amotbudgets
+     * @param  \App\models\amassreg  $amassreg
      * @return \Illuminate\Http\Response
      */
-    public function edit(amotbudgets $amotbudgets)
+    public function edit(amassreg $amassreg)
     {
         //
     }
@@ -64,10 +64,10 @@ class amotbudgetsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amotbudgets  $amotbudgets
+     * @param  \App\models\amassreg  $amassreg
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, amotbudgets $amotbudgets)
+    public function update(Request $request, amassreg $amassreg)
     {
         //
     }
@@ -75,10 +75,10 @@ class amotbudgetsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amotbudgets  $amotbudgets
+     * @param  \App\models\amassreg  $amassreg
      * @return \Illuminate\Http\Response
      */
-    public function destroy(amotbudgets $amotbudgets)
+    public function destroy(amassreg $amassreg)
     {
         //
     }

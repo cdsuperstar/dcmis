@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\amcontrbudgets;
+use App\models\amsvbudget;
 use Illuminate\Http\Request;
 
-class amcontrbudgetsController extends Controller
+class amsvbudgetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class amcontrbudgetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amcontrbudgets  $amcontrbudgets
+     * @param  \App\models\amsvbudget  $amsvbudget
      * @return \Illuminate\Http\Response
      */
-    public function show(amcontrbudgets $amcontrbudgets)
+    public function show(amsvbudget $amsvbudget)
     {
         //
     }
@@ -52,10 +52,10 @@ class amcontrbudgetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amcontrbudgets  $amcontrbudgets
+     * @param  \App\models\amsvbudget  $amsvbudget
      * @return \Illuminate\Http\Response
      */
-    public function edit(amcontrbudgets $amcontrbudgets)
+    public function edit(amsvbudget $amsvbudget)
     {
         //
     }
@@ -64,10 +64,10 @@ class amcontrbudgetsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amcontrbudgets  $amcontrbudgets
+     * @param  \App\models\amsvbudget  $amsvbudget
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, amcontrbudgets $amcontrbudgets)
+    public function update(Request $request, amsvbudget $amsvbudget)
     {
         //
     }
@@ -75,10 +75,10 @@ class amcontrbudgetsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amcontrbudgets  $amcontrbudgets
+     * @param  \App\models\amsvbudget  $amsvbudget
      * @return \Illuminate\Http\Response
      */
-    public function destroy(amcontrbudgets $amcontrbudgets)
+    public function destroy(amsvbudget $amsvbudget)
     {
         //
     }
