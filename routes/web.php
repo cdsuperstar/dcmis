@@ -36,10 +36,13 @@ Route::group(['prefix' => '/sys-model'], function () {
     Route::put('{id}','dcmodel\dcmodelController@update')->middleware(['permission:sys-model.update']); //sys-model.update
     Route::post('','dcmodel\dcmodelController@store')->middleware(['permission:sys-model.store']); //sys-model.store
     Route::delete('{id}','dcmodel\dcmodelController@destroy')->middleware(['permission:sys-model.delete']); //sys-model.delete
-
+    //得到模块树
     Route::get('tree','dcmodel\dcmodelController@getTree')->middleware(['permission:sys-model.gettree']); //sys-model.gettree
+    //移动节点
     Route::post('movenode','dcmodel\dcmodelController@postMovenode')->middleware(['permission:sys-model.movenode']); //sys-model.movenode
+    //得到mod树 菜单
     Route::get('getModTree','dcmodel\dcmodelController@getModTree'); //sys-model.modtree
+    //得到mod列表
     Route::get('getModList','dcmodel\dcmodelController@getModList'); //sys-model.modlist
 });
 
@@ -53,8 +56,11 @@ Route::group(['prefix' => '/sys-users'], function () {
     Route::post('','User\userController@store')->middleware(['permission:sys-users.store']); //sys-users.store
     Route::delete('{user}','User\userController@destroy')->middleware(['permission:sys-users.destroy']); //sys-users.destroy
 
+    //得到用户参数
     Route::get('userperms','User\userController@getUserPerms');
+    //得到登录用户详细信息
     Route::get('dcUser','User\userController@getLoginedUser')->middleware(['permission:sys-users.logineduser']); //sys-users.logineduser
+    //得到在线用户
     Route::get('onlineusers','User\userController@getOnlineUsers')->middleware(['permission:sys-users.onlineusers']); //sys-users.onlineusers
 });
 
@@ -62,6 +68,7 @@ Route::group(['prefix' => '/sys-users'], function () {
 Route::group(['prefix' => '/sys-usersown'], function () {
     //得到自己信息
     Route::get('self','User\userprofileController@show')->middleware(['permission:sys-usersown.selfdata']); //sys-usersown.selfdata
+    //保存用户配置信息
     Route::post('','User\userprofileController@store');
 });
 
@@ -84,7 +91,9 @@ Route::group(['prefix' => '/sys-role'], function () {
     Route::post('','roleController@store')->middleware(['permission:sys-role.store']); //sys-role.store
     Route::post('{role}/{dcmodels}','roleController@postSetModels');
 
+    //得到角色所拥有模块
     Route::get('{role}/rolemodels','roleController@getRoleModels');
+    //得到角色所拥有权限
     Route::get('{role}/roleperms','roleController@getRolePerms');
 
     Route::put('{dcmodel}','roleController@update')->middleware(['permission:sys-role.update']); //sys-role.update
@@ -95,6 +104,9 @@ Route::group(['prefix' => '/sys-role'], function () {
 Route::group(['prefix' => '/sys-privilege-management'], function () {
     //得到自己信息
     Route::get('','permissionController@index')->middleware(['permission:sys-privilege-management.allperms']); //sys-privilege-management.allperms
+    //根据模块id得到权限
+    Route::get('getListByModel/{dcmodel}','permissionController@getListByModel'); //
+
     Route::get('create','permissionController@create')->middleware(['permission:sys-privilege-management.create']); //sys-privilege-management.create
     Route::put('{permission}','permissionController@update')->middleware(['permission:sys-privilege-management.update']); //sys-privilege-management.update
     Route::post('','permissionController@store')->middleware(['permission:sys-privilege-management.store']);//sys-privilege-management.store
@@ -109,8 +121,11 @@ Route::group(['prefix' => '/user-department'], function () {
     Route::post('','unitgrpController@store')->middleware(['permission:user-department.store']); //user-department.store
     Route::delete('{permission}','unitgrpController@destroy')->middleware(['permission:user-department.destroy']); // user-department.destroy
 
+    //得到机构的树形
     Route::get('tree','unitgrpController@getTree')->middleware(['permission:user-department.tree']); // user-department.tree
+    //移动节点
     Route::post('movenode','unitgrpController@postMovenode')->middleware(['permission:user-department.movenode']); // user-department.movenode
+    //设置为成员
     Route::post('setmember','unitgrpController@postSetMember')->middleware(['permission:user-department.setmember']);  // user-department.setmember  //参数1为机构 参数2为用户
 });
 
@@ -121,11 +136,12 @@ Route::group(['prefix' => '/sys-msg'], function () {
     Route::get('create', 'usermsgController@create')->middleware(['permission:sys-msg.create']); //sys-msg.create
     Route::delete('{dcmodel}', 'usermsgController@destroy')->middleware(['permission:sys-msg.destroy']); //sys-msg.destroy
 
+    //得到未读信息
     Route::get('unreadmsgs','usermsgController@getUnreadMsgs')->middleware(['permission:sys-msg.unreadmsgs']); //sys-msg.unreadmsgs
 });
 
 // Debug all sqls
-//DB::listen(function ($event) {
-//    Log::info($event->sql);
-//    Log::info($event->bindings);
-//});
+DB::listen(function ($event) {
+    Log::info($event->sql);
+    Log::info($event->bindings);
+});

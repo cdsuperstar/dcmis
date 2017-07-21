@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Permission;
+use App\models\dcmodel;
 use Illuminate\Http\Request;
 use Config;
 use Log;
@@ -66,6 +67,16 @@ class permissionController extends Controller
     public function show(Permission $permission)
     {
         //
+    }
+
+    /**
+     * get permission list by model
+     * @param dcmodel $dcmodel
+     */
+    public function getListByModel(dcmodel $dcmodel){
+        $datas = Permission::where('name','like',$dcmodel->name.'.%')->get(["id","name","display_name"]);
+        return response()->json($datas);
+
     }
 
     /**
