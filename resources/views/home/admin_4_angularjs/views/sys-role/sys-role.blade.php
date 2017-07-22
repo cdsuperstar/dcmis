@@ -17,15 +17,21 @@
                     <div id="modelTree" class="tree-demo"></div>
                 </div>
                 <div class="col col-md-6">
-                    权限列表
-                    <div id="privilegeTree" class="tree-demo"></div>
+                    <div class="mt-checkbox-list">
+
+                        <label class="mt-checkbox mt-checkbox-outline" ng-repeat="dt in privileges"> @{{dt.id}} @{{dt.display_name}}
+                                <input type="checkbox" value="@{{dt.id}}" name="tprvil" ng-checked="privilegeasset.indexOf(dt.id) > -1" ng-click="pupdateSelection($event,dt.id)">
+                            <span></span>
+                        </label>
+
+                    </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer" style="padding: 1px;">
             <div style="text-align: right;">
                 <a href="javascript:;" class="btn btn-info" ng-click="confirm( selectedTreeData )" >
-                    <i class="fa fa-check"></i>  配 置 完 成 </a>
+                    <i class="fa fa-check"></i>  模 块 配 置 完 成 </a>
             </div>
         </div>
     </script>

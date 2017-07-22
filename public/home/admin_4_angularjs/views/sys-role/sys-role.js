@@ -43,9 +43,9 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                 },
                                 "checkbox":{
                                     three_state: false,
-                                    whole_node : false,
+                                    whole_node : true,
                                     tie_selection : true,
-                                    keep_selected_style:false,
+                                    keep_selected_style:true,
                                     cascade: 'undetermined'
                                 },
                                 "types": {
@@ -65,62 +65,35 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                 //
                                 //})
                                 .bind("show_contextmenu.jstree",function (e,data) {
-                                    $("#privilegeTree").jstree({
-                                        "plugins": ["state", "types", "json_data", "checkbox","wholerow"],
-                                        "core": {
-                                            "themes": {
-                                                "responsive": false
-                                            },
-                                            // so that create works
-                                            "check_callback": function (operation, node, parent, position, more) {
-                                                if (operation === "copy_node" || operation === "move_node") {
-                                                    if (parent.id === "#") {
-                                                        return false; // prevent moving a child above or below the root
-                                                    }
-                                                }
-                                                return true; // allow everything else
-                                            },
-                                            'data': {
-                                                'url': '/sys-model/tree',
-                                                'data': function (node) {
-                                                    return {'id': node.id};
-                                                }
-                                            }
-                                        },
-                                        "checkbox":{
-                                            three_state: false,
-                                            whole_node : false,
-                                            tie_selection : true,
-                                            cascade: 'undetermined'
-                                        },
-                                        "types": {
-                                            "default": {
-                                                "icon": "fa fa-folder icon-state-warning icon-lg"
-                                            },
-                                            "file": {
-                                                "icon": "fa fa-file icon-state-warning icon-lg"
-                                            }
-                                        }
-                                    })
-                                        .bind("changed.jstree", function (e,data) {
-                                            $scope.selectedTreeData=data.instance.get_selected();
-                                        })
-                                        //.bind("check_node.jstree", function (e,data) {
-                                        //    console.log('checked!');
-                                        //
-                                        //})
-                                        .bind("ready.jstree", function (e,data) {
-                                            data.instance.uncheck_all();
-                                            var role = $scope.gridApi.selection.getSelectedRows()[0];
-                                            role.getList('rolemodels').then(function(res){
-                                                $.each(res, function(idx, obj) {
-                                                    data.instance.check_node(obj.id)
-                                                });
-                                            });
-                                        })
-                                    ;
+                                    //获取当前模块权限
+                                    Restangular.all('/sys-role/getListByModel/'+data.node.data).getList().then(function (accounts) {
+                                         $scope.$parent.$parent.privileges = accounts;
+                                    });
+                                    //获取已有全部权限
+                                    Restangular.all('/sys-role/'+$scope.gridApi.selection.getSelectedRows()[0].id+'/roleperms').getList().then(function (accounts) {
+                                        var array = [];
+                                        angular.forEach(accounts, function(data,index,tarray){
+                                            array.push(tarray[index].id);
+                                        });
+                                        $scope.$parent.$parent.privilegeasset = array; //转换成数组
+                                    });
 
-                                    console.log(e);
+                                    //save 权限
+                                    var pupdateSelected = function(action,id){
+                                        if(action == 'add'){
+                                            console.log(id);
+                                        }
+                                        if(action == 'remove'){
+                                            console.log(id+'---');
+                                        }
+                                    };
+
+                                    $scope.pupdateSelection = function($event, id){
+                                        var checkbox = $event.target;
+                                        var action = (checkbox.checked?'add':'remove');
+                                        pupdateSelected(action,id);
+                                    };
+                                    $scope.$apply();
                                 })
                                 .bind("ready.jstree", function (e,data) {
                                     data.instance.uncheck_all();
