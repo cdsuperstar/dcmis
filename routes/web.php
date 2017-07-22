@@ -130,7 +130,13 @@ Route::group(['prefix' => '/user-department'], function () {
     //设置为成员
     Route::post('setmember','unitgrpController@postSetMember')->middleware(['permission:user-department.setmember']);  // user-department.setmember  //参数1为机构 参数2为用户
 });
-
+Route::group(['prefix'=>'/am-budget-lb'],function(){
+    Route::get('','ambudgettypeController@index'); //
+    Route::get('create','ambudgettypeController@create'); //
+    Route::put('{dcmodel}','ambudgettypeController@update'); //
+    Route::post('','ambudgettypeController@store'); //
+    Route::delete('{permission}','ambudgettypeController@destroy'); //
+});
 //消息
 Route::group(['prefix' => '/sys-msg'], function () {
     //得到自己信息
