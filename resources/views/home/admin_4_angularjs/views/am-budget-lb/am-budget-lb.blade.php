@@ -23,7 +23,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="lb00">
+                                    <input type="text" class="form-control" ng-model="dcEdition.no" placeholder="lb00">
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.name" placeholder="名称">
+                                    <input type="text" class="form-control" ng-model="dcEdition.type" placeholder="名称">
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mspell" placeholder="简拼">
+                                    <input type="text" class="form-control" ng-model="dcEdition.spell" placeholder="简拼">
                                 </div>
                             </div>
                         </div>
