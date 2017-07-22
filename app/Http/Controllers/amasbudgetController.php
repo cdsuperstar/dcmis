@@ -15,6 +15,9 @@ class amasbudgetController extends Controller
     public function index()
     {
         //
+        $datas = amasbudget::all();
+        return response()->json($datas);
+
     }
 
     /**
@@ -25,6 +28,8 @@ class amasbudgetController extends Controller
     public function create()
     {
         //
+//        return view('home.'.Config::get('app.dctemplate').'.views.am-budget-management.edit');
+
     }
 
     /**
@@ -36,6 +41,17 @@ class amasbudgetController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new amasbudget($request->toArray());
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
+        return response()->json(['errors' => $rec->id ]);
+
     }
 
     /**
@@ -70,6 +86,21 @@ class amasbudgetController extends Controller
     public function update(Request $request, amasbudget $amasbudget)
     {
         //
+        if ($amasbudget) {
+
+            if ($amasbudget->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $amasbudget->id]),
+                        'success' => true,
+                    ], $amasbudget->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $amasbudget->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +112,15 @@ class amasbudgetController extends Controller
     public function destroy(amasbudget $amasbudget)
     {
         //
+        if ($amasbudget->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('data.destroy', ['rows' => $amasbudget->id . " with id ".$amasbudget->id]),
+                'success' => true,
+            ],$amasbudget->toArray()));
+        } else {
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $amasbudget->id])]);
+        }
+
     }
 }

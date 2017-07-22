@@ -15,6 +15,9 @@ class amsupplierController extends Controller
     public function index()
     {
         //
+        $datas = amsupplier::all();
+        return response()->json($datas);
+
     }
 
     /**
@@ -25,6 +28,8 @@ class amsupplierController extends Controller
     public function create()
     {
         //
+//        return view('home.'.Config::get('app.dctemplate').'.views.am-budget-management.edit');
+
     }
 
     /**
@@ -36,6 +41,17 @@ class amsupplierController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new amsupplier($request->toArray());
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
+        return response()->json(['errors' => $rec->id ]);
+
     }
 
     /**
@@ -70,6 +86,21 @@ class amsupplierController extends Controller
     public function update(Request $request, amsupplier $amsupplier)
     {
         //
+        if ($amsupplier) {
+
+            if ($amsupplier->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $amsupplier->id]),
+                        'success' => true,
+                    ], $amsupplier->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $amsupplier->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +112,15 @@ class amsupplierController extends Controller
     public function destroy(amsupplier $amsupplier)
     {
         //
+        if ($amsupplier->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('data.destroy', ['rows' => $amsupplier->id . " with id ".$amsupplier->id]),
+                'success' => true,
+            ],$amsupplier->toArray()));
+        } else {
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $amsupplier->id])]);
+        }
+
     }
 }

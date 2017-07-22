@@ -15,6 +15,9 @@ class amassetsregController extends Controller
     public function index()
     {
         //
+        $datas = amassetsreg::all();
+        return response()->json($datas);
+
     }
 
     /**
@@ -25,6 +28,8 @@ class amassetsregController extends Controller
     public function create()
     {
         //
+//        return view('home.'.Config::get('app.dctemplate').'.views.am-budget-management.edit');
+
     }
 
     /**
@@ -36,6 +41,17 @@ class amassetsregController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new amassetsreg($request->toArray());
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
+        return response()->json(['errors' => $rec->id ]);
+
     }
 
     /**
@@ -70,6 +86,21 @@ class amassetsregController extends Controller
     public function update(Request $request, amassetsreg $amassetsreg)
     {
         //
+        if ($amassetsreg) {
+
+            if ($amassetsreg->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $amassetsreg->id]),
+                        'success' => true,
+                    ], $amassetsreg->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $amassetsreg->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +112,15 @@ class amassetsregController extends Controller
     public function destroy(amassetsreg $amassetsreg)
     {
         //
+        if ($amassetsreg->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('data.destroy', ['rows' => $amassetsreg->id . " with id ".$amassetsreg->id]),
+                'success' => true,
+            ],$amassetsreg->toArray()));
+        } else {
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $amassetsreg->id])]);
+        }
+
     }
 }

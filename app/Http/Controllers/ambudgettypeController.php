@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\models\ambudgettype;
 use Illuminate\Http\Request;
 
-class ambudgettypesController extends Controller
+class ambudgettypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,8 @@ class ambudgettypesController extends Controller
     public function index()
     {
         //
+        $datas = ambudgettype::all();
+        return response()->json($datas);
     }
 
     /**
@@ -25,6 +27,8 @@ class ambudgettypesController extends Controller
     public function create()
     {
         //
+//        return view('home.'.Config::get('app.dctemplate').'.views.am-budget-management.edit');
+
     }
 
     /**
@@ -36,6 +40,17 @@ class ambudgettypesController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new ambudgettype($request->toArray());
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
+        return response()->json(['errors' => $rec->id ]);
+
     }
 
     /**
@@ -70,6 +85,21 @@ class ambudgettypesController extends Controller
     public function update(Request $request, ambudgettype $ambudgettype)
     {
         //
+        if ($ambudgettype) {
+
+            if ($ambudgettype->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $ambudgettype->id]),
+                        'success' => true,
+                    ], $ambudgettype->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $ambudgettype->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +111,15 @@ class ambudgettypesController extends Controller
     public function destroy(ambudgettype $ambudgettype)
     {
         //
+        if ($ambudgettype->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('data.destroy', ['rows' => $ambudgettype->id . " with id ".$ambudgettype->id]),
+                'success' => true,
+            ],$ambudgettype->toArray()));
+        } else {
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $ambudgettype->id])]);
+        }
+
     }
 }

@@ -15,6 +15,9 @@ class amassregController extends Controller
     public function index()
     {
         //
+        $datas = amassreg::all();
+        return response()->json($datas);
+
     }
 
     /**
@@ -25,6 +28,8 @@ class amassregController extends Controller
     public function create()
     {
         //
+//        return view('home.'.Config::get('app.dctemplate').'.views.am-budget-management.edit');
+
     }
 
     /**
@@ -36,6 +41,17 @@ class amassregController extends Controller
     public function store(Request $request)
     {
         //
+        $rec = new amassreg($request->toArray());
+        if ($rec->save()) {
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
+        return response()->json(['errors' => $rec->id ]);
+
     }
 
     /**
@@ -70,6 +86,21 @@ class amassregController extends Controller
     public function update(Request $request, amassreg $amassreg)
     {
         //
+        if ($amassreg) {
+
+            if ($amassreg->update($request->toArray())) {
+                return response()->json(array_merge([
+                        'messages' => trans('data.update', ["data" => $amassreg->id]),
+                        'success' => true,
+                    ], $amassreg->toArray()
+                    )
+                );
+            } else {
+                return response()->json(['errors' => $amassreg->errors()->all()]);
+            }
+        }
+        return response()->json(['errors' => [trans('data.notfound')]]);
+
     }
 
     /**
@@ -81,5 +112,15 @@ class amassregController extends Controller
     public function destroy(amassreg $amassreg)
     {
         //
+        if ($amassreg->delete()) {
+
+            return response()->json(array_merge([
+                'messages' => trans('data.destroy', ['rows' => $amassreg->id . " with id ".$amassreg->id]),
+                'success' => true,
+            ],$amassreg->toArray()));
+        } else {
+            return response()->json(['errors' => trans('data.destroyfailed', ['data' => $amassreg->id])]);
+        }
+
     }
 }
