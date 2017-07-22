@@ -3,7 +3,8 @@
 angular.module("MetronicApp").controller('ambudgetlbCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('wz.json');
+
+            var tableDatas = Restangular.all('/am-budget-lb');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
@@ -13,6 +14,7 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+
 
                         //end
                     }],
@@ -30,7 +32,7 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                                 $scope.gridOptions.data.push(res);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             } else {
-                                // TODO add error message to system
+                                //TODO add error message to system
                                 showMsg(res.errors.toString(), '错误', 'ruby');
                             }
                         }
@@ -41,12 +43,12 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
             };
 
             $scope.delData = function () {
-                var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
-                selectdcmodels.forEach(function (deluser) {
-                        //console.log(deluser);
-                        deluser.entity.remove().then(function (res) {
+                var selectbudgetlb = $scope.gridApi.selection.getSelectedGridRows();
+                selectbudgetlb.forEach(function (deldata) {
+                        //console.log(deldata);
+                        deldata.entity.remove().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -65,9 +67,9 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: '编号', field: 'mno', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
-                    {name: '类别名称',width: '260', field: 'mname', enableCellEdit: true},  //主要用来生成编号
-                    {name: '类别简拼', width: '150',field: 'mspell',enableCellEdit: true,visible:true},
+                    {name: '编号', field: 'no', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
+                    {name: '类别名称',width: '260', field: 'type', enableCellEdit: true},  //主要用来生成编号
+                    {name: '类别简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 
