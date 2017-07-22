@@ -29,14 +29,10 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 提醒时间 </label>
                             <div class="col-md-8">
-                                <div class="input-icon right">
-                                    <i class="fa fa-warning tooltips font-red" title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.dtime"  placeholder="提醒时间">
-                                </div>
+                                <input class="form-control" type="datetime-local" ng-model="dcEdition.dtime" value="2017-05-23T15:00:00"  id="dateTimeInput">
                             </div>
+
                         </div>
-
-
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 内  容 </label>
                             <div class="col-md-8">

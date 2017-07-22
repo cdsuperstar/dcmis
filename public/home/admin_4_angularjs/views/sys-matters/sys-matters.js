@@ -3,8 +3,10 @@
 angular.module("MetronicApp").controller('sysmattersCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('/dcmodels');
+            var tableDatas = Restangular.all('/sys-matter');
             i18nService.setCurrentLang('zh-cn');
+            //时间日期控件赋初始值
+            $scope.dcEdition = {dtime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, 0)};
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -13,6 +15,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
+
                     }],
                     showClose: false,
                     setBodyPadding: 1,
@@ -56,74 +59,6 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 );
             };
 
-            $scope.editTree = function () {
-                ngDialog.openConfirm({
-                    template: 'treeTemp',
-                    className: 'ngdialog-theme-default',
-                    scope: $scope,
-                    controller: ['$scope', 'Restangular',function ($scope,Restangular) {
-                        //$scope.$validationOptions = validationConfig;
-                        $scope.$on('ngDialog.opened', function () {
-
-                            $("#modelTree").jstree({
-                                "core": {
-                                    "themes": {
-                                        "responsive": false
-                                    },
-                                    // so that create works
-                                    "check_callback": function (operation, node, parent, position, more) {
-                                        if (operation === "copy_node" || operation === "move_node") {
-                                            if (parent.id === "#") {
-                                                return false; // prevent moving a child above or below the root
-                                            }
-                                        }
-                                        return true; // allow everything else
-                                    },
-                                    'data': {
-                                        'url': '/dcmodelopt/tree',
-                                        'data': function (node) {
-                                            return { 'id' : node.id };
-                                        }
-                                    }
-                                },
-                                "types": {
-                                    "default": {
-                                        "icon": "fa fa-folder icon-state-warning icon-lg"
-                                    },
-                                    "file": {
-                                        "icon": "fa fa-file icon-state-warning icon-lg"
-                                    }
-                                },
-                                "plugins": ["dnd", "state", "types", "json_data"]
-                            }).bind("move_node.jstree", function (e, data) {
-                                    //console.log('the item being dragged ', data);
-                                    Restangular.all("/dcmodelopt/movenode").post(data).then(
-                                        function (res) {
-                                            //console.log(res);
-                                            if (res.success) {
-                                                showMsg(res.messages.toString(), '信息', 'lime');
-                                                //console.log("save success", res);
-                                            }
-                                        }
-                                    );
-                                })
-                                .bind("changed.jstree", function (e, data) {
-                                    //console.log("The selected nodes are:");
-                                    //console.log(data);
-                                });
-                        });
-                    }],
-                    showClose: false,
-                    setBodyPadding: 1,
-                    overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
-                }).then(function (dcEdition) {
-
-                }, function (dcEdition) {
-
-                });
-            };
 
             //edit data
             $scope.editData = function () {
