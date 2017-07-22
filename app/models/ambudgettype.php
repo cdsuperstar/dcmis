@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ambudgettype extends Model
 {
     //
-    protected $table = 'roles';
+    protected $table = 'ambudgettypes';
     protected $fillable = ['no', 'type', 'spell'];
 
 }
