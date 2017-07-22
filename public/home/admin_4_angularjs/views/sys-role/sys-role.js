@@ -60,10 +60,7 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                 .bind("changed.jstree", function (e,data) {
                                     $scope.selectedTreeData=data.instance.get_selected();
                                 })
-                                //.bind("check_node.jstree", function (e,data) {
-                                //    console.log('checked!');
-                                //
-                                //})
+
                                 .bind("show_contextmenu.jstree",function (e,data) {
                                     //获取当前模块权限
                                     Restangular.all('/sys-role/getListByModel/'+data.node.data).getList().then(function (accounts) {
@@ -81,10 +78,22 @@ angular.module("MetronicApp").controller('rolesCtrl',
                                     //save 权限
                                     var pupdateSelected = function(action,id){
                                         if(action == 'add'){
-                                            console.log(id);
+                                            Restangular.one('/sys-role/setPermOfRole/add',$scope.gridApi.selection.getSelectedRows()[0].id).post(id).then(function(res){
+                                                if (res.success) {
+                                                    showMsg(res.messages.toString(), '信息', 'lime');
+                                                } else {
+                                                    showMsg(res.errors.toString(), '错误', 'ruby');
+                                                }
+                                            });
                                         }
                                         if(action == 'remove'){
-                                            console.log(id+'---');
+                                            Restangular.one('/sys-role/setPermOfRole/remove',$scope.gridApi.selection.getSelectedRows()[0].id).post(id).then(function(res){
+                                                if (res.success) {
+                                                    showMsg(res.messages.toString(), '信息', 'lime');
+                                                } else {
+                                                    showMsg(res.errors.toString(), '错误', 'ruby');
+                                                }
+                                            });
                                         }
                                     };
 
