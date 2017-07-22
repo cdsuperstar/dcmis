@@ -17,6 +17,7 @@
                     <div id="modelTree" class="tree-demo"></div>
                 </div>
                 <div class="col col-md-6">
+                    权限列表
                     <div class="mt-checkbox-list">
 
                         <label class="mt-checkbox mt-checkbox-outline" ng-repeat="dt in privileges"> @{{dt.id}} @{{dt.display_name}}
