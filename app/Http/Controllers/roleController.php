@@ -127,6 +127,34 @@ class roleController extends Controller
     }
 
     /**
+     * set permission of role.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\models\Role $role
+     * @return \Illuminate\Http\Response
+     */
+    public function setPermOfRole(string $action,Role $role,Permission $permission)
+    {
+        Log::info($action,$role->toArray(),$permission->toArray());
+        switch($action){
+            case "add":
+                $role->attachPermission($permission);
+                break;
+            case "remove":
+                $role->detachPermission($permission);
+                break;
+        }
+
+        return response()->json(array_merge([
+                'messages' => trans('data.setsuccess', ["data" => $action]),
+                'success' => true,
+            ],[]
+            )
+        );
+
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\models\Role $role

@@ -96,7 +96,9 @@ Route::group(['prefix' => '/sys-role'], function () {
     //得到角色所拥有权限
     Route::get('{role}/roleperms','roleController@getRolePerms');
     //根据模块id得到权限
-    Route::get('getListByModel/{dcmodel}','roleController@getListByModel'); //
+    Route::get('getListByModel/{dcmodel}','roleController@getListByModel');
+    //设置角色权限
+    Route::post('setPermOfRole/{action}/{role}/{permission}','roleController@setPermOfRole');
 
     Route::put('{dcmodel}','roleController@update')->middleware(['permission:sys-role.update']); //sys-role.update
     Route::delete('{dcmodel}','roleController@destroy')->middleware(['permission:sys-role.destroy']); //sys-role.destroy

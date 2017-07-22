@@ -16,6 +16,7 @@ return [
     'destroy' => 'data ID :data deleted',
     'destroyfailed' => 'data ID :data deleted failed',
     'notfound' => 'data ID :data not found',
-    'movesuccess' =>'the :cNode moved to :pNode success'
+    'movesuccess' =>'the :cNode moved to :pNode success',
+    'setsuccess' =>'the set opt :data success'
 
 ];
