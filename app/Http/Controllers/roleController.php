@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\models\Role;
 use App\models\dcMdGrp;
+use App\models\dcmodel;
+use App\models\Permission;
 use Illuminate\Http\Request;
 use Config;
 use Log;
@@ -85,6 +87,17 @@ class roleController extends Controller
     {
         //
     }
+
+    /**
+     * get permission list by model
+     * @param dcmodel $dcmodel
+     */
+    public function getListByModel(dcmodel $dcmodel){
+        $datas = Permission::where('name','like',$dcmodel->name.'.%')->get(["id","name","display_name"]);
+        return response()->json($datas);
+
+    }
+
 
     /**
      * Update the specified resource in storage.
