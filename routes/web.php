@@ -133,9 +133,9 @@ Route::group(['prefix' => '/user-department'], function () {
 Route::group(['prefix'=>'/am-budget-lb'],function(){
     Route::get('','ambudgettypeController@index'); //
     Route::get('create','ambudgettypeController@create'); //
-    Route::put('{dcmodel}','ambudgettypeController@update'); //
+    Route::put('{ambudgettype}','ambudgettypeController@update'); //
     Route::post('','ambudgettypeController@store'); //
-    Route::delete('{permission}','ambudgettypeController@destroy'); //
+    Route::delete('{ambudgettype}','ambudgettypeController@destroy'); //
 });
 //消息
 Route::group(['prefix' => '/sys-msg'], function () {
