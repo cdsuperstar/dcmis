@@ -25,8 +25,9 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('ambudgettypes', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('no')->unique(); //编号
             $table->string('type'); //类别
-            $table->string('spell')->nullable(); //申请部门
+            $table->string('spell')->nullable(); //简拼
 
             $table->timestamps();
         });
