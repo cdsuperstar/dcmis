@@ -92,9 +92,9 @@ Route::group(['prefix' => '/sys-role'], function () {
     Route::post('{role}/{dcmodels}','roleController@postSetModels');
 
     //得到角色所拥有模块
-    Route::get('rolemodels/{role}','roleController@getRoleModels');
+    Route::get('{role}/rolemodels','roleController@getRoleModels');
     //得到角色所拥有权限
-    Route::get('roleperms/{role}','roleController@getRolePerms');
+    Route::get('{role}/roleperms','roleController@getRolePerms');
     //根据模块id得到权限
     Route::get('getListByModel/{dcmodel}','roleController@getListByModel'); //
 
