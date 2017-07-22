@@ -7,6 +7,7 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
             var tableDatas = Restangular.all('/am-budget-lb');
             i18nService.setCurrentLang('zh-cn');
 
+
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: 'add-ambudgetlb',
@@ -38,7 +39,7 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                         }
                     );
                 }, function (dcEdition) {
-                    console.log('Modal promise rejected. Reason: ', dcEdition);
+                    //console.log('Modal promise rejected. Reason: ', dcEdition);
                 });
             };
 
@@ -97,8 +98,12 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
-                $scope.datawzgrps = accounts;
                 $scope.gridOptions.data = allAccounts;
+
+                //找最大值
+                //var maxid = Math.max.apply(Math,allAccounts.map(function(item){return item.id;}));
+                // $scope.maxno = eval($scope.gridOptions.data)[eval($scope.gridOptions.data).length-1]["no"];
+                // $scope.maxno = $scope.gridOptions.data[$scope.gridOptions.data.length-1]["no"];
                 //console.log( $scope.gridOptions.data);
             });
 
