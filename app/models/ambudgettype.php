@@ -8,6 +8,6 @@ class ambudgettype extends Model
 {
     //
     protected $table = 'ambudgettypes';
-    protected $fillable = ['no', 'type', 'spell'];
+    protected $fillable = ['no', 'type', 'spell','template'];
 
 }
