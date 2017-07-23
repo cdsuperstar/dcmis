@@ -23,7 +23,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="wz000000">
+                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="最近物资编号为:[@{{ tmno }}]">
                                 </div>
                             </div>
                         </div>

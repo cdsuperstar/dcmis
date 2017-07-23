@@ -181,6 +181,22 @@ INSERT INTO public.permission_role (permission_id, role_id) VALUES (37, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (38, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (39, 1);
 
+INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (1, 'lb01', '物资预算', 'wz', '1', '2017-07-23 15:17:11', '2017-07-23 15:17:11');
+INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (2, 'lb02', '工程预算', 'gc', '2', '2017-07-23 15:17:45', '2017-07-23 15:17:45');
+INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (3, 'lb03', '服务预算', 'fw', '3', '2017-07-23 15:18:05', '2017-07-23 15:18:05');
+INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (4, 'lb04', '其他预算', 'qt', '4', '2017-07-23 15:18:27', '2017-07-23 15:18:27');
+
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (1, '2017', 1, 3, 10000, null, '2017-07-23 15:20:17', '2017-07-23 15:20:17');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (2, '2017', 2, 3, 50000, null, '2017-07-23 15:20:28', '2017-07-23 15:20:28');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (3, '2017', 3, 3, 10000, null, '2017-07-23 15:20:35', '2017-07-23 15:20:35');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (4, '2017', 4, 3, 10000, null, '2017-07-23 15:20:45', '2017-07-23 15:20:45');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (5, '2017', 1, 4, 10000, null, '2017-07-23 15:20:59', '2017-07-23 15:20:59');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (6, '2017', 2, 4, 30000, null, '2017-07-23 15:21:09', '2017-07-23 15:21:09');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (7, '2017', 3, 4, 3000, '', '2017-07-23 15:21:25', '2017-07-23 15:21:25');
+INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (8, '2017', 4, 4, 10000, null, '2017-07-23 15:21:41', '2017-07-23 15:22:44');
+
+
+
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
 select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));
 select setval('unitgrps_id_seq', (select max(id) + 1 from unitgrps));

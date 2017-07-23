@@ -417,10 +417,10 @@
                     <label class="col-md-2 control-label"> 类  别 </label>
                     <div class="col-md-4">
                         <ui-select ng-model="basket.type" theme="bootstrap">
-                            <ui-select-match placeholder="选择类别...">@{{$select.selected.label}}</ui-select-match>
+                            <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
-                                    repeat="tmplist.value as tmplist in listnames track by tmplist.value">
-                                @{{tmplist.label}}
+                                    repeat="tmplist.id as tmplist in listnames | filter: $select.search">
+                                <div ng-bind-html="tmplist.type | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
                     </div>

@@ -19,8 +19,8 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                         var items = $scope.datawzgrps;
                         var result = [];
                         for (var item, i = 0; item = items[i++];) {
-                            var name = item.mclass;
-                            var tmno = item.mno;
+                            var name = item.class;
+                            var tmno = item.no;
 
                             if (!(name in lookup)) {
                                 lookup[name] = 1;
@@ -61,11 +61,11 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
 
             $scope.delData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
-                selectdcmodels.forEach(function (deluser) {
-                        //console.log(deluser);
-                        deluser.entity.remove().then(function (res) {
+                selectdcmodels.forEach(function (deldata) {
+                        //console.log(deldata);
+                        deldata.entity.remove().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -80,9 +80,9 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
             //edit data
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
+                toEditRows.forEach(function (editdata) {
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
+                        return user.id === editdata.entity.id;
                     });
                     userWithId.password_confirmation = userWithId.password;
                     //console.log(userWithId);
@@ -111,11 +111,11 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: '编号', field: 'mno', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
-                    {name: '物资分类', field: 'mclass', width: '120',enableCellEdit: true,enableHiding: false},
-                    {name: '物资名称',width: '260', field: 'mname', enableCellEdit: true},
-                    {name: '单位',width: '100',field: 'munit', enableCellEdit: true},
-                    {name: '物资简拼', width: '150',field: 'mspell',enableCellEdit: true,visible:true},
+                    {name: '编号', field: 'no', enableCellEdit: false, width: '120',enableFiltering: true,enableColumnResizing:false},
+                    {name: '物资分类', field: 'class', width: '120',enableCellEdit: false,enableHiding: false},
+                    {name: '物资名称',width: '260', field: 'name', enableCellEdit: true},
+                    {name: '单位',width: '100',field: 'measunit', enableCellEdit: true},
+                    {name: '物资简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 

@@ -45,6 +45,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">  类别模板  </label>
+                            <div class="col-md-8">
+                                <div class="input-icon right">
+                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
+                                    <ui-select ng-model="dcEdition.template">
+                                        <ui-select-match placeholder="选择模板...">@{{$select.selected.label}}</ui-select-match>
+                                        <ui-select-choices
+                                                repeat="tmplist.value as tmplist in templatelist track by tmplist.value">
+                                            @{{tmplist.label}}
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-action" style="text-align: center;">
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <a href="javascript:;" class="btn green" ng-click="confirm(dcEdition)" ng-disabled="dcEditionFm.$invalid">

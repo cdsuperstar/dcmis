@@ -61,11 +61,11 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
 
             $scope.delData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
-                selectdcmodels.forEach(function (deluser) {
-                        //console.log(deluser);
-                        deluser.entity.remove().then(function (res) {
+                selectdcmodels.forEach(function (deldata) {
+                        //console.log(deldata);
+                        deldata.entity.remove().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -80,9 +80,9 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
             //edit data
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
+                toEditRows.forEach(function (editdata) {
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
+                        return user.id === editdata.entity.id;
                     });
                     userWithId.password_confirmation = userWithId.password;
                     //console.log(userWithId);
@@ -111,13 +111,13 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: '编号', field: 'mno', enableCellEdit: true, width: '80',enableFiltering: true,enableColumnResizing:false},
-                    {name: '公司名称', field: 'name', width: '180',enableCellEdit: true,enableHiding: false},
-                    {name: '负责人',width: '100', field: 'cname', enableCellEdit: true},
-                    {name: '联络人', width: '100',field: 'mname',enableCellEdit: true,visible:true},
-                    {name: '固定电话', width: '120',field: 'ctel',enableCellEdit: true,visible:true},
-                    {name: '联系电话', width: '120',field: 'mtel',enableCellEdit: true,visible:true},
-                    {name: '公司地址',width: '200',field: 'address', enableCellEdit: true},
+                    {name: 'ID', field: 'id', enableCellEdit: false, width: '80',enableFiltering: true,enableColumnResizing:false},
+                    {name: '公司名称', field: 'compname', width: '180',enableCellEdit: true,enableHiding: false},
+                    {name: '负责人',width: '100', field: 'principal', enableCellEdit: true},
+                    {name: '联络人', width: '100',field: 'contacter',enableCellEdit: true,visible:true},
+                    {name: '固定电话', width: '120',field: 'tel',enableCellEdit: true,visible:true},
+                    {name: '联系电话', width: '120',field: 'phone',enableCellEdit: true,visible:true},
+                    {name: '公司地址',width: '200',field: 'compaddr', enableCellEdit: true},
                     {name: '备注', width: '200',field: 'remark',enableCellEdit: true,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}

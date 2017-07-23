@@ -9,7 +9,6 @@
                         <div class="caption font-green-sharp">
                             <i class="icon-settings font-green-sharp"></i>
                             <span class="caption-subject bold uppercase"> 添加供应商 </span>
-                            <span class="caption-helper"> 最近供应商编号为:[@{{ tmno }}] </span>
                         </div>
                         <div class="tools">
                             {{--<a href="" class="fullscreen"> </a>--}}
@@ -19,20 +18,11 @@
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 编  号 </label>
-                            <div class="col-md-8">
-                                <div class="input-icon right">
-                                    <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="GYS000">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-md-3 control-label"> 公司名称 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.name" placeholder="公司名称">
+                                    <input type="text" class="form-control" ng-model="dcEdition.compname" placeholder="公司名称">
                                 </div>
                             </div>
                         </div>
@@ -40,7 +30,7 @@
                             <label class="col-md-3 control-label"> 负责人  </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
-                                    <input type="text" class="form-control" ng-model="dcEdition.cname" placeholder="负责人">
+                                    <input type="text" class="form-control" ng-model="dcEdition.principal" placeholder="负责人">
                                 </div>
                             </div>
                         </div>
@@ -49,7 +39,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mname" placeholder="联络人">
+                                    <input type="text" class="form-control" ng-model="dcEdition.contacter" placeholder="联络人">
                                 </div>
                             </div>
                         </div>
@@ -58,7 +48,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.mtel" placeholder="联系电话">
+                                    <input type="number" class="form-control" ng-model="dcEdition.phone" placeholder="联系电话">
                                 </div>
                             </div>
                         </div>
@@ -66,7 +56,7 @@
                             <label class="col-md-3 control-label"> 固定电话  </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
-                                    <input type="number" class="form-control" ng-model="dcEdition.ctel" placeholder="固定电话">
+                                    <input type="number" class="form-control" ng-model="dcEdition.tel" placeholder="固定电话">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +64,7 @@
                             <label class="col-md-3 control-label"> 公司地址 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
-                                    <input type="text" class="form-control" ng-model="dcEdition.address" placeholder="公司地址">
+                                    <input type="text" class="form-control" ng-model="dcEdition.compaddr" placeholder="公司地址">
                                 </div>
                             </div>
                         </div>

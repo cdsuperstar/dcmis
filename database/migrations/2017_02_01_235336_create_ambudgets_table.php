@@ -26,8 +26,9 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('no')->unique(); //编号
-            $table->string('type'); //类别
+            $table->string('type')->nullable(); //类别
             $table->string('spell')->nullable(); //简拼
+            $table->string('template')->nullable(); //模板
 
             $table->timestamps();
         });
@@ -75,6 +76,7 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('class'); //物资分类
+            $table->string('no'); //物资编号
             $table->string('name'); //物资名称
             $table->string('measunit')->nullable(); //单位
             $table->string('spell')->nullable(); //简拼

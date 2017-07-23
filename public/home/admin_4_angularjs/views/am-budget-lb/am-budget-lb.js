@@ -6,6 +6,8 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
 
             var tableDatas = Restangular.all('/am-budget-lb');
             i18nService.setCurrentLang('zh-cn');
+            //预算类别模板
+            $scope.templatelist = [{ value: 1, label: '物资模板' }, { value: 2, label: '工程模板' }, { value: 3, label: '服务模板' }, { value: 4, label: '其他模板' }];
 
 
             $scope.addData = function () {
@@ -71,6 +73,14 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                     {name: '编号', field: 'no', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
                     {name: '类别名称',width: '260', field: 'type', enableCellEdit: true},  //主要用来生成编号
                     {name: '类别简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
+                    {name: '类别模板', width: '150',field: 'template',enableCellEdit: true,visible:true,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: $scope.templatelist,cellFilter: 'templateGender',
+                        filter: {
+                            term: 1,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: $scope.templatelist}
+                    },
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 
@@ -110,5 +120,23 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
         }
     ]
 )
+
+    .filter('templateGender', function() {
+        var templateHash = {
+            1: '物资模板',
+            2: '工程模板',
+            3: '服务模板',
+            4: '其他模板'
+        };
+
+        return function(input) {
+            if (!input){
+                return '';
+            } else {
+                return templateHash[input];
+            }
+        };
+    })
+
 ;
 
