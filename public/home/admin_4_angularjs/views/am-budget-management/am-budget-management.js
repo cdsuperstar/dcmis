@@ -16,11 +16,27 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 tmpu ={value:yeararr[i],label:yeararr[i]};
                 untarr.push(tmpu);
             }
-            $scope.uigrtyear = untarr; //转换成uigrid可识别的模式[{value:xxx,lebel:'xxx'}]
+            $scope.uigrtyear = untarr; //转换成uigrid可识别的模式[{value:xxx,label:'xxx'}]
             $scope.tyear = yeararr;
             //console.log($scope.uigrtyear);
             //预算类别列表
-            $scope.listnames = [{ value: 1, label: '物资预算' }, { value: 2, label: '工程预算' }, { value: 3, label: '服务预算' }, { value: 4, label: '其他预算' }];
+            Restangular.all('/am-budget-lb').getList().then(function (accounts) {
+                //console.log(accounts);
+                var lbarr = [];
+                var tmpu = {};
+                var lbHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                    tmpu ={value:accounts[i].id,label:accounts[i].type};
+                    lbHash[accounts[i].id]=accounts[i].type;
+                    lbarr.push(tmpu);
+                }
+                $scope.listnames = lbarr; //转换成uigrid可识别的模式
+                $scope.gridOptions.columnDefs[2].filter.selectOptions=lbarr;
+                $scope.gridOptions.columnDefs[2].editDropdownOptionsArray=lbarr;
+                $scope.gridOptions.columnDefs[2].lbHash =  lbHash ;
+            });
+
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
                 //console.log(accounts);
@@ -35,9 +51,9 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 }
                 $scope.uigrunitgrps = untarr; //转换成uigrid可识别的模式
                 $scope.untigrps = accounts;
-                $scope.gridOptions.columnDefs[2].filter.selectOptions=untarr;
-                $scope.gridOptions.columnDefs[2].editDropdownOptionsArray=untarr;
-                $scope.gridOptions.columnDefs[2].unitHash =  unitHash ;
+                $scope.gridOptions.columnDefs[3].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[3].editDropdownOptionsArray=untarr;
+                $scope.gridOptions.columnDefs[3].unitHash =  unitHash ;
             });
             //
             var tableDatas = Restangular.all('/am-budget-management');
@@ -51,11 +67,11 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                         $scope.$validationOptions = validationConfig;
 
                         //初始化
-                        $scope.addBudget = { syear : currentYear};  //初始化为当前年度
-                        //预算类别
-                        $scope.addBudget.type = 1; //初始值为物资预算
-                        ////////////机构
-                        $scope.addBudget.unit = 3;  //有值的情况下定义选择项
+                        $scope.addBudget = { syear : currentYear,type:1,unit:3};  //初始化为当前年度
+                        // //预算类别
+                        // $scope.addBudget.type = "lb01"; //初始值为物资预算
+                        // ////////////机构
+                        // $scope.addBudget.unit = 3;  //有值的情况下定义选择项
 
 
                     }],
@@ -87,11 +103,11 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
             };
 
             $scope.delData = function () {
-                var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
-                selectUsers.forEach(function (deluser) {
-                        deluser.entity.remove().then(function (res) {
+                var selectDatas = $scope.gridApi.selection.getSelectedGridRows();
+                selectDatas.forEach(function (deldata) {
+                        deldata.entity.remove().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -104,9 +120,9 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
             //$scope.editdataids = [];
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
+                toEditRows.forEach(function (editdata) {
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
+                        return user.id === editdata.entity.id;
                     });
                     userWithId.password_confirmation = userWithId.password;
                     userWithId.put().then(function (res) {
@@ -137,7 +153,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 enableCellEditOnFocus:true,
                 columnDefs: [
                     {name: 'id', field: 'id',width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
-                    {name: '年度', field: 'syear',width: '80',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '年度', field: 'syear',width: '100',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: $scope.uigrtyear,cellFilter: 'yearGender',
@@ -146,25 +162,25 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '部门', field: 'unit',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '预算类别', field: 'type',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
                             term:1,
                             type: uiGridConstants.filter.SELECT,
+                            selectOptions: []}
+                    },
+                    {name: '部门', field: 'unit',width: '230',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                        filter: {
+                            term:3,
+                            type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '预算类别', field: 'type',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
-                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: $scope.listnames,cellFilter: 'yslbGender',
-                        filter: {
-                            term: 1,
-                            type: uiGridConstants.filter.SELECT,
-                            selectOptions: $scope.listnames}
-                    },
-                    {name: '金额', field: 'total',width: '70',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '金额', field: 'total',width: '100',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '备注', field: 'remark',width: '180',enableCellEdit: true,enableColumnMenu: true,enableHiding: true,
+                    {name: '备注', field: 'remark',width: '100',enableCellEdit: true,enableColumnMenu: true,enableHiding: true,
                         cellTooltip: function(row){ return row.entity.remark; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
@@ -242,23 +258,10 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
         };
     })
 
-    .filter('yslbGender', function() {
-        var yslbHash = {
-            1: '物资预算',
-            2: '工程预算',
-            3: '服务预算',
-            4: '其他预算'
-        };
-        return function(input) {
-            if (!input){
-                return '';
-            } else {
-                return yslbHash[input];
-            }
-        };
-    })
     .filter('dFilterHash',function(){
         return function(v,h){
+            if (h==='undefined') return '';
+            if (h[v]==='undefined') return '';
             return h[v];
         }
     })

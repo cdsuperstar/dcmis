@@ -43,8 +43,8 @@
                                 <ui-select ng-model="addBudget.unit">
                                     <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices
-                                            repeat="category.id as category in untigrps track by category.id">
-                                        @{{category.name}}
+                                            repeat="category.id as category in untigrps | filter: $select.search">
+                                        <div ng-bind-html="category.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
