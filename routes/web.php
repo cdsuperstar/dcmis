@@ -130,6 +130,8 @@ Route::group(['prefix' => '/user-department'], function () {
     //设置为成员
     Route::post('setmember','unitgrpController@postSetMember')->middleware(['permission:user-department.setmember']);  // user-department.setmember  //参数1为机构 参数2为用户
 });
+
+//预算类别
 Route::group(['prefix'=>'/am-budget-lb'],function(){
     Route::get('','ambudgettypeController@index'); //
     Route::get('create','ambudgettypeController@create'); //
@@ -137,6 +139,25 @@ Route::group(['prefix'=>'/am-budget-lb'],function(){
     Route::post('','ambudgettypeController@store'); //
     Route::delete('{ambudgettype}','ambudgettypeController@destroy'); //
 });
+
+// 物资目录
+Route::group(['prefix'=>'/icon-basket-setindex'],function(){
+    Route::get('','ambaseasController@index'); //
+    Route::get('create','ambaseasController@create'); //
+    Route::put('{ambaseas}','ambaseasController@update'); //
+    Route::post('','ambaseasController@store'); //
+    Route::delete('{ambaseas}','ambaseasController@destroy'); //
+});
+
+// 供应商目录
+Route::group(['prefix'=>'/icon-basket-setsupplier'],function(){
+    Route::get('','amsupplierController@index'); //
+    Route::get('create','amsupplierController@create'); //
+    Route::put('{amsupplier}','amsupplierController@update'); //
+    Route::post('','amsupplierController@store'); //
+    Route::delete('{amsupplier}','amsupplierController@destroy'); //
+});
+
 //消息
 Route::group(['prefix' => '/sys-msg'], function () {
     //得到自己信息
