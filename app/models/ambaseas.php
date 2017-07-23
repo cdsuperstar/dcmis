@@ -8,6 +8,6 @@ class ambaseas extends Model
 {
     //
     protected $table = 'ambaseass';
-    protected $fillable = ['class', 'name', 'measunit','spell'];
+    protected $fillable = ['class', 'no','name', 'measunit','spell'];
 
 }
