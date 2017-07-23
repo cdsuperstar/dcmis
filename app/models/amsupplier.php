@@ -8,6 +8,6 @@ class amsupplier extends Model
 {
     //
     protected $table = 'amsuppliers';
-    protected $fillable = ['compname', 'principal','tel', 'phone','compaddr', 'remark'];
+    protected $fillable = ['compname', 'principal','contacter','tel', 'phone','compaddr', 'remark'];
 
 }
