@@ -3,7 +3,7 @@
 angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('wz.json');
+            var tableDatas = Restangular.all('/icon-basket-setsupplier');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
@@ -13,25 +13,6 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
                     scope: $scope,
                     controller: ['$scope', function ($scope) {
                         //$scope.$validationOptions = validationConfig;
-                        //二级联动start 物品分类
-                        //distinct json mclass字段  开始
-                        var lookup = {};
-                        var items = $scope.datawzgrps;
-                        var result = [];
-                        for (var item, i = 0; item = items[i++];) {
-                            var name = item.mclass;
-                            var tmno = item.mno;
-
-                            if (!(name in lookup)) {
-                                lookup[name] = 1;
-                                result.push(name);
-                            }
-                        }
-                        //结束
-                        $scope.tmclass =result; //将物资分类的数组赋过去
-                        $scope.tmno=tmno; //显示最近编号
-
-                        $scope.dcEdition={mclass:$scope.tmclass[0]}; //初始化第一个分类为默认值
 
                         //end
                     }],
@@ -42,7 +23,7 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
-                    console.log(dcEdition);
+                    // console.log(dcEdition);
                     tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
@@ -111,7 +92,7 @@ angular.module("MetronicApp").controller('iconbasketsetsupplierCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: 'ID', field: 'id', enableCellEdit: false, width: '80',enableFiltering: true,enableColumnResizing:false},
+                    {name: 'ID', field: 'id', enableCellEdit: false, width: '50',enableFiltering: false,enableColumnResizing:false},
                     {name: '公司名称', field: 'compname', width: '180',enableCellEdit: true,enableHiding: false},
                     {name: '负责人',width: '100', field: 'principal', enableCellEdit: true},
                     {name: '联络人', width: '100',field: 'contacter',enableCellEdit: true,visible:true},

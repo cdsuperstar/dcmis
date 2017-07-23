@@ -3,7 +3,7 @@
 angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('wz.json');
+            var tableDatas = Restangular.all('/icon-basket-setindex');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {
@@ -31,7 +31,7 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                         $scope.tmclass =result; //将物资分类的数组赋过去
                         $scope.tmno=tmno; //显示最近编号
 
-                        $scope.dcEdition={mclass:$scope.tmclass[0]}; //初始化第一个分类为默认值
+                        // $scope.dcEdition={mclass:$scope.tmclass[0]}; //初始化第一个分类为默认值
 
                         //end
                     }],
@@ -113,7 +113,7 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                 columnDefs: [
                     {name: '编号', field: 'no', enableCellEdit: false, width: '120',enableFiltering: true,enableColumnResizing:false},
                     {name: '物资分类', field: 'class', width: '120',enableCellEdit: false,enableHiding: false},
-                    {name: '物资名称',width: '260', field: 'name', enableCellEdit: true},
+                    {name: '物资名称',width: '180', field: 'name', enableCellEdit: true},
                     {name: '单位',width: '100',field: 'measunit', enableCellEdit: true},
                     {name: '物资简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},

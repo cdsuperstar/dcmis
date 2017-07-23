@@ -23,14 +23,14 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mno" placeholder="最近物资编号为:[@{{ tmno }}]">
+                                    <input type="text" class="form-control" ng-model="dcEdition.no" placeholder="最近物资编号为:[@{{ tmno }}]">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 物资分类 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.mclass" theme="bootstrap">
+                                <ui-select ng-model="dcEdition.class" theme="bootstrap">
                                     <ui-select-match placeholder="选择分类...">@{{$select.selected}}</ui-select-match>
                                     <ui-select-choices repeat="tmparr in tmclass | filter: $select.search">
                                         <div ng-bind-html="tmparr | highlight: $select.search"></div>
@@ -55,7 +55,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.munit" placeholder="单位">
+                                    <input type="text" class="form-control" ng-model="dcEdition.measunit" placeholder="单位">
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcEdition.mspell" placeholder="物资简拼">
+                                    <input type="text" class="form-control" ng-model="dcEdition.spell" placeholder="物资简拼">
                                 </div>
                             </div>
                         </div>

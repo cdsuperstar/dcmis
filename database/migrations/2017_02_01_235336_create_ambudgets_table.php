@@ -26,9 +26,9 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('no')->unique(); //编号
-            $table->string('type')->nullable(); //类别
-            $table->string('spell')->nullable(); //简拼
-            $table->string('template')->nullable(); //模板
+            $table->string('type'); //类别
+            $table->string('spell'); //简拼
+            $table->string('template'); //模板
 
             $table->timestamps();
         });
@@ -41,10 +41,10 @@ class CreateAmbudgetsTable extends Migration
 
 //            $table->string('no')->unique(); //申请表编号9
 //            $table->text('summary')->nullable(); //项目名称
-            $table->string('syear')->nullable(); //年度
-            $table->integer('type')->nullable(); //类别
-            $table->integer('unit')->nullable(); //申请部门
-            $table->decimal('total')->nullable(); //总金额
+            $table->string('syear'); //年度
+            $table->integer('type'); //类别
+            $table->integer('unit'); //申请部门
+            $table->decimal('total'); //总金额
 //            $table->decimal('requester')->nullable(); //申报人
 //            $table->decimal('urchasingstatus')->nullable(); //采购状态
             $table->text('remark')->nullable(); //备注
@@ -59,10 +59,10 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->text('compname'); //公司名
-            $table->string('principal'); //负责人
+            $table->string('principal')->nullable(); //负责人
             $table->string('contacter'); //联络人
             $table->string('tel')->nullable(); //固定电话
-            $table->string('phone')->nullable(); //联系电话
+            $table->string('phone'); //联系电话
             $table->string('compaddr')->nullable(); //公司地址
             $table->text('remark')->nullable(); //备注
 
@@ -78,8 +78,8 @@ class CreateAmbudgetsTable extends Migration
             $table->string('class'); //物资分类
             $table->string('no'); //物资编号
             $table->string('name'); //物资名称
-            $table->string('measunit')->nullable(); //单位
-            $table->string('spell')->nullable(); //简拼
+            $table->string('measunit'); //单位
+            $table->string('spell'); //简拼
 
             $table->timestamps();
         });

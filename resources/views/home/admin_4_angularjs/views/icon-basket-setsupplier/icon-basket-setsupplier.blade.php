@@ -48,7 +48,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.phone" placeholder="联系电话">
+                                    <input type="text" class="form-control" ng-model="dcEdition.phone" placeholder="联系电话">
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                             <label class="col-md-3 control-label"> 固定电话  </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
-                                    <input type="number" class="form-control" ng-model="dcEdition.tel" placeholder="固定电话">
+                                    <input type="text" class="form-control" ng-model="dcEdition.tel" placeholder="固定电话">
                                 </div>
                             </div>
                         </div>

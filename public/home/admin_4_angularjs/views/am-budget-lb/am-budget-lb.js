@@ -28,7 +28,7 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
-                    console.log(dcEdition);
+                    // console.log(dcEdition);
                     tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
