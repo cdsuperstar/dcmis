@@ -41,8 +41,8 @@ class CreateAmbudgetsTable extends Migration
 //            $table->string('no')->unique(); //申请表编号9
 //            $table->text('summary')->nullable(); //项目名称
             $table->string('syear')->nullable(); //年度
-            $table->string('type'); //类别
-            $table->string('unit')->nullable(); //申请部门
+            $table->integer('type')->nullable(); //类别
+            $table->integer('unit')->nullable(); //申请部门
             $table->decimal('total')->nullable(); //总金额
 //            $table->decimal('requester')->nullable(); //申报人
 //            $table->decimal('urchasingstatus')->nullable(); //采购状态

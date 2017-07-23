@@ -24,17 +24,18 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 //console.log(accounts);
                 var lbarr = [];
                 var tmpu = {};
-                var lbHash=[];
+                var lbHash=[] ;
                 for(var i=0;i<accounts.length;i++){
                     //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
                     tmpu ={value:accounts[i].id,label:accounts[i].type};
-                    lbHash[accounts[i].id]=accounts[i].type;
+                    lbHash[accounts[i].id] = accounts[i].type;
                     lbarr.push(tmpu);
                 }
                 $scope.listnames = lbarr; //转换成uigrid可识别的模式
+
                 $scope.gridOptions.columnDefs[2].filter.selectOptions=lbarr;
                 $scope.gridOptions.columnDefs[2].editDropdownOptionsArray=lbarr;
-                $scope.gridOptions.columnDefs[2].lbHash =  lbHash ;
+                $scope.gridOptions.columnDefs[2].lbHash =  lbHash;
             });
 
             //机构列表
@@ -85,7 +86,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     if(!addBudget.syear||!addBudget.type||!addBudget.unit||!addBudget.total){
                         showMsg('必要的信息未填写！', '错误', 'ruby');
                     }else{
-                        console.log(addBudget)
+                        //console.log(addBudget)
                         tableDatas.post(addBudget).then(
                             function (res) {
                                 if (res.success) {
@@ -260,8 +261,8 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
 
     .filter('dFilterHash',function(){
         return function(v,h){
-            if (h==='undefined') return '';
-            if (h[v]==='undefined') return '';
+            if (h=== undefined) return '';
+            if (h[v]===undefined) return '';
             return h[v];
         }
     })
