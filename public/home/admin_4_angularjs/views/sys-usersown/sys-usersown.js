@@ -29,7 +29,7 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
 
 
             $scope.edituserprofile = function () { //修改
-                console.log($scope.userprofile);
+                // console.log($scope.userprofile);
                 Restangular.all('sys-usersown').post($scope.userprofile).then(function(res){
                     if (res.success) {
                         showMsg(res.messages.toString(), '信息', 'lime');
