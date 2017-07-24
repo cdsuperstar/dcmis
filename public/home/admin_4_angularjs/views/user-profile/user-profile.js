@@ -7,6 +7,23 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
 
             var tableDatas = Restangular.all('/sys-usersown');
 
+            //机构列表
+            Restangular.all('/user-department').getList().then(function (accounts) {
+                //console.log(accounts);
+                var untarr = [];
+                var tmpu = {};
+                var unitHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    unitHash[accounts[i].id]=accounts[i].name;
+                    untarr.push(tmpu);
+                }
+                $scope.gridOptions.columnDefs[11].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[11].editDropdownOptionsArray=untarr;
+                $scope.gridOptions.columnDefs[11].unitHash =  unitHash ;
+            });
+
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
                 toEditRows.forEach(function (edituser) {
@@ -43,11 +60,13 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 enableHorizontalScrollbar :2,
                 columnDefs: [
                     {name: 'ID', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
+                    {name: '姓名', field: 'user.name',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true},
+                    {name: '邮箱', field: 'user.email',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true},
                     {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
                     {name: '昵称', field: 'nickname',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:false},
                     {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true,
                         filter: {
-                            term: 'sex',
+                            term: '男',
                             condition: uiGridConstants.filter.STARTS_WITH,
                             flags: { caseSensitive: false },         //区分大小写,
                             type: uiGridConstants.filter.SELECT,
@@ -65,7 +84,15 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                     {name: '办公电话', field: 'tel',width: '120',enableCellEdit: true,enableColumnMenu: true},
                     {name: '办公地址', field: 'address',width: '150',enableCellEdit: true,enableColumnMenu: true},
                     {name: '个人职务', field: 'duties',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '所属部门', field: 'unitid',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '部门', field: 'unitid',width: '230',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                        filter: {
+                            term:3,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
+                    },
+
                     {name: '个人简介', field: 'memo',width: '150',enableCellEdit: true,enableColumnMenu: true},
                 ],
                 enablePagination: true, //是否分页，默认为true
@@ -176,6 +203,12 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
             }
         };
     })
-
+    .filter('dFilterHash',function(){
+        return function(v,h){
+            if (h=== undefined) return '';
+            if (h[v]===undefined) return '';
+            return h[v];
+        }
+    })
 ;
 

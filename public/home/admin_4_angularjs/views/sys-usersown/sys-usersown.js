@@ -38,8 +38,6 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
                         showMsg(res.errors.toString(), '错误', 'ruby');
                     }
                 });
-                console.log($scope.userprofile);
-
             }
 
             $scope.showdetail = function () { //重获数据

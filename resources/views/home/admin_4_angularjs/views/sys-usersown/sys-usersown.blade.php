@@ -79,7 +79,7 @@
                     {{--</ui-select-choices>--}}
                 {{--</ui-select>--}}
 
-                <ui-select ng-model="userprofile.unitid" theme="bootstrap" search-enabled="true">
+                <ui-select ng-model="userprofile.unitid" theme="bootstrap" readonly="true" disabled="true" search-enabled="true">
                     <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices
                             repeat="category.id as category in untigrps | filter: $select.search">
