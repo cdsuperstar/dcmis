@@ -39,11 +39,11 @@ use LaravelArdent\Ardent\Ardent;
 class userprofile extends Model
 {
     protected $table='userprofiles';
-    protected $fillable = ['id','no', 'name', 'sex', 'phone', 'birth', 'tel', 'address','duties','unitid', 'memo','signpic'];
+    protected $fillable = ['id','no', 'nickname', 'sex', 'phone', 'birth', 'tel', 'address','duties','unitid', 'memo','signpic'];
 //    public static $relationsData = array(
 //        'user' => array(self::BELONGS_TO, 'App\User'),
 //    );
-//    public function user(){
-//        return $this->belongsTo('App\User','id');
-//    }
+    public function user(){
+        return $this->belongsTo('App\User','id');
+    }
 }

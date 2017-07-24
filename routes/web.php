@@ -73,7 +73,7 @@ Route::group(['prefix' => '/sys-usersown'], function () {
     //保存用户个人信息
     Route::post('','User\userprofileController@store');
     //保存用户配置信息
-    Route::put('{id}','User\userprofileController@update')->middleware(['permission:sys-users.update']); //sys-users.update
+    Route::put('{userprofile}','User\userprofileController@update')->middleware(['permission:sys-users.update']); //sys-users.update
 });
 
 //预算管理
@@ -174,7 +174,7 @@ Route::group(['prefix' => '/sys-msg'], function () {
 });
 
 // Debug all sqls
-DB::listen(function ($event) {
-    Log::info($event->sql);
-    Log::info($event->bindings);
-});
+//DB::listen(function ($event) {
+//    Log::info($event->sql);
+//    Log::info($event->bindings);
+//});

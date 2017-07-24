@@ -19,7 +19,7 @@ class CreateUserprofilesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('no')->nullable()->unique();
-            $table->string('name')->nullable();
+            $table->string('nickname')->nullable();
             $table->string('sex', 1)->nullable();
             $table->string('phone')->nullable();
             $table->date('birth')->nullable();

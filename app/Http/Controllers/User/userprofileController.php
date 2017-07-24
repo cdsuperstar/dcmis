@@ -7,6 +7,7 @@ use App\models\userprofile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Config;
+use Illuminate\Support\Facades\Input;
 use Storage;
 use Image;
 use Log;
@@ -22,7 +23,7 @@ class userprofileController extends Controller
     public function index()
     {
         //
-        $datas = userprofile::all();
+        $datas = userprofile::with('user')->get();
         return response()->json($datas);
 
     }
@@ -123,8 +124,8 @@ class userprofileController extends Controller
     public function update(Request $request, userprofile $userprofile)
     {
         //
-        if ($userprofile) {
 
+        if ($userprofile) {
             if ($userprofile->update($request->toArray())) {
                 return response()->json(array_merge([
                         'messages' => trans('data.update', ["data" => $userprofile->id]),
@@ -133,7 +134,7 @@ class userprofileController extends Controller
                     )
                 );
             } else {
-                return response()->json(['errors' => $userprofile->errors()->all()]);
+                return response()->json(['errors' => $userprofile->name." update failed"]);
             }
         }
         return response()->json(['errors' => [trans('data.notfound')]]);
