@@ -24,4 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 class amotbudget extends Model
 {
     //
+    protected $table = 'amotbudgets;';
+    protected $fillable = ['name','bdg','otremark','addr','picharge','picphone','contrprice','purchway','purchstate','amsuppliers_id','reimstate','total','remark'];
+
 }

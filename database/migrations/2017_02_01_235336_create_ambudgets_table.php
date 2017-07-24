@@ -130,7 +130,7 @@ class CreateAmbudgetsTable extends Migration
         });
 
         /**
-         *
+         * 工程采购表
          */
         Schema::create('amcontrbudgets', function (Blueprint $table) {
             $table->increments('id');
@@ -243,10 +243,6 @@ class CreateAmbudgetsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('amassregs');
-        Schema::dropIfExists('ambudget_amotbudget');
-        Schema::dropIfExists('ambudget_amsvbudget');
-        Schema::dropIfExists('ambudget_amcontrbudget');
-        Schema::dropIfExists('ambudget_amasbudget');
         Schema::dropIfExists('amotbudgets');
         Schema::dropIfExists('amsvbudgets');
         Schema::dropIfExists('amcontrbudgets');

@@ -56,4 +56,7 @@ use Illuminate\Database\Eloquent\Model;
 class amcontrbudget extends Model
 {
     //
+    protected $table = 'amcontrbudgets';
+    protected $fillable = ['name','bdg','req','addr','picharge','picphone','price','purchway','purchstate','amsuppliers_id','reimstate','contrno','total','remark'];
+
 }

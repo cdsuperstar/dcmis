@@ -38,4 +38,7 @@ use Illuminate\Database\Eloquent\Model;
 class amasbudget extends Model
 {
     //
+    protected $table = 'amasbudgets';
+    protected $fillable = ['meas','amt','bdgprice','purchprice','purchway','purchstate','reimstate','contrno','asstate','total','remark'];
+
 }

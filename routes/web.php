@@ -144,6 +144,51 @@ Route::group(['prefix'=>'/am-budget-lb'],function(){
     Route::delete('{ambudgettype}','ambudgettypeController@destroy'); //
 });
 
+//发起采购 采购申请表
+Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
+    Route::get('','amapplicationController@index'); //
+    Route::get('create','amapplicationController@create'); //
+    Route::put('{amapplication}','amapplicationController@update'); //
+    Route::post('','amapplicationController@store'); //
+    Route::delete('{amapplication}','amapplicationController@destroy'); //
+});
+
+///物资采购表
+Route::group(['prefix'=>'/amasbudgets'],function(){
+    Route::get('','amasbudgetController@index'); //
+    Route::get('create','amasbudgetController@create'); //
+    Route::put('{amasbudget}','amasbudgetController@update'); //
+    Route::post('','amasbudgetController@store'); //
+    Route::delete('{amasbudget}','amasbudgetController@destroy'); //
+});
+
+///工程采购表
+Route::group(['prefix'=>'/amcontrbudgets'],function(){
+    Route::get('','amcontrbudgetController@index'); //
+    Route::get('create','amcontrbudgetController@create'); //
+    Route::put('{amcontrbudget}','amcontrbudgetController@update'); //
+    Route::post('','amcontrbudgetController@store'); //
+    Route::delete('{amcontrbudget}','amcontrbudgetController@destroy'); //
+});
+
+///服务采购表
+Route::group(['prefix'=>'/amsvbudgets'],function(){
+    Route::get('','amsvbudgetController@index'); //
+    Route::get('create','amsvbudgetController@create'); //
+    Route::put('{amsvbudget}','amsvbudgetController@update'); //
+    Route::post('','amsvbudgetController@store'); //
+    Route::delete('{amsvbudget}','amsvbudgetController@destroy'); //
+});
+
+///其他采购表
+Route::group(['prefix'=>'/amotbudgets'],function(){
+    Route::get('','amotbudgetController@index'); //
+    Route::get('create','amotbudgetController@create'); //
+    Route::put('{amotbudget}','amotbudgetController@update'); //
+    Route::post('','amotbudgetController@store'); //
+    Route::delete('{amotbudget}','amotbudgetController@destroy'); //
+});
+
 // 物资目录
 Route::group(['prefix'=>'/icon-basket-setindex'],function(){
     Route::get('','ambaseasController@index'); //
