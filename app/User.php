@@ -142,8 +142,8 @@ class User extends Ardent implements
         return $this->hasOne('App\models\session');
     }
 
-    public function unitgrps()
-    {
-        return $this->belongsToMany('App\models\unitgrp','unitgrp_user','user_id');
-    }
+//    public function unitgrps()
+//    {
+//        return $this->belongsToMany('App\models\unitgrp','unitgrp_user','user_id');
+//    }
 }

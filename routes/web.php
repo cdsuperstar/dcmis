@@ -66,10 +66,14 @@ Route::group(['prefix' => '/sys-users'], function () {
 
 //用户个人信息
 Route::group(['prefix' => '/sys-usersown'], function () {
+    //得到所有用户配置信息
+    Route::get('','User\userprofileController@index');
     //得到自己信息
     Route::get('self','User\userprofileController@show')->middleware(['permission:sys-usersown.selfdata']); //sys-usersown.selfdata
-    //保存用户配置信息
+    //保存用户个人信息
     Route::post('','User\userprofileController@store');
+    //保存用户配置信息
+    Route::put('{id}','User\userprofileController@update')->middleware(['permission:sys-users.update']); //sys-users.update
 });
 
 //预算管理

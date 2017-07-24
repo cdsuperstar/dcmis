@@ -57,8 +57,8 @@ class unitgrp extends Node
 
     protected $fillable = ['name',  'brief'];
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User','unitgrp_user','unitgrp_id');
-    }
+//    public function users()
+//    {
+//        return $this->belongsToMany('App\User','unitgrp_user','unitgrp_id');
+//    }
 }
