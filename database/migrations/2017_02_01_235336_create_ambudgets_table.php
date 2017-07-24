@@ -94,8 +94,8 @@ class CreateAmbudgetsTable extends Migration
             $table->string('unitgrps_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
-            $table->string('name')->nullable(); //项目名称
-            $table->integer('ambudgettypes_id')->nullable(); //预算类别
+            $table->string('name'); //项目名称
+            $table->integer('ambudgettypes_id'); //预算类别
             $table->string('appstate')->nullable(); //审批状态
             $table->integer('apper')->nullable(); //审批人
             $table->dateTime('appdate')->nullable(); //审批时间
@@ -114,8 +114,9 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('amasbudgets', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('meas')->nullable(); //单位
-            $table->integer('amt')->nullable(); //数量
+            $table->string('wzno'); //物资编号
+            $table->string('wzsmodel')->nullable(); //规格型号
+            $table->integer('amt'); //数量
             $table->decimal('bdgprice')->nullable(); //预算单价
             $table->decimal('purchprice')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
