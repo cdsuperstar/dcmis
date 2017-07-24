@@ -6,5 +6,5 @@
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
 
     </div>
-    <div id="userprivilegrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-pinning ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="userProfileGrid"></div>
+    <div id="userprivilegrid" ui-grid="gridOptions" ui-grid-edit ui-grid-pinning ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="userProfileGrid"></div>
 </div>

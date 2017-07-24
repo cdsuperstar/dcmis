@@ -41,7 +41,16 @@ angular.module("MetronicApp").controller('sysusersOwnCtrl',
             }
 
             $scope.showdetail = function () { //重获数据
-                console.log($scope.name);
+                //获得已有数据
+                Restangular.one('/sys-usersown','self').get().then(function (accounts) {
+                    // console.log(accounts.signpic);
+                    if(accounts.signpic == undefined || accounts.signpic==''){
+                        $scope.pictname ="150";
+                    }else{
+                        $scope.pictname = accounts.id+"/"+accounts.signpic;
+                    }
+                    $scope.userprofile = accounts;
+                });
             }
 
             //图片上传
