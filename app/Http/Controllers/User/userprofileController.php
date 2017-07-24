@@ -51,7 +51,7 @@ class userprofileController extends Controller
         $rec=userprofile::find($request->user()->id);
         $arrInput=$request->input();
 
-        if(isset($arrInput['signpic'])&&strpos($arrInput['signpic'],'signpic')<>false){
+        if(isset($arrInput['signpic'])&&is_array($arrInput['signpic'])){
             $imgTmp=Image::make(base64_decode(explode(',',$arrInput['signpic']['result'])[1]))->resize(150, 150);
             unset($arrInput['signpic']);
 
