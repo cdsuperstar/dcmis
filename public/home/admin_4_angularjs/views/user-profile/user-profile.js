@@ -5,7 +5,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('/sys-usersown/self');
+            var tableDatas = Restangular.all('/sys-usersown');
 
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
@@ -44,7 +44,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 columnDefs: [
                     {name: 'ID', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
                     {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
-                    {name: '昵称', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
+                    {name: '昵称', field: 'nickname',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:false},
                     {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true,
                         filter: {
                             term: 'sex',
@@ -61,7 +61,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                     ]
                     },
                     {name: '联系电话', field: 'phone',width: '120',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '出生日期', field: 'birth',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '出生日期', field: 'birth',width: '150',enableCellEdit: true,type: 'date', cellFilter: 'date:"yyyy-MM-dd"',enableColumnMenu: true},
                     {name: '办公电话', field: 'tel',width: '120',enableCellEdit: true,enableColumnMenu: true},
                     {name: '办公地址', field: 'address',width: '150',enableCellEdit: true,enableColumnMenu: true},
                     {name: '个人职务', field: 'duties',width: '100',enableCellEdit: true,enableColumnMenu: true},

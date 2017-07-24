@@ -29,11 +29,11 @@
                 &nbsp;
             </div>
             <div class="from-group">
-                <label class="col-md-2 control-label">  姓 名 </label>
+                <label class="col-md-2 control-label">  昵 称 </label>
                 <div class="col-md-4">
                     <div class="input-icon right">
                         <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                        <input type="text" class="form-control" ng-model="userprofile.name" placeholder="姓名">
+                        <input type="text" class="form-control" ng-model="userprofile.nickname" placeholder="昵称">
                     </div>
                 </div>
             </div>
@@ -69,15 +69,24 @@
             </div>
             <label class="col-md-2 control-label">所属部门</label>
             <div class="col-md-4">
-                <ui-select
-                        multiple
-                        ng-model="userprofile.untigrps" limit="1">
-                    <ui-select-match placeholder="选择部门...">@{{$item.name}}</ui-select-match>
+                {{--<ui-select--}}
+                        {{--multiple--}}
+                        {{--ng-model="userprofile.unitid" limit="1">--}}
+                    {{--<ui-select-match placeholder="选择部门...">@{{$item.name}}</ui-select-match>--}}
+                    {{--<ui-select-choices--}}
+                            {{--repeat="category.id as category in untigrps | filter: $select.search">--}}
+                        {{--<div ng-bind-html="category.name | highlight: $select.search"></div>--}}
+                    {{--</ui-select-choices>--}}
+                {{--</ui-select>--}}
+
+                <ui-select ng-model="userprofile.unitid" theme="bootstrap" search-enabled="true">
+                    <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices
                             repeat="category.id as category in untigrps | filter: $select.search">
                         <div ng-bind-html="category.name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
+
             </div>
         </div>
         <div class="form-group">
