@@ -32,10 +32,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             });
             $scope.basket = { syear:currentYear,type:1};  //初始化为当前年度
 
-            $scope.SPFilter = function (tArray,actual) {
-                    return listnames.name;
-            };
-
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
             //     for (var x in mArray){
@@ -59,7 +55,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     showMsg('必要信息未填写！', '错误', 'ruby');
                     return false;
                 }
-            }
+            };
 
             $scope.savedata = function() {
                 console.log($scope.basket);
@@ -67,7 +63,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     showMsg('必要信息未填写！', '错误', 'ruby');
                     return false;
                 }
-            }
+            };
 
             $scope.stepthrid = function () {
                 //转换开始
@@ -115,15 +111,21 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         break;
                 }
                 //导航结束
-
-
-
-            }
+            };
             $scope.changestep = function() {
-                // console.log($scope.basket.type);
-                switch($scope.basket.type)
+                console.log($scope.dcUser);
+
+                // 取当前类别的模板类型
+                $scope.templatesign="1";
+                if($scope.listnames===undefined){
+                } else {
+                    for(var i=0;i<$scope.listnames.length;i++){
+                        if($scope.listnames[i].id==$scope.basket.type) $scope.templatesign = $scope.listnames[i].template;
+                    }
+                }
+                switch($scope.templatesign)
                 {
-                    case 1:
+                    case "1":
                     {
                         //start
                         $scope.soucegridOptions={
@@ -276,7 +278,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
                     }
                         break;
-                    case 2:
+                    case "2":
                     {
                         //start
                         $scope.soucegridOptions={
@@ -386,7 +388,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
                     }
                         break;
-                    case 3:
+                    case "3":
                     {
 
                         //start
@@ -497,7 +499,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
                     }
                         break;
-                    case 4:
+                    case "4":
                     {
 
                         //start
@@ -608,7 +610,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     }
                         break;
                     default:
-                        console.log($scope.basket.type);
+                        // console.log($scope.basket.type);
                         break;
                 }
             }

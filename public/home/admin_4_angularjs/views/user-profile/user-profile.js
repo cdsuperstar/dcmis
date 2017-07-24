@@ -5,55 +5,8 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            var tableDatas = Restangular.all('sys-usersown');
+            var tableDatas = Restangular.all('/sys-usersown/self');
 
-            $scope.addData = function () {
-                ngDialog.openConfirm({
-                    template: '/userprofiles/create',
-                    className: 'ngdialog-theme-default userprofile',
-                    scope: $scope,
-                    controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
-                        $scope.$validationOptions = validationConfig;
-                    }],
-                    showClose: false,
-                    setBodyPadding: 1,
-                    overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
-                    closeByEscape: true
-                }).then(function (dcEdition) {
-
-                    tableDatas.post(dcEdition).then(
-                        function (res) {
-                            if (res.success) {
-                                $scope.gridOptions.data.push(res);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            } else {
-                                // TODO add error message to system
-                                showMsg(res.errors.toString(), '错误', 'ruby');
-                            }
-                        }
-                    );
-                }, function (dcEdition) {
-                });
-            };
-
-            $scope.delData = function () {
-                var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
-                selectUsers.forEach(function (deluser) {
-                        deluser.entity.remove().then(function (res) {
-                            if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            }
-                            else {
-                                showMsg(res.errors.toString(), '错误', 'ruby');
-                            }
-                        });
-                    }
-                );
-            };
-            //$scope.editdataids = [];
             $scope.editData = function () {
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
                 toEditRows.forEach(function (edituser) {
@@ -111,8 +64,8 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                     {name: '出生日期', field: 'birth',width: '100',enableCellEdit: true,enableColumnMenu: true},
                     {name: '办公电话', field: 'tel',width: '120',enableCellEdit: true,enableColumnMenu: true},
                     {name: '办公地址', field: 'address',width: '150',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '个人职务', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
-                    {name: '所属部门', field: 'name',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '个人职务', field: 'duties',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '所属部门', field: 'unitid',width: '100',enableCellEdit: true,enableColumnMenu: true},
                     {name: '个人简介', field: 'memo',width: '150',enableCellEdit: true,enableColumnMenu: true},
                 ],
                 enablePagination: true, //是否分页，默认为true
