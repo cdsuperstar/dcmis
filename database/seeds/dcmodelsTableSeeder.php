@@ -200,6 +200,7 @@ INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, 
 INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (7, '测试公司', '阿道夫', '额头湾', '028-34829231', '21231233212', '989823', '23424', '2017-07-23 18:05:08', '2017-07-23 18:07:18');
 INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (6, '成都奥斯特教育咨询有限公司', '杨珊', '林冉', '028-643234923', '18292302131', '成都市高新区天府大道北段12号', '主要负责培训事宜', '2017-07-23 18:03:35', '2017-07-23 18:07:18');
 
+INSERT INTO public.userprofiles (id, no, nickname, sex, phone, birth, tel, address, duties, unitid, signpic, memo, created_at, updated_at) VALUES (1, '10201201234', '测试', '男', '1234567890', '2017-07-24', '000-123455678', '办公室地址', null, 3, 'signpic5975ee7a8612b', '个人简介', '2017-07-24 20:56:26', '2017-07-24 20:56:55');
 
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3464, '各类纸张', 'wz000002', 'A4复印纸(彩色)', '包', 'a4fyzc', '2017-07-23 15:17:00', '2017-07-23 15:17:00');
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3465, '各类纸张', 'wz000003', 'A3复印纸', '包', 'a3fyz', '2017-07-23 15:17:00', '2017-07-23 15:17:00');

@@ -17,20 +17,18 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             });
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
-                // console.log(accounts);
                 $scope.untigrps = accounts;
             });
             //物资列表
-            Restangular.all('wz.json').getList().then(function (accounts) {
+            Restangular.all('/icon-basket-setindex').getList().then(function (accounts) {
                 $scope.datawzgrps = accounts;
             });
             //人员列表
             Restangular.all('/sys-users').getList().then(function (accounts) {
-                $scope.peoplegrps = accounts;
+                    $scope.peoplegrps = accounts;
             });
 
-            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid,requester:$scope.dcUser.id};  //初始化当前用户数据
-
+            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid,requester:$scope.dcUser.id,type:1};  //初始化当前用户数据
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -121,6 +119,50 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }
                 //导航结束
             };
+            $scope.imdata=[];
+            $scope.soucegridOptions={
+                enableSorting: true,
+                enableFiltering: false,
+                showColumnFooter:true,
+                showGridFooter:true,
+                enableVerticalScrollbar:1,
+                enableHorizontalScrollbar :1,
+                enableGridMenu: true,
+                //--------------导入开始----------------------------------
+                importerDataAddCallback: function ( grid, newObjects ) {
+                    $scope.imdata = $scope.imdata.concat( newObjects );
+                },
+                //--------------导入结束----------------------------------
+                //--------------导出----------------------------------
+                exporterHeaderFilterUseName : true,
+                exporterMenuCsv : true, //导出Excel 开关
+                exporterMenuPdf : false, //导出pdf 开关
+                exporterMenuLabel : "Export",
+                exporterOlderExcelCompatibility : true,
+                exporterCsvColumnSeparator: ',',
+                exporterCsvFilename:'Datadownload.csv',
+                columnDefs: [],
+                data: 'imdata',
+                onRegisterApi: function (gridApi) {
+                    $scope.gridApi = gridApi;
+                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+                }
+            };
+            $scope.delData = function () {
+                var selectDatas = $scope.gridApi.selection.getSelectedGridRows();
+                selectDatas.forEach(function (del) {
+                    $scope.imdata = _.without($scope.imdata, del.entity);
+                    }
+                );
+                $scope.$apply();
+            };
+            $scope.saveRow = function (rowEntity) {
+                var promise = $q.defer();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
+                promise.resolve();
+            };
+
+
             $scope.changestep = function() {
 
                 //取当前类别的模板类型
@@ -131,63 +173,33 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     templatesign = changeJsonData($scope.listnames,'id',$scope.basket.type,'template');
                 }
                 //end
-
                 switch(templatesign)
                 {
                     case "1":
                     {
                         //start
-                        var sourceDatas = Restangular.all('/amasbudgets');
-
-                        $scope.soucegridOptions={
-                            enableSorting: true,
-                            enableFiltering: false,
-                            showColumnFooter:true,
-                            showGridFooter:true,
-                            enableVerticalScrollbar:1,
-                            enableHorizontalScrollbar :1,
-                            enableGridMenu: true,
-                            //--------------导入开始----------------------------------
-                            imdata : 'data',
-                            importerDataAddCallback: function ( grid, newObjects ) {
-                                $scope.imdata = $scope.imdata.concat( newObjects );
+                        $scope.soucegridOptions.columnDefs=[
+                            {name: '物资编号', field: 'wzno',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,visible:false},
+                            {name: '物资名称', field: 'wzname',width: '200',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
+                                footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                            {name: '单位', field: 'wzmeasunit',width: '60',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true},
+                            {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
+                                cellTooltip: function(row){ return row.entity.aspara; },
+                                //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                             },
-                            //--------------导入结束----------------------------------
-                            //--------------导出----------------------------------
-                            exporterHeaderFilterUseName : true,
-                            exporterMenuCsv : true, //导出Excel 开关
-                            exporterMenuPdf : false, //导出pdf 开关
-                            exporterMenuLabel : "Export",
-                            exporterOlderExcelCompatibility : true,
-                            exporterCsvColumnSeparator: ',',
-                            exporterCsvFilename:'wzlistdownload.csv',
-                            //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
-                            columnDefs: [
-                                {name: '物资名称', field: 'wzno',width: '200',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
-                                    footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '单位', field: 'measunit',width: '60',enableColumnMenu: true,pinnedLeft:true},
-                                {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
-                                    cellTooltip: function(row){ return row.entity.aspara; },
-                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                                },
-                                {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '预算单价', field: 'bdgprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
-                            ],
-                            data: [],
-                            onRegisterApi: function (gridApi) {
-                                $scope.gridApi = gridApi;
-                            }
-                        };
+                            {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                            {name: '预算单价', field: 'bdgprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                            {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
+                        ];
+
                         $scope.addData = function () {
+                            console.log($scope.imdata);
                             ngDialog.openConfirm({
                                 template: 'add-material',
                                 className: 'ngdialog-theme-default iconaddmaterial',
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
-                                    //$scope.$validationOptions = validationConfig;
-                                    // console.log($scope.aswzfl);
                                     //二级联动start 物品分类
                                     //distinct json class字段  开始
                                     var lookup = {};
@@ -209,7 +221,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     $scope.chanagewzdata = function() {
                                         $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
                                         $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
-                                    }
+                                    };
                                     //end
 
                                 }],
@@ -220,45 +232,20 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 disableAnimation:true,  //是否显示动画
                                 closeByEscape: true
                             }).then(function (dcaddMaterial) {
-                                console.log(dcaddMaterial);
-                                sourceDatas.post(dcaddMaterial).then(
-                                    function (res) {
-                                        if (res.success) {
-                                            $scope.gridOptions.data.push(res);
-                                            showMsg(res.messages.toString(), '信息', 'lime');
-                                        } else {
-                                            // TODO add error message to system
-                                            showMsg(res.errors.toString(), '错误', 'ruby');
-                                        }
-                                    }
-                                );
+                                if(dcaddMaterial.wzno){
+                                    dcaddMaterial.wzname = changeJsonData($scope.datawzgrps,'no',dcaddMaterial.wzno,'name');//获取物资名称
+                                    dcaddMaterial.wzmeasunit = changeJsonData($scope.datawzgrps,'no',dcaddMaterial.wzno,'measunit');//获取物资单位
+                                    // console.log(dcaddMaterial);
+                                    // $scope.soucegridOptions.data.push(dcaddMaterial);
+                                    $scope.imdata.push(dcaddMaterial);
+                                    showMsg('添加成功!编号：'+dcaddMaterial.wzno, '信息', 'lime');
+                                }else {
+                                    showMsg('添加失败!编号：'+dcaddMaterial.wzno, '错误', 'ruby');
+                                }
                             }, function (dcaddMaterial) {
-                                console.log('Modal promise rejected. Reason: ', dcaddMaterial);
+                                // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
                         };
-
-                        $scope.delData = function () {
-
-                        };
-                        $scope.editData = function () {
-
-                        };
-                        $scope.saveRow = function (rowEntity) {
-                            //$scope.editdataids.push(rowEntity.id);
-                            // var promise = $q.defer();
-                            // $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
-                            //promise.resolve();
-                            // promise.reject();
-                        };
-                        $scope.toggleFiltering = function(){
-                            $scope.soucegridOptions.enableFiltering = !$scope.soucegridOptions.enableFiltering;
-                            $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
-                        };
-
-                        sourceDatas.getList().then(function (accounts) {
-                            var allAccounts = accounts;
-                            $scope.soucegridOptions.data = allAccounts;
-                        });
                         //end
 
                     }
@@ -266,51 +253,22 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     case "2":
                     {
                         //start
-                        $scope.soucegridOptions={
-                            enableSorting: true,
-                            enableFiltering: false,
-                            showColumnFooter:true,
-                            showGridFooter:true,
-                            enableVerticalScrollbar:1,
-                            enableHorizontalScrollbar :1,
-                            enableGridMenu: true,
-                            //--------------导入开始----------------------------------
-                            imdata : 'data',
-                            importerDataAddCallback: function ( grid, newObjects ) {
-                                $scope.imdata = $scope.imdata.concat( newObjects );
+                        $scope.soucegridOptions.columnDefs=[
+                            {name: '工程项目名称', field: 'contrname',width: '150',enableColumnMenu: true,
+                                cellTooltip: function(row){ return row.entity.contrname; },
+                                //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
+                                footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                            {name: '工程预算', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                            {name: '工期要求', field: 'contrworkreq',width: '200',enableColumnMenu: true,
+                                cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                             },
-                            //--------------导入结束----------------------------------
-                            //--------------导出----------------------------------
-                            exporterHeaderFilterUseName : true,
-                            exporterMenuCsv : true, //导出Excel 开关
-                            exporterMenuPdf : false, //导出pdf 开关
-                            exporterMenuLabel : "Export",
-                            exporterOlderExcelCompatibility : true,
-                            exporterCsvColumnSeparator: ',',
-                            exporterCsvFilename:'download.csv',
-                            //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
-                            columnDefs: [
-                                {name: '工程项目名称', field: 'contrname',width: '150',enableColumnMenu: true,
-                                    cellTooltip: function(row){ return row.entity.contrname; },
-                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
-                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
-                                    footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '工程预算', field: 'contrprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '工期要求', field: 'contrworkreq',width: '200',enableColumnMenu: true,
-                                    cellTooltip: function(row){ return row.entity.contrworkreq; },
-                                    //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                                    cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                                },
-                                {name: '工程地点', field: 'contraddr',width: '120',enableColumnMenu: true},
-                                {name: '负责人', field: 'contrpicharge',width: '120',enableColumnMenu: true},
-                                {name: '负责人电话', field: 'contrpicphone',width: '120',enableColumnMenu: true}
-                            ],
-                            data: [],
-                            onRegisterApi: function (gridApi) {
-                                $scope.gridApi = gridApi;
-                            }
-                        };
-                        var sourceDatas = Restangular.all('data.json');
+                            {name: '工程地点', field: 'contraddr',width: '120',enableColumnMenu: true},
+                            {name: '负责人', field: 'contrpicharge',width: '120',enableColumnMenu: true},
+                            {name: '负责人电话', field: 'contrpicphone',width: '120',enableColumnMenu: true}
+                        ];
 
                         $scope.addData = function () {
                             ngDialog.openConfirm({
@@ -598,7 +556,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                         // console.log($scope.basket.type);
                         break;
                 }
-            }
+            };
             //
 
         }

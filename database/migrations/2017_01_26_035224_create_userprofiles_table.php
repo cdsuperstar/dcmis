@@ -26,7 +26,7 @@ class CreateUserprofilesTable extends Migration
             $table->string('tel')->nullable();
             $table->string('address')->nullable();
             $table->string('duties')->nullable();//职务
-            $table->integer('unitid')->unsigned(); //部门
+            $table->integer('unitid')->nullable()->unsigned(); //部门
             $table->string('signpic')->nullable();
             $table->text('memo')->nullable();
 
