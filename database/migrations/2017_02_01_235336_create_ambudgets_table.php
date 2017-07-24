@@ -94,8 +94,8 @@ class CreateAmbudgetsTable extends Migration
             $table->string('unitgrps_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
-            $table->string('name')->nullable(); //项目名称
-            $table->integer('ambudgettypes_id')->nullable(); //预算类别
+            $table->string('name'); //项目名称
+            $table->integer('ambudgettypes_id'); //预算类别
             $table->string('appstate')->nullable(); //审批状态
             $table->integer('apper')->nullable(); //审批人
             $table->dateTime('appdate')->nullable(); //审批时间

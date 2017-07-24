@@ -29,24 +29,8 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.peoplegrps = accounts;
             });
 
-            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid};  //初始化当前用户数据
+            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid,requester:$scope.dcUser.id};  //初始化当前用户数据
 
-            //采购编号
-            if(!$scope.basket.type) $scope.basket.type=1;
-            $scope.templatesign="1";
-            $scope.templatespell="wz";
-            $scope.currentYear = currentYear;
-            // 取当前类别的模板类型
-            if($scope.listnames===undefined){
-            } else {
-                for(var i=0;i<$scope.listnames.length;i++){
-                    if($scope.listnames[i].id==$scope.basket.type){
-                        $scope.templatesign = $scope.listnames[i].template;
-                        $scope.templatespell = $scope.listnames[i].spell;
-                    }
-                }
-            }
-            console.log($scope.basket.type,$scope.templatespell);
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -88,7 +72,16 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unit,'name');
                 // console.log($scope.basket.unit+'--->'+$scope.listunname);
                 //转换结束
-
+                //生成采购编号
+                if(!$scope.basket.type) $scope.basket.type=1;
+                var templatespell="wz";
+                if($scope.listnames===undefined){
+                } else {
+                    templatespell = changeJsonData($scope.listnames,'id',$scope.basket.type,'spell');
+                }
+                $scope.basket.no=currentYear+templatespell;
+                console.log($scope.basket.no);
+                //end
                 //导航开始
                 $scope.isMaterialbudget = false;
                 $scope.isProjectbudget = true;
@@ -130,7 +123,16 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             };
             $scope.changestep = function() {
 
-                switch($scope.templatesign)
+                //取当前类别的模板类型
+                if(!$scope.basket.type) $scope.basket.type=1;
+                var templatesign="1";
+                if($scope.listnames===undefined){
+                } else {
+                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.type,'template');
+                }
+                //end
+
+                switch(templatesign)
                 {
                     case "1":
                     {
