@@ -22,6 +22,7 @@ use Zizaco\Entrust\EntrustRole;
  * @method static \Illuminate\Database\Query\Builder|\App\models\Role whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\Role whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\dcmodel[] $models
  */
 class Role extends EntrustRole
 {

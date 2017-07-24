@@ -88,6 +88,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereBegindate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereBudgetname($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereEnddate($value)
+ * @property string $syear
+ * @method static \Illuminate\Database\Query\Builder|\App\models\ambudget whereSyear($value)
  */
 class ambudget extends Model
 {

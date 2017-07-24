@@ -52,6 +52,32 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereThepay($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @property float $bdg
+ * @property string $req
+ * @property string $addr
+ * @property string $picharge
+ * @property string $picphone
+ * @property float $price
+ * @property string $purchway
+ * @property string $purchstate
+ * @property int $amsuppliers_id
+ * @property string $reimstate
+ * @property float $total
+ * @property string $remark
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereAddr($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereAmsuppliersId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereBdg($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget wherePicharge($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget wherePicphone($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget wherePrice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget wherePurchstate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget wherePurchway($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereReimstate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereRemark($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereReq($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereTotal($value)
  */
 class amcontrbudget extends Model
 {

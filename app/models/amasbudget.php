@@ -34,6 +34,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget wherePurchway($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property float $bdgprice
+ * @property float $purchprice
+ * @property string $purchstate
+ * @property string $reimstate
+ * @property string $contrno
+ * @property string $asstate
+ * @property float $total
+ * @property string $remark
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereAsstate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereBdgprice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereContrno($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget wherePurchprice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget wherePurchstate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereReimstate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereRemark($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereTotal($value)
  */
 class amasbudget extends Model
 {

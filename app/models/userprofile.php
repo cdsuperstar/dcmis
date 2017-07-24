@@ -35,6 +35,12 @@ use LaravelArdent\Ardent\Ardent;
  * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\User $user
+ * @property string $nickname
+ * @property string $duties
+ * @property int $unitid
+ * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereDuties($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereNickname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\userprofile whereUnitid($value)
  */
 class userprofile extends Model
 {
