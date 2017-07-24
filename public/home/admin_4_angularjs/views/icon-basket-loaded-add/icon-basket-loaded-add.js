@@ -137,6 +137,8 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     case "1":
                     {
                         //start
+                        var sourceDatas = Restangular.all('/amasbudgets');
+
                         $scope.soucegridOptions={
                             enableSorting: true,
                             enableFiltering: false,
@@ -158,21 +160,19 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             exporterMenuLabel : "Export",
                             exporterOlderExcelCompatibility : true,
                             exporterCsvColumnSeparator: ',',
-                            exporterCsvFilename:'download.csv',
+                            exporterCsvFilename:'wzlistdownload.csv',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
-                                {name: '物资名称', field: 'asname',width: '200',enableCellEdit: false,enableColumnMenu: true,
+                                {name: '物资名称', field: 'wzno',width: '200',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
                                     footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                {name: '规格、型号', field: 'aspara',width: '200',enableColumnMenu: true,
+                                {name: '单位', field: 'measunit',width: '60',enableColumnMenu: true,pinnedLeft:true},
+                                {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
                                     cellTooltip: function(row){ return row.entity.aspara; },
                                     //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                 },
                                 {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,enableCellEdit: false,editableCellTemplate: 'ui-grid/dropdownEditor',
-                                    editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
-                                },
-                                {name: '预算单价', field: 'price',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                {name: '预算单价', field: 'bdgprice',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                 {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                             ],
                             data: [],
@@ -180,8 +180,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 $scope.gridApi = gridApi;
                             }
                         };
-                        var sourceDatas = Restangular.all('data.json');
-
                         $scope.addData = function () {
                             ngDialog.openConfirm({
                                 template: 'add-material',
@@ -191,12 +189,12 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     //$scope.$validationOptions = validationConfig;
                                     // console.log($scope.aswzfl);
                                     //二级联动start 物品分类
-                                    //distinct json mclass字段  开始
+                                    //distinct json class字段  开始
                                     var lookup = {};
                                     var items = $scope.datawzgrps;
                                     var result = [];
                                     for (var item, i = 0; item = items[i++];) {
-                                        var name = item.mclass;
+                                        var name = item.class;
 
                                         if (!(name in lookup)) {
                                             lookup[name] = 1;
@@ -206,11 +204,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     //结束
                                     $scope.wzfl =result; //将物资分类的数组赋过去
                                     $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
-                                    $scope.wzgrps = $filter("filter")($scope.datawzgrps,{mclass:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
+                                    $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
 
                                     $scope.chanagewzdata = function() {
-                                        $scope.dcaddMaterial.asname = undefined; //如果分类改变，该值置为空
-                                        $scope.wzgrps = $filter("filter")($scope.datawzgrps,{mclass:$scope.dcaddMaterial.aswzfl});
+                                        $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
+                                        $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
                                     }
                                     //end
 
@@ -223,17 +221,17 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 closeByEscape: true
                             }).then(function (dcaddMaterial) {
                                 console.log(dcaddMaterial);
-                                // tableDatas.post(dcaddMaterial).then(
-                                //     function (res) {
-                                //         if (res.success) {
-                                //             $scope.gridOptions.data.push(res);
-                                //             showMsg(res.messages.toString(), '信息', 'lime');
-                                //         } else {
-                                //             // TODO add error message to system
-                                //             showMsg(res.errors.toString(), '错误', 'ruby');
-                                //         }
-                                //     }
-                                // );
+                                sourceDatas.post(dcaddMaterial).then(
+                                    function (res) {
+                                        if (res.success) {
+                                            $scope.gridOptions.data.push(res);
+                                            showMsg(res.messages.toString(), '信息', 'lime');
+                                        } else {
+                                            // TODO add error message to system
+                                            showMsg(res.errors.toString(), '错误', 'ruby');
+                                        }
+                                    }
+                                );
                             }, function (dcaddMaterial) {
                                 console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
@@ -256,31 +254,9 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             $scope.soucegridOptions.enableFiltering = !$scope.soucegridOptions.enableFiltering;
                             $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
                         };
+
                         sourceDatas.getList().then(function (accounts) {
                             var allAccounts = accounts;
-                            for(var i = 0; i < accounts.length; i++){
-                                accounts[i].tmeas = {options: [
-                                    {value:'个'},
-                                    {value:'套'},
-                                    {value:'件'},
-                                    {value:'组'},
-                                    {value:'卷'},
-                                    {value:'台'},
-                                    {value:'只'},
-                                    {value:'支'},
-                                    {value:'张'},
-                                    {value:'打'},
-                                    {value:'卷'},
-                                    {value:'袋'},
-                                    {value:'包'},
-                                    {value:'箱'},
-                                    {value:'桶'},
-                                    {value:'萝'},
-                                    {value:'令'},
-                                    {value:'双'},
-                                    {value:'项'}
-                                ]}
-                            }
                             $scope.soucegridOptions.data = allAccounts;
                         });
                         //end

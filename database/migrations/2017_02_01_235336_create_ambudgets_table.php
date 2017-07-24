@@ -114,8 +114,9 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('amasbudgets', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('meas')->nullable(); //单位
-            $table->integer('amt')->nullable(); //数量
+            $table->string('wzno'); //物资编号
+            $table->string('wzsmodel')->nullable(); //规格型号
+            $table->integer('amt'); //数量
             $table->decimal('bdgprice')->nullable(); //预算单价
             $table->decimal('purchprice')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式

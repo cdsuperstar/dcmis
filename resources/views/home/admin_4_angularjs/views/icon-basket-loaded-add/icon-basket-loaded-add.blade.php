@@ -33,14 +33,14 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 物资名称 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcaddMaterial.asname" theme="bootstrap">
-                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected.mname}} 【@{{$select.selected.munit}}】</ui-select-match>
-                                    <ui-select-choices repeat="tmparr.mno as tmparr in wzgrps | filter: $select.search">
+                                <ui-select ng-model="dcaddMaterial.wzno" theme="bootstrap">
+                                    <ui-select-match placeholder="选择物资名称...">@{{$select.selected.name}} 【@{{$select.selected.measunit}}】</ui-select-match>
+                                    <ui-select-choices repeat="tmparr.no as tmparr in wzgrps | filter: $select.search">
                                         <div ng-bind-html="tmparr.name | highlight: $select.search"></div>
                                         <small>
-                                            编号：<span ng-bind-html="tmparr.mno | highlight: $select.search"></span><br>
-                                            类别：<span ng-bind-html="''+tmparr.mclass | highlight: $select.search"></span>；
-                                            单位：<span ng-bind-html="''+tmparr.munit | highlight: $select.search"></span>
+                                            编号：<span ng-bind-html="tmparr.no | highlight: $select.search"></span><br>
+                                            类别：<span ng-bind-html="''+tmparr.class | highlight: $select.search"></span>；
+                                            单位：<span ng-bind-html="''+tmparr.measunit | highlight: $select.search"></span>
                                         </small>
                                     </ui-select-choices>
                                     <ui-select-no-choice>
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 规格型号 </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="dcaddMaterial.aspara" placeholder="规格型号">
+                                <input type="text" class="form-control" ng-model="dcaddMaterial.wzsmodel" placeholder="规格型号">
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,7 +69,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddMaterial.price" placeholder="预算单价">
+                                    <input type="number" class="form-control" ng-model="dcaddMaterial.bdgprice" placeholder="预算单价">
                                 </div>
                             </div>
                         </div>
