@@ -12,8 +12,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 yeararr.push(val);}
             $scope.tyear = yeararr;
             //预算类别列表
-            // $scope.listnames = [{ value: 1, label: '物资预算' }, { value: 2, label: '工程预算' }, { value: 3, label: '服务预算' }, { value: 4, label: '其他预算' }];
-            //预算类别列表
             Restangular.all('/am-budget-lb').getList().then(function (accounts) {
                 $scope.listnames = accounts;
             });
@@ -30,7 +28,25 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             Restangular.all('/sys-users').getList().then(function (accounts) {
                 $scope.peoplegrps = accounts;
             });
-            $scope.basket = { syear:currentYear,type:1};  //初始化为当前年度
+
+            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid};  //初始化当前用户数据
+
+            //采购编号
+            if(!$scope.basket.type) $scope.basket.type=1;
+            $scope.templatesign="1";
+            $scope.templatespell="wz";
+            $scope.currentYear = currentYear;
+            // 取当前类别的模板类型
+            if($scope.listnames===undefined){
+            } else {
+                for(var i=0;i<$scope.listnames.length;i++){
+                    if($scope.listnames[i].id==$scope.basket.type){
+                        $scope.templatesign = $scope.listnames[i].template;
+                        $scope.templatespell = $scope.listnames[i].spell;
+                    }
+                }
+            }
+            console.log($scope.basket.type,$scope.templatespell);
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -113,16 +129,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 //导航结束
             };
             $scope.changestep = function() {
-                console.log($scope.dcUser);
 
-                // 取当前类别的模板类型
-                $scope.templatesign="1";
-                if($scope.listnames===undefined){
-                } else {
-                    for(var i=0;i<$scope.listnames.length;i++){
-                        if($scope.listnames[i].id==$scope.basket.type) $scope.templatesign = $scope.listnames[i].template;
-                    }
-                }
                 switch($scope.templatesign)
                 {
                     case "1":

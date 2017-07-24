@@ -457,7 +457,7 @@
                     </div>
                     <label class="col-md-2 control-label">项目编号</label>
                     <div class="col-md-4">
-                        <input type="number" ng-model="basket.no" class="form-control" placeholder="20XXXXXXXXX" readonly>
+                        <input type="text" ng-model="basket.no" class="form-control" value="@{{ currentYear+templatespell }}" placeholder="20XXXXXXXXX" readonly>
                         <p class="help-block">该项自动生成，毋须填写。</p>
                     </div>
                 </div>
