@@ -69,7 +69,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddMaterial.bdgprice" placeholder="预算单价">
+                                    <input type="number" class="form-control" ng-model="dcaddMaterial.bdg" placeholder="预算单价">
                                 </div>
                             </div>
                         </div>
@@ -114,11 +114,11 @@
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 工程项目名称 </label>
+                            <label class="col-md-3 control-label"> 项目名称 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddContr.contrname" placeholder="采购内容">
+                                    <input type="text" class="form-control" ng-model="dcaddContr.name" placeholder="采购内容">
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddContr.contrworkreq" placeholder="工期要求">
+                                    <input type="text" class="form-control" ng-model="dcaddContr.req" placeholder="工期要求">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddContr.contrprice" placeholder="预算金额">
+                                    <input type="number" class="form-control" ng-model="dcaddContr.bdg" placeholder="预算金额">
                                 </div>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddContr.contraddr" placeholder="地点">
+                                    <input type="text" class="form-control" ng-model="dcaddContr.addr" placeholder="地点">
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddContr.contrpicharge" placeholder="负责人">
+                                    <input type="text" class="form-control" ng-model="dcaddContr.picharge" placeholder="负责人">
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddContr.contrpicphone" placeholder="负责人电话">
+                                    <input type="text" class="form-control" ng-model="dcaddContr.picphone" placeholder="负责人电话">
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddSv.svrname" placeholder="采购内容">
+                                    <input type="text" class="form-control" ng-model="dcaddSv.name" placeholder="采购内容">
                                 </div>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddSv.svrworkreq" placeholder="服务期限">
+                                    <input type="text" class="form-control" ng-model="dcaddSv.req" placeholder="服务期限">
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddSv.svrprice" placeholder="预算金额">
+                                    <input type="number" class="form-control" ng-model="dcaddSv.bdg" placeholder="预算金额">
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddSv.svaddr" placeholder="服务地点">
+                                    <input type="text" class="form-control" ng-model="dcaddSv.addr" placeholder="服务地点">
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddSv.svpicharge" placeholder="负责人">
+                                    <input type="text" class="form-control" ng-model="dcaddSv.picharge" placeholder="负责人">
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddSv.svpicphone" placeholder="负责人电话">
+                                    <input type="text" class="form-control" ng-model="dcaddSv.picphone" placeholder="负责人电话">
                                 </div>
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddOt.otrname" placeholder="采购内容">
+                                    <input type="text" class="form-control" ng-model="dcaddOt.name" placeholder="采购内容">
                                 </div>
                             </div>
                         </div>
@@ -315,7 +315,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddOt.otrworkreq" placeholder="其他说明">
+                                    <input type="text" class="form-control" ng-model="dcaddOt.otremark" placeholder="其他说明">
                                 </div>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddOt.otrprice" placeholder="预算金额">
+                                    <input type="number" class="form-control" ng-model="dcaddOt.bdg" placeholder="预算金额">
                                 </div>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddOt.otaddr" placeholder="地点">
+                                    <input type="text" class="form-control" ng-model="dcaddOt.addr" placeholder="地点">
                                 </div>
                             </div>
                         </div>
@@ -342,7 +342,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddOt.otpicharge" placeholder="负责人">
+                                    <input type="text" class="form-control" ng-model="dcaddOt.picharge" placeholder="负责人">
                                 </div>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="text" class="form-control" ng-model="dcaddOt.otpicphone" placeholder="负责人电话">
+                                    <input type="text" class="form-control" ng-model="dcaddOt.picphone" placeholder="负责人电话">
                                 </div>
                             </div>
                         </div>
@@ -425,7 +425,7 @@
                     </div>
                     <label class="col-md-2 control-label"> 类  别 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.type" theme="bootstrap">
+                        <ui-select ng-model="basket.type" theme="bootstrap" ng-change="dumpimdata()">
                             <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
                                     repeat="tmplist.id as tmplist in listnames | filter: $select.search">
@@ -465,14 +465,71 @@
                 </div>
             </div>
             <div class="tab-pane" id="preview">
-                <div class="table-scrollable"  uib-collapse="isMaterialbudget">
+                <div class="table-scrollable"  uib-collapse="isMaterialbudget" id="isMaterialbudget">
                     <table class="table table-bordered table-hover" width="800">
                         <tbody>
                         <tr>
-                            <th colspan="2" style="text-align:center;">预算年度</th>
-                            <td colspan="2">@{{ basket.syear }}</td>
-                            <th colspan="3" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} 【项目编号 年度+预算类别(类别简拼)编号+总序号】</td>
+                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td>@{{ basket.syear }}</td>
+                            <th colspan="4" style="text-align:center;">项目名称</th>
+                            <td colspan="8">@{{ basket.summary }} 【<font color="red">@{{ basket.no }}</font> 】</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="7">@{{ listunname }} [@{{ basket.unit }}]</td>
+                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="7">@{{ listusname }} [@{{ basket.requester }}]</td>
+                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3">@{{ datetimestr }}</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;">序号</th>
+                            <th colspan="3" style="text-align:center;">物资编号</th>
+                            <th colspan="3" style="text-align:center;">物资名称</th>
+                            <th colspan="4" style="text-align:center;">规格、型号</th>
+                            <th style="text-align:center;">数量</th>
+                            <th style="text-align:center;">单位</th>
+                            <th style="text-align:center;">预算单价</th>
+                            <th style="text-align:center;">小计</th>
+                            <th style="text-align:center;">备注</th>
+                        </tr>
+                        {{--按照物资分类排序--}}
+                        <tr ng-repeat="wzdata in imdata">
+                            <td style="text-align:center;">@{{ $index+1 }}</td>
+                            <td colspan="3">@{{ wzdata.wzno }}</td>
+                            <td colspan="3">@{{ wzdata.wzname }}</td>
+                            <td colspan="4">@{{ wzdata.wzsmodel }}</td>
+                            <td>@{{ wzdata.amt }}</td>
+                            <td>@{{ wzdata.wzmeasunit }}</td>
+                            <td>@{{ wzdata.bdg | currency:'￥'}}</td>
+                            <td>@{{ wzdata.amt*wzdata.bdg | currency:'￥' }}</td>
+                            <td>@{{ wzdata.remark }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
+                            <th colspan="9" style="text-align:center;"> @{{ wztotalimdata | currency:'￥' }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
+                            <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
+                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="4" style="text-align:center;"> </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-scrollable"  uib-collapse="isProjectbudget">
+                    <table class="table table-bordered table-hover" width="800">
+                        <tbody>
+                        <tr>
+                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td>@{{ basket.syear }}</td>
+                            <th colspan="4" style="text-align:center;">项目名称</th>
+                            <td colspan="8">@{{ basket.summary }} 【<font color="red">@{{ basket.no }}</font> 】</td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>
@@ -484,180 +541,140 @@
                             <th colspan="3" style="text-align:center;">申请人</th>
                             <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
                             <th colspan="3" style="text-align:center;">申请日期</th>
-                            <td colspan="3">2017-03-10</td>
-                        </tr>
-                        <tr>
-                            <th style="text-align:center;">序号</th>
-                            <th colspan="3" style="text-align:center;">采购项目名称</th>
-                            <th colspan="4" style="text-align:center;">规格、型号</th>
-                            <th style="text-align:center;">数量</th>
-                            <th style="text-align:center;">单位</th>
-                            <th style="text-align:center;">预算单价</th>
-                            <th colspan="2" style="text-align:center;">备注</th>
-                        </tr>
-                        {{--按照物资分类排序--}}
-                        <tr>
-                            <td>1</td>
-                            <td colspan="3">采购项目名称</td>
-                            <td colspan="4">规格、型号</td>
-                            <td>数量</td>
-                            <td>单位</td>
-                            <td>预算单价</td>
-                            <td colspan="2">备注</td>
+                            <td colspan="3">@{{ datetimestr }}</td>
                         </tr>
                         <tr>
                             <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                            <th colspan="6" style="text-align:center;"> </th>
+                            <th colspan="9" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</th>
                         </tr>
                         <tr>
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="2" style="text-align:center;"> </th>
-                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-scrollable"  uib-collapse="isProjectbudget">
-                    <table class="table table-bordered table-hover">
-                        <tbody>
-                        <tr>
-                            <th colspan="2" style="text-align:center;">预算年度</th>
-                            <td colspan="1">@{{ basket.syear }}</td>
-                            <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
-                        </tr>
-                        <tr>
-                            <th colspan="2" style="text-align:center;">申请单位</th>
-                            <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
-                            <th colspan="2" style="text-align:center;">预算类别</th>
-                            <td colspan="5">@{{ listtyname }} [@{{ basket.type }}]</td>
-                        </tr>
-                        <tr>
-                            <th colspan="2" style="text-align:center;">申请人</th>
-                            <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
-                            <th colspan="2" style="text-align:center;">申请日期</th>
-                            <td colspan="5">2017-03-10</td>
-                        </tr>
-                        <tr>
-                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="2" style="text-align:center;"> </th>
-                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
+                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="4" style="text-align:center;"> </th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
-                            <th colspan="4" style="text-align:center;">工程项目名称</th>
+                            <th colspan="6" style="text-align:center;">工程项目名称</th>
                             <th colspan="3" style="text-align:center;">工期要求</th>
                             <th style="text-align:center;">工程预算</th>
                             <th style="text-align:center;">工程地点</th>
-                            <th style="text-align:center;">负责人</th>
+                            <th colspan="2" style="text-align:center;">负责人</th>
                             <th colspan="2" style="text-align:center;">负责人电话</th>
                         </tr>
-                        <tr>
-                            <td style="text-align:center;">序号</td>
-                            <td colspan="4" style="text-align:center;word-break:break-all;">采购内容采购内容采购内容采购内容采购采购内容采购内容内容采购内容</td>
-                            <td colspan="3" style="text-align:center;word-break:break-all;">工期要采购内容采购内容采购内容采购内容采购内容采购内容求</td>
-                            <td style="text-align:center;">预算金额</td>
-                            <td style="text-align:center;">地点</td>
-                            <td style="text-align:center;">负责人</td>
-                            <td colspan="2" style="text-align:center;">负责人电话</td>
+                        <tr ng-repeat="gcdata in imdata">
+                            <td style="text-align:center;">@{{ $index+1 }}</td>
+                            <td colspan="6" >@{{ gcdata.name }}</td>
+                            <td colspan="3" >@{{ gcdata.req }}</td>
+                            <td >@{{ gcdata.bdg | currency:'￥'}}</td>
+                            <td >@{{ gcdata.addr }}</td>
+                            <td colspan="2" >@{{ gcdata.picharge }}</td>
+                            <td colspan="2" >@{{ gcdata.picphone }}</td>
                         </tr>
+
                         </tbody>
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isServicebudget">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" width="800">
                         <tbody>
                         <tr>
                             <th colspan="2" style="text-align:center;">预算年度</th>
-                            <td colspan="1">@{{ basket.syear }}</td>
-                            <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
+                            <td colspan="2">@{{ basket.syear }}</td>
+                            <th colspan="3" style="text-align:center;">项目名称</th>
+                            <td colspan="8">@{{ basket.summary }} 【<font color="red">@{{ basket.no }}</font> 】</td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="text-align:center;">申请单位</th>
+                            <th colspan="3" style="text-align:center;">申请单位</th>
                             <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
-                            <th colspan="2" style="text-align:center;">预算类别</th>
-                            <td colspan="5">@{{ listtyname }} [@{{ basket.type }}]</td>
+                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="text-align:center;">申请人</th>
+                            <th colspan="3" style="text-align:center;">申请人</th>
                             <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
-                            <th colspan="2" style="text-align:center;">申请日期</th>
-                            <td colspan="5">2017-03-10</td>
+                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3">@{{ datetimestr }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
+                            <th colspan="9" style="text-align:center;"> @{{ totalimdata | currency:'￥' }}</th>
                         </tr>
                         <tr>
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="2" style="text-align:center;"> </th>
-                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
+                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="4" style="text-align:center;"> </th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
-                            <th colspan="4" style="text-align:center;">服务内容</th>
+                            <th colspan="6" style="text-align:center;">服务内容</th>
                             <th colspan="3" style="text-align:center;">服务期限</th>
                             <th style="text-align:center;">预算金额</th>
                             <th style="text-align:center;">地点</th>
-                            <th style="text-align:center;">负责人</th>
+                            <th colspan="2" style="text-align:center;">负责人</th>
                             <th colspan="2" style="text-align:center;">负责人电话</th>
                         </tr>
-                        <tr>
-                            <td style="text-align:center;">序号</td>
-                            <td colspan="4" style="text-align:center;word-break:break-all;">服务内容服务内容服务内容服务内容服务内容服务内容服务内容服务内容服务内容服务内容</td>
-                            <td colspan="3" style="text-align:center;word-break:break-all;">服务期限服务期限服务期限服务期限服务期限服务期限服务期限服务期限服务期限服务期限服务期限</td>
-                            <td style="text-align:center;">预算金额</td>
-                            <td style="text-align:center;">地点</td>
-                            <td style="text-align:center;">负责人</td>
-                            <td colspan="2" style="text-align:center;">负责人电话</td>
+                        <tr ng-repeat="fwdata in imdata">
+                            <td style="text-align:center;">@{{ $index+1 }}</td>
+                            <td colspan="6" >@{{ fwdata.name }}</td>
+                            <td colspan="3" >@{{ fwdata.req }}</td>
+                            <td >@{{ fwdata.bdg | currency:'￥' }}</td>
+                            <td >@{{ fwdata.addr }}</td>
+                            <td colspan="2" >@{{ fwdata.picharge }}</td>
+                            <td colspan="2" >@{{ fwdata.picphone }}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isOthersbudget">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" width="800">
                         <tbody>
                         <tr>
                             <th colspan="2" style="text-align:center;">预算年度</th>
-                            <td colspan="1">@{{ basket.syear }}</td>
-                            <th colspan="2" style="text-align:center;">项目名称</th>
-                            <td colspan="10" width="200" style="word-break:break-all;">@{{ basket.summary }} 【项目编号 年度+预算类别编号（类别简拼）+总序号】</td>
+                            <td colspan="2">@{{ basket.syear }}</td>
+                            <th colspan="3" style="text-align:center;">项目名称</th>
+                            <td colspan="8">@{{ basket.summary }} 【<font color="red">@{{ basket.no }}</font> 】</td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="text-align:center;">申请单位</th>
+                            <th colspan="3" style="text-align:center;">申请单位</th>
                             <td colspan="6">@{{ listunname }} [@{{ basket.unit }}]</td>
-                            <th colspan="2" style="text-align:center;">预算类别</th>
-                            <td colspan="5">@{{ listtyname }} [@{{ basket.type }}]</td>
+                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3">@{{ listtyname }} [@{{ basket.type }}]</td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="text-align:center;">申请人</th>
+                            <th colspan="3" style="text-align:center;">申请人</th>
                             <td colspan="6">@{{ listusname }} [@{{ basket.requester }}]</td>
-                            <th colspan="2" style="text-align:center;">申请日期</th>
-                            <td colspan="5">2017-03-10</td>
+                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3">@{{ datetimestr }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
+                            <th colspan="9" style="text-align:center;"> @{{ totalimdata | currency:'￥' }}</th>
                         </tr>
                         <tr>
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="2" style="text-align:center;"> </th>
-                            <th colspan="4" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥'}}</th>
+                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
+                            <th colspan="4" style="text-align:center;"> </th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
-                            <th colspan="4" style="text-align:center;">采购内容</th>
+                            <th colspan="6" style="text-align:center;">采购内容</th>
                             <th colspan="3" style="text-align:center;">其他说明</th>
                             <th style="text-align:center;">预算金额</th>
                             <th style="text-align:center;">地点</th>
-                            <th style="text-align:center;">负责人</th>
+                            <th colspan="2" style="text-align:center;">负责人</th>
                             <th colspan="2" style="text-align:center;">负责人电话</th>
                         </tr>
-                        <tr>
-                            <td style="text-align:center;">序号</td>
-                            <td colspan="4" style="text-align:center;word-break:break-all;">采购内容采购内容采购内容采购内容采购采购内容采购内容内容采购内容</td>
-                            <td colspan="3" style="text-align:center;word-break:break-all;">其他说明其他说明其他说明其他说明其他说明其他说明其他说明其他说明其他说明</td>
-                            <td style="text-align:center;">预算金额</td>
-                            <td style="text-align:center;">地点</td>
-                            <td style="text-align:center;">负责人</td>
-                            <td colspan="2" style="text-align:center;">负责人电话</td>
+                        <tr ng-repeat="qtdata in imdata">
+                            <td style="text-align:center;">@{{ $index+1 }}</td>
+                            <td colspan="6" >@{{ qtdata.name }}</td>
+                            <td colspan="3" >@{{ qtdata.req }}</td>
+                            <td >@{{ qtdata.bdg | currency:'￥' }}</td>
+                            <td >@{{ qtdata.addr }}</td>
+                            <td colspan="2" >@{{ qtdata.picharge }}</td>
+                            <td colspan="2" >@{{ qtdata.picphone }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -666,12 +683,12 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-2 col-sm-4 col-xs-4">
-                        <a href="#" ng-click="savedata()" class="btn green">
+                        <a href="#" ng-click="saveformdata()" class="btn green">
                             <i class="fa fa-check"></i> 提交申报 </a>
                         {{--必须提交申报后 才可以打印--}}
                     </div>
                     <div class="col-md-3 col-sm-4 col-xs-4">
-                        <a href="#" ng-click="printdata()" class="btn blue-oleo">
+                        <a href="#" ng-click="printformdata()" ng-show="printsign" class="btn blue-oleo">
                             <i class="fa fa-print"></i> - 打 印 - </a>
                     </div>
                 </div>

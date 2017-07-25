@@ -117,7 +117,7 @@ class CreateAmbudgetsTable extends Migration
             $table->string('wzno'); //物资编号
             $table->string('wzsmodel')->nullable(); //规格型号
             $table->integer('amt'); //数量
-            $table->decimal('bdgprice')->nullable(); //预算单价
+            $table->decimal('bdg')->nullable(); //预算单价
             $table->decimal('purchprice')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
@@ -135,8 +135,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amcontrbudgets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable(); //工程名称
-            $table->decimal('bdg')->nullable(); //工程概预算
+            $table->string('name'); //工程名称
+            $table->decimal('bdg'); //工程概预算
             $table->text('req')->nullable(); //工程要求
             $table->text('addr')->nullable(); //工程地点
             $table->string('picharge')->nullable(); //负责人
@@ -159,8 +159,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amsvbudgets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable(); //服务名称
-            $table->decimal('bdg')->nullable(); //服务预算
+            $table->string('name'); //服务名称
+            $table->decimal('bdg'); //服务预算
             $table->text('req')->nullable(); //服务要求
             $table->text('addr')->nullable(); //服务地点
 
@@ -182,8 +182,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amotbudgets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable(); //名称
-            $table->decimal('bdg')->nullable(); //预算
+            $table->string('name'); //名称
+            $table->decimal('bdg'); //预算
             $table->text('otremark')->nullable(); //其他说明
 
             $table->text('addr')->nullable(); //服务地点

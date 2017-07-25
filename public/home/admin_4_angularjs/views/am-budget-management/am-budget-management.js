@@ -179,7 +179,7 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '金额', field: 'total',width: '100',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '金额', field: 'total',width: '100',cellFilter: 'currency',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '备注', field: 'remark',width: '100',enableCellEdit: true,enableColumnMenu: true,enableHiding: true,
                         cellTooltip: function(row){ return row.entity.remark; },
