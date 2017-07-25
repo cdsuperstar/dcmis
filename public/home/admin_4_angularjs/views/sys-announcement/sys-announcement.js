@@ -3,7 +3,7 @@
 angular.module("MetronicApp").controller('sysannouncementCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('/dcmodels');
+            var tableDatas = Restangular.all('/sys-announcement');
             i18nService.setCurrentLang('zh-cn');
 
             $scope.addData = function () {

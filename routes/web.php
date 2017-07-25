@@ -218,6 +218,15 @@ Route::group(['prefix' => '/sys-msg'], function () {
     Route::get('unreadmsgs','usermsgController@getUnreadMsgs')->middleware(['permission:sys-msg.unreadmsgs']); //sys-msg.unreadmsgs
 });
 
+// 系统公告 sys-announcement
+Route::group(['prefix'=>'/sys-announcement'],function(){
+    Route::get('','dcannouncementController@index'); //
+    Route::get('create','dcannouncementController@create'); //
+    Route::put('{dcannouncement}','dcannouncementController@update'); //
+    Route::post('','dcannouncementController@store'); //
+    Route::delete('{dcannouncement}','dcannouncementController@destroy'); //
+});
+
 // Debug all sqls
 //DB::listen(function ($event) {
 //    Log::info($event->sql);

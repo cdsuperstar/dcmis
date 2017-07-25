@@ -30,7 +30,7 @@
                             <label class="col-md-3 control-label"> 内  容 </label>
                             <div class="col-md-8">
                                 {{--<div ng-model="dcEdition.content" id="summernote_sysannouncement"> </div>--}}
-                                <textarea ng-model="dcEdition.content" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 200px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写公告内容（1000字以内）"></textarea>
+                                <textarea ng-model="dcEdition.body" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 200px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写公告内容（1000字以内）"></textarea>
                             </div>
                         </div>
                         <div class="form-action" align="center">
@@ -55,7 +55,7 @@
 
         <button id="addData" type="button" class="btn btn-success" ng-click="addData()"><i class="fa fa-plus"></i> 增加</button>
         <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些公告数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除</button>
-        <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
+        {{--<button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>--}}
         <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选</button>
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
 
