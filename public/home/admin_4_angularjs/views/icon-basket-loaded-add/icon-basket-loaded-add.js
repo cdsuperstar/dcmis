@@ -72,17 +72,31 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             };
 
             $scope.printformdata = function () {
-
-                var head_str = "<html><head><title></title></head><body>"; //先生成头部
+                //取当前类别的模板类型
+                if(!$scope.basket.type) $scope.basket.type=1;
+                var templatesign="1";
+                if($scope.listnames===undefined){
+                } else {
+                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.type,'template');
+                }
+                //end
+                var htmstr='';
+                var head_str = "<html><head><title></title></head><body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
+                if(templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
+                if(templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
+                if(templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
+                if(templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
                 var foot_str = "</body></html>"; //生成尾部
-                var older = document.body.innerHTML;
+                // var older = document.body.innerHTML;
                 var new_str = document.getElementById('isMaterialbudget').innerHTML; //获取指定打印区域
-                var old_str = document.body.innerHTML; //获得原本页面的代码
-                document.body.innerHTML = head_str + new_str + foot_str; //构建新网页
-                window.print(); //打印刚才新建的网页
-                document.body.innerHTML = older; //将网页还原
-                return false;
+                // var old_str = document.body.innerHTML; //获得原本页面的代码
+                document.body.innerHTML = head_str + htmstr + foot_str; //构建新网页
 
+                window.print(); //打印刚才新建的网页
+                location.reload(); //打印结束后reload本页面
+                // window.location.href="#/icon-basket-loaded-add.html";
+                // document.body.innerHTML = older; //将网页还原
+                // return false;
             };
             $scope.dumpimdata=function () {
                 $scope.imdata=[];
@@ -332,7 +346,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 }else {
                                     showMsg('添加失败!工程项目名称：'+dcaddContr.name, '错误', 'ruby');
                                 }
-                            }, function (dcaddMaterial) {
+                            }, function (dcaddContr) {
                                 // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
                         };
@@ -386,7 +400,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 }else {
                                     showMsg('添加失败!服务内容：'+dcaddSv.name, '错误', 'ruby');
                                 }
-                            }, function (dcaddMaterial) {
+                            }, function (dcaddSv) {
                                 // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
 
@@ -435,12 +449,12 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             }).then(function (dcaddOt) {
                                 // console.log(dcaddOt);
                                 if(dcaddOt.name){
-                                    $scope.imdata.push(dcaddSv);
+                                    $scope.imdata.push(dcaddOt);
                                     showMsg('添加成功!采购内容：'+dcaddOt.name, '信息', 'lime');
                                 }else {
                                     showMsg('添加失败!采购内容：'+dcaddOt.name, '错误', 'ruby');
                                 }
-                            }, function (dcaddMaterial) {
+                            }, function (dcaddOt) {
                                 // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
                         };
