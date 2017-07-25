@@ -22,6 +22,17 @@ class ambudgetController extends Controller
     }
 
     /**
+     * 得到某年数据
+     * @param String $syear
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getYearDatas(String $syear)
+    {
+        $datas = ambudget::whereSyear($syear)->get();
+        return response()->json($datas);
+
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

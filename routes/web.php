@@ -78,6 +78,9 @@ Route::group(['prefix' => '/sys-usersown'], function () {
 
 //预算管理
 Route::group(['prefix'=>'/am-budget-management'],function(){
+    // 得到某年数据
+    Route::get('year/{syear}','ambudgetController@getYearDatas');
+
     Route::get('','ambudgetController@index');
     Route::get('create','ambudgetController@create');
     Route::put('{ambudget}','ambudgetController@update');
