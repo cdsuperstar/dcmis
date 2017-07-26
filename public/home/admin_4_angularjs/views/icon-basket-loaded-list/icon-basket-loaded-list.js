@@ -6,7 +6,6 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             i18nService.setCurrentLang('zh-cn');
 
             //获得年度列表
-            //获得年度列表
             var currentYear = new Date().getFullYear();
             var yeararr = new Array();
             for(var val = (currentYear-3); val <= (currentYear+3); val++){
@@ -17,32 +16,68 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 tmpu ={value:yeararr[i],label:yeararr[i]};
                 untarr.push(tmpu);
             }
-            $scope.uigrtyear = untarr; //转换成uigrid可识别的模式[{value:xxx,lebel:'xxx'}]
+            $scope.uigrtyear = untarr; //转换成uigrid可识别的模式[{value:xxx,label:'xxx'}]
             $scope.tyear = yeararr;
+            //console.log($scope.uigrtyear);
             //预算类别列表
-            $scope.listnames = [{ value: 1, label: '物资预算' }, { value: 2, label: '工程预算' }, { value: 3, label: '服务预算' }, { value: 4, label: '其他预算' }];
+            Restangular.all('/am-budget-lb').getList().then(function (accounts) {
+                //console.log(accounts);
+                var lbarr = [];
+                var tmpu = {};
+                var lbHash=[] ;
+                for(var i=0;i<accounts.length;i++){
+                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                    tmpu ={value:accounts[i].id,label:accounts[i].type};
+                    lbHash[accounts[i].id] = accounts[i].type;
+                    lbarr.push(tmpu);
+                }
+                $scope.listnames = lbarr; //转换成uigrid可识别的模式
+
+                $scope.gridOptions.columnDefs[6].filter.selectOptions=lbarr;
+                $scope.gridOptions.columnDefs[6].editDropdownOptionsArray=lbarr;
+                $scope.gridOptions.columnDefs[6].lbHash =  lbHash;
+            });
+
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
                 //console.log(accounts);
-                $scope.untigrps = accounts;
+                var tmpu = {};
+                var unitHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    unitHash[accounts[i].id]=accounts[i].name;
+                }
+                $scope.gridOptions.columnDefs[8].unitHash =  unitHash ;
             });
+
             //人员列表
             Restangular.all('/sys-users').getList().then(function (accounts) {
+                var userarr = [];
+                var tmpu = {};
+                var userHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    userHash[accounts[i].id]=accounts[i].name;
+                    userarr.push(tmpu);
+                }
+                $scope.uigrusergrps = userarr; //转换成uigrid可识别的模式
                 $scope.peoplegrps = accounts;
+                $scope.gridOptions.columnDefs[7].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[7].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[7].unitHash =  userHash ;
             });
-            $scope.basket = { syear:currentYear,type:1};  //初始化为当前年度
 
             //
-            var tableDatas = Restangular.all('500_complex.json');
-
+            var tableDatas = Restangular.all('/am-budget-management');
 
             $scope.delData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
-                selectdcmodels.forEach(function (deluser) {
+                selectdcmodels.forEach(function (deldata) {
                         //console.log(deluser);
-                        deluser.entity.remove().then(function (res) {
+                    deldata.entity.remove().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -57,7 +92,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
-                showColumnFooter:true,
+                showColumnFooter:false,
                 showGridFooter:true,
                 columnDefs: [
                     {name: '详情', field: 'id',width: '50',enableColumnMenu: false,enableColumnResizing:false,enableSorting:false,pinnedLeft:true,
@@ -66,35 +101,37 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         ' </div>'},
-                    {name: '编号', field: 'no',width: '100',enableColumnMenu: true,
-                        footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'
-                    },
-                    {name: '年度', field: 'syear',width: '80',
+                    {name: '项目编号', field: 'no',width: '100'},
+                    {name: '项目名称', field: 'name',width: '200'},
+                    {name: '审批状态', field: 'appstate',width: '100',enableColumnMenu: true},
+                    {name: '采购状态', field: 'progress',width: '100',enableColumnMenu: true},
+                    {name: '年度', field: 'year',width: '100',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: $scope.uigrtyear,
+                        editDropdownOptionsArray: $scope.uigrtyear,cellFilter: 'yearGender',
                         filter: {
                             term: currentYear,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '预算类别', field: 'type',width: '120',
+                    {name: '预算类别', field: 'ambudgettypes_id',width: '120',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: $scope.listnames,cellFilter: 'yslbGender',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term: 1,
+                            term:1,
                             type: uiGridConstants.filter.SELECT,
-                            selectOptions: $scope.listnames}
+                            selectOptions: []}
                     },
-                    {name: '项目名称', field: 'budgetname',width: '200'},
-                    {name: '总金额', field: 'total',width: '80',type:'float',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '申报人', field: 'requester',width: '100',},
-                    {name: '部门', field: 'unit',width: '200',
+                    {name: '申请人', field: 'requester',width: '100',enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
                         filter: {
+                            term:1,
                             type: uiGridConstants.filter.SELECT,
-                            selectOptions: $scope.uigrunitgrps}
+                            selectOptions: [] }
                     },
-                    {name: '审批状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true},
-                    {name: '采购状态', field: 'urchasingstatus',width: '100',enableColumnMenu: true}
+                    {name: '部门', field: 'unitgrps_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
+                        cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
+                    }
                 ],
 
                 enableGridMenu: true,
@@ -106,7 +143,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'download.csv',
+                exporterCsvFilename:'datadownload.csv',
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -300,19 +337,21 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
         }
     ]
 )
-    .filter('yslbGender', function() {
-        var yslbHash = {
-            1: '物资预算',
-            2: '工程预算',
-            3: '服务预算',
-            4: '其他预算'
-        };
+    .filter('yearGender', function() {
         return function(input) {
             if (!input){
                 return '';
             } else {
-                return yslbHash[input];
+                return input;
             }
         };
+    })
+
+    .filter('dFilterHash',function(){
+        return function(v,h){
+            if (h=== undefined) return '';
+            if (h[v]===undefined) return '';
+            return h[v];
+        }
     })
 ;
