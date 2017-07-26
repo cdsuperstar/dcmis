@@ -135,6 +135,18 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'spell');
                 }
                 $scope.basket.no=currentYear+templatespell+"0001";
+                Restangular.all('/icon-basket-loaded-add').getList().then(function (accounts) {
+                    var tmpno = 0;
+                    for(var i=0;i<accounts.length;i++){
+                        if(currentYear==accounts[i].no.substr(0,4)){
+                            if(accounts[i].no.substr(6.4) > tmpno) tmpno = accounts[i].no.substr(6.4);
+                            console.log(tmpno);
+                            $scope.basket.no = currentYear+templatespell+(tmpno+1);
+                        }else {
+                            $scope.basket.no=currentYear+templatespell+"0001";
+                        }
+                    }
+                });
                 // console.log($scope.basket.no);
                 //end
                 //导航开始
@@ -227,7 +239,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
                 //取当前类别的模板类型
                 if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
-                var templatesign="1";
                 if($scope.listnames===undefined){
                 } else {
                     $scope.basket.templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
