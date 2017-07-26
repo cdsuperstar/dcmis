@@ -55,6 +55,6 @@ class amasbudget extends Model
 {
     //
     protected $table = 'amasbudgets';
-    protected $fillable = ['meas','amt','bdgprice','purchprice','purchway','purchstate','reimstate','contrno','asstate','total','remark'];
+    protected $fillable = ['amapplications_id','wzno','wzsmodel','amt','bdg','purchprice','purchway','purchstate','reimstate','contrno','asstate','total','remark'];
 
 }

@@ -149,6 +149,9 @@ Route::group(['prefix'=>'/am-budget-lb'],function(){
 
 //发起采购 采购申请表
 Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
+    //保存发起采购信息
+    Route::post('storeReq','amapplicationController@storeReq'); //
+
     Route::get('','amapplicationController@index'); //
     Route::get('create','amapplicationController@create'); //
     Route::put('{amapplication}','amapplicationController@update'); //

@@ -71,8 +71,15 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     var res = angular.merge($scope.basket, $scope.imdata);
                     $scope.printsign = true;
                     $scope.subsign = false;
+                    Restangular.all('/icon-basket-loaded-add/storeReq').post(res).then(function(storeRes){
+                        if (storeRes.success) {
+                            showMsg(storeRes.messages.toString(), '信息', 'lime');
+                        } else {
+                            // TODO add error message to system
+                            showMsg(storeRes.errors.toString(), '错误', 'ruby');
+                        }
+                    });
                     console.log(res);
-                    showMsg('数据保存成功！', '信息', 'lime');
                 }
             };
 

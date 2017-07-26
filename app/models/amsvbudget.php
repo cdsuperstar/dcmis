@@ -51,6 +51,6 @@ class amsvbudget extends Model
 {
     //
     protected $table = 'amsvbudgets';
-    protected $fillable = ['name','bdg','req','addr','picharge','picphone','contrprice','purchway','purchstate','amsuppliers_id','reimstate','total','remark'];
+    protected $fillable = ['amapplications_id','name','bdg','req','addr','picharge','picphone','contrprice','purchway','purchstate','amsuppliers_id','reimstate','total','remark'];
 
 }

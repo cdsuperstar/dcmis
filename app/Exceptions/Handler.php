@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use PDOException;
+use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -44,9 +46,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        if ($exception instanceof QueryException) {
+            return response()->json(['errors' => $exception->errorInfo]);
+        }
+
+        if ($exception instanceof PDOException) {
+            return response()->json(['errors' => $exception->errorInfo]);
+        }
+
         if ($this->isHttpException($exception)) {
             return $this->renderHttpException($exception);
         }
+
 
 //        if (config('app.debug')&&!($exception instanceof AuthenticationException)) {
 //            return $this->renderExceptionWithWhoops($exception);

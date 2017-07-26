@@ -41,6 +41,6 @@ class amapplication extends Model
 {
     //
     protected $table = 'amapplications';
-    protected $fillable = ['year','unitgrps_id','requester','name','ambudgettypes_id','appstate','apper','appdate','progress','isterm','termreason'];
+    protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettypes_id','appstate','apper','appdate','progress','isterm','termreason'];
 
 }

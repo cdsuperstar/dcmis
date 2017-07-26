@@ -90,11 +90,11 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('amapplications', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('year'); //年度
+            $table->string('syear'); //年度
             $table->string('unitgrps_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
-            $table->string('no'); //项目编号
+            $table->string('no')->unique(); //项目编号
             $table->string('name'); //项目名称
             $table->integer('ambudgettypes_id'); //预算类别
             $table->string('appstate')->nullable(); //审批状态
@@ -115,6 +115,7 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('amasbudgets', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('amapplications_id'); //采购申请表id
             $table->string('wzno'); //物资编号
             $table->string('wzsmodel')->nullable(); //规格型号
             $table->integer('amt'); //数量
@@ -136,6 +137,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amcontrbudgets', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('amapplications_id'); //采购申请表id
             $table->string('name'); //工程名称
             $table->decimal('bdg'); //工程概预算
             $table->text('req')->nullable(); //工程要求
@@ -160,6 +163,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amsvbudgets', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('amapplications_id'); //采购申请表id
             $table->string('name'); //服务名称
             $table->decimal('bdg'); //服务预算
             $table->text('req')->nullable(); //服务要求
@@ -183,6 +188,8 @@ class CreateAmbudgetsTable extends Migration
          */
         Schema::create('amotbudgets', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('amapplications_id'); //采购申请表id
             $table->string('name'); //名称
             $table->decimal('bdg'); //预算
             $table->text('otremark')->nullable(); //其他说明
