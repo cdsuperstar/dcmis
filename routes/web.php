@@ -152,20 +152,28 @@ Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
     //保存发起采购信息
     Route::post('storeReq','amapplicationController@storeReq'); //
 
-    Route::get('','amapplicationController@index'); //
     Route::get('create','amapplicationController@create'); //
     Route::put('{amapplication}','amapplicationController@update'); //
     Route::post('','amapplicationController@store'); //
     Route::delete('{amapplication}','amapplicationController@destroy'); //
 });
 
-///物资采购表
+
+//物资采购表
 Route::group(['prefix'=>'/amasbudgets'],function(){
     Route::get('','amasbudgetController@index'); //
     Route::get('create','amasbudgetController@create'); //
     Route::put('{amasbudget}','amasbudgetController@update'); //
     Route::post('','amasbudgetController@store'); //
     Route::delete('{amasbudget}','amasbudgetController@destroy'); //
+});
+
+//采购列表
+Route::group(['prefix'=>'/icon-basket-loaded-list'],function(){
+    //得到所有采购申请
+    Route::get('','amapplicationController@index'); //
+    //根据申请ID得到子项
+    Route::get('getSubsFromAppID/{amapplication}','amapplicationController@getSubsFromAppID'); //
 });
 
 ///工程采购表

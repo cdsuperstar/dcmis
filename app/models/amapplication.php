@@ -43,4 +43,22 @@ class amapplication extends Model
     protected $table = 'amapplications';
     protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettypes_id','appstate','apper','appdate','progress','isterm','termreason'];
 
+    public function amasbudgets()
+    {
+        return $this->hasMany('App\models\amasbudget','amapplication_id');
+    }
+    public function amcontrbudgets()
+    {
+        return $this->hasMany('App\models\amcontrbudget','amapplication_id');
+    }
+    public function amsvbudgets()
+    {
+        return $this->hasMany('App\models\amsvbudget','amapplication_id');
+    }
+    public function amotbudgets()
+    {
+        return $this->hasMany('App\models\amotbudget','amapplication_id');
+    }
+
+
 }

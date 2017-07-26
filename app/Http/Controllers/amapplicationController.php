@@ -24,6 +24,27 @@ class amapplicationController extends Controller
         return response()->json($datas);
 
     }
+    public function getSubsFromAppID(amapplication $amapplication)
+    {
+        //
+        switch ($amapplication->ambudgettypes_id) {
+            case 1:
+                $datas=$amapplication->amasbudgets();
+                break;
+            case 2:
+                $datas=$amapplication->amcontrbudgets();
+                break;
+            case 3:
+                $datas=$amapplication->amsvbudgets();
+                break;
+            case 4:
+                $datas=$amapplication->amotbudgets();
+                break;
+        }
+
+        return response()->json($datas->get());
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -81,28 +102,23 @@ class amapplicationController extends Controller
         if ($rec->save()) {
             foreach ($aSubs as $k => $v) {
                 $cntSub = 0;
+                $v['amapplication_id'] = $rec->id;
                 switch ($aAmapplicationsinut['templatesign']) {
                     case "1":
-                        $v['amapplications_id'] = $rec->id;
                         $recSub[$k] = new amasbudget($v);
-                        if ($recSub[$k]->save()) $cntSub++;
                         break;
                     case "2":
-                        $v['amapplications_id'] = $rec->id;
                         $recSub[$k] = new amcontrbudget($v);
-                        if ($recSub[$k]->save()) $cntSub++;
                         break;
                     case "3":
-                        $v['amapplications_id'] = $rec->id;
                         $recSub[$k] = new amsvbudget($v);
-                        if ($recSub[$k]->save()) $cntSub++;
                         break;
                     case "4":
-                        $v['amapplications_id'] = $rec->id;
                         $recSub[$k] = new amotbudget($v);
-                        if ($recSub[$k]->save()) $cntSub++;
                         break;
                 }
+                if ($recSub[$k]->save()) $cntSub++;
+
             }
 
             return response()->json(array_merge([

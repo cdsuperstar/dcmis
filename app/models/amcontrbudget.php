@@ -83,6 +83,10 @@ class amcontrbudget extends Model
 {
     //
     protected $table = 'amcontrbudgets';
-    protected $fillable = ['amapplications_id','name','bdg','req','addr','picharge','picphone','price','purchway','purchstate','amsuppliers_id','reimstate','contrno','total','remark'];
+    protected $fillable = ['amapplication_id','name','bdg','req','addr','picharge','picphone','price','purchway','purchstate','amsuppliers_id','reimstate','contrno','total','remark'];
+    public function amapplication(){
+        return $this->belongsTo('App\models\amapplication','id');
+    }
+
 
 }
