@@ -31,7 +31,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     lbHash[accounts[i].id] = accounts[i].type;
                     lbarr.push(tmpu);
                 }
-                $scope.listnames = lbarr; //转换成uigrid可识别的模式
+                $scope.listnames = accounts;
 
                 $scope.gridOptions.columnDefs[6].filter.selectOptions=lbarr;
                 $scope.gridOptions.columnDefs[6].editDropdownOptionsArray=lbarr;
@@ -179,10 +179,10 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     controller: ['$scope',function ($scope) {
                         $scope.tmpobjdata = row.entity.id;  //取当前项目申请表的id
                         //取当前类别的模板类型
-                        if(!row.entity.type) row.entity.type=1;
+                        if(!row.entity.ambudgettypes_id) row.entity.ambudgettypes_id=1;
                         if($scope.listnames===undefined){
                         } else {
-                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.type,'template');
+                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettypes_id,'template');
                         }
                         //end
                         $scope.soucegridOptions={
@@ -200,6 +200,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                 $scope.gridApi = gridApi;
                             }
                         };
+                        console.log(row.entity.ambudgettypes_id);
                         switch($scope.templatesign)
                         {
                             case "1":
@@ -289,7 +290,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                 console.log(row.entity.type);
                                 break;
                         }
-
+                        var sourceDatas = Restangular.all('data.json');
                         sourceDatas.getList().then(function (accounts) {
                             var allAccounts = accounts;
                             $scope.soucegridOptions.data = allAccounts;
