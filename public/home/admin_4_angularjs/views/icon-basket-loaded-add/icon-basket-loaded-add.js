@@ -11,8 +11,14 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             var yeararr = new Array();
             for(var val = (currentYear-3); val <= (currentYear+3); val++){
                 yeararr.push(val);}
+
+            ////////////初始化区域
             $scope.tyear = yeararr;
-            $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString();;
+            $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
+            $scope.printsign = false; //打印按钮隐藏
+            $scope.subsign = true;  //默认显示提交申报按钮
+            //初始化结束
+
             //预算类别列表
             Restangular.all('/am-budget-lb').getList().then(function (accounts) {
                 $scope.listnames = accounts;
@@ -58,7 +64,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 return total;
             };
 
-            $scope.printsign = false;
             $scope.saveformdata = function() {
                 if(!$scope.basket.summary || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0){
                     showMsg('必要信息未填写！( 项目名称未填写 或 数据列表为空! )', '错误', 'ruby');
@@ -66,6 +71,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }else {
                     var res = angular.merge($scope.basket, $scope.imdata);
                     $scope.printsign = true;
+                    $scope.subsign = false;
                     console.log(res);
                     showMsg('数据保存成功！', '信息', 'lime');
                 }
@@ -81,19 +87,23 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }
                 //end
                 var htmstr='';
-                var head_str = "<html><head><title></title></head><body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
+                var head_str = "<html><head><title>采购审批表 - 打印</title><link href='http://" +window.location.host+
+                    "/home/assets/global/plugins/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'/></head><body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
                 if(templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
                 if(templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
                 if(templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
                 if(templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
                 var foot_str = "</body></html>"; //生成尾部
                 // var older = document.body.innerHTML;
-                var new_str = document.getElementById('isMaterialbudget').innerHTML; //获取指定打印区域
+                // var new_str = document.getElementById('isMaterialbudget').innerHTML; //获取指定打印区域
                 // var old_str = document.body.innerHTML; //获得原本页面的代码
-                document.body.innerHTML = head_str + htmstr + foot_str; //构建新网页
+                var newh = window.open();
+                newh.document.body.innerHTML = head_str + htmstr + foot_str; //构建新网页
 
-                window.print(); //打印刚才新建的网页
-                location.reload(); //打印结束后reload本页面
+                $scope.subsign = false;
+
+                // newh.print(); //打印刚才新建的网页
+                // location.reload(); //打印结束后reload本页面
                 // window.location.href="#/icon-basket-loaded-add.html";
                 // document.body.innerHTML = older; //将网页还原
                 // return false;

@@ -790,7 +790,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-2 col-sm-4 col-xs-4">
-                        <a href="#" ng-click="saveformdata()" class="btn green">
+                        <a href="#" ng-click="saveformdata()" ng-show="subsign" class="btn green">
                             <i class="fa fa-check"></i> 提交申报 </a>
                         {{--必须提交申报后 才可以打印--}}
                     </div>
