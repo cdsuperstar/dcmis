@@ -60,7 +60,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 showColumnFooter:true,
                 showGridFooter:true,
                 columnDefs: [
-                    {name: '操作', field: 'id',width: '50',enableColumnMenu: false,enableColumnResizing:false,enableSorting:false,pinnedLeft:true,
+                    {name: '详情', field: 'id',width: '50',enableColumnMenu: false,enableColumnResizing:false,enableSorting:false,pinnedLeft:true,
                         enableHiding: false,
                         enableFiltering: false,
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
