@@ -36,7 +36,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.peoplegrps = accounts;
             });
             //初始化数据
-            $scope.basket = { syear:currentYear,unit:$scope.dcUser.unitid,requester:$scope.dcUser.id,type:1};  //初始化当前用户数据
+            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,type:1};  //初始化当前用户数据
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -79,11 +79,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
             $scope.printformdata = function () {
                 //取当前类别的模板类型
-                if(!$scope.basket.type) $scope.basket.type=1;
+                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
                 var templatesign="1";
                 if($scope.listnames===undefined){
                 } else {
-                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.type,'template');
+                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
                 }
                 //end
                 var htmstr='';
@@ -117,24 +117,24 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.yearbudgettotal = 0;
                 Restangular.all('/am-budget-management/year/'+$scope.basket.syear).getList().then(function (accounts) {
                     for (var item=0;item<accounts.length;item++){
-                        if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.type)
+                        if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettypes_id)
                             $scope.yearbudgettotal = accounts[item]['total'];
                     }
 
                 });
 
                 //转换开始
-                $scope.listtyname = changeJsonData($scope.listnames,'id',$scope.basket.type,'type');
+                $scope.listtyname = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'type');
                 $scope.listusname = changeJsonData($scope.peoplegrps,'id',$scope.basket.requester,'name');
-                $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unit,'name');
-                // console.log($scope.basket.unit+'--->'+$scope.listunname);
+                $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unitgrps_id,'name');
+                // console.log($scope.basket.unitgrps_id+'--->'+$scope.listunname);
                 //转换结束
                 //生成采购编号
-                if(!$scope.basket.type) $scope.basket.type=1;
+                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
                 var templatespell="wz";
                 if($scope.listnames===undefined){
                 } else {
-                    templatespell = changeJsonData($scope.listnames,'id',$scope.basket.type,'spell');
+                    templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'spell');
                 }
                 $scope.basket.no=currentYear+templatespell+"0001";
                 // console.log($scope.basket.no);
@@ -144,7 +144,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.isProjectbudget = true;
                 $scope.isServicebudget = true;
                 $scope.isOthersbudget = true;
-                switch($scope.basket.type)
+                switch($scope.basket.ambudgettypes_id)
                 {
                     case 1:{
                         $scope.isMaterialbudget = false;
@@ -228,11 +228,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.changestep = function() {
 
                 //取当前类别的模板类型
-                if(!$scope.basket.type) $scope.basket.type=1;
+                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
                 var templatesign="1";
                 if($scope.listnames===undefined){
                 } else {
-                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.type,'template');
+                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
                 }
                 //end
                 switch(templatesign)
@@ -472,7 +472,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     }
                         break;
                     default:
-                        // console.log($scope.basket.type);
+                        // console.log($scope.basket.ambudgettypes_id);
                         break;
                 }
             };
