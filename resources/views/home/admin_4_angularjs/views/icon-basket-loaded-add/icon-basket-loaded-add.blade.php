@@ -409,7 +409,7 @@
                     <div class="col-md-10">
                         <div class="input-icon right">
                             <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                            <input type="text" ng-model="basket.summary" class="form-control" placeholder="项目名称">
+                            <input type="text" ng-model="basket.name" class="form-control" placeholder="项目名称">
                         </div>
                     </div>
                 </div>
@@ -475,7 +475,7 @@
                             <th colspan="3" style="text-align:center;">预算年度</th>
                             <td>@{{ basket.syear }}</td>
                             <th colspan="4" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} </td>
+                            <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>
@@ -559,7 +559,7 @@
                             <th colspan="3" style="text-align:center;">预算年度</th>
                             <td>@{{ basket.syear }}</td>
                             <th colspan="5" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} </td>
+                            <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>
@@ -638,7 +638,7 @@
                             <th colspan="3" style="text-align:center;">预算年度</th>
                             <td>@{{ basket.syear }}</td>
                             <th colspan="5" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} </td>
+                            <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>
@@ -717,7 +717,7 @@
                             <th colspan="3" style="text-align:center;">预算年度</th>
                             <td>@{{ basket.syear }}</td>
                             <th colspan="5" style="text-align:center;">项目名称</th>
-                            <td colspan="8">@{{ basket.summary }} </td>
+                            <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
                             <th colspan="3" style="text-align:center;">申请单位</th>

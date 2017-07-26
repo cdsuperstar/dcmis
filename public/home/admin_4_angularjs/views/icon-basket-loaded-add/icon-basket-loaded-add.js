@@ -17,6 +17,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
             $scope.printsign = false; //打印按钮隐藏
             $scope.subsign = true;  //默认显示提交申报按钮
+            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettypes_id:1};  //初始化当前用户数据
             //初始化结束
 
             //预算类别列表
@@ -35,8 +36,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             Restangular.all('/sys-users').getList().then(function (accounts) {
                 $scope.peoplegrps = accounts;
             });
-            //初始化数据
-            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,type:1};  //初始化当前用户数据
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -65,7 +64,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             };
 
             $scope.saveformdata = function() {
-                if(!$scope.basket.summary || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0){
+                if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0){
                     showMsg('必要信息未填写！( 项目名称未填写 或 数据列表为空! )', '错误', 'ruby');
                     return false;
                 }else {
@@ -78,21 +77,13 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             };
 
             $scope.printformdata = function () {
-                //取当前类别的模板类型
-                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
-                var templatesign="1";
-                if($scope.listnames===undefined){
-                } else {
-                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
-                }
-                //end
                 var htmstr='';
                 var head_str = "<html><head><title>采购审批表 - 打印</title><link href='http://" +window.location.host+
                     "/home/assets/global/plugins/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'/></head><body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
-                if(templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
-                if(templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
-                if(templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
-                if(templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
+                if($scope.basket.templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
+                if($scope.basket.templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
+                if($scope.basket.templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
+                if($scope.basket.templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
                 var foot_str = "</body></html>"; //生成尾部
                 // var older = document.body.innerHTML;
                 // var new_str = document.getElementById('isMaterialbudget').innerHTML; //获取指定打印区域
@@ -144,23 +135,23 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.isProjectbudget = true;
                 $scope.isServicebudget = true;
                 $scope.isOthersbudget = true;
-                switch($scope.basket.ambudgettypes_id)
+                switch($scope.basket.templatesign)
                 {
-                    case 1:{
+                    case "1":{
                         $scope.isMaterialbudget = false;
                         $scope.isProjectbudget = true;
                         $scope.isServicebudget = true;
                         $scope.isOthersbudget = true;
                     }
                     break;
-                    case 2:{
+                    case "2":{
                         $scope.isMaterialbudget = true;
                         $scope.isProjectbudget = false;
                         $scope.isServicebudget = true;
                         $scope.isOthersbudget = true;
                     }
                         break;
-                    case 3:{
+                    case "3":{
                         $scope.isMaterialbudget = true;
                         $scope.isProjectbudget = true;
                         $scope.isServicebudget = false;
@@ -232,10 +223,10 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 var templatesign="1";
                 if($scope.listnames===undefined){
                 } else {
-                    templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
+                    $scope.basket.templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
                 }
                 //end
-                switch(templatesign)
+                switch($scope.basket.templatesign)
                 {
                     case "1":
                     {
