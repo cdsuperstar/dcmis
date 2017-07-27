@@ -7,7 +7,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-social-youtube font-red-thunderbird"></i>
-                            <span class="caption-subject font-red-thunderbird sbold">采购项目详细（编号：@{{tmpobjdata.no}}&nbsp;）</span>
+                            <span class="caption-subject font-red-thunderbird sbold">采购项目详细（项目名称：@{{ tmpobjname }}   编号：@{{tmpobjno}}&nbsp;）</span>
                         </div>
                         <div class="tools">
                             {{--<a href="" class="fullscreen" data-original-title="全屏" title="全屏"> </a>--}}
@@ -84,7 +84,7 @@
                             </div>
 
                         </div>
-                        <div id="iconbaketsouceplangrid" ui-grid="soucegridOptions" ui-grid-selection ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsouceplangrid"></div>
+                        <div id="iconbaketsouceplangrid" ui-grid="soucegridOptions" ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsouceplangrid"></div>
                     </div>
                 </div>
             </div>
@@ -144,57 +144,22 @@
                     <div class="col-md-4">
                         <button type="button" id="icon-basketset" class="btn btn-warning" ng-click="toggleFiltering()"><i class="fa fa-search"></i> 搜 索
                         </button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 批量处理
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 批量受理申请
                             <span class="caret"></span>
                             <span class="sr-only">切换下拉菜单</span>
                         </button>
                         <ul class="dropdown-menu" >
                             <li>
-                                <a href="javascript:;" ng-click="acceptpurchase('through')"> 受理采购申请【审批通过】 </a>
+                                <a href="javascript:;" ng-click="acceptpurchase('审批通过')"> 申请状态【审批通过】 </a>
                             </li>
                             <li>
-                                <a href="javascript:;" ng-click="acceptpurchase('rejected')"> 驳回采购申请【驳回申请】 </a>
-                            </li>
-                            <li class="divider"> </li>
-                            <li>
-                                <a href="javascript:;"> 报销状态【已报销】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 报销状态【未报销】 </a>
-                            </li>
-                            <li class="divider"> </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【取消采购】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【自行采购】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【询价采购】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【定点采购】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【公开招标】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【邀请招标】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【竞争性谈判】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【单一来源采购】 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;"> 采购方式【协议供货采购】 </a>
+                                <a href="javascript:;" ng-click="acceptpurchase('审批未通过')"> 申请状态【审批未通过】 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
         </div>
-
-        <div id="iconbasketloadplangrid" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbasketloadplangrid"></div>
+        <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存</button>
+        <div id="iconbasketloadplangrid" ui-grid="gridOptions" ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbasketloadplangrid"></div>
     </form>
 </div>

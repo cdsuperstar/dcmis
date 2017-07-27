@@ -100,8 +100,8 @@ class CreateAmbudgetsTable extends Migration
             $table->string('appstate')->nullable(); //审批状态
             $table->integer('apper')->nullable(); //审批人
             $table->dateTime('appdate')->nullable(); //审批时间
-            $table->integer('progress')->nullable(); //进度
-            $table->boolean('isterm')->nullable(); //是否终止
+            $table->string('progress')->nullable(); //进度
+            $table->string('isterm')->nullable(); //是否终止
             $table->text('termreason')->nullable(); //终止原因
 
 

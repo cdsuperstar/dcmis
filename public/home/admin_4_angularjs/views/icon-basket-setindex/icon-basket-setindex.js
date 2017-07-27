@@ -84,10 +84,8 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === editdata.entity.id;
                     });
-                    userWithId.password_confirmation = userWithId.password;
-                    //console.log(userWithId);
                     userWithId.put().then(function (res) {
-                        console.log(res);
+                        // console.log(res);
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
                             $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
@@ -97,7 +95,8 @@ angular.module("MetronicApp").controller('iconbasketsetindexCtrl',
                     });
                 });
 
-            }
+            };
+
             $scope.saveRow = function (rowEntity) {
                 //$scope.editdataids.push(rowEntity.id);
                 var promise = $q.defer();

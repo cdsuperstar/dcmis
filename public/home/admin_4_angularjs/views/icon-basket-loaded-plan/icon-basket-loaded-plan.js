@@ -93,16 +93,15 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 showGridFooter:false,
                 columnDefs: [
                     {name: '详情', field: 'id',width: '50',enableColumnMenu: false,enableColumnResizing:false,enableSorting:false,pinnedLeft:true,
-                        enableHiding: false,
-                        enableFiltering: false,
+                        enableHiding: false,enableCellEdit: false,enableFiltering: false,
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         ' </div>'},
-                    {name: '项目编号', field: 'no',width: '100'},
-                    {name: '项目名称', field: 'name',width: '200'},
-                    {name: '审批状态', field: 'appstate',width: '100',enableColumnMenu: true},
-                    {name: '采购状态', field: 'progress',width: '100',enableColumnMenu: true},
-                    {name: '年度', field: 'syear',width: '100',enableColumnMenu: false,enableHiding: false,
+                    {name: '项目编号', field: 'no',width: '100',enableCellEdit: false,},
+                    {name: '项目名称', field: 'name',width: '200',enableCellEdit: false,},
+                    {name: '审批状态', field: 'appstate',width: '100',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '采购进度', field: 'progress',width: '100',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '年度', field: 'syear',width: '100',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: $scope.uigrtyear,cellFilter: 'yearGender',
                         filter: {
@@ -110,7 +109,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '预算类别', field: 'ambudgettypes_id',width: '120',enableColumnMenu: false,enableHiding: false,
+                    {name: '预算类别', field: 'ambudgettypes_id',width: '120',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
@@ -118,7 +117,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
-                    {name: '申请人', field: 'requester',width: '100',enableColumnMenu: false,enableHiding: false,
+                    {name: '申请人', field: 'requester',width: '100',enableColumnMenu: false,enableHiding: false,enableCellEdit: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
                         filter: {
@@ -126,9 +125,15 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrps_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
+                    {name: '部门', field: 'unitgrps_id',width: '230',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,
                         cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
-                    }
+                    },
+                    {name: '是否终止', field: 'isterm',width: '100',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                        editDropdownValueLabel: 'isterm', editDropdownOptionsArray: [
+                        { id: '是', isterm: '是' },
+                        { id: '否', isterm: '否' }]
+                    },
+                    {name: '终止原因', field: 'termreason',width: '200',enableCellEdit: true}
                 ],
 
                 enableGridMenu: true,
@@ -150,6 +155,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
+                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                     $scope.gridApi.grid.registerRowsProcessor( $scope.singleFilter, 200 );
                 }
             };
@@ -301,16 +307,55 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
 
             };
 
-            $scope.acceptpurchase = function (applystatus) {//受理采购申请（审批通过、驳回申请）
-                if(applystatus == "through"){
+            $scope.acceptpurchase = function (applystatus) {//受理采购申请（审批通过、审批未通过）
+                var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
+                selectdcmodels.forEach(function (deldata) {
+                    //console.log(deldata.entity.id);
+                    Restangular.all('/icon-basket-loaded-plan/setStatus/'+deldata.entity.id+'/appstate/'+applystatus).post().then(function (res) {
+                            if (res.success) {
+                                deldata.entity.appstate = applystatus;
+                                showMsg(res.messages.toString(), '信息', 'lime');
+                            }
+                            else {
+                                showMsg(res.errors.toString(), '错误', 'ruby');
+                            }
+                            //console.log(res);
+                        });
+                    }
+                );
 
-                }
             };
+
+            $scope.editData = function () { //修改是否终止及原因
+                var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
+                toEditRows.forEach(function (edituser) {
+                    var userWithId = _.find($scope.gridOptions.data, function (user) {
+                        return user.id === edituser.entity.id;
+                    });
+                    userWithId.put().then(function (res) {
+                        if (res.success) {
+                            showMsg(res.messages.toString(), '信息', 'lime');
+                            $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
+                        } else {
+                            showMsg(res.errors.toString(), '错误', 'ruby');
+                        }
+                    });
+                });
+            };
+
+            $scope.saveRow = function (rowEntity) {
+                //$scope.editdataids.push(rowEntity.id);
+                var promise = $q.defer();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
+                //promise.resolve();
+                promise.reject();
+            };
+
             $scope.toggleFiltering = function(){
                 $scope.gridApi.grid.refresh();
             };
             $scope.singleFilter = function( renderableRows ){
-                console.log($scope.basket.syear);
+                // console.log($scope.basket.syear);
                 var yearmatcher = new RegExp($scope.basket.syear);
                 var unitmatcher = Number($scope.basket.unitgrps_id);
                 var namematcher = new RegExp($scope.basket.name);
@@ -343,7 +388,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                console.log( $scope.gridOptions.data);
+                // console.log( $scope.gridOptions.data);
             });
 
         }
