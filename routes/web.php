@@ -180,6 +180,14 @@ Route::group(['prefix'=>'/icon-basket-loaded-list'],function(){
     Route::get('getSubsFromAppID/{amapplication}','amapplicationController@getSubsFromAppID'); //
 });
 
+// 采购设置
+Route::group(['prefix'=>'/icon-basket-loaded-plan'],function(){
+    //设置申请状态
+    Route::post('setStatus/{amapplication}/{field}/{status}','amapplicationController@setStatus'); //
+
+
+});
+
 ///工程采购表
 Route::group(['prefix'=>'/amcontrbudgets'],function(){
     Route::get('','amcontrbudgetController@index'); //

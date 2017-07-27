@@ -34,6 +34,19 @@ class amapplicationController extends Controller
 
     }
 
+    public function setStatus(amapplication $amapplication, $field='',$status='')
+    {
+        if($field<>'appstate')return false;
+
+        if($amapplication->update([$field=>$status])){
+            return response()->json(array_merge([
+                    'messages' => trans('data.update', ["data" => $amapplication->id]),
+                    'success' => true,
+                ], $amapplication->toArray()
+                )
+            );
+        }
+    }
     public function getSubsFromAppID(amapplication $amapplication)
     {
         //
