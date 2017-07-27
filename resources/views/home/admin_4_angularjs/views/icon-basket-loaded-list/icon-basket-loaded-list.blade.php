@@ -7,7 +7,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-social-youtube font-red-thunderbird"></i>
-                            <span class="caption-subject font-red-thunderbird sbold">采购项目详细（编号：@{{tmpobjdata.no}}&nbsp;）</span>
+                            <span class="caption-subject font-red-thunderbird sbold">采购项目详细（项目名称：@{{ tmpobjname }}   编号：@{{tmpobjno}}&nbsp;）</span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="remove"  ng-click="closeThisDialog(dcEdition)">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
+                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
                     </div>
                 </div>
             </div>

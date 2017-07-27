@@ -67,6 +67,10 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 $scope.gridOptions.columnDefs[7].editDropdownOptionsArray=userarr;
                 $scope.gridOptions.columnDefs[7].unitHash =  userHash ;
             });
+            //物资列表
+            Restangular.all('/icon-basket-setindex').getList().then(function (accounts) {
+                $scope.datawzgrps = accounts;
+            });
             //转换函数  遍历json
             var changeJsonData = function (mJson,mkey,mvalue,mlabel) {
                 if(mvalue){
@@ -77,9 +81,9 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 }
             };
             //
-            var tableDatas = Restangular.all('/icon-basket-loaded-add');
+            var tableDatas = Restangular.all('/icon-basket-loaded-list');
 
-            $scope.delData = function () {
+            $scope.delData = function () { //删除当前项目采购申请表，也需删除当前对应的子项
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deldata) {
                         //console.log(deldata);
@@ -164,9 +168,8 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 }
             };
 
-
             $scope.showdetail = function(row) {
-                //var detaildata=angular.fromJson(row.entity);
+                // var detaildata=angular.fromJson(row.entity.id);
                 ngDialog.openConfirm({
                     showClose: false,
                     setBodyPadding: 1,
@@ -178,6 +181,8 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {
                         $scope.tmpobjdata = row.entity.id;  //取当前项目申请表的id
+                        $scope.tmpobjno = row.entity.no;  //取当前项目申请表的no
+                        $scope.tmpobjname = row.entity.name;  //取当前项目申请表的name
                         //取当前类别的模板类型
                         if(!row.entity.ambudgettypes_id) row.entity.ambudgettypes_id=1;
                         if($scope.listnames===undefined){
@@ -200,14 +205,26 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                 $scope.gridApi = gridApi;
                             }
                         };
-                        console.log(row.entity.ambudgettypes_id);
+                        var sourceDatas = Restangular.all('/icon-basket-loaded-list/getSubsFromAppID/'+row.entity.id);
+                        sourceDatas.getList().then(function (accounts) {
+                            for (var item=0;item<accounts.length;item++){
+                                if(accounts[item]["wzno"]) {
+                                    accounts[item]["wzname"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'name');//获取物资名称
+                                    accounts[item]["wzmeasunit"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'measunit');//获取物资单位
+                                }
+                            }
+                            $scope.soucegridOptions.data = accounts;
+                            // console.log(accounts);
+                        });
+
+                        // console.log(row.entity.ambudgettypes_id);
                         switch($scope.templatesign)
                         {
                             case "1":
                             {
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '物资编号', field: 'wzno',width: '100',enableColumnMenu: true,pinnedLeft:true,visible:false},
-                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,pinnedLeft:true,
+                                    {name: '物资编号', field: 'wzno',width: '100',enableColumnMenu: true,visible:true},
+                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '单位', field: 'wzmeasunit',width: '60',enableColumnMenu: true,pinnedLeft:true},
                                     {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
@@ -218,8 +235,6 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     {name: '预算单价', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                                 ];
-
-                                var sourceDatas = Restangular.all('data.json');
 
                             }
                                 break;
@@ -240,8 +255,6 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
                                 ];
 
-                                var sourceDatas = Restangular.all('data.json');
-
                             }
                                 break;
                             case "3":
@@ -260,8 +273,6 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     {name: '负责人', field: 'picharge',width: '120',enableColumnMenu: true},
                                     {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
                                 ];
-
-                                var sourceDatas = Restangular.all('data.json');
 
                             }
                                 break;
@@ -283,18 +294,12 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
                                 ];
 
-                                var sourceDatas = Restangular.all('data.json');
                             }
                                 break;
                             default:
                                 console.log(row.entity.type);
                                 break;
                         }
-                        var sourceDatas = Restangular.all('data.json');
-                        sourceDatas.getList().then(function (accounts) {
-                            var allAccounts = accounts;
-                            $scope.soucegridOptions.data = allAccounts;
-                        });
                     }]
 
                 }).then(function (dcEdition) {
