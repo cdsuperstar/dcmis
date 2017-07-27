@@ -108,25 +108,49 @@ class amapplicationController extends Controller
             }
         }
 
-        isset($aAmapplicationsinut["id"])?$rec=amapplication::updateOrCreate($aAmapplicationsinut):$rec = new amapplication($aAmapplicationsinut);
+        if(isset($aAmapplicationsinut["id"])){
+            $rec=amapplication::find($aAmapplicationsinut["id"]);
+            $rec->fill($aAmapplicationsinut);
+        }else{
+            $rec = new amapplication($aAmapplicationsinut);
+        }
         $rec->save();
-        \Log::info($rec);
         if ($rec) {
             foreach ($aSubs as $k => $v) {
                 $cntSub = 0;
                 $v['amapplication_id'] = $rec->id;
                 switch ($aAmapplicationsinut['templatesign']) {
                     case "1":
-                        isset($v["id"])? $recSub[$k] = amasbudget::updateOrCreate($v):$recSub[$k]=new amasbudget($v);
+                        if(isset($v["id"])){
+                            $recSub[$k]=amasbudget::find($v["id"]);
+                            $recSub[$k]->fill($v);
+                        }else{
+                            $recSub[$k]=new amasbudget($v);
+                        }
                         break;
                     case "2":
-                        isset($v["id"])? $recSub[$k] = amcontrbudget::updateOrCreate($v):$recSub[$k]=new amcontrbudget($v);
+                        if(isset($v["id"])){
+                            $recSub[$k]=amasbudget::find($v["id"]);
+                            $recSub[$k]->fill($v);
+                        }else{
+                            $recSub[$k]=new amcontrbudget($v);
+                        }
                         break;
                     case "3":
-                        isset($v["id"])? $recSub[$k] = amsvbudget::updateOrCreate($v):$recSub[$k]=new amsvbudget($v);
+                        if(isset($v["id"])){
+                            $recSub[$k]=amasbudget::find($v["id"]);
+                            $recSub[$k]->fill($v);
+                        }else{
+                            $recSub[$k]=new amsvbudget($v);
+                        }
                         break;
                     case "4":
-                        isset($v["id"])? $recSub[$k] = amotbudget::updateOrCreate($v):$recSub[$k]=new amotbudget($v);
+                        if(isset($v["id"])){
+                            $recSub[$k]=amasbudget::find($v["id"]);
+                            $recSub[$k]->fill($v);
+                        }else{
+                            $recSub[$k]=new amotbudget($v);
+                        }
                         break;
                 }
                 if ($recSub[$k]->save()) $cntSub++;
