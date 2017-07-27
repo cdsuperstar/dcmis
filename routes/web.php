@@ -157,7 +157,6 @@ Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
 
     Route::get('create','amapplicationController@create'); //
     Route::post('','amapplicationController@store'); //
-    Route::put('{amapplication}','amapplicationController@update'); //
 });
 
 
@@ -178,6 +177,8 @@ Route::group(['prefix'=>'/icon-basket-loaded-list'],function(){
     Route::get('','amapplicationController@index'); //
     //根据申请ID得到子项
     Route::get('getSubsFromAppID/{amapplication}','amapplicationController@getSubsFromAppID'); //
+
+    Route::put('{amapplication}','amapplicationController@update'); //
 });
 
 // 采购设置
