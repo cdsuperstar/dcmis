@@ -1,22 +1,22 @@
-.ngdialog.iconbasketloadlist .ngdialog-content{width : 950px;background: #ffffff;}
+.ngdialog.iconbasketloadplan .ngdialog-content{width : 950px;background: #ffffff;}
 
 .jquery-notific8-container.top { top: 60px; }
 
-.iconbasketloadlistgrid {
+.iconbasketloadplangrid {
     /*width: 800px;*/
     height: 384px;
 }
 
-.iconbasketloadlistgrid .ui-grid-header{
+.iconbasketloadplangrid .ui-grid-header{
     background: #1BA39C;
 }
-.iconbasketloadlistgrid .ui-grid-top-panel{
+.iconbasketloadplangrid .ui-grid-top-panel{
     background: #1BA39C;
 }
-.iconbasketloadlistgrid .ui-grid-top-panel-background{
+.iconbasketloadplangrid .ui-grid-top-panel-background{
     background: #1BA39C;
 }
-.iconbasketloadlistgrid .ui-grid-header-cell-label{
+.iconbasketloadplangrid .ui-grid-header-cell-label{
     color:#ffffff;
 }
 
@@ -25,19 +25,19 @@
     height: 384px;
 }
 
-.iconbaketsoucelistgrid .ui-grid-header{
+.iconbaketsouceplangrid .ui-grid-header{
     background: #F2784B;
 }
-.iconbaketsoucelistgrid .ui-grid-top-panel{
+.iconbaketsouceplangrid .ui-grid-top-panel{
     background: #F2784B;
 }
-.iconbaketsoucelistgrid .ui-grid-top-panel-background{
+.iconbaketsouceplangrid .ui-grid-top-panel-background{
     background: #F2784B;
 }
-.iconbaketsoucelistgrid .ui-grid-header-cell-label{
+.iconbaketsouceplangrid .ui-grid-header-cell-label{
     color:#ffffff;
 }
-.iconbaketsoucelistgrid .ui-grid-header-cell{
+.iconbaketsouceplangrid .ui-grid-header-cell{
     color:#ffffff;
 }
 

@@ -320,8 +320,6 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     }]
 
                 }).then(function (dcEdition) {
-                    var tmpdcdata=angular.toJson(dcEdition);
-
 
                 }, function (dcEdition) {
 
