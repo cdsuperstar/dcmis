@@ -102,7 +102,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                             showMsg(storeRes.errors.toString(), '错误', 'ruby');
                         }
                     });
-                    console.log(res);
+                    // console.log(res);
                 }
             };
 
