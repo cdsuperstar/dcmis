@@ -73,6 +73,7 @@ MetronicApp.factory('settings', ['$rootScope', function ($rootScope) {
 MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', function ($scope, $rootScope,Restangular) {
     $scope.dcUserMsgs = [];
     $scope.dcBroadcast = [];
+    $scope.ModelsDataShare = [];
 
     $scope.$on('$viewContentLoaded', function () {
         //App.initComponents(); // init core components
