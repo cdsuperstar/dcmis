@@ -69,13 +69,13 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             // console.log($scope.ModelsDataShare);
             if($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'] != null && $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'] != null){
                 $scope.basket = {
-                    syear:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['syear'],
-                    unitgrps_id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrps_id'],
-                    requester:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester'],
-                    ambudgettypes_id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettypes_id'],
+                    syear:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['syear']),
+                    unitgrps_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrps_id']),
+                    requester:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester']),
+                    ambudgettypes_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettypes_id']),
                     name:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['name'],
-                    no:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no'],
-                    id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['id']
+                    no:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no']),
+                    id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['id'])
                 };
                 var modifydetaildata = $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'];
                 for(var i=0;i<modifydetaildata.length;i++){

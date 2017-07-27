@@ -225,6 +225,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                 if(accounts[item]["wzno"]) {
                                     accounts[item]["wzname"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'name');//获取物资名称
                                     accounts[item]["wzmeasunit"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'measunit');//获取物资单位
+                                    accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["bdg"];//计算物资小计
                                 }
                             }
                             $scope.soucegridOptions.data = accounts;
@@ -236,6 +237,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         {
                             case "1":
                             {
+                                //start
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '物资编号', field: 'wzno',width: '100',enableColumnMenu: true,visible:true},
                                     {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,
@@ -247,6 +249,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     },
                                     {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '预算单价', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '小计', field: 'wztotal',width: '100', cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                                 ];
 
