@@ -26,6 +26,14 @@ class amapplicationController extends Controller
 
     }
 
+    public function getLastNo()
+    {
+        //
+        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
+        return response()->json($datas);
+
+    }
+
     public function getSubsFromAppID(amapplication $amapplication)
     {
         //
