@@ -153,9 +153,8 @@ Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
     Route::post('storeReq','amapplicationController@storeReq'); //
 
     Route::get('create','amapplicationController@create'); //
-    Route::put('{amapplication}','amapplicationController@update'); //
     Route::post('','amapplicationController@store'); //
-    Route::delete('{amapplication}','amapplicationController@destroy'); //
+    Route::put('{amapplication}','amapplicationController@update'); //
 });
 
 
@@ -170,6 +169,8 @@ Route::group(['prefix'=>'/amasbudgets'],function(){
 
 //采购列表
 Route::group(['prefix'=>'/icon-basket-loaded-list'],function(){
+    //删除采购申请
+    Route::delete('{amapplication}','amapplicationController@destroy'); //
     //得到所有采购申请
     Route::get('','amapplicationController@index'); //
     //根据申请ID得到子项
