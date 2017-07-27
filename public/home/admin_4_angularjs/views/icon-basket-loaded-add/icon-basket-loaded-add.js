@@ -11,15 +11,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             var yeararr = new Array();
             for(var val = (currentYear-3); val <= (currentYear+3); val++){
                 yeararr.push(val);}
-
-            ////////////初始化区域
-            $scope.tyear = yeararr;
-            $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
-            $scope.printsign = false; //打印按钮隐藏
-            $scope.subsign = true;  //默认显示提交申报按钮
-            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettypes_id:1};  //初始化当前用户数据
-            //初始化结束
-
             //预算类别列表
             Restangular.all('/am-budget-lb').getList().then(function (accounts) {
                 $scope.listnames = accounts;
@@ -36,6 +27,15 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             Restangular.all('/sys-users').getList().then(function (accounts) {
                 $scope.peoplegrps = accounts;
             });
+
+            ////////////页面初始化区域
+            $scope.tyear = yeararr;
+            $scope.imdata=[];
+            $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
+            $scope.printsign = false; //打印按钮隐藏
+            $scope.subsign = true;  //默认显示提交申报按钮
+            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettypes_id:1};  //初始化当前用户数据
+            //初始化结束
 
             //转换函数  遍历数组
             // var changeArrData = function (mArray,mkey,mvalue,mlabel) {
@@ -62,6 +62,27 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }
                 return total;
             };
+
+            //修改状态初始化
+            // $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'];
+            // $scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'];
+            // console.log($scope.ModelsDataShare);
+            if($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'] != null && $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'] != null){
+                $scope.basket = {
+                    syear:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['syear'],
+                    unitgrps_id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrps_id'],
+                    requester:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester'],
+                    ambudgettypes_id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettypes_id'],
+                    name:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['name'],
+                    no:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no'],
+                    id:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['id']
+                };
+                var modifydetaildata = $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'];
+                for(var i=0;i<modifydetaildata.length;i++){
+                    $scope.imdata.push(modifydetaildata[i]);
+                }
+            }
+            //修改状态初始化结束
 
             $scope.saveformdata = function() {
                 if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0){
@@ -191,7 +212,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.totalimdata = SumJsonData($scope.imdata,'bdg','');
                 $scope.wztotalimdata = SumJsonData($scope.imdata,'bdg','amt');
             };
-            $scope.imdata=[];
             $scope.soucegridOptions={
                 enableSorting: true,
                 enableFiltering: false,
@@ -248,6 +268,13 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 {
                     case "1":
                     {
+                        //重新获取物资名称及单位
+                        if($scope.imdata != null){
+                            for(var i=0;i<$scope.imdata.length;i++){
+                                $scope.imdata[i]['wzname'] = changeJsonData($scope.datawzgrps,'no',$scope.imdata[i]['wzno'],'name');//获取物资名称
+                                $scope.imdata[i]['wzmeasunit'] = changeJsonData($scope.datawzgrps,'no',$scope.imdata[i]['wzno'],'measunit');//获取物资单位
+                            }
+                        }
                         //start
                         $scope.soucegridOptions.columnDefs=[
                             {name: '物资编号', field: 'wzno',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,visible:false},

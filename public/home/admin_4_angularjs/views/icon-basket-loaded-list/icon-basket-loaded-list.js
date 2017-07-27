@@ -83,7 +83,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             //
             var tableDatas = Restangular.all('/icon-basket-loaded-list');
 
-            $scope.delData = function () { //删除当前项目采购申请表，也需删除当前对应的子项
+            $scope.delData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deldata) {
                         //console.log(deldata);
@@ -101,6 +101,20 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 );
             };
 
+            $scope.ModifyData = function () {
+                var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
+                if(selectdcmodels.length == 1){
+                    var sourceDatas = Restangular.all('/icon-basket-loaded-list/getSubsFromAppID/'+selectdcmodels[0].entity.id);
+                    sourceDatas.getList().then(function (accounts) {
+                        $scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'] = selectdcmodels;
+                        $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'] = accounts;
+                        location.href="#/icon-basket-loaded-add.html";
+                        // console.log($scope.ModelsDataShare);
+                    });
+                }else{
+                    showMsg('请正确选择需修改的数据！（未选择或选择数据大于2条）', '错误', 'ruby');
+                }
+            };
             $scope.gridOptions = {
                 enableSorting: true,
                 enableFiltering: false,
