@@ -425,7 +425,7 @@
                     </div>
                     <label class="col-md-2 control-label"> 类  别 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.ambudgettypes_id" theme="bootstrap" ng-change="dumpimdata()">
+                        <ui-select ng-model="basket.ambudgettypes_id" theme="bootstrap" readonly="Midifysign" ng-disabled="Midifysign" ng-change="dumpimdata()">
                             <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
                                     repeat="tmplist.id as tmplist in listnames | filter: $select.search">

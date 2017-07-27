@@ -104,11 +104,11 @@
                     </div>
                     <label class="col-md-1 control-label"> 类  别 </label>
                     <div class="col-md-2">
-                        <ui-select ng-model="basket.type" theme="bootstrap">
-                            <ui-select-match placeholder="选择类别...">@{{$select.selected.label}}</ui-select-match>
+                        <ui-select ng-model="basket.ambudgettypes_id" theme="bootstrap">
+                            <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
-                                    repeat="tmplist.value as tmplist in listnames track by tmplist.value">
-                                @{{tmplist.label}}
+                                    repeat="tmplist.id as tmplist in listnames | filter: $select.search">
+                                <div ng-bind-html="tmplist.type | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
                     </div>
@@ -122,11 +122,10 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                </div>
                 <div class="form-group">
                     <label class="col-md-1 control-label"> 部  门 </label>
-                    <div class="col-md-3">
-                        <ui-select ng-model="basket.unit" theme="bootstrap">
+                    <div class="col-md-2">
+                        <ui-select ng-model="basket.unitgrps_id" theme="bootstrap" readonly="true" ng-disabled="true" search-enabled="true">
                             <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices
                                     repeat="category.id as category in untigrps | filter: $select.search">
@@ -134,7 +133,7 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                    <label class="col-md-1 control-label"> 名  称 </label>
+                    <label class="col-md-1 control-label"> 项 目 名  称 </label>
                     <div class="col-md-3">
                         <div class="input-icon right">
                             <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>

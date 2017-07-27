@@ -29,6 +29,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             });
 
             ////////////页面初始化区域
+            $scope.Midifysign = false; //默认非修改状态
             $scope.tyear = yeararr;
             $scope.imdata=[];
             $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
@@ -74,13 +75,14 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     requester:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester']),
                     ambudgettypes_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettypes_id']),
                     name:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['name'],
-                    no:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no']),
+                    no:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no'],
                     id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['id'])
                 };
                 var modifydetaildata = $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'];
                 for(var i=0;i<modifydetaildata.length;i++){
                     $scope.imdata.push(modifydetaildata[i]);
                 }
+                $scope.Midifysign = true;
             }
             //修改状态初始化结束
 
@@ -131,6 +133,12 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.imdata=[];
             };
 
+            //准换数字左边补0
+            var padleft = function(num, n) {
+                var y='00000000000000000000000000000'+num; //爱几个0就几个，自己够用就行
+                return y.substr(y.length-n);
+            };
+
             $scope.stepthrid = function () {
                 //年预算总金额
                 $scope.yearbudgettotal = 0;
@@ -149,26 +157,22 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 // console.log($scope.basket.unitgrps_id+'--->'+$scope.listunname);
                 //转换结束
                 //生成采购编号
-                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
-                var templatespell="wz";
-                if($scope.listnames===undefined){
-                } else {
-                    templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'spell');
-                }
-                $scope.basket.no=currentYear+templatespell+"0001";
-                Restangular.all('/icon-basket-loaded-add').getList().then(function (accounts) {
-                    var tmpno = 0;
-                    for(var i=0;i<accounts.length;i++){
-                        if(currentYear==accounts[i].no.substr(0,4)){
-                            if(accounts[i].no.substr(6.4) > tmpno) tmpno = accounts[i].no.substr(6.4);
-                            console.log(tmpno);
-                            $scope.basket.no = currentYear+templatespell+(tmpno+1);
-                        }else {
-                            $scope.basket.no=currentYear+templatespell+"0001";
+                if($scope.Midifysign == false){
+                    if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
+                    var templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'spell');
+                    $scope.basket.no=currentYear+templatespell+"0001";
+                    Restangular.all('/icon-basket-loaded-add/getLastNo').getList().then(function (accounts) {
+                        var tmpno = 0;
+                        for(var i=0;i<accounts.length;i++){
+                            if(currentYear==accounts[i].no.substr(0,4)){
+                                if(accounts[i].no.substr(6.4) > tmpno) tmpno = Number(accounts[i].no.substr(6.4))+1;
+                                $scope.basket.no = currentYear+templatespell+padleft(tmpno,5);
+                            }else {
+                                $scope.basket.no=currentYear+templatespell+"0001";
+                            }
                         }
-                    }
-                });
-                // console.log($scope.basket.no);
+                    });
+                }
                 //end
                 //导航开始
                 $scope.isMaterialbudget = false;
