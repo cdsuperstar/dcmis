@@ -86,7 +86,11 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             $scope.delData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deldata) {
-                        //console.log(deldata);
+                    // console.log(deldata.entity.appstate);
+                    if(deldata.entity.appstate == '审批通过'){
+                        showMsg('该采购申请表已经 审批通过，不能删除！', '错误', 'ruby');
+                        return false;
+                    }
                     deldata.entity.remove().then(function (res) {
                             if (res.success) {
                                 $scope.gridOptions.data = _.without($scope.gridOptions.data, deldata.entity);
@@ -104,6 +108,11 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             $scope.ModifyData = function () {
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 if(selectdcmodels.length == 1){
+                    // console.log(selectdcmodels[0].entity.appstate);
+                    if(selectdcmodels[0].entity.appstate == '审批通过'){
+                        showMsg('该采购申请表已经 审批通过，不能修改！', '错误', 'ruby');
+                        return false;
+                    }
                     var sourceDatas = Restangular.all('/icon-basket-loaded-list/getSubsFromAppID/'+selectdcmodels[0].entity.id);
                     sourceDatas.getList().then(function (accounts) {
                         $scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'] = selectdcmodels;
@@ -130,7 +139,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     {name: '项目编号', field: 'no',width: '100'},
                     {name: '项目名称', field: 'name',width: '200'},
                     {name: '审批状态', field: 'appstate',width: '100',enableColumnMenu: true},
-                    {name: '采购状态', field: 'progress',width: '100',enableColumnMenu: true},
+                    {name: '采购进度', field: 'progress',width: '100',enableColumnMenu: true},
                     {name: '年度', field: 'syear',width: '100',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: $scope.uigrtyear,cellFilter: 'yearGender',
@@ -336,6 +345,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
+
                 //console.log( $scope.gridOptions.data);
             });
             //
