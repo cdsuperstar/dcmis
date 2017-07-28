@@ -65,10 +65,10 @@ class amotbudgetController extends Controller
         //
     }
 
-    public function setStatus(amasbudget $amotbudget, $field='',$status='')
+    public function setStatus(amotbudget $amotbudget, $field='',$status='')
     {
         //
-        if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
+        if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate')return false;
 
         if($amotbudget->update([$field=>$status])){
             return response()->json(array_merge([
