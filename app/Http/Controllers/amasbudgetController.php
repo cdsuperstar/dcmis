@@ -20,6 +20,27 @@ class amasbudgetController extends Controller
 
     }
 
+
+    /**
+     * 得到登记资产列表
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAssReg()
+    {
+        //
+        $datas = amasbudget::with(['amassregs'])->get();
+        return response()->json($datas);
+
+    }
+
+    public function getAssScrap()
+    {
+        //
+        $datas = amasbudget::with(['amassscraps'])->get();
+        return response()->json($datas);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -70,7 +91,12 @@ class amasbudgetController extends Controller
     {
         //
         if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
-        if($amasbudget->update([$field=>$status])){
+        $amasbudget->fill([$field=>$status]);
+
+        if($field=='purchstate'&&$status=="已采购")
+            $amasbudget->regamt=$amasbudget->amt - $amasbudget->amassregs()->count();
+
+        if($amasbudget->save()){
             $tmpProgress='';
             if($field=='purchstate'){
                 $resAmapp=$amasbudget->amapplication;

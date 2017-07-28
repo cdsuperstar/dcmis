@@ -55,9 +55,19 @@ class amasbudget extends Model
 {
     //
     protected $table = 'amasbudgets';
-    protected $fillable = ['amapplication_id','wzno','wzsmodel','amt','bdg','purchprice','purchway','purchstate','reimstate','contrno','asstate','total','remark'];
+    protected $fillable = ['amapplication_id','wzno','wzsmodel','amt','bdg','purchprice','purchway','regamt','scrapamt','purchstate','reimstate','contrno','asstate','total','remark'];
     public function amapplication(){
         return $this->belongsTo('App\models\amapplication');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function amassregs(){
+        return $this->hasMany('App\models\amassreg');
+    }
+    public function amassscraps(){
+        return $this->hasMany('App\models\amassscrap');
     }
 
 

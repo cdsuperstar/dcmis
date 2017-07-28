@@ -127,6 +127,11 @@ class CreateAmbudgetsTable extends Migration
             $table->string('contrno')->nullable(); //合同编号
             $table->integer('amsupplier_id')->nullable(); //供应商编号
             $table->string('asstate')->nullable(); //物资状态
+
+            $table->integer('regamt')->nullable(); //库存数量
+            $table->integer('scrapamt')->nullable(); //报废数量
+
+
             $table->decimal('total')->nullable(); //合计金额
             $table->text('remark')->nullable(); //备注
             $table->foreign('amapplication_id')->references('id')->on('amapplications')
@@ -219,22 +224,44 @@ class CreateAmbudgetsTable extends Migration
         });
 
         /**
-         * 固定资产登记表
+         * 资产登记表
          */
         Schema::create('amassregs', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('meas')->nullable(); //单位
+            $table->integer('amasbudget_id')->nullable(); //领用人
+
             $table->integer('amt')->nullable(); //数量
             $table->integer('asuser')->nullable(); //领用人
             $table->string('unitgrps_id'); //领用单位
             $table->dateTime('userdate')->nullable(); //领用时间
             $table->dateTime('validdate')->nullable(); //有效期
-            $table->dateTime('state')->nullable(); //物资状态
+            $table->string('state')->nullable(); //物资状态
+
+            $table->text('remark')->nullable(); //备注
+
+            $table->foreign('amasbudget_id')->references('id')->on('amasbudgets')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->timestamps();
+        });
+
+        /**
+         * 资产报废表
+         */
+        Schema::create('amassscraps', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('amasbudget_id')->nullable(); //领用人
+
+            $table->integer('scrapamt')->nullable(); //报废数量
             $table->integer('scrapuser')->nullable(); //报废人
             $table->dateTime('scrapdate')->nullable(); //报废日期
 
             $table->text('remark')->nullable(); //备注
+
+            $table->foreign('amasbudget_id')->references('id')->on('amasbudgets')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -260,6 +287,7 @@ class CreateAmbudgetsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('amassscraps');
         Schema::dropIfExists('amassregs');
         Schema::dropIfExists('amotbudgets');
         Schema::dropIfExists('amsvbudgets');
