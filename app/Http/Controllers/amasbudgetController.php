@@ -70,10 +70,17 @@ class amasbudgetController extends Controller
     {
         //
         if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
-
         if($amasbudget->update([$field=>$status])){
+            $tmpProgress='';
+            if($field=='purchstate'){
+                $resAmapp=$amasbudget->amapplication;
+                $resAmapp->progress=''.$amasbudget->amapplication->amasbudgets()->where(['purchstate'=>'已采购'])->count().'/'.$amasbudget->amapplication->amasbudgets()->count();
+                $tmpProgress=$resAmapp->progress;
+                $resAmapp->save();
+            }
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amasbudget->id]),
+                    'progress'=>$tmpProgress,
                     'success' => true,
                 ], $amasbudget->toArray()
                 )

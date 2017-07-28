@@ -285,6 +285,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                     Restangular.all(tmpstr+'/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                                         if (res.success) {
                                             deldata.entity[field] = applystatus;
+                                            row.entity.progress=res.progress;
                                             showMsg(res.messages.toString(), '信息', 'lime');
                                         }
                                         else {

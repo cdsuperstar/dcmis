@@ -69,8 +69,16 @@ class amcontrbudgetController extends Controller
         if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate')return false;
 
         if($amcontrbudget->update([$field=>$status])){
+            $tmpProgress='';
+            if($field=='purchstate'){
+                $resAmapp=$amcontrbudget->amapplication;
+                $resAmapp->progress=''.$amcontrbudget->amapplication->amcontrbudgets()->where(['purchstate'=>'已采购'])->count().'/'.$amcontrbudget->amapplication->amcontrbudgets()->count();
+                $tmpProgress=$resAmapp->progress;
+                $resAmapp->save();
+            }
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amcontrbudget->id]),
+                    'progress'=>$tmpProgress,
                     'success' => true,
                 ], $amcontrbudget->toArray()
                 )

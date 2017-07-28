@@ -27,7 +27,7 @@ class amotbudget extends Model
     protected $table = 'amotbudgets';
     protected $fillable = ['amapplication_id','name','bdg','otremark','addr','picharge','picphone','contrprice','purchway','purchstate','amsuppliers_id','reimstate','total','remark'];
     public function amapplication(){
-        return $this->belongsTo('App\models\amapplication','id');
+        return $this->belongsTo('App\models\amapplication');
     }
 
 }

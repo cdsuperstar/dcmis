@@ -71,8 +71,16 @@ class amotbudgetController extends Controller
         if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate')return false;
 
         if($amotbudget->update([$field=>$status])){
+            $tmpProgress='';
+            if($field=='purchstate'){
+                $resAmapp=$amotbudget->amapplication;
+                $resAmapp->progress=''.$amotbudget->amapplication->amotbudgets()->where(['purchstate'=>'已采购'])->count().'/'.$amotbudget->amapplication->amotbudgets()->count();
+                $tmpProgress=$resAmapp->progress;
+                $resAmapp->save();
+            }
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amotbudget->id]),
+                    'progress'=>$tmpProgress,
                     'success' => true,
                 ], $amotbudget->toArray()
                 )

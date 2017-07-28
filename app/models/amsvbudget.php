@@ -53,7 +53,7 @@ class amsvbudget extends Model
     protected $table = 'amsvbudgets';
     protected $fillable = ['amapplication_id','name','bdg','req','addr','picharge','picphone','contrprice','purchway','purchstate','amsuppliers_id','reimstate','total','remark'];
     public function amapplication(){
-        return $this->belongsTo('App\models\amapplication','id');
+        return $this->belongsTo('App\models\amapplication');
     }
 
 }
