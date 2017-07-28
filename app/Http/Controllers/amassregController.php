@@ -43,6 +43,9 @@ class amassregController extends Controller
         //
         $rec = new amassreg($request->toArray());
         if ($rec->save()) {
+            $rec->amasbudget->regamt=$rec->amasbudget->amt - $rec->amasbudget->amassregs()->sum("amt");
+            $rec->amasbudget->save();
+
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $rec->id]),
                     'success' => true,

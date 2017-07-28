@@ -40,7 +40,7 @@ class amassreg extends Model
     //
     protected $table = 'amassregs';
     protected $fillable = ['amasbudget_id','amt','asuser','unitgrps_id','userdate','validdate','state','remark'];
-    public function amapplication(){
+    public function amasbudget(){
         return $this->belongsTo('App\models\amasbudget');
     }
 

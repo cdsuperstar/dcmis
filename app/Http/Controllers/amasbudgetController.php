@@ -94,7 +94,7 @@ class amasbudgetController extends Controller
         $amasbudget->fill([$field=>$status]);
 
         if($field=='purchstate'&&$status=="已采购")
-            $amasbudget->regamt=$amasbudget->amt - $amasbudget->amassregs()->count();
+            $amasbudget->regamt=$amasbudget->amt - $amasbudget->amassregs()->sum("amt");
 
         if($amasbudget->save()){
             $tmpProgress='';
