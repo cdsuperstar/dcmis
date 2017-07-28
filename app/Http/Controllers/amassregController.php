@@ -41,19 +41,19 @@ class amassregController extends Controller
     public function store(Request $request)
     {
         //
-        $rec = new amassreg($request->toArray());
-        if ($rec->save()) {
-            $rec->amasbudget->regamt=$rec->amasbudget->amt - $rec->amasbudget->amassregs()->sum("amt");
-            $rec->amasbudget->save();
+        $amassreg = new amassreg($request->toArray());
+        if ($amassreg->save()) {
+            $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
+            $amassreg->amasbudget->save();
 
             return response()->json(array_merge([
-                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'messages' => trans('data.add', ["data" => $amassreg->id]),
                     'success' => true,
-                ], $rec->toArray()
+                ], $amassreg->toArray()
                 )
             );
         }
-        return response()->json(['errors' => $rec->id ]);
+        return response()->json(['errors' => $amassreg->id ]);
 
     }
 
@@ -92,6 +92,9 @@ class amassregController extends Controller
         if ($amassreg) {
 
             if ($amassreg->update($request->toArray())) {
+                $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
+                $amassreg->amasbudget->save();
+
                 return response()->json(array_merge([
                         'messages' => trans('data.update', ["data" => $amassreg->id]),
                         'success' => true,
@@ -116,6 +119,8 @@ class amassregController extends Controller
     {
         //
         if ($amassreg->delete()) {
+            $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
+            $amassreg->amasbudget->save();
 
             return response()->json(array_merge([
                 'messages' => trans('data.destroy', ['rows' => $amassreg->id . " with id ".$amassreg->id]),
