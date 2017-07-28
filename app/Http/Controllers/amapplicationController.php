@@ -8,6 +8,7 @@ use App\models\amasbudget;
 use App\models\amcontrbudget;
 use App\models\amsvbudget;
 use App\models\amotbudget;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 
@@ -34,11 +35,11 @@ class amapplicationController extends Controller
 
     }
 
-    public function setStatus(amapplication $amapplication, $field='',$status='')
+    public function setStatus(amapplication $amapplication, $field='',$status='',Request $request)
     {
         if($field<>'appstate')return false;
 
-        if($amapplication->update([$field=>$status])){
+        if($amapplication->update([$field=>$status,'apper'=> $request->user()->id,'appdate'=>Carbon::now()])){
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amapplication->id]),
                     'success' => true,

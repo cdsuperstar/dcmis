@@ -65,6 +65,22 @@ class amsvbudgetController extends Controller
         //
     }
 
+    public function setStatus(amasbudget $amsvbudget, $field='',$status='')
+    {
+        //
+        if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
+
+        if($amsvbudget->update([$field=>$status])){
+            return response()->json(array_merge([
+                    'messages' => trans('data.update', ["data" => $amsvbudget->id]),
+                    'success' => true,
+                ], $amsvbudget->toArray()
+                )
+            );
+        }
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

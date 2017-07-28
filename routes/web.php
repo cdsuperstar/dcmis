@@ -162,6 +162,9 @@ Route::group(['prefix'=>'/icon-basket-loaded-add'],function(){
 
 //物资采购表
 Route::group(['prefix'=>'/amasbudgets'],function(){
+    //设置字段值
+    Route::post('setStatus/{amasbudget}/{field}/{status}','amasbudgetController@setStatus'); //
+
     Route::get('','amasbudgetController@index'); //
     Route::get('create','amasbudgetController@create'); //
     Route::put('{amasbudget}','amasbudgetController@update'); //
@@ -191,6 +194,9 @@ Route::group(['prefix'=>'/icon-basket-loaded-plan'],function(){
 
 ///工程采购表
 Route::group(['prefix'=>'/amcontrbudgets'],function(){
+    //设置字段值
+    Route::post('setStatus/{amcontrbudget}/{field}/{status}','amcontrbudgetController@setStatus'); //
+
     Route::get('','amcontrbudgetController@index'); //
     Route::get('create','amcontrbudgetController@create'); //
     Route::put('{amcontrbudget}','amcontrbudgetController@update'); //
@@ -200,6 +206,9 @@ Route::group(['prefix'=>'/amcontrbudgets'],function(){
 
 ///服务采购表
 Route::group(['prefix'=>'/amsvbudgets'],function(){
+    //设置字段值
+    Route::post('setStatus/{amsvbudget}/{field}/{status}','amsvbudgetController@setStatus'); //
+
     Route::get('','amsvbudgetController@index'); //
     Route::get('create','amsvbudgetController@create'); //
     Route::put('{amsvbudget}','amsvbudgetController@update'); //
@@ -209,6 +218,9 @@ Route::group(['prefix'=>'/amsvbudgets'],function(){
 
 ///其他采购表
 Route::group(['prefix'=>'/amotbudgets'],function(){
+    //设置字段值
+    Route::post('setStatus/{amotbudget}/{field}/{status}','amotbudgetController@setStatus'); //
+
     Route::get('','amotbudgetController@index'); //
     Route::get('create','amotbudgetController@create'); //
     Route::put('{amotbudget}','amotbudgetController@update'); //

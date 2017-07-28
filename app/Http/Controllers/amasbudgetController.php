@@ -63,6 +63,23 @@ class amasbudgetController extends Controller
     public function show(amasbudget $amasbudget)
     {
         //
+
+    }
+
+    public function setStatus(amasbudget $amasbudget, $field='',$status='')
+    {
+        //
+        if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
+
+        if($amasbudget->update([$field=>$status])){
+            return response()->json(array_merge([
+                    'messages' => trans('data.update', ["data" => $amasbudget->id]),
+                    'success' => true,
+                ], $amasbudget->toArray()
+                )
+            );
+        }
+
     }
 
     /**
