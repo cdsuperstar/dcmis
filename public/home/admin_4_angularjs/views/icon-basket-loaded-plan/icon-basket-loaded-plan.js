@@ -6,7 +6,8 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             i18nService.setCurrentLang('zh-cn');
 
             //获得年度列表
-            var currentYear = new Date().getFullYear();
+            var date = new Date();
+            var currentYear = date.getFullYear();
             var yeararr = new Array();
             for(var val = (currentYear-3); val <= (currentYear+3); val++){
                 yeararr.push(val);}
@@ -18,6 +19,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             }
             $scope.uigrtyear = untarr; //转换成uigrid可识别的模式[{value:xxx,label:'xxx'}]
             $scope.tyear = yeararr;
+            $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
             //console.log($scope.uigrtyear);
             //预算类别列表
             Restangular.all('/am-budget-lb').getList().then(function (accounts) {
@@ -32,23 +34,27 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     lbarr.push(tmpu);
                 }
                 $scope.listnames = accounts;
-                $scope.gridOptions.columnDefs[6].filter.selectOptions=lbarr;
-                $scope.gridOptions.columnDefs[6].editDropdownOptionsArray=lbarr;
-                $scope.gridOptions.columnDefs[6].lbHash =  lbHash;
+                $scope.gridOptions.columnDefs[8].filter.selectOptions=lbarr;
+                $scope.gridOptions.columnDefs[8].editDropdownOptionsArray=lbarr;
+                $scope.gridOptions.columnDefs[8].lbHash =  lbHash;
             });
 
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
                 //console.log(accounts);
+                var untarr = [];
                 var tmpu = {};
                 var unitHash=[];
                 for(var i=0;i<accounts.length;i++){
                     //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
                     tmpu ={value:accounts[i].id,label:accounts[i].name};
                     unitHash[accounts[i].id]=accounts[i].name;
+                    untarr.push(tmpu);
                 }
                 $scope.untigrps = accounts;
-                $scope.gridOptions.columnDefs[8].unitHash =  unitHash ;
+                $scope.gridOptions.columnDefs[10].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=untarr;
+                $scope.gridOptions.columnDefs[10].unitHash =  unitHash ;
             });
 
             //人员列表
@@ -63,9 +69,12 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 }
                 $scope.uigrusergrps = userarr; //转换成uigrid可识别的模式
                 $scope.peoplegrps = accounts;
-                $scope.gridOptions.columnDefs[7].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[7].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[7].unitHash =  userHash ;
+                $scope.gridOptions.columnDefs[4].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[4].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[4].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[9].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[9].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[9].userHash =  userHash ;
             });
             //物资列表
             Restangular.all('/icon-basket-setindex').getList().then(function (accounts) {
@@ -82,6 +91,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             };
 
             $scope.basket = { syear:currentYear,type:1};  //初始化为当前年度
+            $scope.iswzstatus = false; //是否显示固定资产标记
 
             //
             var tableDatas = Restangular.all('/icon-basket-loaded-list');
@@ -99,7 +109,24 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         ' </div>'},
                     {name: '项目编号', field: 'no',width: '100',enableCellEdit: false,},
                     {name: '项目名称', field: 'name',width: '200',enableCellEdit: false,},
-                    {name: '审批状态', field: 'appstate',width: '100',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '审批状态', field: 'appstate',width: '100',enableCellEdit: false,enableColumnMenu: true,
+                        filter: {
+                            term: '审批未通过',
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [
+                                { value: '审批通过', label: '审批通过' },
+                                { value: '审批未通过', label: '审批未通过' }
+                            ]}
+                    },
+                    {name: '审批人', field: 'apper',width: '100',enableCellEdit: false,enableColumnMenu: true,visible:false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
+                        filter: {
+                            term:1,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
+                    },
+                    {name: '审批时间', field: 'appdate',width: '100',enableCellEdit: false,enableColumnMenu: true,visible:false},
                     {name: '采购进度', field: 'progress',width: '100',enableCellEdit: false,enableColumnMenu: true},
                     {name: '年度', field: 'syear',width: '100',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -119,19 +146,31 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     },
                     {name: '申请人', field: 'requester',width: '100',enableColumnMenu: false,enableHiding: false,enableCellEdit: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
                             term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrps_id',width: '230',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false,
-                        cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
+                    {name: '部门', field: 'unitgrps_id',width: '230',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                        filter: {
+                            term:3,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
                     },
                     {name: '是否终止', field: 'isterm',width: '100',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
                         editDropdownValueLabel: 'isterm', editDropdownOptionsArray: [
                         { id: '是', isterm: '是' },
-                        { id: '否', isterm: '否' }]
+                        { id: '否', isterm: '否' }],
+                        filter: {
+                            term: '',
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [
+                                { value: '是', label: '是' },
+                                { value: '否', label: '否' }
+                            ]}
                     },
                     {name: '终止原因', field: 'termreason',width: '200',enableCellEdit: true}
                 ],
@@ -161,7 +200,6 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             };
 
             $scope.showdetail = function(row) {
-                console.log(row);
                 var detaildata=angular.fromJson(row.entity.id);
                 ngDialog.openConfirm({
                     showClose: false,
@@ -183,6 +221,24 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettypes_id,'template');
                         }
                         //end
+                        //供应商列表
+                        Restangular.all('/icon-basket-setsupplier').getList().then(function (accounts) {
+                            // console.log(accounts);
+                            var supplierarr = [];
+                            var tmpu = {};
+                            var supplierHash=[];
+                            for(var i=0;i<accounts.length;i++){
+                                //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                                tmpu ={value:accounts[i].id,label:accounts[i].compname};
+                                supplierHash[accounts[i].id]=accounts[i].compname;
+                                supplierarr.push(tmpu);
+                            }
+                            $scope.suppliergrps = accounts;
+                            $scope.soucegridOptions.columnDefs[6].filter.selectOptions=supplierarr;
+                            $scope.soucegridOptions.columnDefs[6].editDropdownOptionsArray=supplierarr;
+                            $scope.soucegridOptions.columnDefs[6].supplierHash =  supplierHash ;
+                        });
+
                         $scope.soucegridOptions={
                             enableSorting: true,
                             enableFiltering: false,
@@ -194,8 +250,9 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [],
                             data: [],
-                            onRegisterApi: function (gridApi) {
-                                $scope.gridApi = gridApi;
+                            onRegisterApi: function (soucegridApi) {
+                                $scope.soucegridApi = soucegridApi;
+                                soucegridApi.rowEdit.on.saveRow($scope, $scope.savebranchRow);
                             }
                         };
                         var sourceDatas = Restangular.all('/icon-basket-loaded-list/getSubsFromAppID/'+row.entity.id);
@@ -204,90 +261,418 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 if(accounts[item]["wzno"]) {
                                     accounts[item]["wzname"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'name');//获取物资名称
                                     accounts[item]["wzmeasunit"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'measunit');//获取物资单位
-                                    accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["bdg"];//计算物资小计
+                                    if (accounts[item]["purchprice"]) accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["purchprice"];//计算物资小计
+                                    else accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["bdg"];//计算物资小计
                                 }
                             }
                             $scope.soucegridOptions.data = accounts;
                             // console.log(accounts);
                         });
 
+                        $scope.changeStatus = function (field,applystatus) {//转换各种状态
+                            var tmpstr = '';
+                            var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
+                            selectdcmodels.forEach(function (deldata) {
+                                    if($scope.templatesign=="1") tmpstr = "/amasbudgets";//物资采购
+                                    if($scope.templatesign=="2") tmpstr = "/amcontrbudgets";//工程采购
+                                    if($scope.templatesign=="3") tmpstr = "/amsvbudgets";//服务采购
+                                    if($scope.templatesign=="4") tmpstr = "/amotbudgets";//其他采购
+                                    Restangular.all(tmpstr+'/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                                        if (res.success) {
+                                            deldata.entity[field] = applystatus;
+                                            showMsg(res.messages.toString(), '信息', 'lime');
+                                        }
+                                        else {
+                                            showMsg(res.errors.toString(), '错误', 'ruby');
+                                        }
+                                        //console.log(res);
+                                    });
+                                }
+                            );
+                        };
+
+                        $scope.editbranchData = function () {
+                            var toEditRows = $scope.soucegridApi.rowEdit.getDirtyRows($scope.soucegridOptions);
+                            toEditRows.forEach(function (edituser) {
+                                var userWithId = _.find($scope.soucegridOptions.data, function (user) {
+                                    return user.id === edituser.entity.id;
+                                });
+                                if($scope.templatesign=="1") userWithId.route = "/amasbudgets";//物资采购
+                                if($scope.templatesign=="2") userWithId.route = "/amcontrbudgets";//工程采购
+                                if($scope.templatesign=="3") userWithId.route = "/amsvbudgets";//服务采购
+                                if($scope.templatesign=="4") userWithId.route = "/amotbudgets";//其他采购
+                                userWithId.put().then(function (res) {
+                                    if (res.success) {
+                                        showMsg(res.messages.toString(), '信息', 'lime');
+                                        $scope.soucegridApi.rowEdit.setRowsClean(Array(userWithId));
+                                    } else {
+                                        showMsg(res.errors.toString(), '错误', 'ruby');
+                                    }
+                                });
+                            });
+                        };
+                        $scope.savebranchRow = function (rowEntity) {
+                            //$scope.editdataids.push(rowEntity.id);
+                            var promise = $q.defer();
+                            $scope.soucegridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
+                            //promise.resolve();
+                            promise.reject();
+                        };
+                        $scope.togglebranchFiltering = function(){
+                            $scope.soucegridOptions.enableFiltering = !$scope.soucegridOptions.enableFiltering;
+                            $scope.soucegridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+                        };
                         // console.log(row.entity.ambudgettypes_id);
                         switch($scope.templatesign)
                         {
                             case "1":
                             {
                                 //start
+                                $scope.iswzstatus = true; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '物资编号', field: 'wzno',width: '100',enableColumnMenu: true,visible:true,pinnedLeft:true},
-                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,
+                                    {name: '物资编号', field: 'wzno',width: '100',enableCellEdit: false,enableColumnMenu: true,visible:true,pinnedLeft:true},
+                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,enableCellEdit: false,
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                    {name: '单位', field: 'wzmeasunit',width: '60',enableColumnMenu: true},
+                                    {name: '单位', field: 'wzmeasunit',width: '60',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
                                         cellTooltip: function(row){ return row.entity.aspara; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
-                                    {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '预算单价', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '小计', field: 'wztotal',width: '100', cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
-                                    {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
+                                    {name: '小计', field: 'wztotal',width: '100', enableCellEdit: false,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
+                                    {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
+                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
+                                        filter: {
+                                            term:3,
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [] }
+                                    },
+                                    {name: '数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '预算单价', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购方式', field: 'purchway',width: '120',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchway', editDropdownOptionsArray: [
+                                        { id: '取消采购', ispurchway: '取消采购' },
+                                        { id: '自行采购', ispurchway: '自行采购' },
+                                        { id: '询价采购', ispurchway: '询价采购' },
+                                        { id: '定点采购', ispurchway: '定点采购' },
+                                        { id: '公开招标', ispurchway: '公开招标' },
+                                        { id: '邀请招标', ispurchway: '邀请招标' },
+                                        { id: '竞争性谈判', ispurchway: '竞争性谈判' },
+                                        { id: '单一来源采购', ispurchway: '单一来源采购' },
+                                        { id: '协议供货采购', ispurchway: '协议供货采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '取消采购', label: '取消采购' },
+                                                { value: '自行采购', label: '自行采购' },
+                                                { value: '询价采购', label: '询价采购' },
+                                                { value: '定点采购', label: '定点采购' },
+                                                { value: '公开招标', label: '公开招标' },
+                                                { value: '邀请招标', label: '邀请招标' },
+                                                { value: '竞争性谈判', label: '竞争性谈判' },
+                                                { value: '单一来源采购', label: '单一来源采购' },
+                                                { value: '协议供货采购', label: '协议供货采购' }
+                                            ]}
+                                    },
+                                    {name: '采购状态', field: 'purchstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchstate', editDropdownOptionsArray: [
+                                        { id: '已采购', ispurchstate: '已采购' },
+                                        { id: '未采购', ispurchstate: '未采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已采购', label: '已采购' },
+                                                { value: '未采购', label: '未采购' }]}
+                                    },
+                                    {name: '报销状态', field: 'reimstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'isreimstate', editDropdownOptionsArray: [
+                                        { id: '已报销', isreimstate: '已报销' },
+                                        { id: '未报销', isreimstate: '未报销' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已报销', label: '已报销' },
+                                                { value: '未报销', label: '未报销' }]}
+                                    },
+                                    {name: '物资状态', field: 'asstate',width: '120',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'isasstate', editDropdownOptionsArray: [
+                                        { id: '固定资产', isasstate: '固定资产' },
+                                        { id: '非固定资产', isasstate: '非固定资产' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '固定资产', label: '固定资产' },
+                                                { value: '非固定资产', label: '非固定资产' }]}
+                                    },
+                                    {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    }
                                 ];
 
                             }
                                 break;
                             case "2":
                             {
+                                $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,
+                                    {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                    {name: '工程预算', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '工期要求', field: 'req',width: '200',enableColumnMenu: true,
+                                    {name: '工期要求', field: 'req',width: '200',enableColumnMenu: true,enableCellEdit: false,
                                         cellTooltip: function(row){ return row.entity.contrworkreq; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
-                                    {name: '工程地点', field: 'addr',width: '120',enableColumnMenu: true},
-                                    {name: '负责人', field: 'picharge',width: '120',enableColumnMenu: true},
-                                    {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
+                                    {name: '工程地点', field: 'addr',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '工程预算', field: 'bdg',width: '80',cellFilter: 'currency',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
+                                        filter: {
+                                            term:3,
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [] }
+                                    },
+                                    {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
+                                    {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购方式', field: 'purchway',width: '120',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchway', editDropdownOptionsArray: [
+                                        { id: '取消采购', ispurchway: '取消采购' },
+                                        { id: '自行采购', ispurchway: '自行采购' },
+                                        { id: '询价采购', ispurchway: '询价采购' },
+                                        { id: '定点采购', ispurchway: '定点采购' },
+                                        { id: '公开招标', ispurchway: '公开招标' },
+                                        { id: '邀请招标', ispurchway: '邀请招标' },
+                                        { id: '竞争性谈判', ispurchway: '竞争性谈判' },
+                                        { id: '单一来源采购', ispurchway: '单一来源采购' },
+                                        { id: '协议供货采购', ispurchway: '协议供货采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '取消采购', label: '取消采购' },
+                                                { value: '自行采购', label: '自行采购' },
+                                                { value: '询价采购', label: '询价采购' },
+                                                { value: '定点采购', label: '定点采购' },
+                                                { value: '公开招标', label: '公开招标' },
+                                                { value: '邀请招标', label: '邀请招标' },
+                                                { value: '竞争性谈判', label: '竞争性谈判' },
+                                                { value: '单一来源采购', label: '单一来源采购' },
+                                                { value: '协议供货采购', label: '协议供货采购' }
+                                            ]}
+                                    },
+                                    {name: '采购状态', field: 'purchstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchstate', editDropdownOptionsArray: [
+                                        { id: '已采购', ispurchstate: '已采购' },
+                                        { id: '未采购', ispurchstate: '未采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已采购', label: '已采购' },
+                                                { value: '未采购', label: '未采购' }]}
+                                    },
+                                    {name: '报销状态', field: 'reimstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'isreimstate', editDropdownOptionsArray: [
+                                        { id: '已报销', isreimstate: '已报销' },
+                                        { id: '未报销', isreimstate: '未报销' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已报销', label: '已报销' },
+                                                { value: '未报销', label: '未报销' }]}
+                                    },
+                                    {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    }
                                 ];
 
                             }
                                 break;
                             case "3":
                             {
+                                $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,
+                                    {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                    {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '服务期限', field: 'req',width: '200',enableColumnMenu: true,
+                                    {name: '服务期限', field: 'req',width: '200',enableColumnMenu: true,enableCellEdit: false,
                                         cellTooltip: function(row){ return row.entity.contrworkreq; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
-                                    {name: '地点', field: 'addr',width: '150',enableColumnMenu: true},
-                                    {name: '负责人', field: 'picharge',width: '120',enableColumnMenu: true},
-                                    {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
+                                    {name: '地点', field: 'addr',width: '150',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '预算金额', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
+                                        filter: {
+                                            term:3,
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [] }
+                                    },
+                                    {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
+                                    {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购方式', field: 'purchway',width: '120',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchway', editDropdownOptionsArray: [
+                                        { id: '取消采购', ispurchway: '取消采购' },
+                                        { id: '自行采购', ispurchway: '自行采购' },
+                                        { id: '询价采购', ispurchway: '询价采购' },
+                                        { id: '定点采购', ispurchway: '定点采购' },
+                                        { id: '公开招标', ispurchway: '公开招标' },
+                                        { id: '邀请招标', ispurchway: '邀请招标' },
+                                        { id: '竞争性谈判', ispurchway: '竞争性谈判' },
+                                        { id: '单一来源采购', ispurchway: '单一来源采购' },
+                                        { id: '协议供货采购', ispurchway: '协议供货采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '取消采购', label: '取消采购' },
+                                                { value: '自行采购', label: '自行采购' },
+                                                { value: '询价采购', label: '询价采购' },
+                                                { value: '定点采购', label: '定点采购' },
+                                                { value: '公开招标', label: '公开招标' },
+                                                { value: '邀请招标', label: '邀请招标' },
+                                                { value: '竞争性谈判', label: '竞争性谈判' },
+                                                { value: '单一来源采购', label: '单一来源采购' },
+                                                { value: '协议供货采购', label: '协议供货采购' }
+                                            ]}
+                                    },
+                                    {name: '采购状态', field: 'purchstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchstate', editDropdownOptionsArray: [
+                                        { id: '已采购', ispurchstate: '已采购' },
+                                        { id: '未采购', ispurchstate: '未采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已采购', label: '已采购' },
+                                                { value: '未采购', label: '未采购' }]}
+                                    },
+                                    {name: '报销状态', field: 'reimstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'isreimstate', editDropdownOptionsArray: [
+                                        { id: '已报销', isreimstate: '已报销' },
+                                        { id: '未报销', isreimstate: '未报销' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已报销', label: '已报销' },
+                                                { value: '未报销', label: '未报销' }]}
+                                    },
+                                    {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    }
                                 ];
 
                             }
                                 break;
                             case "4":
                             {
-
+                                $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,
+                                    {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                    {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '其他说明', field: 'otremark',width: '200',enableColumnMenu: true,
+                                    {name: '其他说明', field: 'otremark',width: '200',enableCellEdit: false,enableColumnMenu: true,
                                         cellTooltip: function(row){ return row.entity.contrworkreq; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
-                                    {name: '合同地点', field: 'addr',width: '150',enableColumnMenu: true},
-                                    {name: '负责人', field: 'picharge',width: '120',enableColumnMenu: true},
-                                    {name: '负责人电话', field: 'picphone',width: '120',enableColumnMenu: true}
+                                    {name: '合同地点', field: 'addr',width: '150',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '预算金额', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
+                                        filter: {
+                                            term:3,
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [] }
+                                    },
+                                    {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
+                                    {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购方式', field: 'purchway',width: '120',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchway', editDropdownOptionsArray: [
+                                        { id: '取消采购', ispurchway: '取消采购' },
+                                        { id: '自行采购', ispurchway: '自行采购' },
+                                        { id: '询价采购', ispurchway: '询价采购' },
+                                        { id: '定点采购', ispurchway: '定点采购' },
+                                        { id: '公开招标', ispurchway: '公开招标' },
+                                        { id: '邀请招标', ispurchway: '邀请招标' },
+                                        { id: '竞争性谈判', ispurchway: '竞争性谈判' },
+                                        { id: '单一来源采购', ispurchway: '单一来源采购' },
+                                        { id: '协议供货采购', ispurchway: '协议供货采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '取消采购', label: '取消采购' },
+                                                { value: '自行采购', label: '自行采购' },
+                                                { value: '询价采购', label: '询价采购' },
+                                                { value: '定点采购', label: '定点采购' },
+                                                { value: '公开招标', label: '公开招标' },
+                                                { value: '邀请招标', label: '邀请招标' },
+                                                { value: '竞争性谈判', label: '竞争性谈判' },
+                                                { value: '单一来源采购', label: '单一来源采购' },
+                                                { value: '协议供货采购', label: '协议供货采购' }
+                                            ]}
+                                    },
+                                    {name: '采购状态', field: 'purchstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'ispurchstate', editDropdownOptionsArray: [
+                                        { id: '已采购', ispurchstate: '已采购' },
+                                        { id: '未采购', ispurchstate: '未采购' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已采购', label: '已采购' },
+                                                { value: '未采购', label: '未采购' }]}
+                                    },
+                                    {name: '报销状态', field: 'reimstate',width: '100',enableColumnMenu: true,
+                                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                                        editDropdownValueLabel: 'isreimstate', editDropdownOptionsArray: [
+                                        { id: '已报销', isreimstate: '已报销' },
+                                        { id: '未报销', isreimstate: '未报销' }],
+                                        filter: {
+                                            term: '',
+                                            type: uiGridConstants.filter.SELECT,
+                                            selectOptions: [
+                                                { value: '已报销', label: '已报销' },
+                                                { value: '未报销', label: '未报销' }]}
+                                    },
+                                    {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                                    }
                                 ];
 
                             }
@@ -314,6 +699,8 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     Restangular.all('/icon-basket-loaded-plan/setStatus/'+deldata.entity.id+'/appstate/'+applystatus).post().then(function (res) {
                             if (res.success) {
                                 deldata.entity.appstate = applystatus;
+                                deldata.entity.apper = $scope.dcUser.id;
+                                deldata.entity.appdate = $scope.datetimestr;
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
@@ -323,7 +710,6 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         });
                     }
                 );
-
             };
 
             $scope.editData = function () { //修改是否终止及原因
@@ -349,6 +735,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
                 //promise.resolve();
                 promise.reject();
+            };
+
+            $scope.Filteringtoggle = function(){
+                $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
             $scope.toggleFiltering = function(){

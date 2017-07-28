@@ -120,11 +120,12 @@ class CreateAmbudgetsTable extends Migration
             $table->string('wzsmodel')->nullable(); //规格型号
             $table->integer('amt'); //数量
             $table->decimal('bdg')->nullable(); //预算单价
-            $table->decimal('purchprice')->nullable(); //采购单价
+            $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
             $table->string('reimstate')->nullable(); //报销状态
             $table->string('contrno')->nullable(); //合同编号
+            $table->integer('amsupplier_id')->nullable(); //供应商编号
             $table->string('asstate')->nullable(); //物资状态
             $table->decimal('total')->nullable(); //合计金额
             $table->text('remark')->nullable(); //备注
@@ -150,7 +151,7 @@ class CreateAmbudgetsTable extends Migration
             $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsuppliers_id')->nullable(); //供应商编号
+            $table->integer('amsupplier_id')->nullable(); //供应商编号
             $table->string('reimstate')->nullable(); //报销状态
             $table->string('contrno')->nullable(); //合同编号
             $table->decimal('total')->nullable(); //合计金额
@@ -176,10 +177,10 @@ class CreateAmbudgetsTable extends Migration
 
             $table->string('picharge')->nullable(); //负责人
             $table->string('picphone')->nullable(); //负责人电话
-            $table->decimal('contrprice')->nullable(); //采购单价
+            $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsuppliers_id')->nullable(); //供应商编号
+            $table->integer('amsupplier_id')->nullable(); //供应商编号
             $table->string('reimstate')->nullable(); //报销状态
             $table->decimal('total')->nullable(); //合计金额
             $table->text('remark')->nullable(); //备注
@@ -204,10 +205,10 @@ class CreateAmbudgetsTable extends Migration
 
             $table->string('picharge')->nullable(); //负责人
             $table->string('picphone')->nullable(); //负责人电话
-            $table->decimal('contrprice')->nullable(); //采购单价
+            $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsuppliers_id')->nullable(); //供应商编号
+            $table->integer('amsupplier_id')->nullable(); //供应商编号
             $table->string('reimstate')->nullable(); //报销状态
             $table->decimal('total')->nullable(); //合计金额
             $table->text('remark')->nullable(); //备注
