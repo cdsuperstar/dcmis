@@ -36,7 +36,7 @@ class amasbudgetController extends Controller
     public function getAssScrap()
     {
         //
-        $datas = amasbudget::with(['amassscraps'])->get();
+        $datas = amasbudget::with(['amassscraps','ambaseas'])->get();
         return response()->json($datas);
 
     }
