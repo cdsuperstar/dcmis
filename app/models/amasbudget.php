@@ -60,6 +60,10 @@ class amasbudget extends Model
         return $this->belongsTo('App\models\amapplication');
     }
 
+    public function ambaseas(){
+        return $this->belongsTo('App\models\ambaseas','wzno','no');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

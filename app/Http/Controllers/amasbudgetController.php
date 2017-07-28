@@ -28,7 +28,7 @@ class amasbudgetController extends Controller
     public function getAssReg()
     {
         //
-        $datas = amasbudget::with(['amassregs'])->get();
+        $datas = amasbudget::with(['amassregs','ambaseas'])->get();
         return response()->json($datas);
 
     }
