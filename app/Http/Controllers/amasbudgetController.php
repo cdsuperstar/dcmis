@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\amasbudget;
+use App\models\amassreg;
 use Illuminate\Http\Request;
 
 class amasbudgetController extends Controller
@@ -28,7 +29,7 @@ class amasbudgetController extends Controller
     public function getAssReg()
     {
         //
-        $datas = amasbudget::with(['amassregs','ambaseas'])->get();
+        $datas = amasbudget::with(['amassregs', 'ambaseas'])->get();
         return response()->json($datas);
 
     }
@@ -44,7 +45,7 @@ class amasbudgetController extends Controller
     public function getAppAss()
     {
         //
-        $datas = amasbudget::with(['amapplication','ambaseas'])->get();
+        $datas = amasbudget::with(['amapplication', 'ambaseas'])->get();
         return response()->json($datas);
 
     }
@@ -52,7 +53,15 @@ class amasbudgetController extends Controller
     public function getAssScrap()
     {
         //
-        $datas = amasbudget::with(['amassscraps','ambaseas'])->get();
+        $datas = amasbudget::with(['amassscraps', 'ambaseas'])->get();
+        return response()->json($datas);
+
+    }
+
+    public function getAssToScrap()
+    {
+        //
+        $datas = amassreg::with(['amasbudgets', 'ambaseas'])->get();
         return response()->json($datas);
 
     }
@@ -72,7 +81,7 @@ class amasbudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -87,14 +96,14 @@ class amasbudgetController extends Controller
                 )
             );
         }
-        return response()->json(['errors' => $rec->id ]);
+        return response()->json(['errors' => $rec->id]);
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amasbudget  $amasbudget
+     * @param  \App\models\amasbudget $amasbudget
      * @return \Illuminate\Http\Response
      */
     public function show(amasbudget $amasbudget)
@@ -103,26 +112,26 @@ class amasbudgetController extends Controller
 
     }
 
-    public function setStatus(amasbudget $amasbudget, $field='',$status='')
+    public function setStatus(amasbudget $amasbudget, $field = '', $status = '')
     {
         //
-        if($field<>'purchway'&&$field<>'purchstate'&&$field<>'reimstate'&&$field<>'asstate')return false;
-        $amasbudget->fill([$field=>$status]);
+        if ($field <> 'purchway' && $field <> 'purchstate' && $field <> 'reimstate' && $field <> 'asstate') return false;
+        $amasbudget->fill([$field => $status]);
 
-        if($field=='purchstate'&&$status=="已采购")
-            $amasbudget->regamt=$amasbudget->amt - $amasbudget->amassregs()->sum("amt");
+        if ($field == 'purchstate' && $status == "已采购")
+            $amasbudget->regamt = $amasbudget->amt - $amasbudget->amassregs()->sum("amt");
 
-        if($amasbudget->save()){
-            $tmpProgress='';
-            if($field=='purchstate'){
-                $resAmapp=$amasbudget->amapplication;
-                $resAmapp->progress=''.$amasbudget->amapplication->amasbudgets()->where(['purchstate'=>'已采购'])->count().'/'.$amasbudget->amapplication->amasbudgets()->count();
-                $tmpProgress=$resAmapp->progress;
+        if ($amasbudget->save()) {
+            $tmpProgress = '';
+            if ($field == 'purchstate') {
+                $resAmapp = $amasbudget->amapplication;
+                $resAmapp->progress = '' . $amasbudget->amapplication->amasbudgets()->where(['purchstate' => '已采购'])->count() . '/' . $amasbudget->amapplication->amasbudgets()->count();
+                $tmpProgress = $resAmapp->progress;
                 $resAmapp->save();
             }
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amasbudget->id]),
-                    'progress'=>$tmpProgress,
+                    'progress' => $tmpProgress,
                     'success' => true,
                 ], $amasbudget->toArray()
                 )
@@ -134,7 +143,7 @@ class amasbudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amasbudget  $amasbudget
+     * @param  \App\models\amasbudget $amasbudget
      * @return \Illuminate\Http\Response
      */
     public function edit(amasbudget $amasbudget)
@@ -145,8 +154,8 @@ class amasbudgetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amasbudget  $amasbudget
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\models\amasbudget $amasbudget
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, amasbudget $amasbudget)
@@ -172,7 +181,7 @@ class amasbudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amasbudget  $amasbudget
+     * @param  \App\models\amasbudget $amasbudget
      * @return \Illuminate\Http\Response
      */
     public function destroy(amasbudget $amasbudget)
@@ -181,9 +190,9 @@ class amasbudgetController extends Controller
         if ($amasbudget->delete()) {
 
             return response()->json(array_merge([
-                'messages' => trans('data.destroy', ['rows' => $amasbudget->id . " with id ".$amasbudget->id]),
+                'messages' => trans('data.destroy', ['rows' => $amasbudget->id . " with id " . $amasbudget->id]),
                 'success' => true,
-            ],$amasbudget->toArray()));
+            ], $amasbudget->toArray()));
         } else {
             return response()->json(['errors' => trans('data.destroyfailed', ['data' => $amasbudget->id])]);
         }
