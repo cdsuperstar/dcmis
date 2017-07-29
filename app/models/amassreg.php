@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\models\amassreg
@@ -43,5 +44,4 @@ class amassreg extends Model
     public function amasbudget(){
         return $this->belongsTo('App\models\amasbudget');
     }
-
 }
