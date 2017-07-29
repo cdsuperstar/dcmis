@@ -55,7 +55,7 @@ class amasbudget extends Model
 {
     //
     protected $table = 'amasbudgets';
-    protected $fillable = ['amapplication_id','wzno','wzsmodel','amt','bdg','purchprice','purchway','regamt','scrapamt','purchstate','reimstate','contrno','asstate','total','remark'];
+    protected $fillable = ['amapplication_id','wzno','price','wzsmodel','amt','bdg','purchprice','purchway','regamt','scrapamt','purchstate','reimstate','contrno','asstate','total','remark'];
     public function amapplication(){
         return $this->belongsTo('App\models\amapplication');
     }
