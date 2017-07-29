@@ -132,10 +132,10 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                                 { value: '报废', label: '报废' }
                             ]}
                     },
-                    {name: '报废备注', field: 'scrapremark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                    {name: '报废备注', field: 'scrapremark',width: '150',enableColumnMenu: true,enableCellEdit: false,
                         cellTooltip: function(row){ return row.entity.scrapremark; },
-                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                    },
+                        cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP"><span class=" icon-note icon-hand" ng-click="grid.appScope.showdetail(row)"  title="登记领用"></span>{{COL_FIELD CUSTOM_FILTERS}}</div>'
+                    }
 
                 ],
 
@@ -161,6 +161,36 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
+            };
+
+            $scope.showdetail = function(row) {
+                // console.log(row.entity.appstate);
+                var detaildata=angular.fromJson(row.entity.id);
+                ngDialog.openConfirm({
+                    showClose: false,
+                    setBodyPadding: 1,
+                    overlay: true,        //是否用div覆盖当前页面
+                    closeByDocument:false,  //是否点覆盖div 关闭会话
+                    disableAnimation:true,  //是否显示动画
+                    template: 'assets-management-scrap',
+                    className: 'ngdialog-theme-default assetsmanagementscrap',
+                    scope: $scope,
+                    controller: ['$scope',function ($scope) {
+                        console.log($scope);
+                        $scope.tmpobjno = row.entity.amasbudget.wzno;  //取当取当期物资的no
+                        $scope.tmpobjname = row.entity.amasbudget.ambaseas.name;  //取当前物资的name
+                        $scope.scrapremark = row.entity.scrapremark;//赋初始值
+                    }]
+
+                }).then(function (dcEdition) {
+                    // console.log(dcEdition);
+                    if(row.entity.scrapremark != dcEdition){
+                        row.entity.scrapremark = dcEdition;
+                        $scope.gridApi.rowEdit.setRowsDirty(Array(row.entity) );
+                    }
+                }, function (dcEdition) {
+
+                });
             };
 
             $scope.exportxls = function(){
