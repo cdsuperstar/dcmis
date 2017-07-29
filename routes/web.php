@@ -246,15 +246,6 @@ Route::group(['prefix'=>'/amassregs'],function(){
     Route::delete('{amassreg}','amassregController@destroy'); //
 });
 
-//资产报废表
-Route::group(['prefix'=>'/amassscraps'],function(){
-    Route::get('','amassscrapController@index'); //
-    Route::get('create','amassscrapController@create'); //
-    Route::put('{amassscrap}','amassscrapController@update'); //
-    Route::post('','amassregController@store'); //
-    Route::delete('{amassscrap}','amassscrapController@destroy'); //
-});
-
 //资产登记模块
 Route::group(['prefix'=>'/am-assets-management-add'],function(){
     //得到所有资产登记
