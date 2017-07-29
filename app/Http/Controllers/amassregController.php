@@ -49,6 +49,7 @@ class amassregController extends Controller
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $amassreg->id]),
                     'regamt'=>$amassreg->amasbudget->regamt,
+                    'amt'=>$amassreg->amasbudget->amt,
                     'success' => true,
                 ], $amassreg->toArray()
                 )
@@ -99,6 +100,7 @@ class amassregController extends Controller
                 return response()->json(array_merge([
                         'messages' => trans('data.update', ["data" => $amassreg->id]),
                         'regamt'=>$amassreg->amasbudget->regamt,
+                        'amt'=>$amassreg->amasbudget->amt,
                         'success' => true,
                     ], $amassreg->toArray()
                     )
@@ -127,6 +129,7 @@ class amassregController extends Controller
             return response()->json(array_merge([
                 'messages' => trans('data.destroy', ['rows' => $amassreg->id . " with id ".$amassreg->id]),
                 'regamt'=>$amassreg->amasbudget->regamt,
+                'amt'=>$amassreg->amasbudget->amt,
                 'success' => true,
             ],$amassreg->toArray()));
         } else {

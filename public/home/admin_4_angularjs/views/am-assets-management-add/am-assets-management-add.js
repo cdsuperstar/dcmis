@@ -89,8 +89,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === editdata.entity.id;
                     });
-                    console.log(userWithId);
-                    userWithId.route = "/amasbudgets";
+
                     userWithId.put().then(function (res) {
                         console.log(res);
                         if (res.success) {
@@ -438,6 +437,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         var sourceDatas = Restangular.all('/am-assets-management-add/getTheAssReg/'+row.entity.id);
                         sourceDatas.getList().then(function (accounts) {
                             var listdata = accounts[0].amassregs;
+                            Restangular.restangularizeCollection(null, accounts[0].amassregs, '/amassregs');
                             var amttotal = 0;
                             for (var item=0;item<listdata.length;item++){
                                 if(listdata[item]["amt"]) { //计算物资数量合计
@@ -445,6 +445,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 }
                             }
                             $scope.souceamttoal = Number(row.entity.amt) - amttotal; //获得当前物资领取总数
+
                             $scope.soucegridOptions.data = listdata;
                             //console.log(row.entity.amt,amttotal,$scope.souceamttoal);
                             // console.log(listdata);
@@ -479,10 +480,12 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 var userWithId = _.find($scope.soucegridOptions.data, function (user) {
                                     return user.id === edituser.entity.id;
                                 });
-                                console.log(userWithId);
-                                Restangular.all('/amassregs').customPUT(userWithId).then(function (res) {
+                                userWithId.put().then(function (res) {
                                     if (res.success) {
                                         showMsg(res.messages.toString(), '信息', 'lime');
+                                        row.entity.regamt = res.regamt;
+                                        $scope.souceamttoal = res.regamt;
+
                                         $scope.soucegridApi.rowEdit.setRowsClean(Array(userWithId));
                                     } else {
                                         showMsg(res.errors.toString(), '错误', 'ruby');
