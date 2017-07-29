@@ -369,7 +369,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                             // console.log(res);
                                             $scope.soucegridOptions.data.push(res);
                                             row.entity.regamt = res.regamt;
-                                            $scope.souceamttoal = dcEdition.amt - res.regamt;
+                                            $scope.souceamttoal = res.regamt;
                                             showMsg(res.messages.toString(), '信息', 'lime');
                                         } else {
                                             // TODO add error message to system

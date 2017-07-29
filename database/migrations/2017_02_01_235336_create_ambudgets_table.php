@@ -254,7 +254,6 @@ class CreateAmbudgetsTable extends Migration
 
             $table->integer('amasbudget_id')->nullable(); //领用人
 
-            $table->integer('scrapamt')->nullable(); //报废数量
             $table->integer('scrapuser')->nullable(); //报废人
             $table->dateTime('scrapdate')->nullable(); //报废日期
 

@@ -88,7 +88,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-social-youtube font-red-thunderbird"></i>
-                            <span class="caption-subject font-red-thunderbird sbold">物资领取登记（编号：@{{tmpobjno}}&nbsp;   物资名称：@{{ tmpobjname }}）</span>
+                            <span class="caption-subject font-red-thunderbird sbold">物资领取登记（剩余数量：【@{{ souceamttoal }}】编号：@{{tmpobjno}}&nbsp;   物资名称：@{{ tmpobjname }}）</span>
                         </div>
                         <div class="tools">
                             {{--<a href="" class="fullscreen" data-original-title="全屏" title="全屏"> </a>--}}

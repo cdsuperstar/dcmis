@@ -7,32 +7,86 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
 
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
-                // console.log(accounts);
+                //console.log(accounts);
+                var untarr = [];
+                var tmpu = {};
+                var unitHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    unitHash[accounts[i].id]=accounts[i].name;
+                    untarr.push(tmpu);
+                }
                 $scope.untigrps = accounts;
+                $scope.gridOptions.columnDefs[10].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=untarr;
+                $scope.gridOptions.columnDefs[10].unitHash =  unitHash ;
             });
+
             //人员列表
             Restangular.all('/sys-users').getList().then(function (accounts) {
+                var userarr = [];
+                var tmpu = {};
+                var userHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    userHash[accounts[i].id]=accounts[i].name;
+                    userarr.push(tmpu);
+                }
+                $scope.uigrusergrps = userarr; //转换成uigrid可识别的模式
                 $scope.peoplegrps = accounts;
+                $scope.gridOptions.columnDefs[4].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[4].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[4].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[9].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[9].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[9].userHash =  userHash ;
             });
 
-            var tableDatas = Restangular.all('/sys-users');
+            var tableDatas = Restangular.all('/am-assets-management-scrap/getAssReg');
 
-            $scope.delData = function () {
-                var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
-                selectUsers.forEach(function (deluser) {
-                        deluser.entity.remove().then(function (res) {
+            $scope.editData = function () { //修改报废的原因
+                var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
+                toEditRows.forEach(function (edituser) {
+                    var userWithId = _.find($scope.gridOptions.data, function (user) {
+                        return user.id === edituser.entity.id;
+                    });
+                    userWithId.put().then(function (res) {
+                        if (res.success) {
+                            showMsg(res.messages.toString(), '信息', 'lime');
+                            $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
+                        } else {
+                            showMsg(res.errors.toString(), '错误', 'ruby');
+                        }
+                    });
+                });
+            };
+            $scope.saveRow = function (rowEntity) {
+                //$scope.editdataids.push(rowEntity.id);
+                var promise = $q.defer();
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
+                //promise.resolve();
+                promise.reject();
+            };
+
+            $scope.changeStatus = function (field,applystatus) {//转换各种状态
+                var tmpstr = '';
+                var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
+                selectdcmodels.forEach(function (deldata) {
+                        Restangular.all('/am-assets-management-scrap/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                             if (res.success) {
-                                $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
+                                deldata.entity[field] = applystatus;
+                                row.entity.progress=res.progress;
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
                                 showMsg(res.errors.toString(), '错误', 'ruby');
                             }
+                            //console.log(res);
                         });
                     }
                 );
             };
-            //$scope.editdataids = [];
 
             $scope.gridOptions = {
                 enableSorting: true,
@@ -46,15 +100,15 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                         //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
+                    {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
+                    },
                     {name: '规格、型号', field: 'aspara',width: '200',enableColumnMenu: true,
                         cellTooltip: function(row){ return row.entity.aspara; },
                         //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
                     {name: '领用数量', field: 'amt',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                    {name: '单位', field: 'meas',width: '60',enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
-                    },
                     {name: '领用人', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '领用单位', field: 'price',width: '150',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '领用时间', field: 'price',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -84,6 +138,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
+                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
 
@@ -107,6 +162,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                console.log(accounts);
                 $scope.gridOptions.data = allAccounts;
             });
 
