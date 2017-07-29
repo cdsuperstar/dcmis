@@ -269,7 +269,7 @@ Route::group(['prefix'=>'/am-assets-management-add'],function(){
 //资产报废
 Route::group(['prefix'=>'/am-assets-management-scrap'],function(){
     //得到资产登记
-    Route::get('getAssReg','amasbudgetController@getAssReg'); //
+    Route::get('getAssScrap','amasbudgetController@getAssScrap'); //
 
 });
 
