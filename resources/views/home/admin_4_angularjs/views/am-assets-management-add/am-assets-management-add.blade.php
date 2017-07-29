@@ -46,7 +46,7 @@
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.amt" placeholder="领用数量">
+                                    <input type="number" class="form-control" ng-model="dcEdition.amt" placeholder="可领用数量: @{{ souceamttoal }}">
                                 </div>
                             </div>
                         </div>
@@ -99,6 +99,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <button id="addData" type="button" class="btn btn-success" ng-click="addbranchData()"><i class="fa fa-pencil"></i> 登记领用信息 </button>
+                            <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些领用数据吗？" ng-click="delbranchData()"><i class="fa fa-trash"></i> 删除领用信息</button>
                             <button id="saveData" type="button"  class="btn btn-info" ng-click="editbranchData()"><i class="fa fa-check"></i> 保存数据 </button>
                             <button id='toggleFiltering' type="button"class="btn yellow" ng-click="togglebranchFiltering()" ><i class="fa fa-search"></i> 数据筛选 </button>
                             </div>
@@ -106,7 +107,7 @@
                             {{--<button type="button" class="btn green-meadow"><i class="fa fa-file-excel-o"> </i>  导出数据  </button>--}}
                             {{--</div>--}}
                         </div>
-                        <div id="assetssouceplangrid" ui-grid="soucegridOptions" ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="assetssouceplangrid"></div>
+                        <div id="assetssouceplangrid" ui-grid="soucegridOptions" ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="assetssouceplangrid"></div>
                     </div>
                 </div>
             </div>
