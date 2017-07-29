@@ -259,6 +259,8 @@ Route::group(['prefix'=>'/amassscraps'],function(){
 Route::group(['prefix'=>'/am-assets-management-add'],function(){
     //得到所有资产登记
     Route::get('getAssReg','amasbudgetController@getAssReg'); //
+    //得到具体的资产登记
+    Route::get('getTheAssReg/{amasbudget}','amasbudgetController@getTheAssReg'); //
     //得到所有申请资产
     Route::get('getAppAss','amasbudgetController@getAppAss'); //
 

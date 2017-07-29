@@ -33,6 +33,14 @@ class amasbudgetController extends Controller
 
     }
 
+    public function getTheAssReg(amasbudget $amasbudget)
+    {
+        //
+        $datas = amasbudget::with(['amassregs'])->find($amasbudget->id);
+        return response()->json($datas);
+
+    }
+
     public function getAppAss()
     {
         //

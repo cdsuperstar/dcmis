@@ -74,6 +74,11 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     $scope.dcUserMsgs = [];
     $scope.dcBroadcast = [];
     $scope.ModelsDataShare = [];
+    $scope.$on('ngDialog.opened', function (e, $dialog) {
+        $(".ngdialog").draggable({
+            handle: ".ngdialog-content"
+        });
+    });
 
     $scope.$on('$viewContentLoaded', function () {
         //App.initComponents(); // init core components

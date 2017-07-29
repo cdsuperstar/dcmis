@@ -21,6 +21,8 @@ require('socket.io-client');
 require('ng-tags-input');
 require('jasny-bootstrap/js/fileinput');
 require('ui-select');
+//require('jquery-ui-bundle');
+require("jquery-ui/ui/widgets/draggable");
 require('ui-router-extras');
 
 /**
