@@ -237,7 +237,7 @@ Route::group(['prefix'=>'/icon-basket-setindex'],function(){
     Route::delete('{ambaseas}','ambaseasController@destroy'); //
 });
 
-//资产登记
+//资产登记表
 Route::group(['prefix'=>'/amassregs'],function(){
     Route::get('','amassregController@index'); //
     Route::get('create','amassregController@create'); //
@@ -246,7 +246,7 @@ Route::group(['prefix'=>'/amassregs'],function(){
     Route::delete('{amassreg}','amassregController@destroy'); //
 });
 
-//资产报废
+//资产报废表
 Route::group(['prefix'=>'/amassscraps'],function(){
     Route::get('','amassscrapController@index'); //
     Route::get('create','amassscrapController@create'); //
@@ -255,10 +255,12 @@ Route::group(['prefix'=>'/amassscraps'],function(){
     Route::delete('{amassscrap}','amassscrapController@destroy'); //
 });
 
-//资产登记
+//资产登记模块
 Route::group(['prefix'=>'/am-assets-management-add'],function(){
-    //得到资产登记
+    //得到所有资产登记
     Route::get('getAssReg','amasbudgetController@getAssReg'); //
+    //得到所有申请资产
+    Route::get('getAppAss','amasbudgetController@getAppAss'); //
 
 });
 

@@ -33,6 +33,14 @@ class amasbudgetController extends Controller
 
     }
 
+    public function getAppAss()
+    {
+        //
+        $datas = amasbudget::with(['amapplication','ambaseas'])->get();
+        return response()->json($datas);
+
+    }
+
     public function getAssScrap()
     {
         //
