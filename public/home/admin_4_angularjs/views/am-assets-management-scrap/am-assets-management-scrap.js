@@ -5,43 +5,43 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            //机构列表
-            Restangular.all('/user-department').getList().then(function (accounts) {
-                //console.log(accounts);
-                var untarr = [];
-                var tmpu = {};
-                var unitHash=[];
-                for(var i=0;i<accounts.length;i++){
-                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
-                    tmpu ={value:accounts[i].id,label:accounts[i].name};
-                    unitHash[accounts[i].id]=accounts[i].name;
-                    untarr.push(tmpu);
-                }
-                $scope.untigrps = accounts;
-                $scope.gridOptions.columnDefs[10].filter.selectOptions=untarr;
-                $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=untarr;
-                $scope.gridOptions.columnDefs[10].unitHash =  unitHash ;
-            });
-
-            //人员列表
-            Restangular.all('/sys-users').getList().then(function (accounts) {
-                var userarr = [];
-                var tmpu = {};
-                var userHash=[];
-                for(var i=0;i<accounts.length;i++){
-                    tmpu ={value:accounts[i].id,label:accounts[i].name};
-                    userHash[accounts[i].id]=accounts[i].name;
-                    userarr.push(tmpu);
-                }
-                $scope.uigrusergrps = userarr; //转换成uigrid可识别的模式
-                $scope.peoplegrps = accounts;
-                $scope.gridOptions.columnDefs[4].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[4].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[4].userHash =  userHash ;
-                $scope.gridOptions.columnDefs[9].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[9].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[9].userHash =  userHash ;
-            });
+            // //机构列表
+            // Restangular.all('/user-department').getList().then(function (accounts) {
+            //     //console.log(accounts);
+            //     var untarr = [];
+            //     var tmpu = {};
+            //     var unitHash=[];
+            //     for(var i=0;i<accounts.length;i++){
+            //         //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+            //         tmpu ={value:accounts[i].id,label:accounts[i].name};
+            //         unitHash[accounts[i].id]=accounts[i].name;
+            //         untarr.push(tmpu);
+            //     }
+            //     $scope.untigrps = accounts;
+            //     $scope.gridOptions.columnDefs[10].filter.selectOptions=untarr;
+            //     $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=untarr;
+            //     $scope.gridOptions.columnDefs[10].unitHash =  unitHash ;
+            // });
+            //
+            // //人员列表
+            // Restangular.all('/sys-users').getList().then(function (accounts) {
+            //     var userarr = [];
+            //     var tmpu = {};
+            //     var userHash=[];
+            //     for(var i=0;i<accounts.length;i++){
+            //         tmpu ={value:accounts[i].id,label:accounts[i].name};
+            //         userHash[accounts[i].id]=accounts[i].name;
+            //         userarr.push(tmpu);
+            //     }
+            //     $scope.uigrusergrps = userarr; //转换成uigrid可识别的模式
+            //     $scope.peoplegrps = accounts;
+            //     $scope.gridOptions.columnDefs[4].filter.selectOptions=userarr;
+            //     $scope.gridOptions.columnDefs[4].editDropdownOptionsArray=userarr;
+            //     $scope.gridOptions.columnDefs[4].userHash =  userHash ;
+            //     $scope.gridOptions.columnDefs[9].filter.selectOptions=userarr;
+            //     $scope.gridOptions.columnDefs[9].editDropdownOptionsArray=userarr;
+            //     $scope.gridOptions.columnDefs[9].userHash =  userHash ;
+            // });
 
             var tableDatas = Restangular.all('/am-assets-management-scrap/getAssReg');
 

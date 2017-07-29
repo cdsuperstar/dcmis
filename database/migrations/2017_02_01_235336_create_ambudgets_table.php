@@ -252,10 +252,10 @@ class CreateAmbudgetsTable extends Migration
         Schema::create('amassscraps', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('amasbudget_id')->nullable(); //领用人
+            $table->integer('amasbudget_id'); //领用人
 
-            $table->integer('scrapuser')->nullable(); //报废人
-            $table->dateTime('scrapdate')->nullable(); //报废日期
+            $table->integer('scrapuser'); //报废人
+            $table->dateTime('scrapdate'); //报废日期
 
             $table->text('remark')->nullable(); //备注
 
