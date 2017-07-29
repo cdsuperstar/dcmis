@@ -17,15 +17,18 @@
                         </div>
                     </div>
                     <form class="form-horizontal" role="form">
-                        <div class="alert alert-warning">
+                        <div class="alert alert-info">
                             <strong>原领用人:</strong> xxxx <br>
                             <strong>原领用单位:</strong> 成都理工大学资产经营有限公司
+                        </div>
+                        <div class="alert alert-warning">
+                            * 变更登记 如变更登记的数量小于领用数量，请变更后在 资产登记 模块 ，对新领用人进行登记资产；
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 领用人 </label>
                             <div class="col-md-8">
                                 <ui-select ng-model="dcEdition.requester" theme="bootstrap">
-                                    <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-match placeholder="选择人员...">@{{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices repeat="tmpperson.id as tmpperson in peoplegrps | filter: $select.search">
                                         <div ng-bind-html="tmpperson.name | highlight: $select.search"></div>
                                         <small ng-bind-html="tmpperson.email | highlight: $select.search"></small>
@@ -46,18 +49,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 数 量 </label>
+                            <label class="col-md-3 control-label"> 变更数量 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcEdition.amt" placeholder="数量">
+                                    <input type="number" class="form-control" ng-model="dcEdition.amt" placeholder="变更数量">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 备 注 </label>
                             <div class="col-md-8">
-                                <input type="number" class="form-control" ng-model="dcEdition.remark" placeholder="备注">
+                                <textarea ng-model="dcEdition.remark" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写备注内容（1000字以内）"></textarea>
                             </div>
                         </div>
                         <div class="form-action" align="center">

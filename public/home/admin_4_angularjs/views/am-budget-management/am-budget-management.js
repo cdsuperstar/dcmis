@@ -125,7 +125,6 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === editdata.entity.id;
                     });
-                    userWithId.password_confirmation = userWithId.password;
                     userWithId.put().then(function (res) {
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');

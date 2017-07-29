@@ -1,6 +1,8 @@
 
 .ngdialog.amassetmangementadd .ngdialog-content{width : 450px;background: #ffffff;}
 
+.ngdialog.amassetmangementmeatter .ngdialog-content{width : 800px;background: #ffffff;}
+
 .jquery-notific8-container.top { top: 60px; }
 
 .amassetmangementaddgrid {
@@ -24,3 +26,26 @@
     color:#ffffff;
 }
 
+.assetssouceplangrid {
+    /*width: 300px;*/
+    height: 300px;
+}
+.assetssouceplangrid .ui-grid-header{
+    background: #F2784B;
+}
+.assetssouceplangrid .ui-grid-top-panel{
+    background: #F2784B;
+}
+.assetssouceplangrid .ui-grid-top-panel-background{
+    background: #F2784B;
+}
+.assetssouceplangrid .ui-grid-header-cell{
+    color:#F2784B;
+}
+.assetssouceplangrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}
+
+.icon-hand{
+    cursor: pointer;
+}
