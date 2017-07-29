@@ -70,9 +70,6 @@ class amasbudget extends Model
     public function amassregs(){
         return $this->hasMany('App\models\amassreg');
     }
-    public function amassscraps(){
-        return $this->hasMany('App\models\amassscrap');
-    }
 
 
 }
