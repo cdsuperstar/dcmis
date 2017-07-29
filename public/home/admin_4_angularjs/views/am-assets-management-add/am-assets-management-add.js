@@ -361,12 +361,12 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 dcEdition.userdate = new Date();
                                 dcEdition.state = "正常";
                                 dcEdition.amasbudget_id = $scope.tmpobjdata;
-                                console.log(dcEdition);
+                                // console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
                                     function (res) {
                                         if (res.success) {
-                                            console.log(res);
+                                            // console.log(res);
                                             $scope.soucegridOptions.data.push(res);
                                             row.entity.regamt = res.regamt;
                                             $scope.souceamttoal = dcEdition.amt - res.regamt;
@@ -485,7 +485,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                         showMsg(res.messages.toString(), '信息', 'lime');
                                         row.entity.regamt = res.regamt;
                                         $scope.souceamttoal = res.regamt;
-
+                                        if(Number(res.regamt) < 0) showMsg('请注意数据的一致性，库存小于 0 ！', '信息', 'ruby');
                                         $scope.soucegridApi.rowEdit.setRowsClean(Array(userWithId));
                                     } else {
                                         showMsg(res.errors.toString(), '错误', 'ruby');
@@ -495,7 +495,20 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         };
 
                         $scope.delbranchData = function () {
-
+                            var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
+                            selectdcmodels.forEach(function (deldata) {
+                                    deldata.entity.remove().then(function (res) {
+                                        if (res.success) {
+                                            $scope.soucegridOptions.data = _.without($scope.soucegridOptions.data, deldata.entity);
+                                            showMsg(res.messages.toString(), '信息', 'lime');
+                                        }
+                                        else {
+                                            showMsg(res.errors.toString(), '错误', 'ruby');
+                                        }
+                                        //console.log(res);
+                                    });
+                                }
+                            );
                         };
 
                         $scope.savebranchRow = function (rowEntity) {
