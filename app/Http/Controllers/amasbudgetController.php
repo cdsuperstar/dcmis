@@ -36,8 +36,7 @@ class amasbudgetController extends Controller
     public function getTheAssReg(amasbudget $amasbudget)
     {
         //
-        $datas=[];
-        $datas[] = amasbudget::with(['amassregs'])->find($amasbudget->id);
+        $datas = collect([amasbudget::with(['amassregs'])->find($amasbudget->id)]);
         return response()->json($datas);
 
     }
