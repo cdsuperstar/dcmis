@@ -78,6 +78,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereRemark($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereReq($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereTotal($value)
+ * @property int $amapplication_id
+ * @property int $amsupplier_id
+ * @property-read \App\models\amapplication $amapplication
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereAmapplicationId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amcontrbudget whereAmsupplierId($value)
  */
 class amcontrbudget extends Model
 {

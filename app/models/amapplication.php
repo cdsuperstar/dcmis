@@ -36,6 +36,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereYear($value)
  * @mixin \Eloquent
+ * @property string $syear
+ * @property string $no
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amasbudget[] $amasbudgets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amcontrbudget[] $amcontrbudgets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amotbudget[] $amotbudgets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amsvbudget[] $amsvbudgets
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereNo($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereSyear($value)
  */
 class amapplication extends Model
 {

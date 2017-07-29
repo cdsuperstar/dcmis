@@ -46,6 +46,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget whereRemark($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget whereReq($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget whereTotal($value)
+ * @property int $amapplication_id
+ * @property float $price
+ * @property int $amsupplier_id
+ * @property-read \App\models\amapplication $amapplication
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget whereAmapplicationId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget whereAmsupplierId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amsvbudget wherePrice($value)
  */
 class amsvbudget extends Model
 {

@@ -35,6 +35,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereUserdate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereValiddate($value)
  * @mixin \Eloquent
+ * @property int $amasbudget_id
+ * @property string $scrapremark
+ * @property-read \App\models\amasbudget $amasbudget
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereAmasbudgetId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereScrapremark($value)
  */
 class amassreg extends Model
 {

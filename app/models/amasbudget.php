@@ -50,6 +50,23 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereReimstate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereRemark($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereTotal($value)
+ * @property int $amapplication_id
+ * @property string $wzno
+ * @property string $wzsmodel
+ * @property float $bdg
+ * @property int $amsupplier_id
+ * @property int $regamt
+ * @property int $scrapamt
+ * @property-read \App\models\amapplication $amapplication
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amassreg[] $amassregs
+ * @property-read \App\models\ambaseas $ambaseas
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereAmapplicationId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereAmsupplierId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereBdg($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereRegamt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereScrapamt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereWzno($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\amasbudget whereWzsmodel($value)
  */
 class amasbudget extends Model
 {
