@@ -166,12 +166,12 @@
                                 <li ng-repeat="showcanlen in showcanlender">
                                     <a href="#/sys-matters.html">
                                         <span class="task">
-                                            <span class="desc" style="color: @{{ progress.states }};" title="@{{ showcanlen.content }}">@{{ showcanlen.title }} </span>
+                                            <span class="desc" title="@{{ showcanlen.content }}">@{{ showcanlen.title }} </span>
                                             <span class="percent">余@{{ showcanlen.enddate }}天</span>
                                         </span>
                                         <span class="progress">
-                                            <span style="width: @{{ progress.percent }}%;" class="progress-bar @{{ showcanlen.percolor }}"
-                                                  aria-valuenow="@{{ 100-showcanlen.enddate }}" aria-valuemin="0" aria-valuemax="100">
+                                            <span style="width: 100%;" class="progress-bar @{{ showcanlen.percolor }}"
+                                                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">余@{{ showcanlen.enddate }}天 </span>
                                             </span>
                                         </span>

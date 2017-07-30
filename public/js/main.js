@@ -82,7 +82,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
 
     //日历项提醒
     Restangular.all('/dcmatters/getMyRecIndex').getList().then(function (accounts) {
-        console.log(accounts);
         var showcanlender = [];
         var tmpu = {};
         for(var i=0;i<accounts.length;i++) {
@@ -94,7 +93,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
             // console.log(new Date(),new Date(end),end);
             var percolor = "progress-bar-success";
             if(enddate < 10) percolor = "progress-bar-success";
-            if(enddate < 3) percolor = "progress-bar-warning";
+            if(enddate < 7) percolor = "progress-bar-warning";
             if(enddate < 3) percolor = "progress-bar-danger";
             tmpu ={title:title,content:content,enddate:enddate,percolor:percolor};
             showcanlender.push(tmpu);
