@@ -75,6 +75,8 @@ class usermsgController extends Controller
             $rec->sendername=$rec->sender->name;
             $rec->recvername=$rec->recver->name;
             unset($rec["updated_at"]);
+            unset($rec["sender"]);
+            unset($rec["recver"]);
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $rec->id]),
                     'success' => true,
