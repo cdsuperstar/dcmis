@@ -95,20 +95,21 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
                     if(percent < 60 ) percolor = "progress-bar-warning";
                     if(percent < 30 ) percolor = "progress-bar-danger";
                     tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+                    showprogress.push(tmpu);
                 }
             }else {
                 percolor = "progress-bar-danger";
                 percent = 0;
                 if(accounts[i].appstate != "审批通过") states = "red";
                 tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+                showprogress.push(tmpu);
             }
-            showprogress.push(tmpu);
         }
         var tmpshowprogressNum = 0;
         if(showprogress.length) tmpshowprogressNum = showprogress.length;
         $scope.showprogress = showprogress;
         $scope.showprogressNum = tmpshowprogressNum;
-        // console.log(accounts);
+        // console.log(showprogress);
     });
 
     $scope.$on('$viewContentLoaded', function () {
