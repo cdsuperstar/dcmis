@@ -64,9 +64,21 @@ class usermsgController extends Controller
     public function sendMsg(Request $request)
     {
         //
-        \Log::info($request->input());
-        $resData= $request->input();
-        return response()->json($resData);
+        $tmpArray=array();
+        foreach ($request->input() as $key=>$v) {
+            $tmpArray=$v;
+        }
+        $tmpArray["sender_id"]=$request->user()->id;
+
+        $rec=new usermsg($tmpArray);
+        if($rec->save()){
+            return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]),
+                    'success' => true,
+                ], $rec->toArray()
+                )
+            );
+        }
     }
 
     public function getUnreadMsgs(Request $request)
