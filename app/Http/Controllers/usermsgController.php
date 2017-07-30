@@ -19,7 +19,7 @@ class usermsgController extends Controller
     {
         //
         $theUserid=$request->user()->id;
-        $resData = usermsg::where([['recver_id',$theUserid],['r_delat',null]])->orwhere([['sender_id',$theUserid],['s_delat',null]]);
+        $resData = usermsg::where([['recver_id',$theUserid],['r_delat',null]])->orwhere([['sender_id',$theUserid],['s_delat',null]])->get();
 //        usermsg::where('recver_id',$theUserid)->update(['readtime'=>Carbon::now()]);
         return response()->json($resData);
     }
