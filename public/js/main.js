@@ -164,7 +164,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         }
 
         window.Echo.private('App.User.' + $scope.dcUser.id)
-            .listen('usermsg', (e) => {
+            .listen('eventusermsg', (e) => {
             $scope.dcUserMsgs.unshift(e.msg);
         $scope.$apply();
     })
