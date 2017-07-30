@@ -19,7 +19,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $datas = User::all();
+        $datas = User::with(['userprofile'])->get();
         return response()->json($datas);
         //
     }
