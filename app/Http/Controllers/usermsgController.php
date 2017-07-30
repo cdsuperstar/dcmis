@@ -100,7 +100,6 @@ class usermsgController extends Controller
 
         $rec=new usermsg($tmpArray);
         if($rec->save()){
-            event(new \App\Events\eventusermsg($rec->recver_id,$rec->body));
             $resData=usermsg::where(
                 'usermsgs.id','=',$rec->id
             )
@@ -110,7 +109,16 @@ class usermsgController extends Controller
                 ->orderBy("usermsgs.id",'desc')
                 ->get(['usermsgs.id','usermsgs.sender_id','usermsgs.recver_id','usermsgs.body','usermsgs.readtime','usermsgs.s_delat','usermsgs.r_delat','usermsgs.created_at','sender.name as sendername','recver.name as recvername']);
 
-            \Log::info($resData->toArray());
+            $msg=(object)null;
+            $msg->photo="";
+            if(isset($msg->sender->userprofile->signpic))
+                $msg->photo="/images/users/".$msg->sender->userprofile->signpic.".jpg";
+            $msg->sendername=$rec->sender->name;
+            $msg->body=$rec->body;
+            $msg->created_at=$rec->created_at->toTimeString();
+
+            event(new \App\Events\eventusermsg($rec->recver_id,$msg));
+
             return response()->json($resData);
         }
     }
