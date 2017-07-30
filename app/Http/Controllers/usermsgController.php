@@ -40,9 +40,38 @@ class usermsgController extends Controller
         return response()->json($resData);
     }
 
+    public function getMyChatMsgs(Request $request,User $user)
+    {
+        //
+        $resData=usermsg::where([
+            ['recver_id','=',$request->user()->id],
+            ['sender_id',$user->id],
+            ['r_delat',null]
+        ])
+            ->orWhere([
+                ['sender_id','=',$request->user()->id],
+                ['recver_id',$user->id],
+                ['s_delat',null]
+            ])
+            ->leftjoin('users as sender','sender.id','=','usermsgs.sender_id')
+            ->leftjoin('users as recver','recver.id','=','usermsgs.recver_id')
+
+            ->orderBy("usermsgs.id",'desc')
+            ->get(['usermsgs.id','usermsgs.sender_id','usermsgs.recver_id','usermsgs.body','usermsgs.readtime','usermsgs.s_delat','usermsgs.r_delat','usermsgs.created_at','sender.name as sendername','recver.name as recvername']);
+        return response()->json($resData);
+    }
+
     public function getUnreadMsgs(Request $request)
     {
-        $recData=usermsg::where([['recver_id',$request->user()->id],['readtime',null],['r_delat',null]])->selectraw('usermsgs.*,users.name as sendername,b.name as recvername')->leftjoin('users','users.id','=','usermsgs.sender_id')->leftjoin('users as b','b.id','=','usermsgs.recver_id')->get();
+        $recData=usermsg::where([
+            ['recver_id',$request->user()->id],
+            ['readtime',null],
+            ['r_delat',null]
+        ])
+            ->selectraw('usermsgs.*,users.name as sendername,b.name as recvername')
+            ->leftjoin('users','users.id','=','usermsgs.sender_id')
+            ->leftjoin('users as b','b.id','=','usermsgs.recver_id')
+            ->get();
 
         return response()->json($recData);
     }
