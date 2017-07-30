@@ -33,8 +33,19 @@ Route::group(['prefix' => '/coms'], function () {
     Route::get('getApplicationProgress','amapplicationController@getApplicationProgress'); //
 });
 
-//模块管理
+// 事项提醒
+Route::group(['prefix'=>'/dcmatters'],function(){
+    Route::get('','dcmatterController@index'); //
+    Route::get('getMySendIndex','dcmatterController@getMySendIndex'); //
+    Route::get('getMyRecIndex','dcmatterController@getMyRecIndex'); //
+    Route::get('create','dcmatterController@create'); //
+    Route::put('{dcmatter}','dcmatterController@update'); //
+    Route::post('','amsupplierController@store'); //
+    Route::delete('{dcmatter}','dcmatterController@destroy'); //
+});
 
+
+//模块管理
 Route::group(['prefix' => '/sys-model'], function () {
     //得到全部model
     Route::get('','dcmodel\dcmodelController@index')->middleware(['permission:sys-model.allmodels']); //->middleware(['permission:sys-model.allmodels']);; //->middleware(['permission:BrycenxKoepp']); //->middleware('role:Jayceex Medhurst MD');
