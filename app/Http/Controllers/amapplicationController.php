@@ -31,7 +31,7 @@ class amapplicationController extends Controller
     public function getLastNo()
     {
         //
-        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
+        $datas = amapplication::limit(1)->orderBy('id', 'desc')->get(["no"]);
         return response()->json($datas);
 
     }
@@ -40,17 +40,17 @@ class amapplicationController extends Controller
     {
         //
 //        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
-        $sTemplate=ambudgettype::where('template','=','1')->get();
-        $datas = amapplication::where('requester','=',$request->user()->id)->where('ambudgettypes_id','=',$sTemplate->id)->get();
+        $sTemplate = ambudgettype::where('template', '=', '1')->get();
+        $datas = amapplication::where('requester', '=', $request->user()->id)->where('ambudgettypes_id', '=', $sTemplate->first()->id)->get();
         return response()->json($datas);
 
     }
 
-    public function setStatus(amapplication $amapplication, $field='',$status='',Request $request)
+    public function setStatus(amapplication $amapplication, $field = '', $status = '', Request $request)
     {
-        if($field<>'appstate')return false;
+        if ($field <> 'appstate') return false;
 
-        if($amapplication->update([$field=>$status,'apper'=> $request->user()->id,'appdate'=>Carbon::now()])){
+        if ($amapplication->update([$field => $status, 'apper' => $request->user()->id, 'appdate' => Carbon::now()])) {
             return response()->json(array_merge([
                     'messages' => trans('data.update', ["data" => $amapplication->id]),
                     'success' => true,
@@ -59,6 +59,7 @@ class amapplicationController extends Controller
             );
         }
     }
+
     public function getSubsFromAppID(amapplication $amapplication)
     {
         //
@@ -133,10 +134,10 @@ class amapplicationController extends Controller
             }
         }
 
-        if(isset($aAmapplicationsinut["id"])){
-            $rec=amapplication::find($aAmapplicationsinut["id"]);
+        if (isset($aAmapplicationsinut["id"])) {
+            $rec = amapplication::find($aAmapplicationsinut["id"]);
             $rec->fill($aAmapplicationsinut);
-        }else{
+        } else {
             $rec = new amapplication($aAmapplicationsinut);
         }
         $rec->save();
@@ -146,35 +147,35 @@ class amapplicationController extends Controller
                 $v['amapplication_id'] = $rec->id;
                 switch ($aAmapplicationsinut['templatesign']) {
                     case "1":
-                        if(isset($v["id"])){
-                            $recSub[$k]=amasbudget::find($v["id"]);
+                        if (isset($v["id"])) {
+                            $recSub[$k] = amasbudget::find($v["id"]);
                             $recSub[$k]->fill($v);
-                        }else{
-                            $recSub[$k]=new amasbudget($v);
+                        } else {
+                            $recSub[$k] = new amasbudget($v);
                         }
                         break;
                     case "2":
-                        if(isset($v["id"])){
-                            $recSub[$k]=amasbudget::find($v["id"]);
+                        if (isset($v["id"])) {
+                            $recSub[$k] = amasbudget::find($v["id"]);
                             $recSub[$k]->fill($v);
-                        }else{
-                            $recSub[$k]=new amcontrbudget($v);
+                        } else {
+                            $recSub[$k] = new amcontrbudget($v);
                         }
                         break;
                     case "3":
-                        if(isset($v["id"])){
-                            $recSub[$k]=amasbudget::find($v["id"]);
+                        if (isset($v["id"])) {
+                            $recSub[$k] = amasbudget::find($v["id"]);
                             $recSub[$k]->fill($v);
-                        }else{
-                            $recSub[$k]=new amsvbudget($v);
+                        } else {
+                            $recSub[$k] = new amsvbudget($v);
                         }
                         break;
                     case "4":
-                        if(isset($v["id"])){
-                            $recSub[$k]=amasbudget::find($v["id"]);
+                        if (isset($v["id"])) {
+                            $recSub[$k] = amasbudget::find($v["id"]);
                             $recSub[$k]->fill($v);
-                        }else{
-                            $recSub[$k]=new amotbudget($v);
+                        } else {
+                            $recSub[$k] = new amotbudget($v);
                         }
                         break;
                 }
