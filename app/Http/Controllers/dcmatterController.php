@@ -22,14 +22,14 @@ class dcmatterController extends Controller
     public function getMySendIndex(Request $request)
     {
         //
-        $datas = dcmatter::where('suser_id','=',$request->user()->id);
+        $datas = dcmatter::where('suser_id','=',$request->user()->id)->get();
         return response()->json($datas);
     }
 
     public function getMyRecIndex(Request $request)
     {
         //
-        $datas = dcmatter::where('ruser_id','=',$request->user()->id);
+        $datas = dcmatter::where('ruser_id','=',$request->user()->id)->get();
         return response()->json($datas);
     }
 
