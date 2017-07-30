@@ -19,7 +19,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $datas = User::with(['userprofile'])->get();
+        $datas = User::with(['userprofile.unitgrp'])->get();
         return response()->json($datas);
         //
     }
@@ -124,11 +124,13 @@ class userController extends Controller
 
         $user = User::find($id);
         if ($user) {
+            $aTmp=array();
             foreach ($request->input() as $key => $val) {
-                $user->$key = $val;
+                $aTmp[$key] = $val;
             }
-
-            if ($user->updateUniques()) {
+            $user->fill($aTmp);
+            $user->password_confirmation=$user->password;
+            if ($user->save()) {
                 return response()->json(array_merge([
                         'messages' => trans('users.updatesuccess', ["data" => $user->name]),
                         'success' => true,

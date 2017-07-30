@@ -49,6 +49,10 @@ class userprofile extends Model
 //    public static $relationsData = array(
 //        'user' => array(self::BELONGS_TO, 'App\User'),
 //    );
+    public function unitgrp(){
+        return $this->belongsTo('App\models\unitgrp','unitid');
+    }
+
     public function user(){
         return $this->belongsTo('App\User','id');
     }

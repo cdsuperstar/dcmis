@@ -52,7 +52,7 @@ class User extends Ardent implements
         'name' => 'required|between:4,16|min_len:1|max_len:32',
         'email' => 'required|email|unique:users',
         'password' => 'required|min_len:6',
-        'password_confirmation' => 'match:dcEdition.password,Password|required',
+//        'password_confirmation' => 'match:dcEdition.password,Password|required',
     );
     public $autoPurgeRedundantAttributes = true;
     public $autoHydrateEntityFromInput = true;
