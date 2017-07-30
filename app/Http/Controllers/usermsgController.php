@@ -72,6 +72,8 @@ class usermsgController extends Controller
 
         $rec=new usermsg($tmpArray);
         if($rec->save()){
+            $rec->sendername=$rec->sender->name;
+            $rec->recvername=$rec->recver->name;
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $rec->id]),
                     'success' => true,
