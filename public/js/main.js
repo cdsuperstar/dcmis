@@ -95,8 +95,10 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
             if(enddate < 10) percolor = "progress-bar-success";
             if(enddate < 7) percolor = "progress-bar-warning";
             if(enddate < 3) percolor = "progress-bar-danger";
-            tmpu ={title:title,content:content,enddate:enddate,percolor:percolor};
-            showcanlender.push(tmpu);
+            if(enddate > -2){
+                tmpu ={title:title,content:content,enddate:enddate,percolor:percolor};
+                showcanlender.push(tmpu);
+            }
         }
         $scope.showcanlender = showcanlender;
         var tmpshowcanlenderNum = 0;
