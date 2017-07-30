@@ -73,7 +73,7 @@ class usermsgController extends Controller
         $rec=new usermsg($tmpArray);
         if($rec->save()){
             $resData=usermsg::where([
-                ['id','=',$rec->id]
+                ['usermsgs.id','=',$rec->id]
             ])
                 ->leftjoin('users as sender','sender.id','=','usermsgs.sender_id')
                 ->leftjoin('users as recver','recver.id','=','usermsgs.recver_id')
