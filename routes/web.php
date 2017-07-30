@@ -40,7 +40,7 @@ Route::group(['prefix'=>'/dcmatters'],function(){
     Route::get('getMyRecIndex','dcmatterController@getMyRecIndex'); //
     Route::get('create','dcmatterController@create'); //
     Route::put('{dcmatter}','dcmatterController@update'); //
-    Route::post('','amsupplierController@store'); //
+    Route::post('','dcmatterController@store'); //
     Route::delete('{dcmatter}','dcmatterController@destroy'); //
 });
 
