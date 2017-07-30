@@ -152,16 +152,32 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true" title="事项提醒">
                         <i class="icon-calendar"></i>
-                        <span class="badge badge-primary"> @{{ showprogressNum }} </span>
+                        <span class="badge badge-primary"> @{{ showprogressNum + showcanlenderNum }} </span>
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li class="external">
-                            <h3>你有
-                                <span class="bold">@{{ showprogressNum }} 项</span> 申请表采购进度</h3>
-                            <a href="#/icon-basket-loaded-list.html">查看全部</a>
+                            <h3>
+                                你有<span class="bold">@{{ showcanlenderNum }} 项</span> 事项提醒   <span class="bold">@{{ showprogressNum }} 项</span> 采购进度提醒
+                            </h3>
+                            {{--<a href="#/icon-basket-loaded-list.html">全部</a>--}}
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                <li ng-repeat="showcanlen in showcanlender">
+                                    <a href="#/sys-matters.html">
+                                        <span class="task">
+                                            <span class="desc" style="color: @{{ progress.states }};" title="@{{ showcanlen.content }}">@{{ showcanlen.title }} </span>
+                                            <span class="percent">余@{{ showcanlen.enddate }}天</span>
+                                        </span>
+                                        <span class="progress">
+                                            <span style="width: @{{ progress.percent }}%;" class="progress-bar @{{ showcanlen.percolor }}"
+                                                  aria-valuenow="@{{ 100-showcanlen.enddate }}" aria-valuemin="0" aria-valuemax="100">
+                                                <span class="sr-only">余@{{ showcanlen.enddate }}天 </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+
                                 <li ng-repeat="progress in showprogress">
                                     <a href="#/icon-basket-loaded-list.html">
                                         <span class="task">

@@ -80,6 +80,31 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         });
     });
 
+    //日历项提醒
+    Restangular.all('/dcmatters/getMyRecIndex').getList().then(function (accounts) {
+        console.log(accounts);
+        var showcanlender = [];
+        var tmpu = {};
+        for(var i=0;i<accounts.length;i++) {
+            var title = accounts[i].title;
+            var content = accounts[i].content;
+            var end = accounts[i].enddate.replace(/\-/g, "/");
+            var enddate = parseInt((new Date(end)  -  new Date())  /  1000  /  60  /  60  /24);
+
+            // console.log(new Date(),new Date(end),end);
+            var percolor = "progress-bar-success";
+            if(enddate < 10) percolor = "progress-bar-success";
+            if(enddate < 3) percolor = "progress-bar-warning";
+            if(enddate < 3) percolor = "progress-bar-danger";
+            tmpu ={title:title,content:content,enddate:enddate,percolor:percolor};
+            showcanlender.push(tmpu);
+        }
+        $scope.showcanlender = showcanlender;
+        var tmpshowcanlenderNum = 0;
+        if(showcanlender.length) tmpshowcanlenderNum = showcanlender.length;
+        $scope.showcanlenderNum = tmpshowcanlenderNum;
+    });
+
     //得到采购单的进度
     Restangular.all('/coms/getApplicationProgress').getList().then(function (accounts) {
         var showprogress = [];

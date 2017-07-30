@@ -3,10 +3,10 @@
 angular.module("MetronicApp").controller('sysmattersCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
-            var tableDatas = Restangular.all('/sys-matter');
+            var tableDatas = Restangular.all('/dcmatters/getMySendIndex');
             i18nService.setCurrentLang('zh-cn');
             //时间日期控件赋初始值
-            $scope.dcEdition = {dtime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, 0),user:$scope.dcUser.id};
+            $scope.dcEdition = {enddate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, 0),suser_id:$scope.dcUser.id};
 
             //人员列表
             Restangular.all('/sys-users').getList().then(function (accounts) {
@@ -22,6 +22,9 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 $scope.gridOptions.columnDefs[1].filter.selectOptions=userarr;
                 $scope.gridOptions.columnDefs[1].editDropdownOptionsArray=userarr;
                 $scope.gridOptions.columnDefs[1].unitHash =  userHash ;
+                $scope.gridOptions.columnDefs[5].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[5].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[5].unitHash =  userHash ;
             });
 
 
@@ -41,7 +44,9 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     disableAnimation:true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
-
+                    dcEdition.ruser_id = $scope.dcUser.id;
+                    console.log(dcEdition);
+                    tableDatas = Restangular.all('/dcmatters');
                     tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
@@ -62,6 +67,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deluser) {
                         //console.log(deluser);
+                    deluser.entity.route = "/dcmatters";
                         deluser.entity.remove().then(function (res) {
                             if (res.success) {
                                 $scope.gridOptions.data = _.without($scope.gridOptions.data, deluser.entity);
@@ -84,10 +90,10 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === edituser.entity.id;
                     });
-                    userWithId.password_confirmation = userWithId.password;
-                    //console.log(userWithId);
+                    userWithId.route = "/dcmatters";
+                    console.log(userWithId);
                     userWithId.put().then(function (res) {
-                        console.log(res);
+                        // console.log(res);
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
                             $scope.gridApi.rowEdit.setRowsClean(Array(userWithId));
@@ -97,7 +103,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     });
                 });
 
-            }
+            };
             $scope.saveRow = function (rowEntity) {
                 //$scope.editdataids.push(rowEntity.id);
                 var promise = $q.defer();
@@ -112,7 +118,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 enableCellEditOnFocus: true,
                     columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '40',enableFiltering: false,enableColumnResizing:false},
-                    {name: '提醒人', field: 'user',width: '100',enableColumnMenu: false,enableHiding: false,
+                    {name: '提醒人', field: 'suser_id',width: '100',enableColumnMenu: false,enableHiding: false,enableCellEdit: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
                         filter: {
@@ -122,7 +128,15 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     },
                     {name: '标题', field: 'title', width: '200',enableCellEdit: true,enableHiding: false},
                     {name: '事项内容',width: '350', field: 'content', enableCellEdit: true},
-                    {name: '提醒时间',width: '150',field: 'txdate', enableCellEdit: true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
+                    {name: '到期时间',width: '150',field: 'enddate', enableCellEdit: true,type: 'date', cellFilter: 'date:"yyyy-MM-dd"'},
+                    {name: '发送人', field: 'ruser_id',width: '100',enableColumnMenu: false,enableHiding: false,enableCellEdit: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
+                        filter: {
+                            term:1,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
+                    },
                     {name: '添加时间', width: '150',field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '150',field: 'updated_at',enableCellEdit: false,visible:false}
                     ],

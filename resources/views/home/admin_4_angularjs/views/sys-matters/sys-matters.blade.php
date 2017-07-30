@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">申报人</label>
                             <div class="col-md-10">
-                                <ui-select ng-model="dcEdition.user" theme="bootstrap">
+                                <ui-select ng-model="dcEdition.suser_id" theme="bootstrap">
                                     <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices repeat="tmpperson.id as tmpperson in peoplegrps | filter: $select.search">
                                         <div ng-bind-html="tmpperson.name | highlight: $select.search"></div>
@@ -39,9 +39,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label"> 提醒时间 </label>
+                            <label class="col-md-2 control-label"> 到期时间 </label>
                             <div class="col-md-10">
-                                <input class="form-control" type="datetime-local" ng-model="dcEdition.dtime" value="2017-05-23T15:00:00"  id="dateTimeInput">
+                                <input class="form-control" type="datetime-local" ng-model="dcEdition.enddate" value="2017-05-23T15:00:00"  id="dateTimeInput">
                             </div>
 
                         </div>
