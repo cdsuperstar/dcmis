@@ -61,6 +61,14 @@ class usermsgController extends Controller
         return response()->json($resData);
     }
 
+    public function sendMsg(Request $request)
+    {
+        //
+        \Log::info($request->input());
+//        $resData= '2';
+//        return response()->json($resData);
+    }
+
     public function getUnreadMsgs(Request $request)
     {
         $recData=usermsg::where([

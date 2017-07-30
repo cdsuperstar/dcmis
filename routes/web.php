@@ -302,6 +302,8 @@ Route::group(['prefix' => '/sys-msg'], function () {
     //得到其他用户发给自已的消息未读数
     Route::get('getMyChatMsgs/{user}', 'usermsgController@getMyChatMsgs'); //
 
+    //给其他用户发给消息
+    Route::get('sendMsg', 'usermsgController@sendMsg'); //
 
     Route::get('create', 'usermsgController@create')->middleware(['permission:sys-msg.create']); //sys-msg.create
     Route::delete('{usermsg}', 'usermsgController@destroy')->middleware(['permission:sys-msg.destroy']); //sys-msg.destroy
