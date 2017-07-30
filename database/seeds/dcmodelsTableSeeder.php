@@ -727,12 +727,12 @@ select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));
 select setval('unitgrps_id_seq', (select max(id) + 1 from unitgrps));
 select setval('permissions_id_seq', (select max(id) + 1 from permissions));
 select setval('roles_id_seq', (select max(id) + 1 from roles));
-select setval('ambaseass_id_seq', (select max(id) + 1 from roles));
-select setval('amapplications_id_seq', (select max(id) + 1 from roles));
-select setval('amcontrbudgets_id_seq', (select max(id) + 1 from roles));
-select setval('amasbudgets_id_seq', (select max(id) + 1 from roles));
-select setval('amsvbudgets_id_seq', (select max(id) + 1 from roles));
-select setval('amotbudgets_id_seq', (select max(id) + 1 from roles));
+select setval('ambaseass_id_seq', (select max(id) + 1 from ambaseass));
+select setval('amapplications_id_seq', (select max(id) + 1 from amapplications));
+select setval('amcontrbudgets_id_seq', (select max(id) + 1 from amcontrbudgets));
+select setval('amasbudgets_id_seq', (select max(id) + 1 from amasbudgets));
+select setval('amsvbudgets_id_seq', (select max(id) + 1 from amsvbudgets));
+select setval('amotbudgets_id_seq', (select max(id) + 1 from amotbudgets));
 
       ");
 
