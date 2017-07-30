@@ -31,6 +31,9 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 var userWithId = _.find($scope.people, function (data) {
                     return data.id === id;
                 });
+                for(var i = $scope.dcUserMsgs.length - 1 ;i>=0;i--){
+                    if($scope.dcUserMsgs[i].sender_id == id)$scope.dcUserMsgs.splice(i,1);
+                }
                 userWithId.unread = 0;
                 //取与当前选定用户的消息记录
                 Restangular.all('/sys-msg/getMyChatMsgs/'+id).getList().then(function (chartaccounts) {
