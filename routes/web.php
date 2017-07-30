@@ -303,7 +303,7 @@ Route::group(['prefix' => '/sys-msg'], function () {
     Route::get('getMyChatMsgs/{user}', 'usermsgController@getMyChatMsgs'); //
 
     //给其他用户发给消息
-    Route::get('sendMsg', 'usermsgController@sendMsg'); //
+    Route::post('sendMsg', 'usermsgController@sendMsg'); //
 
     Route::get('create', 'usermsgController@create')->middleware(['permission:sys-msg.create']); //sys-msg.create
     Route::delete('{usermsg}', 'usermsgController@destroy')->middleware(['permission:sys-msg.destroy']); //sys-msg.destroy

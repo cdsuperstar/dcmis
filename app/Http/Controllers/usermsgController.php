@@ -65,8 +65,8 @@ class usermsgController extends Controller
     {
         //
         \Log::info($request->input());
-//        $resData= '2';
-//        return response()->json($resData);
+        $resData= $request->input();
+        return response()->json($resData);
     }
 
     public function getUnreadMsgs(Request $request)
