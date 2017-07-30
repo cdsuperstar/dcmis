@@ -80,6 +80,8 @@ class usermsgController extends Controller
 
                 ->orderBy("usermsgs.id",'desc')
                 ->get(['usermsgs.id','usermsgs.sender_id','usermsgs.recver_id','usermsgs.body','usermsgs.readtime','usermsgs.s_delat','usermsgs.r_delat','usermsgs.created_at','sender.name as sendername','recver.name as recvername']);
+
+            \Log::info($resData->toArray());
             return response()->json($resData);
         }
     }
