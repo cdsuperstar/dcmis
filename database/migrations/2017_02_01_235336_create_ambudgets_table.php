@@ -235,7 +235,7 @@ class CreateAmbudgetsTable extends Migration
             $table->integer('asuser'); //领用人
             $table->integer('unitgrps_id')->nullable(); //领用单位
             $table->dateTime('userdate'); //领用时间
-            $table->date('validdate')->nullable(); //有效期
+            $table->dateTime('validdate')->nullable(); //有效期
             $table->string('state')->nullable(); //物资状态
 
             $table->text('remark')->nullable(); //备注
