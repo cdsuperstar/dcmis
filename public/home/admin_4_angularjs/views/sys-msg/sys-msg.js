@@ -22,7 +22,7 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
 
             if($scope.activesign){
                 //取与当前选定用户的消息记录
-                Restangular.all('/sys-msg/getMyChatMsgs/'+id).getList().then(function (chartaccounts) {
+                Restangular.all('/sys-msg/getMyChatMsgs/'+$scope.activesign).getList().then(function (chartaccounts) {
                     $scope.chartMsgs = chartaccounts;
                 });
             }
