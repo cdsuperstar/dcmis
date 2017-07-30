@@ -303,7 +303,7 @@ Route::group(['prefix'=>'/sys-announcement'],function(){
 });
 
 // Debug all sqls
-//DB::listen(function ($event) {
-//    Log::info($event->sql);
-//    Log::info($event->bindings);
-//});
+DB::listen(function ($event) {
+    Log::info($event->sql);
+    Log::info($event->bindings);
+});

@@ -93,8 +93,8 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 }else {
                     var res = angular.merge($scope.basket, $scope.imdata);
                     $scope.printsign = true;
-                    $scope.subsign = false;
-                    // console.log(res);
+                    //$scope.subsign = false;
+                     console.log(res);
                     Restangular.all('/icon-basket-loaded-add/storeReq').post(res).then(function(storeRes){
                         if (storeRes.success) {
                             showMsg(storeRes.messages.toString(), '信息', 'lime');
