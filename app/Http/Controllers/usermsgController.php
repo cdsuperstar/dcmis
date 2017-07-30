@@ -70,6 +70,25 @@ class usermsgController extends Controller
         return response()->json($resData);
     }
 
+    public function clearMsg(Request $request,User $user)
+    {
+        DB::table('usermsgs')
+            ->where([
+                ['recver_id','=',$request->user()->id],
+                ['sender_id',$user->id],
+                ['r_delat',null]
+            ])
+            ->update(['r_delat' => Carbon::now()]);
+
+        DB::table('usermsgs')
+            ->where([
+                ['sender_id','=',$request->user()->id],
+                ['recver_id',$user->id],
+                ['s_delat',null]
+            ])
+            ->update(['s_delat' => Carbon::now()]);
+    }
+
     public function sendMsg(Request $request)
     {
         //
