@@ -8,6 +8,7 @@ use App\models\amasbudget;
 use App\models\amcontrbudget;
 use App\models\amsvbudget;
 use App\models\amotbudget;
+use App\models\ambudgettype;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -39,7 +40,8 @@ class amapplicationController extends Controller
     {
         //
 //        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
-        $datas = amapplication::where('requester','=',$request->user()->id)->get();
+        $sTemplate=ambudgettype::where('template','=','1')->get();
+        $datas = amapplication::where('requester','=',$request->user()->id)->where('ambudgettypes_id','=',$sTemplate->id)->get();
         return response()->json($datas);
 
     }
