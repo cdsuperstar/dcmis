@@ -118,12 +118,18 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 $scope.gridOptions.data = [];
                 tableDatas.getList().then(function (accounts) {
                     var allAccounts = accounts;
+                    for(var i=0;i<allAccounts.length;i++){
+                        allAccounts[i].birth=new Date(allAccounts[i].birth);
+                    }
                     $scope.gridOptions.data = allAccounts;
                 });
-            }
+            };
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                for(var i=0;i<allAccounts.length;i++){
+                    allAccounts[i].birth=new Date(allAccounts[i].birth);
+                }
                 $scope.gridOptions.data = allAccounts;
             });
 
@@ -143,7 +149,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 //dateDisabled: isDisabled,//是否禁用周末
                 showWeeks:false, //显示周
                 startingDay:1 //从周一显示
-            }
+            };
 
 
             var tomorrow = new Date();

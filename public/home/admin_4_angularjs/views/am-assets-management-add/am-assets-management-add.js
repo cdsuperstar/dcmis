@@ -410,7 +410,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 },
                                 {name: '领用数量', field: 'amt',width: '80',enableCellEdit: true,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                 {name: '领用时间', field: 'userdate',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                                {name: '有效期', field: 'validdate',width: '120',type:'date',enableCellEdit: true,enableColumnMenu: true},
+                                {name: '有效期', field: 'validdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableCellEdit: true,enableColumnMenu: true},
                                 {name: '物资状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
                                     editDropdownValueLabel: 'isstate', editDropdownOptionsArray: [
                                     { id: '正常', isstate: '正常' },
@@ -440,13 +440,15 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             Restangular.restangularizeCollection(null, accounts[0].amassregs, '/amassregs');
                             var amttotal = 0;
                             for (var item=0;item<listdata.length;item++){
+                                // listdata[item]["validdate"] = new Date(listdata[item]["validdate"]);
+                                listdata[item].validdate = new Date(listdata[item].validdate);
                                 if(listdata[item]["amt"]) { //计算物资数量合计
                                     amttotal += Number(listdata[item]["amt"]);
                                 }
                             }
                             $scope.souceamttoal = Number(row.entity.amt) - amttotal; //获得当前物资领取总数
 
-                            $scope.soucegridOptions.data = listdata;
+                             $scope.soucegridOptions.data = listdata;
                             //console.log(row.entity.amt,amttotal,$scope.souceamttoal);
                             // console.log(listdata);
                         });

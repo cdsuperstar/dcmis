@@ -119,7 +119,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                             selectOptions: [] }
                     },
 
-                    {name: '报废时间', field: 'scrapdate',width: '120',type:'date',enableColumnMenu: true},
+                    {name: '报废时间', field: 'scrapdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableColumnMenu: true},
                     {name: '物资状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
                         editDropdownValueLabel: 'isstate', editDropdownOptionsArray: [
                         { id: '正常', isstate: '正常' },
@@ -213,6 +213,9 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                for(var i=0;i<allAccounts.length;i++){
+                    allAccounts[i].scrapdate=new Date(allAccounts[i].scrapdate);
+                }
                 // console.log(accounts);
                 $scope.gridOptions.data = allAccounts;
             });
