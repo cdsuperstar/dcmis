@@ -6,7 +6,24 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
             var tableDatas = Restangular.all('/sys-matter');
             i18nService.setCurrentLang('zh-cn');
             //时间日期控件赋初始值
-            $scope.dcEdition = {dtime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, 0)};
+            $scope.dcEdition = {dtime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, 0),user:$scope.dcUser.id};
+
+            //人员列表
+            Restangular.all('/sys-users').getList().then(function (accounts) {
+                var userarr = [];
+                var tmpu = {};
+                var userHash=[];
+                for(var i=0;i<accounts.length;i++){
+                    tmpu ={value:accounts[i].id,label:accounts[i].name};
+                    userHash[accounts[i].id]=accounts[i].name;
+                    userarr.push(tmpu);
+                }
+                $scope.peoplegrps = accounts;
+                $scope.gridOptions.columnDefs[1].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[1].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[1].unitHash =  userHash ;
+            });
+
 
             $scope.addData = function () {
                 ngDialog.openConfirm({
@@ -37,7 +54,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                         }
                     );
                 }, function (dcEdition) {
-                    console.log('Modal promise rejected. Reason: ', dcEdition);
+                    // console.log('Modal promise rejected. Reason: ', dcEdition);
                 });
             };
 
@@ -95,12 +112,19 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 enableCellEditOnFocus: true,
                     columnDefs: [
                     {name: 'id', field: 'id', enableCellEdit: false, width: '40',enableFiltering: false,enableColumnResizing:false},
+                    {name: '提醒人', field: 'user',width: '100',enableColumnMenu: false,enableHiding: false,
+                        editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
+                        filter: {
+                            term:1,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
+                    },
                     {name: '标题', field: 'title', width: '200',enableCellEdit: true,enableHiding: false},
                     {name: '事项内容',width: '350', field: 'content', enableCellEdit: true},
                     {name: '提醒时间',width: '150',field: 'txdate', enableCellEdit: true,cellFilter: 'date:"yyyy-M-d"',type: 'date'},
                     {name: '添加时间', width: '150',field: 'created_at',enableCellEdit: false,visible:true},
-                    {name: '更新时间', width: '150',field: 'updated_at',enableCellEdit: false,visible:false},
-
+                    {name: '更新时间', width: '150',field: 'updated_at',enableCellEdit: false,visible:false}
                     ],
                 paginationPageSizes: [10, 30, 50],
                 paginationPageSize: 10,
@@ -125,19 +149,12 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
         }
     ]
 )
-    .filter('mapIsmenu', function () {
-        var genderHash = {
-            1: '是',
-            0: '否'
-        };
-
-        return function (input) {
-            if (input == null) {
-                return '';
-            } else {
-                return genderHash[input];
-            }
-        };
+    .filter('dFilterHash',function(){
+        return function(v,h){
+            if (h=== undefined) return '';
+            if (h[v]===undefined) return '';
+            return h[v];
+        }
     })
 ;
 
