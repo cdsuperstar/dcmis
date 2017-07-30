@@ -20,6 +20,12 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             });
             //end
 
+            if($scope.activesign){
+                //取与当前选定用户的消息记录
+                Restangular.all('/sys-msg/getMyChatMsgs/'+id).getList().then(function (chartaccounts) {
+                    $scope.chartMsgs = chartaccounts;
+                });
+            }
             $scope.showmsg = function(id){
                 $scope.activesign = id; //置点击事件样式
                 var userWithId = _.find($scope.people, function (data) {
