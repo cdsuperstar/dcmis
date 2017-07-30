@@ -18,8 +18,20 @@
                     </div>
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 标 题 </label>
-                            <div class="col-md-8">
+                            <label class="col-md-2 control-label">申报人</label>
+                            <div class="col-md-10">
+                                <ui-select ng-model="dcEdition.user" theme="bootstrap">
+                                    <ui-select-match placeholder="选择申报人...">@{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="tmpperson.id as tmpperson in peoplegrps | filter: $select.search">
+                                        <div ng-bind-html="tmpperson.name | highlight: $select.search"></div>
+                                        <small ng-bind-html="tmpperson.email | highlight: $select.search"></small>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"> 标 题 </label>
+                            <div class="col-md-10">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" title="必填项" data-container="body"></i>
                                     <input type="text" class="form-control" ng-model="dcEdition.title" placeholder="事项标题">
@@ -27,15 +39,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 提醒时间 </label>
-                            <div class="col-md-8">
+                            <label class="col-md-2 control-label"> 提醒时间 </label>
+                            <div class="col-md-10">
                                 <input class="form-control" type="datetime-local" ng-model="dcEdition.dtime" value="2017-05-23T15:00:00"  id="dateTimeInput">
                             </div>
 
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 内  容 </label>
-                            <div class="col-md-8">
+                            <label class="col-md-2 control-label"> 内  容 </label>
+                            <div class="col-md-10">
                                 {{--<div ng-model="dcEdition.content" id="summernote_sysannouncement"> </div>--}}
                                 <textarea ng-model="dcEdition.content" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 200px;"  maxlength="1000" onchange="this.value=this.value.substring(0, 1000)" onkeydown="this.value=this.value.substring(0, 1000)" onkeyup="this.value=this.value.substring(0, 1000)" placeholder="填写事项内容（1000字以内）"></textarea>
 
