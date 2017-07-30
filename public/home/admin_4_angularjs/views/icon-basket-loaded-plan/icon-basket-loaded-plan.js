@@ -201,7 +201,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
 
             $scope.showdetail = function(row) {
                 // console.log(row.entity.appstate);
-                if(row.entity.appstate == '审批通过' || (confirm("该采购申请表的审批状态为 未审批 ，确定要继续操作吗？") == true)) {
+                if(row.entity.appstate == '审批通过' || (confirm("该采购申请表的审批状态为 未审批 或 审批未通过 ，确定要继续操作吗？") == true)) {
                 }else {
                     return false;
                 }

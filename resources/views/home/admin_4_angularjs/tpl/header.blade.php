@@ -152,110 +152,26 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true" title="事项提醒">
                         <i class="icon-calendar"></i>
-                        <span class="badge badge-primary"> 3 </span>
+                        <span class="badge badge-primary"> @{{ showprogressNum }} </span>
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li class="external">
                             <h3>你有
-                                <span class="bold">12 条</span> 新日历项</h3>
-                            <a href="#/profile/dashboard">查看全部</a>
+                                <span class="bold">@{{ showprogressNum }} 项</span> 申请表采购进度</h3>
+                            <a href="#/icon-basket-loaded-list.html">查看全部</a>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                                <li>
-                                    <a href="javascript:;">
+                                <li ng-repeat="progress in showprogress">
+                                    <a href="#/icon-basket-loaded-list.html">
                                         <span class="task">
-                                            <span class="desc">New release v1.2 </span>
-                                            <span class="percent">30%</span>
+                                            <span class="desc" style="color: @{{ progress.states }};">@{{ progress.name }} </span>
+                                            <span class="percent">@{{ progress.percent }}%</span>
                                         </span>
                                         <span class="progress">
-                                            <span style="width: 40%;" class="progress-bar progress-bar-success"
-                                                  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">Application deployment</span>
-                                            <span class="percent">65%</span>
-                                        </span>
-                                        <span class="progress">
-                                            <span style="width: 65%;" class="progress-bar progress-bar-danger"
-                                                  aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">65% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">Mobile app release</span>
-                                            <span class="percent">98%</span>
-                                        </span>
-                                        <span class="progress">
-                                            <span style="width: 98%;" class="progress-bar progress-bar-success"
-                                                  aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">98% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">Database migration</span>
-                                            <span class="percent">10%</span>
-                                        </span>
-                                        <span class="progress">
-                                            <span style="width: 10%;" class="progress-bar progress-bar-warning"
-                                                  aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">10% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">Web server upgrade</span>
-                                            <span class="percent">58%</span>
-                                        </span>
-                                        <span class="progress">
-                                            <span style="width: 58%;" class="progress-bar progress-bar-info"
-                                                  aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">58% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">Mobile development</span>
-                                            <span class="percent">85%</span>
-                                        </span>
-                                        <span class="progress">
-                                            <span style="width: 85%;" class="progress-bar progress-bar-success"
-                                                  aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">85% Complete</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="task">
-                                            <span class="desc">New UI release</span>
-                                            <span class="percent">38%</span>
-                                        </span>
-                                        <span class="progress progress-striped">
-                                            <span style="width: 38%;" class="progress-bar progress-bar-important"
-                                                  aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">38% Complete</span>
+                                            <span style="width: @{{ progress.percent }}%;" class="progress-bar @{{ progress.percolor }}"
+                                                  aria-valuenow="@{{ progress.percent }}" aria-valuemin="0" aria-valuemax="100">
+                                                <span class="sr-only">完成 @{{ progress.percent }}% </span>
                                             </span>
                                         </span>
                                     </a>
@@ -301,10 +217,10 @@
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <!-- END USER LOGIN DROPDOWN -->
                 <!-- BEGIN QUICK SIDEBAR DROPDOWN -->
-                <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                    <span class="sr-only">Toggle Quick Sidebar</span>
-                    <i class="icon-logout"></i>
-                </li>
+                {{--<li class="dropdown dropdown-extended quick-sidebar-toggler">--}}
+                    {{--<span class="sr-only">Toggle Quick Sidebar</span>--}}
+                    {{--<i class="icon-logout"></i>--}}
+                {{--</li>--}}
                 <!-- END QUICK SIDEBAR DROPDOWN -->
             </ul>
         </div>

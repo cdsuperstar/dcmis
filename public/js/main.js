@@ -80,8 +80,39 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         });
     });
 
+    //得到采购单的进度
+    Restangular.all('/coms/getApplicationProgress').getList().then(function (accounts) {
+        var showprogress = [];
+        var tmpu = {};
+        for(var i=0;i<accounts.length;i++){
+            var states = "";
+            if(accounts[i].progress){
+                var strs=accounts[i].progress.split("/");
+                var percent = Number(strs[0])/Number(strs[1]) * 100;
+                if(accounts[i].appstate != "审批通过") states = "red";
+                if(percent < 100 ) {
+                    var percolor = "progress-bar-success";
+                    if(percent < 60 ) percolor = "progress-bar-warning";
+                    if(percent < 30 ) percolor = "progress-bar-danger";
+                    tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+                }
+            }else {
+                percolor = "progress-bar-danger";
+                percent = 0;
+                if(accounts[i].appstate != "审批通过") states = "red";
+                tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+            }
+            showprogress.push(tmpu);
+        }
+        var tmpshowprogressNum = 0;
+        if(showprogress.length) tmpshowprogressNum = showprogress.length;
+        $scope.showprogress = showprogress;
+        $scope.showprogressNum = tmpshowprogressNum;
+        // console.log(accounts);
+    });
+
     $scope.$on('$viewContentLoaded', function () {
-        //App.initComponents(); // init core components
+    //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
     Restangular.one('/sys-model/getModTree').get().then(function (res) {
