@@ -5,51 +5,65 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
-            $scope.person = {};
-            $scope.people = [
-                {"id":1,"ykth":"10201401573","name":"高成刚","depart":"办公室"},
-                {"id":2,"ykth":"10201400124","name":"李娴","depart":"办公室"},
-                {"id":3,"ykth":"10201400939","name":"朱创业","depart":"办公室"},
-                {"id":4,"ykth":"10201402485","name":"路婷婷","depart":"财务部"},
-                {"id":5,"ykth":"10201401940","name":"何铭","depart":"财务部"},
-                {"id":6,"ykth":"10201401802","name":"涂涯","depart":"采购科"},
-                {"id":7,"ykth":"2015020765","name":"李伟博","depart":"采购科"}
-            ];
-
-            //end
-            var tableDatas = Restangular.all('/users');
-
-            $scope.addData = function () {
-                ngDialog.openConfirm({
-                    template: '/usermsgs/create',
-                    className: 'ngdialog-theme-default sysmsg',
-                    scope: $scope,
-                    controller: ['$scope', 'validationConfig', function ($scope, validationConfig) {
-                        $scope.$validationOptions = validationConfig;
-                    }],
-                    showClose: false,
-                    setBodyPadding: 1,
-                    overlay: true,        //是否用div覆盖当前页面
-                    closeByDocument:false,  //是否点覆盖div 关闭会话
-                    disableAnimation:true,  //是否显示动画
-                    closeByEscape: true
-                }).then(function (dcEdition) {
-
-                    tableDatas.post(dcEdition).then(
-                        function (res) {
-                            if (res.success) {
-                                //$scope.gridOptions.data.push(res);
-                                showMsg(res.messages.toString(), '信息', 'lime');
-                            } else {
-                                // TODO add error message to system
-                                showMsg(res.errors.toString(), '错误', 'ruby');
+            //人员列表
+            Restangular.all('/sys-users').getList().then(function (accounts) {
+                Restangular.all('/sys-msg/getMyUnreadCounts/'+$scope.dcUser.id).getList().then(function (myunreadaccounts) {
+                    for(var i=0;i<accounts.length;i++){
+                        for(var j=0;j<myunreadaccounts.length;j++){
+                            if(accounts[i].id == myunreadaccounts[j].sender_id){
+                                accounts[i].unread = myunreadaccounts[j].count;
                             }
                         }
-                    );
-                }, function (dcEdition) {
+                    }
+                    $scope.people =accounts;
+                });
+            });
+            //end
+
+            $scope.showmsg = function(id){
+                $scope.activesign = id; //置点击事件样式
+                var userWithId = _.find($scope.people, function (data) {
+                    return data.id === id;
+                });
+                userWithId.unread = 0;
+                //取与当前选定用户的消息记录
+                Restangular.all('/sys-msg/getMyChatMsgs/'+id).getList().then(function (chartaccounts) {
+                    $scope.chartMsgs = chartaccounts;
                 });
             };
 
+            $scope.sendMsg = function () {  //发送消息
+                if($scope.sendMsgcontent === undefined || $scope.activesign == null) return false;
+                var sendData = [{"body":$scope.sendMsgcontent,"recver_id":$scope.activesign}];
+                Restangular.all('/sys-msg/sendMsg').post(sendData).then(function (res) {
+                    if (res[0].id != undefined) {
+                        Restangular.restangularizeElement(null, res[0], '/sys-msg');
+                        $scope.chartMsgs.unshift(res[0]);
+                    }
+                    else {
+                        showMsg('发送失败！', '错误', 'ruby');
+                    }
+                });
+            };
+
+            $scope.delchartdata = function (id) {  //删除单条消息
+                var userWithId = _.find($scope.chartMsgs, function (data) {
+                    return data.id === id;
+                });
+                userWithId.route = "sys-msg";
+                userWithId.remove().then(function (res) {
+                    $scope.chartMsgs = _.without($scope.chartMsgs, userWithId);
+                });
+            };
+
+            $scope.delALLchartdata = function () {  //删除与当前用户的所有消息
+                if($scope.activesign == null) return false;
+                Restangular.all('/sys-msg/clearMsg/'+$scope.activesign).post().then(function (res) {
+                    for(var j=0;j<$scope.chartMsgs.length;j++){
+                        $scope.chartMsgs = [];
+                    }
+                });
+            };
 
 
             $scope.delData = function () {
@@ -68,19 +82,6 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 );
             };
 
-
-            $scope.refreshData = function(){
-                $scope.gridOptions.data = [];
-                tableDatas.getList().then(function (accounts) {
-                    var allAccounts = accounts;
-                    //$scope.gridOptions.data = allAccounts;
-                });
-            }
-
-            tableDatas.getList().then(function (accounts) {
-                var allAccounts = accounts;
-                //$scope.gridOptions.data = allAccounts;
-            });
 
         }
     ]

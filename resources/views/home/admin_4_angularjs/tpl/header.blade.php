@@ -124,7 +124,7 @@
                         <li class="external">
                             <h3>你有
                                 <span class="bold">@{{ dcUserMsgs.length }} 条</span> 新消息</h3>
-                            <a href="#/profile/dashboard">查看全部</a>
+                            <a href="#/sys-msg.html">查看全部</a>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
@@ -133,7 +133,7 @@
                                         <span class="photo">
                                             <img src="../assets/layouts/layout4/img/avatar2.jpg" class="img-circle"
                                                  alt=""> </span>
-                                        <span class="subject">
+                                        <span class="subject" ng-click="msgshow(messageitem.sender_id)">
                                             <span class="from"> @{{ messageitem.sendername }} </span>
                                             <span class="time"> @{{ messageitem.created_at }}</span>
                                         </span>

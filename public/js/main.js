@@ -80,6 +80,11 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         });
     });
 
+    //
+    $scope.msgshow = function(tmpdata){
+        $scope.activesign = tmpdata;
+        location.href = "#/sys-msg.html";
+    };
     //日历项提醒
     Restangular.all('/dcmatters/getMyRecIndex').getList().then(function (accounts) {
         var showcanlender = [];
