@@ -43,6 +43,15 @@ class usermsgController extends Controller
     public function getMyChatMsgs(Request $request,User $user)
     {
         //
+        DB::table('usermsgs')
+            ->where([
+                ['recver_id','=',$request->user()->id],
+                ['sender_id',$user->id],
+                ['readtime',null],
+                ['r_delat',null]
+            ])
+            ->update(['readtime' => Carbon::now()]);
+
         $resData=usermsg::where([
             ['recver_id','=',$request->user()->id],
             ['sender_id',$user->id],
@@ -72,6 +81,7 @@ class usermsgController extends Controller
 
         $rec=new usermsg($tmpArray);
         if($rec->save()){
+            event(new \App\Events\eventusermsg($rec->recver_id,$rec->body));
             $resData=usermsg::where(
                 'usermsgs.id','=',$rec->id
             )

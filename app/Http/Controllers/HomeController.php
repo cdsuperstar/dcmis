@@ -32,7 +32,7 @@ class HomeController extends Controller
         $msg->body="just test shit!";
 //        $msg->created_at=Carbon::now()->diffForHumans(Carbon::now()->addSeconds(10));
         $msg->created_at=$rec->created_at->toTimeString();
-        event(new \App\Events\usermsg(1,$msg));
+        event(new \App\Events\EventUsermsg(1,$msg));
 //        event(new \App\Events\usercmd("\$scope.dcUser.name='fucking haead';"));
 
         echo "fucking head";

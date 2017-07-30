@@ -10,7 +10,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Log;
 
-class usermsg implements ShouldBroadcast
+class eventusermsg implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
     public $msg;
