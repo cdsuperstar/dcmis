@@ -156,6 +156,9 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                for(var i=0;i<allAccounts.length;i++){
+                    allAccounts[i].enddate=new Date(allAccounts[i].enddate);
+                }
                 $scope.gridOptions.data = allAccounts;
                 //console.log( $scope.gridOptions.data);
             });
