@@ -21,7 +21,7 @@ class Dcmatters extends Migration
             $table->integer('ruser_id')->unsigned();
             $table->string('title');
             $table->string('content')->nullable();
-            $table->date('enddate');
+            $table->dateTime('enddate');
             $table->timestamps();
         });
 
