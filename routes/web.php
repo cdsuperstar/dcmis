@@ -27,6 +27,12 @@ Route::group(['prefix' => '/home/{layout}'], function () {
     Route::get('testit','HomeController@testit');
 });
 
+//系统主界面组件
+Route::group(['prefix' => '/coms'], function () {
+    //得到采购进度
+    Route::get('getApplicationProgress','amapplicationController@getApplicationProgress'); //
+});
+
 //模块管理
 
 Route::group(['prefix' => '/sys-model'], function () {

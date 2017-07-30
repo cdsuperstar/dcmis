@@ -35,6 +35,15 @@ class amapplicationController extends Controller
 
     }
 
+    public function getApplicationProgress(Request $request)
+    {
+        //
+//        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
+        $datas = amapplication::where('requester','=',$request->user()->id)->get();
+        return response()->json($datas);
+
+    }
+
     public function setStatus(amapplication $amapplication, $field='',$status='',Request $request)
     {
         if($field<>'appstate')return false;
