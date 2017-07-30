@@ -272,7 +272,6 @@ class CreateAmbudgetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('amassscraps');
         Schema::dropIfExists('amassregs');
         Schema::dropIfExists('amotbudgets');
         Schema::dropIfExists('amsvbudgets');
