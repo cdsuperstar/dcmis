@@ -72,18 +72,15 @@ class usermsgController extends Controller
 
         $rec=new usermsg($tmpArray);
         if($rec->save()){
-            $rec->sendername=$rec->sender->name;
-            $rec->recvername=$rec->recver->name;
-            unset($rec["updated_at"]);
-            unset($rec["sender"]);
-            unset($rec["recver"]);
-            return response()->json(array_merge([
-                    'messages' => trans('data.add', ["data" => $rec->id]),
-                    'success' => true,
-                        'msg' =>  $rec->toArray()
-                ]
-                )
-            );
+            $resData=usermsg::where([
+                ['id','=',$rec->id]
+            ])
+                ->leftjoin('users as sender','sender.id','=','usermsgs.sender_id')
+                ->leftjoin('users as recver','recver.id','=','usermsgs.recver_id')
+
+                ->orderBy("usermsgs.id",'desc')
+                ->get(['usermsgs.id','usermsgs.sender_id','usermsgs.recver_id','usermsgs.body','usermsgs.readtime','usermsgs.s_delat','usermsgs.r_delat','usermsgs.created_at','sender.name as sendername','recver.name as recvername']);
+            return response()->json($resData);
         }
     }
 
