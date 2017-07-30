@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\models\usermsg;
+use App\User;
 use Illuminate\Http\Request;
+use DB;
 use App\models\session;
 use Config;
 use Carbon\Carbon;
@@ -21,6 +23,20 @@ class usermsgController extends Controller
         $theUserid=$request->user()->id;
         $resData = usermsg::where([['recver_id',$theUserid],['r_delat',null]])->orwhere([['sender_id',$theUserid],['s_delat',null]])->get();
 //        usermsg::where('recver_id',$theUserid)->update(['readtime'=>Carbon::now()]);
+        return response()->json($resData);
+    }
+
+    public function getMyUnreadCounts(User $user)
+    {
+        //
+        $resData=usermsg::where([
+            ['recver_id','=',$user->id],
+            ['readtime',null]
+        ])
+            ->select(['sender_id',DB::raw('count(sender_id)')])
+            ->groupBy(['sender_id'])
+            ->orderBy("count",'desc')
+            ->get();
         return response()->json($resData);
     }
 

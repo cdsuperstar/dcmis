@@ -297,8 +297,11 @@ Route::group(['prefix'=>'/icon-basket-setsupplier'],function(){
 Route::group(['prefix' => '/sys-msg'], function () {
     //得到自己信息
     Route::get('', 'usermsgController@index')->middleware(['permission:sys-msg.allmsgs']); //sys-msg.allmsgs
+    //得到其他用户发给自已的消息未读数
+    Route::get('getMyUnreadCounts/{user}', 'usermsgController@getMyUnreadCounts'); //sys-msg.allmsgs
+
     Route::get('create', 'usermsgController@create')->middleware(['permission:sys-msg.create']); //sys-msg.create
-    Route::delete('{dcmodel}', 'usermsgController@destroy')->middleware(['permission:sys-msg.destroy']); //sys-msg.destroy
+    Route::delete('{usermsg}', 'usermsgController@destroy')->middleware(['permission:sys-msg.destroy']); //sys-msg.destroy
 
     //得到未读信息
     Route::get('unreadmsgs','usermsgController@getUnreadMsgs')->middleware(['permission:sys-msg.unreadmsgs']); //sys-msg.unreadmsgs
