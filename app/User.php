@@ -118,7 +118,7 @@ class User extends Ardent implements
     protected $fillable = ['name', 'email', 'password','syscfg','usercfg'];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */

@@ -150,6 +150,7 @@
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE JQUERY PLUGINS -->
 <!--[if lt IE 9]>
+
 <script src="../assets/global/plugins/respond.min.js"></script>
 <script src="../assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
@@ -171,8 +172,8 @@
 <script src="../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
 
-
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
+
 
 <!-- END CORE ANGULARJS PLUGINS -->
 <script src="/js/common/angular-locale_zh-cn.js" type="text/javascript"></script>

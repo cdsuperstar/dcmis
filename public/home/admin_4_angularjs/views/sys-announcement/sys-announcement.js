@@ -17,8 +17,7 @@ angular.module("MetronicApp").controller('sysannouncementCtrl',
                         // jQuery(document).ready(function() {
                         //     $('#summernote_sysannouncement').summernote({height: 300});
                         // });
-                        console.log($scope);
-
+                        //console.log($scope);
                     }],
                     showClose: false,
                     setBodyPadding: 1,
