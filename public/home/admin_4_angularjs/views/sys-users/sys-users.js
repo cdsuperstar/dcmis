@@ -292,7 +292,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
-                console.log(allAccounts);
+                //console.log(allAccounts);
                 $scope.gridOptions.data = allAccounts;
             });
 
