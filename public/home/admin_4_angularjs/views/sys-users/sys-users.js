@@ -35,6 +35,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                 });
             };
 
+            //增加数据
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/sys-users/create',
