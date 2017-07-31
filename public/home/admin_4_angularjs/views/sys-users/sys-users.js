@@ -7,6 +7,33 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             var tableDatas = Restangular.all('/sys-users');
 
+            //得到角色列表
+            Restangular.all('/sys-role').getList().then(function (accounts) {
+                $scope.sysroles = accounts;
+                // console.log(accounts);
+            });
+
+            //设定用户的角色
+            $scope.setuserRole = function (rolesid) {
+                var selectUsers = $scope.gridApi.selection.getSelectedGridRows();
+                if(!selectUsers.length) {
+                    showMsg('请选择用户！（用户数据选择数量小于0）', '错误', 'ruby');
+                    return false;
+                }
+                selectUsers.forEach(function (users) {
+                    var roldata = [{"user_id":users.entity.id,"role_id":rolesid}];
+                    Restangular.all('/sys-role/setPermOfRole/add').post(roldata).then(function (res) {
+                            if (res.success) {
+                                showMsg(res.messages.toString(), '信息', 'lime');
+                            } else {
+                                // TODO add error message to system
+                                showMsg(res.errors.toString(), '错误', 'ruby');
+                            }
+                        }
+                    );
+                });
+            };
+
             $scope.addData = function () {
                 ngDialog.openConfirm({
                     template: '/sys-users/create',

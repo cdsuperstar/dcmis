@@ -79,14 +79,10 @@
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
 
         <div class="btn-group btn-group-solid pull-right">
-            <button type="button" class="btn green-meadow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-excel-o"> </i>  导入/导出  <i class="fa fa-angle-down"></i></button>
+            <button type="button" class="btn green-meadow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tree"></i>  设定用户角色  <i class="fa fa-angle-down"></i></button>
             <ul class="dropdown-menu pull-right">
-                <li>
-                    <a href="javascript:;" ng-click="exportxls()"> 导出CSV </a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="javascript:;"> 导入CSV </a>
+                <li ng-repeat="r in sysroles" style="list-style-position:inside;border-bottom:1px solid #EFF2F6;">
+                    <a href="javascript:;" ng-click="setuserRole(r.id)"> @{{ r.display_name }} </a>
                 </li>
             </ul>
         </div>
