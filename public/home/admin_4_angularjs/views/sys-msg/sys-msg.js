@@ -56,6 +56,7 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 // console.log($scope.dcUserMsgs);
                 Restangular.all('/sys-msg/sendMsg').post(sendData).then(function (res) {
                     if (res[0].id != undefined) {
+                        $scope.sendMsgcontent="";
                         Restangular.restangularizeElement(null, res[0], '/sys-msg');
                         $scope.chartMsgs.unshift(res[0]);
                     }
