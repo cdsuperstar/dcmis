@@ -169,11 +169,11 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         }
 
         window.Echo.private('App.User.' + $scope.dcUser.id)
-            .listen('eventusermsg', (e) => {
+            .listen('eventusermsg', function(e) {
             $scope.dcUserMsgs.unshift(e.msg);
         $scope.$apply();
     })
-        .listen('usercmd', (e) => {
+        .listen('usercmd', function(e) {
         eval(e.cmd);
 });
 });
@@ -210,7 +210,7 @@ $scope.navthemeset = function(){
 MetronicApp.controller('HeaderController', ['$scope' ,function ($scope) {
     $scope.ReadNotifiCnt = 0;
     window.Echo.channel('dcBroadcast')
-        .listen('normal', (e) => {
+        .listen('normal', function(e) {
         $scope.dcBroadcast.unshift(e);
     $scope.$apply();
 });
