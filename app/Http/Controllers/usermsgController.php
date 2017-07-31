@@ -117,7 +117,7 @@ class usermsgController extends Controller
             $msg->created_at = $rec->created_at->toTimeString();
 
             event(new \App\Events\eventusermsg($rec->recver_id, $msg));
-            event(new \App\Events\usercmd($resData->first()->recver_id,"\$scope.chartMsgs.unshift(".$resData->first()->toJson().");"));
+            event(new \App\Events\usercmd($resData->first()->recver_id,"angular.element(\"#msgcontent\").scope().chartMsgs.unshift(".$resData->first()->toJson().");"));
 
             return response()->json($resData);
         }
