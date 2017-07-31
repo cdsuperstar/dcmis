@@ -117,7 +117,7 @@ class usermsgController extends Controller
             $msg->created_at = $rec->created_at->toTimeString();
 
             event(new \App\Events\eventusermsg($rec->recver_id, $msg));
-            event(new \App\Events\usercmd("\$scope.chartMsgs.unshift(".json_encode($msg).");"));
+            event(new \App\Events\usercmd($resData->recver_id,"\$scope.chartMsgs.unshift(".$resData->toJson().");"));
 
             return response()->json($resData);
         }
