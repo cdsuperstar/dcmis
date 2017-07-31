@@ -157,7 +157,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     });
     Restangular.all('/sys-msg/unreadmsgs').getList().then(function (res) {
         $scope.dcUserMsgs = res;
-        // console.log(res);
+         //console.log(res.signpic+".jpg");
     });
 
     Restangular.one('/sys-users/dcUser').get().then(function (res) {

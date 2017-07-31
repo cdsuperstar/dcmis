@@ -130,11 +130,8 @@
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                 <li ng-repeat="messageitem in dcUserMsgs" >
                                     <a href="#/sys-msg.html">
-                                        <span class="photo" ng-show="messageitem.photo == ''">
-                                            <img src="/images/users/defaultuser.jpg " class="img-circle" alt="">
-                                        </span>
-                                        <span class="photo" ng-show="messageitem.photo != ''">
-                                            <img src="/images/users/@{{ messageitem.sender_id }}/@{{ messageitem.photo }}.jpg " class="img-circle" alt="">
+                                        <span class="photo" >
+                                            <img src="/images/users/@{{ messageitem.sender_id }}/@{{ messageitem.signpic }}.jpg" class="img-circle" alt="">
                                         </span>
                                         <span class="subject">
                                             <span class="from"> @{{ messageitem.sendername }} </span>

@@ -110,9 +110,10 @@ class usermsgController extends Controller
                 ->get(['usermsgs.id','usermsgs.sender_id','usermsgs.recver_id','usermsgs.body','usermsgs.readtime','usermsgs.s_delat','usermsgs.r_delat','usermsgs.created_at','sender.name as sendername','recver.name as recvername']);
 
             $msg=(object)null;
-            $msg->photo="";
-            if(isset($msg->sender->userprofile->signpic))
-                $msg->photo="/images/users/".$msg->sender->userprofile->signpic.".jpg";
+            $msg->signpic="../defaultuser";
+            if(isset($msg->sender->userprofile->signpic)){
+                $msg->signpic=$msg->sender->userprofile->signpic;
+            }
             $msg->sendername=$rec->sender->name;
             $msg->body=$rec->body;
             $msg->created_at=$rec->created_at->toTimeString();
@@ -130,11 +131,17 @@ class usermsgController extends Controller
             ['readtime',null],
             ['r_delat',null]
         ])
-            ->selectraw('usermsgs.*,users.name as sendername,b.name as recvername')
+//            ->selectraw('usermsgs.*,users.name as sendername,b.name as recvername')
             ->leftjoin('users','users.id','=','usermsgs.sender_id')
+            ->leftjoin('userprofiles','userprofiles.id','=','usermsgs.sender_id')
             ->leftjoin('users as b','b.id','=','usermsgs.recver_id')
-            ->get();
-
+            ->orderBy('usermsgs.id','desc')
+            ->get(['usermsgs.id','sender_id','userprofiles.signpic as signpic','users.name as sendername','usermsgs.body as body','usermsgs.created_at as created_at']);
+        foreach ($recData as $oBject) {
+            if(is_null($oBject->signpic)){
+                $oBject->signpic="../defaultuser";
+            }
+        }
         return response()->json($recData);
     }
     /**
