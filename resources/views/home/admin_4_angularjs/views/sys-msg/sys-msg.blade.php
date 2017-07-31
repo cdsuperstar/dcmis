@@ -14,6 +14,7 @@
                     <ul class="inbox-nav scroller" style="height: 465px;margin-top:5px; ">
                         <li ng-class="{active: activesign == x.id}" ng-repeat="x in people | filter:tmpsearch | orderBy : 'name'" ng-if="x.id != dcUser.id">
                             <a href="javascript:;" ng-click="showmsg(x.id)">
+                                <span aria-hidden="true" class="icon-user"></span>&nbsp;
                                 @{{x.name}}
                                 <span class="badge badge-danger" ng-show="x.unread > 0"> @{{x.unread}} </span>
                             </a>
@@ -41,7 +42,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <div id="speecscroll" class="spscroller" style="height: 450px; width: 100%;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;padding-right: 8px;">
+                                <div id="speecscroll" class="spscroller" style="height: 450px; width: 100%;margin-top: 15px; background-color:#fdfaf7 ;border-radius:4px;padding-right: 8px;">
                                     <div ng-class="m.recver_id == dcUser.id ? 'leftd':'rightd'" ng-repeat="m in chartMsgs">
                                         <div class="rightimg" ng-if = "m.recver_id == dcUser.id">
                                             <strong>@{{ m.sendername }}</strong> [@{{ m.created_at }}]
