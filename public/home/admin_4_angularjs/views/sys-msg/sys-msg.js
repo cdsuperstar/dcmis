@@ -50,7 +50,8 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
             };
 
             $scope.sendMsg = function () {  //发送消息
-                if($scope.sendMsgcontent === undefined || $scope.activesign == null) return false;
+                $scope.sendMsgcontent=$("#msgcontent")[0].value;
+                if($scope.sendMsgcontent === undefined || $scope.activesign == null || $scope.sendMsgcontent=="") return false;
                 var sendData = [{"body":$scope.sendMsgcontent,"recver_id":$scope.activesign}];
                 // console.log($scope.dcUserMsgs);
                 Restangular.all('/sys-msg/sendMsg').post(sendData).then(function (res) {
