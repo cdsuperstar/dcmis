@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\models\Role;
 use App\User;
 use Config;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $datas = User::with(['userprofile.unitgrp'])->get();
+        $datas = User::with(['userprofile.unitgrp','roles'])->get();
         return response()->json($datas);
         //
     }
@@ -41,8 +42,8 @@ class userController extends Controller
 
     public function getLoginedUser(Request $request)
     {
-        isset($request->user()->userprofile)?
-            $aMerge=array_merge($request->user()->toArray(),$request->user()->userprofile->toArray()):$aMerge=$request->user()->toArray();
+        isset($request->user()->userprofile) ?
+            $aMerge = array_merge($request->user()->toArray(), $request->user()->userprofile->toArray()) : $aMerge = $request->user()->toArray();
         return response()->json($aMerge);
     }
 
@@ -54,6 +55,17 @@ class userController extends Controller
     public function create()
     {
         return view('home.' . Config::get('app.dctemplate') . '.views.sys-users.edit');
+    }
+
+    public function setUserRole(User $user, Role $role)
+    {
+        $user->attachRole($role);
+        return response()->json(array_merge([
+                'messages' => trans('users.updatesuccess', ["data" => $user->name]),
+                'success' => true,
+            ], $user->roles()->get()->toArray()
+            )
+        );
     }
 
     /**
@@ -124,12 +136,12 @@ class userController extends Controller
 
         $user = User::find($id);
         if ($user) {
-            $aTmp=array();
+            $aTmp = array();
             foreach ($request->input() as $key => $val) {
                 $aTmp[$key] = $val;
             }
             $user->fill($aTmp);
-            $user->password_confirmation=$user->password;
+            $user->password_confirmation = $user->password;
             if ($user->save()) {
                 return response()->json(array_merge([
                         'messages' => trans('users.updatesuccess', ["data" => $user->name]),
@@ -158,9 +170,9 @@ class userController extends Controller
             return response()->json(
                 array_merge(
                     [
-                'messages' => trans('users.deletesuccess', ['rows' => 1 . " with id ".$user->id]),
-                'success' => true,
-                ],
+                        'messages' => trans('users.deletesuccess', ['rows' => 1 . " with id " . $user->id]),
+                        'success' => true,
+                    ],
                     $user->toArray()
                 )
             );
@@ -189,8 +201,9 @@ class userController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getUserPerms(Request $request){
-        $resPerms=$request->user()->roles->pluck('perms')[0];
+    public function getUserPerms(Request $request)
+    {
+        $resPerms = $request->user()->roles->pluck('perms')[0];
         return response()->json($resPerms);
     }
 

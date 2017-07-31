@@ -171,6 +171,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 //        Vinkla\Pusher\PusherServiceProvider::class,
 
         //

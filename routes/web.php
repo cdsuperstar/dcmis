@@ -73,6 +73,8 @@ Route::group(['prefix' => '/sys-users'], function () {
     Route::post('','User\userController@store')->middleware(['permission:sys-users.store']); //sys-users.store
     Route::delete('{user}','User\userController@destroy')->middleware(['permission:sys-users.destroy']); //sys-users.destroy
 
+    //设置用户角色
+    Route::post('setUserRole/{user}/{role}','User\userController@setUserRole'); //sys-users.store
     //得到用户参数
     Route::get('userperms','User\userController@getUserPerms');
     //得到登录用户详细信息

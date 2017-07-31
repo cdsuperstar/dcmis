@@ -21,9 +21,10 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                     return false;
                 }
                 selectUsers.forEach(function (users) {
-                    var roldata = [{"user_id":users.entity.id,"role_id":rolesid}];
-                    Restangular.all('/sys-role/setPermOfRole/add').post(roldata).then(function (res) {
+                    //var roldata = [{"user_id":users.entity.id,"role_id":rolesid}];
+                    Restangular.all('/sys-users/setUserRole/'+users.entity.id+'/'+rolesid).post().then(function (res) {
                             if (res.success) {
+                                selectUsers[0].entity.roles=res;
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             } else {
                                 // TODO add error message to system
@@ -127,6 +128,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
                         cellTemplate: '<div class="ui-grid-cell-contents">******</div>',
                         enableCellEdit: true
                     },
+                    {name: '用户角色', field: 'roles.0.display_name',width: '200',enableCellEdit: false,visible:true},
                     {name: '用户配置', width: '200',field: 'usercfg',enableCellEdit: true,visible:true,
                         cellTooltip: function(row){ return row.entity.usercfg; },
                         cellTemplate: '<div class="ui-grid-cell-contents" title="TOOLTIP">{{grid.getCellValue(row, col)}}</div>',
@@ -289,6 +291,7 @@ angular.module("MetronicApp").controller('dcuserCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
+                console.log(allAccounts);
                 $scope.gridOptions.data = allAccounts;
             });
 

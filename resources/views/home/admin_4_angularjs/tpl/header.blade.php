@@ -131,7 +131,7 @@
                                 <li ng-repeat="messageitem in dcUserMsgs" >
                                     <a href="#/sys-msg.html">
                                         <span class="photo" >
-                                            <img src="/images/users/@{{ messageitem.sender_id }}/@{{ messageitem.signpic }}.jpg" class="img-circle" alt="">
+                                            <img ng-src="/images/users/@{{ messageitem.sender_id }}/@{{ messageitem.signpic }}.jpg" class="img-circle" alt="">
                                         </span>
                                         <span class="subject">
                                             <span class="from"> @{{ messageitem.sendername }} </span>

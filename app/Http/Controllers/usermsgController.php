@@ -131,7 +131,6 @@ class usermsgController extends Controller
             ['readtime',null],
             ['r_delat',null]
         ])
-//            ->selectraw('usermsgs.*,users.name as sendername,b.name as recvername')
             ->leftjoin('users','users.id','=','usermsgs.sender_id')
             ->leftjoin('userprofiles','userprofiles.id','=','usermsgs.sender_id')
             ->leftjoin('users as b','b.id','=','usermsgs.recver_id')
