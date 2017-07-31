@@ -129,15 +129,18 @@
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                 <li ng-repeat="messageitem in dcUserMsgs" >
-                                    <a href="#">
-                                        <span class="photo">
-                                            <img src="../assets/layouts/layout4/img/avatar2.jpg" class="img-circle"
-                                                 alt=""> </span>
-                                        <span class="subject" ng-click="msgshow(messageitem.sender_id)">
+                                    <a href="#/sys-msg.html">
+                                        <span class="photo" ng-show="messageitem.photo == ''">
+                                            <img src="/images/users/defaultuser.jpg " class="img-circle" alt="">
+                                        </span>
+                                        <span class="photo" ng-show="messageitem.photo != ''">
+                                            <img src="/images/users/@{{ messageitem.sender_id }}/@{{ messageitem.photo }}.jpg " class="img-circle" alt="">
+                                        </span>
+                                        <span class="subject">
                                             <span class="from"> @{{ messageitem.sendername }} </span>
                                             <span class="time"> @{{ messageitem.created_at }}</span>
                                         </span>
-                                        <span class="message"> @{{ messageitem.body }} </span>
+                                        <span class="message" ng-bind-html="replace_em(messageitem.body)"> </span>
                                     </a>
                                 </li>
                             </ul>

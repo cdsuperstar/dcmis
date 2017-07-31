@@ -80,11 +80,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         });
     });
 
-    //
-    $scope.msgshow = function(tmpdata){
-        $scope.activesign = tmpdata;
-        location.href = "#/sys-msg.html";
-    };
     //日历项提醒
     Restangular.all('/dcmatters/getMyRecIndex').getList().then(function (accounts) {
         var showcanlender = [];
@@ -143,6 +138,15 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
         // console.log(showprogress);
     });
 
+    //表情转换函数
+    $scope.replace_em = function(str){
+        // str = str.replace(/\</g,'&lt;');
+        // str = str.replace(/\>/g,'&gt;');
+        // str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/css/arclist/$1.gif" border="0" />');
+        return str;
+    };
+
     $scope.$on('$viewContentLoaded', function () {
     //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
@@ -153,6 +157,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     });
     Restangular.all('/sys-msg/unreadmsgs').getList().then(function (res) {
         $scope.dcUserMsgs = res;
+        // console.log(res);
     });
 
     Restangular.one('/sys-users/dcUser').get().then(function (res) {

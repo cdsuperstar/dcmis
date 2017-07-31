@@ -41,9 +41,18 @@ angular.module("MetronicApp").controller('sysmsgCtrl',
                 });
             };
 
+            $scope.replace_em = function(str){
+                // str = str.replace(/\</g,'&lt;');
+                // str = str.replace(/\>/g,'&gt;');
+                // str = str.replace(/\n/g,'<br/>');
+                str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/css/arclist/$1.gif" border="0" />');
+                return str;
+            };
+
             $scope.sendMsg = function () {  //发送消息
                 if($scope.sendMsgcontent === undefined || $scope.activesign == null) return false;
                 var sendData = [{"body":$scope.sendMsgcontent,"recver_id":$scope.activesign}];
+                // console.log($scope.dcUserMsgs);
                 Restangular.all('/sys-msg/sendMsg').post(sendData).then(function (res) {
                     if (res[0].id != undefined) {
                         Restangular.restangularizeElement(null, res[0], '/sys-msg');

@@ -43,10 +43,13 @@
                             <div class="col-md-12">
                                 <div id="speecscroll" class="spscroller" style="height: 450px; width: 100%;margin-top: 15px; background-color:#f5f8fd ;border-radius:4px;padding-right: 8px;">
                                     <div ng-class="m.recver_id == dcUser.id ? 'leftd':'rightd'" ng-repeat="m in chartMsgs">
-                                        <div class="rightimg" ng-if = "m.recver_id == dcUser.id"><strong>@{{ m.sendername }}</strong> [@{{ m.created_at }}]</div>
-                                        <div class="leftimg" ng-if = "m.sender_id == dcUser.id"><strong>@{{ m.sendername }}</strong> [@{{ m.created_at }}]</div>
-                                        <div ng-class="m.recver_id == dcUser.id ? 'speech left':'speech right'">
-                                            @{{ m.body }}
+                                        <div class="rightimg" ng-if = "m.recver_id == dcUser.id">
+                                            <strong>@{{ m.sendername }}</strong> [@{{ m.created_at }}]
+                                        </div>
+                                        <div class="leftimg" ng-if = "m.sender_id == dcUser.id">
+                                            <strong>@{{ m.sendername }}</strong> [@{{ m.created_at }}]
+                                        </div>
+                                        <div ng-class="m.recver_id == dcUser.id ? 'speech left':'speech right'" ng-bind-html="replace_em(m.body)">
                                             <div ng-class="m.recver_id == dcUser.id ? 'rightimg':'leftimg'" class="leftimg"><a href="javascript:;" title="删除此条记录" confirmation-needed="确定要删除此条消息记录吗？" ng-click="delchartdata(m.id)"><i class="fa fa-trash"></i> </a></div>
                                         </div>
                                     </div>
@@ -75,20 +78,20 @@
 //        });
     });
 
-    //    //查看结果
-    //
-    //    function replace_em(str){
-    //
-    //        str = str.replace(/\</g,'&lt;');
-    //
-    //        str = str.replace(/\>/g,'&gt;');
-    //
-    //        str = str.replace(/\n/g,'<br/>');
-    //
-    //        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
-    //
-    //        return str;
-    //
-    //    }
+        //查看结果
+
+//        function replace_em(str){
+//
+//            str = str.replace(/\</g,'&lt;');
+//
+//            str = str.replace(/\>/g,'&gt;');
+//
+//            str = str.replace(/\n/g,'<br/>');
+//
+//            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
+//
+//            return str;
+//
+//        }
 
 </script>
