@@ -172,6 +172,7 @@ return [
         Baum\Providers\BaumServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+//        \SocialiteProviders\Manager\ServiceProvider::class,
 //        Vinkla\Pusher\PusherServiceProvider::class,
 
         //
@@ -236,6 +237,7 @@ return [
 
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+//        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 //        'UserXX' => App\Facades\UserX::class,
 
     ],

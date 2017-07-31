@@ -34,5 +34,15 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+//    'qq' => [
+//        'client_id' => 'your-github-app-id',
+//        'client_secret' => 'your-github-app-secret',
+//        'redirect' => 'http://your-callback-url',
+//    ],
+//    'weixin' => [
+//        'client_id' => 'your-github-app-id',
+//        'client_secret' => 'your-github-app-secret',
+//        'redirect' => 'http://your-callback-url',
+//    ],
 
 ];
