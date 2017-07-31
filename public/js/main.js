@@ -70,7 +70,7 @@ MetronicApp.factory('settings', ['$rootScope', function ($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', function ($scope, $rootScope,Restangular) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', function ($scope, $rootScope, Restangular) {
     $scope.dcUserMsgs = [];
     $scope.dcBroadcast = [];
     $scope.ModelsDataShare = [];
@@ -84,25 +84,25 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     Restangular.all('/dcmatters/getMyRecIndex').getList().then(function (accounts) {
         var showcanlender = [];
         var tmpu = {};
-        for(var i=0;i<accounts.length;i++) {
+        for (var i = 0; i < accounts.length; i++) {
             var title = accounts[i].title;
             var content = accounts[i].content;
             var end = accounts[i].enddate.replace(/\-/g, "/");
-            var enddate = parseInt((new Date(end)  -  new Date())  /  1000  /  60  /  60  /24);
+            var enddate = parseInt((new Date(end) - new Date()) / 1000 / 60 / 60 / 24);
 
             // console.log(new Date(),new Date(end),end);
             var percolor = "progress-bar-success";
-            if(enddate < 10) percolor = "progress-bar-success";
-            if(enddate < 7) percolor = "progress-bar-warning";
-            if(enddate < 3) percolor = "progress-bar-danger";
-            if(enddate > -2){
-                tmpu ={title:title,content:content,enddate:enddate,percolor:percolor};
+            if (enddate < 10) percolor = "progress-bar-success";
+            if (enddate < 7) percolor = "progress-bar-warning";
+            if (enddate < 3) percolor = "progress-bar-danger";
+            if (enddate > -2) {
+                tmpu = {title: title, content: content, enddate: enddate, percolor: percolor};
                 showcanlender.push(tmpu);
             }
         }
         $scope.showcanlender = showcanlender;
         var tmpshowcanlenderNum = 0;
-        if(showcanlender.length) tmpshowcanlenderNum = showcanlender.length;
+        if (showcanlender.length) tmpshowcanlenderNum = showcanlender.length;
         $scope.showcanlenderNum = tmpshowcanlenderNum;
     });
 
@@ -110,45 +110,57 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     Restangular.all('/coms/getApplicationProgress').getList().then(function (accounts) {
         var showprogress = [];
         var tmpu = {};
-        for(var i=0;i<accounts.length;i++){
+        for (var i = 0; i < accounts.length; i++) {
             var states = "";
-            if(accounts[i].progress){
-                var strs=accounts[i].progress.split("/");
-                var percent = Number(strs[0])/Number(strs[1]) * 100;
-                if(accounts[i].appstate != "审批通过") states = "red";
-                if(percent < 100 ) {
+            if (accounts[i].progress) {
+                var strs = accounts[i].progress.split("/");
+                var percent = Number(strs[0]) / Number(strs[1]) * 100;
+                if (accounts[i].appstate != "审批通过") states = "red";
+                if (percent < 100) {
                     var percolor = "progress-bar-success";
-                    if(percent < 60 ) percolor = "progress-bar-warning";
-                    if(percent < 30 ) percolor = "progress-bar-danger";
-                    tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+                    if (percent < 60) percolor = "progress-bar-warning";
+                    if (percent < 30) percolor = "progress-bar-danger";
+                    tmpu = {
+                        percolor: percolor,
+                        percent: percent,
+                        no: accounts[i].no,
+                        name: accounts[i].name,
+                        states: states
+                    };
                     showprogress.push(tmpu);
                 }
-            }else {
+            } else {
                 percolor = "progress-bar-danger";
                 percent = 0;
-                if(accounts[i].appstate != "审批通过") states = "red";
-                tmpu ={percolor:percolor,percent:percent,no:accounts[i].no,name:accounts[i].name,states:states};
+                if (accounts[i].appstate != "审批通过") states = "red";
+                tmpu = {
+                    percolor: percolor,
+                    percent: percent,
+                    no: accounts[i].no,
+                    name: accounts[i].name,
+                    states: states
+                };
                 showprogress.push(tmpu);
             }
         }
         var tmpshowprogressNum = 0;
-        if(showprogress.length) tmpshowprogressNum = showprogress.length;
+        if (showprogress.length) tmpshowprogressNum = showprogress.length;
         $scope.showprogress = showprogress;
         $scope.showprogressNum = tmpshowprogressNum;
         // console.log(showprogress);
     });
 
     //表情转换函数
-    $scope.replace_em = function(str){
+    $scope.replace_em = function (str) {
         // str = str.replace(/\</g,'&lt;');
         // str = str.replace(/\>/g,'&gt;');
         // str = str.replace(/\n/g,'<br/>');
-        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/css/arclist/$1.gif" border="0" />');
+        str = str.replace(/\[em_([0-9]*)\]/g, '<img src="/css/arclist/$1.gif" border="0" />');
         return str;
     };
 
     $scope.$on('$viewContentLoaded', function () {
-    //App.initComponents(); // init core components
+        //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
     });
     Restangular.one('/sys-model/getModTree').get().then(function (res) {
@@ -157,46 +169,46 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','Restangular', f
     });
     Restangular.all('/sys-msg/unreadmsgs').getList().then(function (res) {
         $scope.dcUserMsgs = res;
-         //console.log(res.signpic+".jpg");
+        //console.log(res.signpic+".jpg");
     });
 
     Restangular.one('/sys-users/dcUser').get().then(function (res) {
         $scope.dcUser = res;
-        if(res.signpic == undefined || res.signpic == '' ){
-            $scope.signpictname ="defaultuser";
-        }else{
-            $scope.signpictname = res.id+"/"+res.signpic;
+        if (res.signpic == undefined || res.signpic == '') {
+            $scope.signpictname = "defaultuser";
+        } else {
+            $scope.signpictname = res.id + "/" + res.signpic;
         }
 
         window.Echo.private('App.User.' + $scope.dcUser.id)
-            .listen('eventusermsg', function(e) {
-            $scope.dcUserMsgs.unshift(e.msg);
-        $scope.$apply();
-    })
-        .listen('usercmd', function(e) {
-        eval(e.cmd);
-});
-});
+            .listen('eventusermsg', function (e) {
+                $scope.dcUserMsgs.unshift(e.msg);
+                //$scope.$apply();
+            })
+            .listen('usercmd', function (e) {
+                eval(e.cmd);
+            });
+    });
 
 //theme 导航设置
-$scope.isnavmodelhelp=false;
-$scope.isnavmodelset=true;
-$scope.isnavthemeset=true;
-$scope.navmodelhelp = function(){
-    $scope.isnavmodelhelp=false;
-    $scope.isnavmodelset=true;
-    $scope.isnavthemeset=true;
-}
-$scope.navmodelset = function(){
-    $scope.isnavmodelhelp=true;
-    $scope.isnavmodelset=false;
-    $scope.isnavthemeset=true;
-}
-$scope.navthemeset = function(){
-    $scope.isnavmodelhelp=true;
-    $scope.isnavmodelset=true;
-    $scope.isnavthemeset=false;
-}
+    $scope.isnavmodelhelp = false;
+    $scope.isnavmodelset = true;
+    $scope.isnavthemeset = true;
+    $scope.navmodelhelp = function () {
+        $scope.isnavmodelhelp = false;
+        $scope.isnavmodelset = true;
+        $scope.isnavthemeset = true;
+    }
+    $scope.navmodelset = function () {
+        $scope.isnavmodelhelp = true;
+        $scope.isnavmodelset = false;
+        $scope.isnavthemeset = true;
+    }
+    $scope.navthemeset = function () {
+        $scope.isnavmodelhelp = true;
+        $scope.isnavmodelset = true;
+        $scope.isnavthemeset = false;
+    }
 
 }])
 ;
@@ -207,20 +219,20 @@ $scope.navthemeset = function(){
  ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope' ,function ($scope) {
+MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
     $scope.ReadNotifiCnt = 0;
     window.Echo.channel('dcBroadcast')
-        .listen('normal', function(e) {
-        $scope.dcBroadcast.unshift(e);
-    $scope.$apply();
-});
+        .listen('normal', function (e) {
+            $scope.dcBroadcast.unshift(e);
+            $scope.$apply();
+        });
 
-$scope.checkNotifi = function () {
-    $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
-}
-$scope.$on('$includeContentLoaded', function () {
-    Layout.initHeader(); // init header
-});
+    $scope.checkNotifi = function () {
+        $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
+    }
+    $scope.$on('$includeContentLoaded', function () {
+        Layout.initHeader(); // init header
+    });
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -280,7 +292,7 @@ MetronicApp.directive('confirmationNeeded', function () {
 
 //图片上传结束
 /* Setup Rounting For All Pages */
-MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider', function ($stateProvider, $urlRouterProvider,$futureStateProvider) {
+MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$futureStateProvider', function ($stateProvider, $urlRouterProvider, $futureStateProvider) {
 // Redirect any unmatched url
     var loadAndRegisterFutureStates = function (Restangular) {
         return Restangular.all('/sys-model/getModList').getList().then(function (res) {
@@ -292,7 +304,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider
                     data: {pageTitle: value.title},
                     controller: 'GeneralPageController',
                     resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([{
                                 name: 'MetronicApp',
                                 files: value.files.split(',')
@@ -300,7 +312,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider','$futureStateProvider
                         }]
                     }
                 };
-                $stateProvider.state(value.name,fstate);
+                $stateProvider.state(value.name, fstate);
             });
         });
     };
@@ -330,7 +342,7 @@ function showMsg(msg, title, style, secs, hor, ver, stk) {
 
 /* Init global settings and run the app */
 
-MetronicApp.run(["$rootScope", "settings", "$state",function ($rootScope, settings, $state) {
+MetronicApp.run(["$rootScope", "settings", "$state", function ($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view
 }]);
