@@ -210,12 +210,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
         $scope.isnavmodelset = true;
         $scope.isnavthemeset = false;
     };
-    $scope.savetheme = function () {
-        //写入用户界面配置文件
-
-
-    }
-
 }])
 ;
 /***
@@ -235,7 +229,7 @@ MetronicApp.controller('HeaderController', ['$scope', function ($scope) {
 
     $scope.checkNotifi = function () {
         $scope.ReadNotifiCnt = $scope.dcBroadcast.length;
-    }
+    };
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
     });
@@ -251,6 +245,25 @@ MetronicApp.controller('SidebarController', ['$state', '$scope', function ($stat
 }]);
 /* Setup Layout Part - Sidebar */
 MetronicApp.controller('PageHeadController', ['$scope', function ($scope) {
+    //用户界面配置初始化
+    $scope.themeset ={themecolor:'black',layoutstyleoption:'square',layoutoption:'fluid',pageheaderoption:'default',
+        pageheadertopdropdownstyleoption:'light',sidebaroption:'default',sidebarmenuoption:'accordion',sidebarposoption:'left',pagefooteroption:'default'};
+
+    //写入用户界面配置文件
+    $scope.savetheme = function () {
+        console.log($scope.themeset);
+        //保存 $scope.themeset
+/*
+*  但还是有一个问题，这个值进去了，但是没执行！！
+*  应该在页面开始前执行
+* themecolor 选择的是加载是 layout4/css/theme/default.min.css    or   light.min.css
+* layoutstyleoption 选择的是加载 components-rounded.min.css  or components.min.css
+*
+* 其他更改的均为 body 里的class
+*
+* */
+    };
+
     $scope.$on('$includeContentLoaded', function () {
         Demo.init(); // init theme panel
     });

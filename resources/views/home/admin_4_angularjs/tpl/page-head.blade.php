@@ -48,14 +48,15 @@
                             {{--</div>--}}
                         {{--</div>--}}
                         <div uib-collapse="isnavthemeset" class="row">
+                            <form id="themeset" role="form">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <h3>主题颜色</h3>
                                 <ul class="theme-colors">
-                                    <li class="theme-color theme-color-default active" data-theme="default">
+                                    <li class="theme-color theme-color-default" ng-class="{active: themeset.themecolor == 'black'}" data-theme="default">
                                         <span class="theme-color-view"></span>
                                         <span class="theme-color-name">黑色</span>
                                     </li>
-                                    <li class="theme-color theme-color-light" data-theme="light">
+                                    <li class="theme-color theme-color-light" ng-class="{active: themeset.themecolor == 'white'}" data-theme="light">
                                         <span class="theme-color-view"></span>
                                         <span class="theme-color-name">白色</span>
                                     </li>
@@ -68,55 +69,56 @@
                                 <h3>页面样式</h3>
                                 <ul class="theme-settings">
                                     <li> 主题样式
-                                        <select class="layout-style-option form-control input-small input-sm">
-                                            <option value="square" selected="selected">　方形　</option>
-                                            <option value="rounded">　圆形　</option>
+                                        <select class="layout-style-option form-control input-small input-sm" ng-model="themeset.layoutstyleoption">
+                                            <option value="square" ng-selected="themeset.layoutstyleoption == 'square'">　方形　</option>
+                                            <option value="rounded" ng-selected="themeset.layoutstyleoption == 'rounded'">　圆形　</option>
                                         </select>
                                     </li>
                                     <li> 布局设置
-                                        <select class="layout-option form-control input-small input-sm">
-                                            <option value="fluid" selected="selected">适应屏幕</option>
-                                            <option value="boxed">适应窗口</option>
+                                        <select class="layout-option form-control input-small input-sm" ng-model="themeset.layoutoption">
+                                            <option value="fluid" ng-selected="themeset.layoutoption == 'fluid'">适应屏幕</option>
+                                            <option value="boxed" ng-selected="themeset.layoutoption == 'boxed'">适应窗口</option>
                                         </select>
                                     </li>
                                     <li> 标题栏置顶
-                                        <select class="page-header-option form-control input-small input-sm">
-                                            <option value="fixed" selected="selected">　固定　</option>
-                                            <option value="default">　默认　</option>
+                                        <select class="page-header-option form-control input-small input-sm" ng-model="themeset.pageheaderoption">
+                                            <option value="fixed" ng-selected="themeset.pageheaderoption == 'fixed'">　固定　</option>
+                                            <option value="default" ng-selected="themeset.pageheaderoption == 'default'">　默认　</option>
                                         </select>
                                     </li>
                                     <li> 顶部菜单
-                                        <select class="page-header-top-dropdown-style-option form-control input-small input-sm">
-                                            <option value="light">　明亮　</option>
-                                            <option value="dark" selected="selected">　昏暗　</option>
+                                        <select class="page-header-top-dropdown-style-option form-control input-small input-sm" ng-model="themeset.pageheadertopdropdownstyleoption">
+                                            <option value="light" ng-selected="themeset.pageheadertopdropdownstyleoption == 'light'">　明亮　</option>
+                                            <option value="dark" ng-selected="themeset.pageheadertopdropdownstyleoption == 'dark'">　昏暗　</option>
                                         </select>
                                     </li>
                                     <li> 菜单栏置顶
-                                        <select class="sidebar-option form-control input-small input-sm">
-                                            <option value="fixed">　固定　</option>
-                                            <option value="default" selected="selected">　默认　</option>
+                                        <select class="sidebar-option form-control input-small input-sm" ng-model="themeset.sidebaroption">
+                                            <option value="fixed" ng-selected="themeset.sidebaroption == 'fixed'">　固定　</option>
+                                            <option value="default" ng-selected="themeset.sidebaroption == 'default'">　默认　</option>
                                         </select>
                                     </li>
                                     <li> 菜单样式
-                                        <select class="sidebar-menu-option form-control input-small input-sm">
-                                            <option value="accordion" selected="selected">向下展开</option>
-                                            <option value="hover">右侧显示</option>
+                                        <select class="sidebar-menu-option form-control input-small input-sm" ng-model="themeset.sidebarmenuoption">
+                                            <option value="accordion" ng-selected="themeset.sidebarmenuoption == 'accordion'">向下展开</option>
+                                            <option value="hover" ng-selected="themeset.sidebarmenuoption == 'hover'">右侧显示</option>
                                         </select>
                                     </li>
                                     <li> 菜单页面位置
-                                        <select class="sidebar-pos-option form-control input-small input-sm">
-                                            <option value="left" selected="selected">　左侧　</option>
-                                            <option value="right">　右侧　</option>
+                                        <select class="sidebar-pos-option form-control input-small input-sm" ng-model="themeset.sidebarposoption">
+                                            <option value="left" ng-selected="themeset.sidebarposoption == 'left'">　左侧　</option>
+                                            <option value="right" ng-selected="themeset.sidebarposoption == 'right'">　右侧　</option>
                                         </select>
                                     </li>
                                     <li> 页面底部
-                                        <select class="page-footer-option form-control input-small input-sm">
-                                            <option value="fixed">　固定　</option>
-                                            <option value="default" selected="selected">　默认　</option>
+                                        <select class="page-footer-option form-control input-small input-sm" ng-model="themeset.pagefooteroption">
+                                            <option value="fixed" ng-selected="themeset.pagefooteroption == 'fixed'">　固定　</option>
+                                            <option value="default" ng-selected="themeset.pagefooteroption == 'default'">　默认　</option>
                                         </select>
                                     </li>
                                 </ul>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
