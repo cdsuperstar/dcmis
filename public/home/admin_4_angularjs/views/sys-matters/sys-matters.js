@@ -45,7 +45,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     closeByEscape: true
                 }).then(function (dcEdition) {
                     dcEdition.ruser_id = $scope.dcUser.id;
-                    console.log(dcEdition);
+                    // console.log(dcEdition);
                     tableDatas = Restangular.all('/dcmatters');
                     tableDatas.post(dcEdition).then(
                         function (res) {
@@ -91,7 +91,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                         return user.id === edituser.entity.id;
                     });
                     userWithId.route = "/dcmatters";
-                    console.log(userWithId);
+                    // console.log(userWithId);
                     userWithId.put().then(function (res) {
                         // console.log(res);
                         if (res.success) {

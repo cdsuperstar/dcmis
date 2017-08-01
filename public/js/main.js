@@ -249,6 +249,16 @@ MetronicApp.controller('PageHeadController', ['$scope', function ($scope) {
     $scope.themeset ={themecolor:'black',layoutstyleoption:'square',layoutoption:'fluid',pageheaderoption:'default',
         pageheadertopdropdownstyleoption:'light',sidebaroption:'default',sidebarmenuoption:'accordion',sidebarposoption:'left',pagefooteroption:'default'};
 
+    var panel = $('.theme-panel');
+    $('.layout-style-option', panel).val($scope.themeset.layoutstyleoption);
+    $('.layout-option', panel).val($scope.themeset.layoutoption);
+    $('.page-header-option', panel).val($scope.themeset.pageheaderoption);
+    $('.page-footer-option', panel).val($scope.themeset.pagefooteroption);
+    $('.page-header-top-dropdown-style-option', panel).val($scope.themeset.pageheadertopdropdownstyleoption);
+    $('.sidebar-option', panel).val($scope.themeset.sidebaroption);
+    $('.sidebar-menu-option', panel).val($scope.themeset.sidebarmenuoption);
+    $('.sidebar-pos-option', panel).val($scope.themeset.sidebarposoption);
+
     //写入用户界面配置文件
     $scope.savetheme = function () {
         console.log($scope.themeset);

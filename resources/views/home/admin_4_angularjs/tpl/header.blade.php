@@ -166,7 +166,7 @@
                                 <li ng-repeat="showcanlen in showcanlender">
                                     <a href="#/sys-matters.html">
                                         <span class="task">
-                                            <span class="desc" title="@{{ showcanlen.title }}">[事项]@{{ showcanlen.title | limitTo : 14 }} </span>
+                                            <span class="desc" title="@{{ showcanlen.title }}">[事项]@{{ showcanlen.title | limitTo : 12 }} </span>
                                             <span class="percent" title="@{{ showcanlen.content }}">余@{{ showcanlen.enddate }}天</span>
                                         </span>
                                         <span class="progress">
