@@ -193,7 +193,8 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
 //theme 导航设置
     $scope.isnavmodelhelp = false;
     $scope.isnavmodelset = true;
-    $scope.isnavthemeset = true;
+    // $scope.isnavthemeset = true;
+    $scope.isnavthemeset = false;
     $scope.navmodelhelp = function () {
         $scope.isnavmodelhelp = false;
         $scope.isnavmodelset = true;
@@ -208,6 +209,11 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
         $scope.isnavmodelhelp = true;
         $scope.isnavmodelset = true;
         $scope.isnavthemeset = false;
+
+        //写入用户界面配置文件
+
+
+
     }
 
 }])

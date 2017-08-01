@@ -16,37 +16,37 @@
                     <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
                         <div class="row" style="margin-left: 5px;">
                             <ul class="nav nav-tabs">
-                                <li class="">
-                                    <a href="#" ng-click="navmodelhelp()"><i class="icon-question"></i>　模块帮助　</a>
-                                </li>
-                                <li class="">
-                                    <a href="#" ng-click="navmodelset()"><i class="icon-wrench"></i>　模块设置　</a>
-                                </li>
+                                {{--<li class="">--}}
+                                    {{--<a href="#" ng-click="navmodelhelp()"><i class="icon-question"></i>　模块帮助　</a>--}}
+                                {{--</li>--}}
+                                {{--<li class="">--}}
+                                    {{--<a href="#" ng-click="navmodelset()"><i class="icon-wrench"></i>　模块设置　</a>--}}
+                                {{--</li>--}}
                                 <li class="">
                                     <a href="#" ng-click="navthemeset()"><i class="icon-disc"></i>　主题设置　</a>
                                 </li>
                             </ul>
                         </div>
-                        <div uib-collapse="isnavmodelhelp" class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div>
-                                    模块帮助Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                                    craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art
-                                    party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-                                </div>
-                            </div>
-                        </div>
-                        <div uib-collapse="isnavmodelset" class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div>
-                                    模块设置Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                                    craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art
-                                    party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div uib-collapse="isnavmodelhelp" class="row">--}}
+                            {{--<div class="col-md-12 col-sm-12 col-xs-12">--}}
+                                {{--<div>--}}
+                                    {{--模块帮助Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table--}}
+                                    {{--craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar--}}
+                                    {{--helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art--}}
+                                    {{--party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div uib-collapse="isnavmodelset" class="row">--}}
+                            {{--<div class="col-md-12 col-sm-12 col-xs-12">--}}
+                                {{--<div>--}}
+                                    {{--模块设置Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table--}}
+                                    {{--craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar--}}
+                                    {{--helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art--}}
+                                    {{--party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div uib-collapse="isnavthemeset" class="row">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <h3>主题颜色</h3>
