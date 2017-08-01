@@ -42,7 +42,7 @@ class LoginController extends Controller
      */
     public function __construct(Request $request)
     {
-        \Log::info($request);
+//        \Log::info($request);
         $this->redirectTo=$this->getRedirectUrl().'/../index';
         $this->middleware('guest', ['except' => 'logout']);
     }
