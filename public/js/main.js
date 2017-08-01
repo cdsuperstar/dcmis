@@ -199,19 +199,19 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
         $scope.isnavmodelhelp = false;
         $scope.isnavmodelset = true;
         $scope.isnavthemeset = true;
-    }
+    };
     $scope.navmodelset = function () {
         $scope.isnavmodelhelp = true;
         $scope.isnavmodelset = false;
         $scope.isnavthemeset = true;
-    }
+    };
     $scope.navthemeset = function () {
         $scope.isnavmodelhelp = true;
         $scope.isnavmodelset = true;
         $scope.isnavthemeset = false;
-
+    };
+    $scope.savetheme = function () {
         //写入用户界面配置文件
-
 
 
     }
