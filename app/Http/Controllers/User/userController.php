@@ -6,6 +6,7 @@ use App\models\Role;
 use App\User;
 use Config;
 use Illuminate\Http\Request;
+use Hash;
 use App\Http\Controllers\Controller;
 use Log;
 
@@ -20,7 +21,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $datas = User::with(['userprofile.unitgrp','roles'])->get();
+        $datas = User::with(['userprofile.unitgrp', 'roles'])->get();
         return response()->json($datas);
         //
     }
@@ -66,6 +67,26 @@ class userController extends Controller
             ], $user->roles()->get()->toArray()
             )
         );
+    }
+
+    public function setMyPassword(Request $request,$password = '')
+    {
+        if ($password == "") {
+            return response()->json(['errors' => "密码不得为空！"]);
+        }
+        $rec=User::find($request->user()->id);
+        if(!Hash::check(Hash::make($password["oldpwd"]),$rec->password)){
+            return response()->json(['errors' => "旧密码不正确！"]);
+        }
+        $rec->password=$password["newpwd"];
+        if($rec->save()){
+            return response()->json(array_merge([
+                    'messages' => trans('users.updatesuccess', ["data" => $user->name]),
+                    'success' => true,
+                ], $user->roles()->get()->toArray()
+                )
+            );
+        }
     }
 
     /**
