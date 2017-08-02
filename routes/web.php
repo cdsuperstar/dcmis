@@ -74,7 +74,7 @@ Route::group(['prefix' => '/sys-users'], function () {
     Route::delete('{user}','User\userController@destroy')->middleware(['permission:sys-users.destroy']); //sys-users.destroy
 
     //修改登记用户的密码
-    Route::post('setMyPassword/{password}','User\userController@setMyPassword'); //sys-users.store
+    Route::post('setMyPassword','User\userController@setMyPassword'); //sys-users.store
     //设置用户角色
     Route::post('setUserRole/{user}/{role}','User\userController@setUserRole'); //sys-users.store
     //得到用户参数
