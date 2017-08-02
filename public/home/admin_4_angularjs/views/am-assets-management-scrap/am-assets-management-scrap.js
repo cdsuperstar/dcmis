@@ -176,7 +176,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     className: 'ngdialog-theme-default assetsmanagementscrap',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {
-                        console.log($scope);
+                        // console.log($scope);
                         $scope.tmpobjno = row.entity.amasbudget.wzno;  //取当取当期物资的no
                         $scope.tmpobjname = row.entity.amasbudget.ambaseas.name;  //取当前物资的name
                         $scope.scrapremark = row.entity.scrapremark;//赋初始值
