@@ -43,7 +43,7 @@ class dcannouncementController extends Controller
         //
         $rec = new dcannouncement(array_merge( $request->toArray(),['user_id'=>$request->user()->id]));
         if ($rec->save()) {
-            event(new \App\Events\normal($request->user()->name.":".$rec->body));
+            broadcast(new \App\Events\normal($request->user()->name.":".$rec->body));
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $rec->id]),
                     'success' => true,

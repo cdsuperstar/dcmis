@@ -116,8 +116,8 @@ class usermsgController extends Controller
             $msg->body = $rec->body;
             $msg->created_at = $rec->created_at->toTimeString();
 
-            event(new \App\Events\eventusermsg($rec->recver_id, $msg));
-            event(new \App\Events\usercmd($resData->first()->recver_id,"if(typeof angular.element(\"#msgcontent\").scope().chartMsgs != \"undefined\"){angular.element(\"#msgcontent\").scope().chartMsgs.unshift(".$resData->first()->toJson().");}"));
+            broadcast(new \App\Events\eventusermsg($rec->recver_id, $msg));
+            broadcast(new \App\Events\usercmd($resData->first()->recver_id,"if(angular.element(\"#msgcontent\").scope().chartMsgs === \"undefined\"){}else{angular.element(\"#msgcontent\").scope().chartMsgs.unshift(".$resData->first()->toJson().");\$scope.\$apply();}"));
 
             return response()->json($resData);
         }
