@@ -89,6 +89,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
             var content = accounts[i].content;
             var end = accounts[i].enddate.replace(/\-/g, "/");
             var enddate = parseInt((new Date(end) - new Date()) / 1000 / 60 / 60 / 24);
+            var endtime = parseInt((new Date(end) - new Date()) / 1000 / 60 / 60 % 24);
 
             // console.log(new Date(),new Date(end),end);
             var percolor = "progress-bar-success";
@@ -96,7 +97,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
             if (enddate < 7) percolor = "progress-bar-warning";
             if (enddate < 3) percolor = "progress-bar-danger";
             if (enddate > -2) {
-                tmpu = {title: title, content: content, enddate: enddate, percolor: percolor};
+                tmpu = {title: title, content: content, enddate: enddate, endtime: endtime, percolor: percolor};
                 showcanlender.push(tmpu);
             }
         }
