@@ -45,7 +45,9 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     closeByEscape: true
                 }).then(function (dcEdition) {
                     dcEdition.ruser_id = $scope.dcUser.id;
-                    console.log(dcEdition);
+                    dcEdition.enddate = new Date(dcEdition.enddate).toString().split("GMT")[0];
+                    // dcEdition.enddate = Date.UTC(dcEdition.enddate);
+                    // console.log(dcEdition);
                     tableDatas = Restangular.all('/dcmatters');
                     tableDatas.post(dcEdition).then(
                         function (res) {
@@ -128,9 +130,7 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                     },
                     {name: '标题', field: 'title', width: '200',enableCellEdit: true,enableHiding: false},
                     {name: '事项内容',width: '350', field: 'content', enableCellEdit: true},
-                    {name: '到期时间',width: '250',field: 'enddate', enableCellEdit: true,cellFilter: 'date:"yyyy-MM-dd HH:mm:ss"',
-                        editableCellTemplate: '<div ng-class="colt + col.uid">{{COL_FIELD CUSTOM_FILTERS}}</div>'
-                    },
+                    {name: '到期时间',width: '150',field: 'enddate', enableCellEdit: true,cellFilter: 'date:"yyyy-MM-dd HH:mm:ss"'},
                     {name: '发送人', field: 'ruser_id',width: '100',enableColumnMenu: false,enableHiding: false,enableCellEdit: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
@@ -167,9 +167,9 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
-                for(var i=0;i<allAccounts.length;i++){
-                    allAccounts[i].enddate=new Date(allAccounts[i].enddate);
-                }
+                // for(var i=0;i<allAccounts.length;i++){
+                //     allAccounts[i].enddate=new Date(allAccounts[i].enddate);
+                // }
                 $scope.gridOptions.data = allAccounts;
                 //console.log( $scope.gridOptions.data);
             });

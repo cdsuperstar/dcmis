@@ -104,8 +104,8 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '领用时间', field: 'userdate',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                    {name: '有效期', field: 'validdate',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '领用时间', field: 'userdate',width: '150',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '有效期', field: 'validdate',width: '100',enableCellEdit: false,type:'date',enableColumnMenu: true,cellFilter: 'date:"yyyy-MM-dd"'},
                     {name: '领用备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
                         cellTooltip: function(row){ return row.entity.remark; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
