@@ -61,9 +61,9 @@
                                         <span class="theme-color-name">白色</span>
                                     </li>
                                 </ul>
-                                <div class="btn-group" style="margin-top: 180px; margin-left: 30px;">
-                                    <button type="button"  class="btn btn-circle btn-info" ng-click="savetheme()">　保存设置　</button>
-                                </div>
+                                {{--<div class="btn-group" style="margin-top: 180px; margin-left: 30px;">--}}
+                                    {{--<button type="button"  class="btn btn-circle btn-info" ng-click="savetheme()">　保存设置　</button>--}}
+                                {{--</div>--}}
                             </div>
                             <div class="col-md-8 col-sm-8 col-xs-12 seperator">
                                 <h3>页面样式</h3>

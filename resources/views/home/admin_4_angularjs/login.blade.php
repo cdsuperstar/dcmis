@@ -72,33 +72,35 @@
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码"
                        name="password"></div>
         </div>
-        <div class="form-actions">
+        <div class="form-actions" style="padding-bottom: 0px;">
             <label class="rememberme mt-checkbox mt-checkbox-outline">
                 <input type="checkbox" name="remember" value="1">记住我 <span></span>
             </label>
             <button type="submit" class="btn green pull-right">登录</button>
         </div>
-        <div class="login-options">
-            <h4>或者用以下登录方式</h4>
-            <ul class="social-icons">
-                <li>
-                    <a class="reddit" title="QQ" href="javascript:;"> </a>
-                </li>
-                <li>
-                    <a class="facebook" title="微信" href="javascript:;"> </a>
-                </li>
+        {{--<div class="login-options">--}}
+            {{--<h4>或者用以下登录方式</h4>--}}
+            {{--<ul class="social-icons">--}}
+                {{--<li>--}}
+                    {{--<a class="reddit" title="QQ" href="javascript:;"> </a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a class="facebook" title="微信" href="javascript:;"> </a>--}}
+                {{--</li>--}}
 
 
-            </ul>
+            {{--</ul>--}}
+        {{--</div>--}}
+        <div class="forget-password" style="margin-top: 5px;padding-top: 20px;">
+            <p align="center" style="margin-top: 5px;margin-bottom: 5px;">忘记密码了？&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &rarr; <a href="javascript:;" id="forget-password">重置密码</a>
+            </p>
         </div>
-        <div class="forget-password">
-            <h4>忘记密码了？</h4>
-
-            <p>没关系, 点击
-                <a href="javascript:;" id="forget-password">这里</a>来重置您的密码。</p>
-        </div>
-        <div class="create-account">
-            <p>还没有登录帐户？<a href="javascript:;" id="register-btn">建立一个帐户</a>
+        <div class="create-account" style="margin-top: 0px;padding-top: 2px;">
+            <p align="center" style="margin-top: 0px;">还没有登录帐户？&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &rarr; <a href="javascript:;" id="register-btn">建立一个帐户</a>
             </p>
         </div>
     </form>
@@ -185,7 +187,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"> 2017 © DozenCat team.</div>
+<div class="copyright"> 2017 &copy; 重庆比尔科技有限公司&trade;.</div>
 <!-- END COPYRIGHT -->
 <!--[if lt IE 9]>
 <script src="../assets/global/plugins/respond.min.js"></script>
