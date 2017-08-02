@@ -361,6 +361,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 dcEdition.userdate = new Date();
                                 dcEdition.state = "正常";
                                 dcEdition.amasbudget_id = $scope.tmpobjdata;
+                                dcEdition.validdate = new Date(dcEdition.validdate).toString().split("GMT")[0];
                                 // console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(

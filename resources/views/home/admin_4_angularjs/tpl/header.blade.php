@@ -204,7 +204,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default" style="width: 60px;">
                         <li>
-                            <a href="#/profile/dashboard">
+                            <a href="#/sys-password.html">
                                 <i class="icon-key"></i> 更改密码 </a>
                         </li>
                         <li>
