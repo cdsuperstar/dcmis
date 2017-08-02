@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("MetronicApp").controller('ambudgetlistCtrl',
+angular.module("MetronicApp").controller('syspasswordCtrl',
     ['$scope', 'Restangular', '$q', '$filter', 'ngDialog','uiGridConstants','i18nService',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');

@@ -1,5 +1,5 @@
 <!-- BEGIN MAIN CONTENT -->
-<div class="portlet-body" data-ng-controller="sysusersOwnCtrl">
+<div class="portlet-body" data-ng-controller="syspasswordCtrl">
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label class="col-md-2 control-label">旧密码</label>
