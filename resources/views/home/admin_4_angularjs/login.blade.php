@@ -53,7 +53,7 @@
 
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
-            <span> Enter any username and password. </span>
+            <span> 请输入用户名和密码. </span>
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -61,7 +61,7 @@
 
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
+                <input class="form-control placeholder-no-fix" required="required" type="text" autocomplete="off" placeholder="邮箱"
                        name="email"></div>
         </div>
         <div class="form-group">
@@ -69,7 +69,7 @@
 
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码"
+                <input class="form-control placeholder-no-fix" required="required" type="password" autocomplete="off" placeholder="密码"
                        name="password"></div>
         </div>
         <div class="form-actions" style="padding-bottom: 0px;">
