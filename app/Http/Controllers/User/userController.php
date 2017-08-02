@@ -8,6 +8,7 @@ use Config;
 use Illuminate\Http\Request;
 use Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Log;
 
 class userController extends Controller
@@ -69,23 +70,26 @@ class userController extends Controller
         );
     }
 
-    public function setMyPassword(Request $request,$password = '')
+    public function setMyPassword(Request $request)
     {
-        if ($password == "") {
+        if (Input::get("oldpwd") == ""||Input::get("newpwd")=="") {
             return response()->json(['errors' => "密码不得为空！"]);
         }
         $rec=User::find($request->user()->id);
-        if(!Hash::check(Hash::make($password["oldpwd"]),$rec->password)){
+        if(!Hash::check(Input::get("oldpwd"),$rec->password)){
             return response()->json(['errors' => "旧密码不正确！"]);
         }
-        $rec->password=$password["newpwd"];
+        $rec->password=Input::get("newpwd");
+        $rec->password_confirmation=Input::get("newpwd");
         if($rec->save()){
             return response()->json(array_merge([
-                    'messages' => trans('users.updatesuccess', ["data" => $user->name]),
+                    'messages' => trans('users.updatesuccess', ["data" => $rec->name]),
                     'success' => true,
-                ], $user->roles()->get()->toArray()
+                ], []
                 )
             );
+        }else{
+            return response()->json(['errors' => $rec->errors()->all()]);
         }
     }
 
