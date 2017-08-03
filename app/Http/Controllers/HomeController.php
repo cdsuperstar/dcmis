@@ -55,9 +55,12 @@ class HomeController extends Controller
         $user=$request->user();
         $sView = 'home.' . $layout . ".lock";
         if($user->userprofile->signpic==""){
-            $user->userprofile->signpic="../defaultuser";
+            $signpic="defaultuser";
+        }else{
+            $signpic="defaultuser"=$user->id."/".$user->userprofile->signpic;
+
         }
-        return view($sView,['id'=>$user->id, 'name' => $user->name, 'email' => $user->email, 'signpic' => $user->userprofile->signpic]);
+        return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $signpic]);
     }
 
     public function tpl(String $layout, String $tpl)
