@@ -54,6 +54,9 @@ class HomeController extends Controller
         /* @var $user User */
         $user=$request->user();
         $sView = 'home.' . $layout . ".lock";
+        if($user->userprofile->signpic==""){
+            $user->userprofile->signpic="../defaultuser";
+        }
         return view($sView,['id'=>$user->id, 'name' => $user->name, 'email' => $user->email, 'signpic' => $user->userprofile->signpic]);
     }
 
