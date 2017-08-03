@@ -6,6 +6,7 @@ angular.module("MetronicApp").controller('syspasswordCtrl',
             i18nService.setCurrentLang('zh-cn');
 
             $scope.type = 0;
+            $scope.dcEditionPWD = {oldpwd:'',newpwd:''}; //初始化，防止页面加载引入
             $scope.edituserpwd = function () {
                 if($scope.dcEditionPWD.oldpwd && $scope.dcUser.id && $scope.dcEditionPWD.newpwd){
                     if($scope.dcEditionPWD.newpwd == $scope.dcEditionPWD.repnew){
