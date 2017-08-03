@@ -28,6 +28,7 @@ angular.module("MetronicApp").controller('syspasswordCtrl',
                         );
                     }else showMsg('所设置密码两次输入不一致（校验错误），请重新输入！', '错误', 'ruby');
                 }
+                else showMsg('旧密码/新密码不能为空，请重新输入！', '错误', 'ruby');
             };
 
             //校验密码：只能输入6-20个字母、数字、下划线
