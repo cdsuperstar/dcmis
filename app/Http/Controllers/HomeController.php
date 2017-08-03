@@ -57,7 +57,7 @@ class HomeController extends Controller
         if($user->userprofile->signpic==""){
             $signpic="defaultuser";
         }else{
-            $signpic="defaultuser"=$user->id."/".$user->userprofile->signpic;
+            $signpic=$user->id."/".$user->userprofile->signpic;
 
         }
         return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $signpic]);
