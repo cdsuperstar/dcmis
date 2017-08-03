@@ -218,7 +218,7 @@
                         </li>
                         <li class="divider"> </li>
                         <li>
-                            <a href="#">
+                            <a href="/locksceen">
                                 <i class="icon-lock"></i> 锁定屏幕 </a>
                         </li>
                         <li>
