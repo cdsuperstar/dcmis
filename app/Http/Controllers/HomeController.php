@@ -54,7 +54,7 @@ class HomeController extends Controller
         /* @var $user User */
         $user=$request->user();
         $sView = 'home.' . $layout . ".lock";
-        return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $user->userprofile->signpic]);
+        return view($sView,['id'=>$user->id, 'name' => $user->name, 'email' => $user->email, 'signpic' => $user->userprofile->signpic]);
     }
 
     public function tpl(String $layout, String $tpl)
