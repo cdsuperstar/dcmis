@@ -49,6 +49,20 @@ class HomeController extends Controller
         return view($sView);
     }
 
+    public function getLockScreen(Request $request,String $layout)
+    {
+        /* @var $user User */
+        $user=$request->user();
+        $sView = 'home.' . $layout . ".lock";
+        if($user->userprofile->signpic==""){
+            $signpic="defaultuser";
+        }else{
+            $signpic=$user->id."/".$user->userprofile->signpic;
+
+        }
+        return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $signpic]);
+    }
+
     public function tpl(String $layout, String $tpl)
     {
         $sView = 'home.' . $layout . ".tpl." . $tpl;
