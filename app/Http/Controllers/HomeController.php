@@ -6,6 +6,7 @@ use App\models\dcmodel;
 
 use App\User;
 use Illuminate\Http\Request;
+use Auth;
 use Log;
 use Carbon\Carbon;
 use App\models\usermsg;
@@ -60,6 +61,7 @@ class HomeController extends Controller
             $signpic=$user->id."/".$user->userprofile->signpic;
 
         }
+        Auth::logout();
         return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $signpic]);
     }
 
