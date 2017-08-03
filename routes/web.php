@@ -25,6 +25,9 @@ Route::group(['prefix' => '/home/{layout}'], function () {
     Route::get('index', 'HomeController@index');
     Route::get('tpl/{tpl}', 'HomeController@tpl');
     Route::get('testit','HomeController@testit');
+
+    //得到锁屏界面
+    Route::get('getLockScreen','HomeController@getLockScreen'); //
 });
 
 //系统主界面组件

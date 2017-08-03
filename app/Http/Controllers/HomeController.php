@@ -49,6 +49,12 @@ class HomeController extends Controller
         return view($sView);
     }
 
+    public function getLockScreen(String $layout)
+    {
+        $sView = 'home.' . $layout . ".lock";
+        return view($sView);
+    }
+
     public function tpl(String $layout, String $tpl)
     {
         $sView = 'home.' . $layout . ".tpl." . $tpl;
