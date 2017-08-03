@@ -33,7 +33,7 @@ class LoginController extends Controller
     public function showLoginForm(String $layout)
     {
         $sView = 'home.' . $layout . ".login";
-        return view($sView);
+        return view($sView,["loginmsg"=>$this->errorBag()]);
     }
     /**
      * Create a new controller instance.
