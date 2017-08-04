@@ -91,7 +91,7 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('syear'); //年度
-            $table->string('unitgrps_id'); //申请部门
+            $table->integer('unitgrps_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
             $table->string('no')->unique(); //项目编号

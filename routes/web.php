@@ -235,10 +235,8 @@ Route::group(['prefix'=>'/amassregs'],function(){
 
 //预算统计
 Route::group(['prefix'=>'/am-budget-count'],function(){
-    //得到某年某单位数据
-    Route::get('getYearUnitsDatas/{year}/{unitgrp}','ambudgetController@getYearUnitsDatas');
-    //得到某年某单位预算支出数据
-    Route::get('getYearUnitsBudgets/{year}/{unitgrp}','amsubbudgetController@getYearUnitsBudgets');
+    //得到某年某单位预算申请支出数据
+    Route::get('getYearUnitsBudgets/{syear}/{unitgrp}','amsubbudgetController@getYearUnitsBudgets');
 
 });
 
@@ -303,7 +301,7 @@ Route::group(['prefix'=>'/sys-announcement'],function(){
 });
 
 // Debug all sqls
-//DB::listen(function ($event) {
-//    Log::info($event->sql);
-//    Log::info($event->bindings);
-//});
+DB::listen(function ($event) {
+    Log::info($event->sql);
+    Log::info($event->bindings);
+});

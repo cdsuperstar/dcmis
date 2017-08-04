@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\models\ambudget;
 use App\models\ambudgettype;
 use App\models\amsubbudget;
 use Illuminate\Http\Request;
 use App\models\amassreg;
 use App\models\amapplication;
 use App\models\unitgrp;
+use Illuminate\Support\Facades\DB;
 
 class amsubbudgetController extends Controller
 {
@@ -42,10 +44,10 @@ class amsubbudgetController extends Controller
     public function getAssReg()
     {
         //
-        $ambudgettype=ambudgettype::whereTemplate("1")->get()->first();
+        $ambudgettype = ambudgettype::whereTemplate("1")->get()->first();
         $datas = amsubbudget::with(['amassregs', 'ambaseas'])
-            ->whereHas('amapplication', function($query) use ($ambudgettype) {
-                $query->where('ambudgettype_id',$ambudgettype->id);
+            ->whereHas('amapplication', function ($query) use ($ambudgettype) {
+                $query->where('ambudgettype_id', $ambudgettype->id);
             })
             ->get();
         return response()->json($datas);
@@ -60,24 +62,47 @@ class amsubbudgetController extends Controller
 
     }
 
-    public function getYearUnitsBudgets(String $year,unitgrp $unitgrp)
+    public function getYearUnitsBudgets(String $syear, unitgrp $unitgrp)
     {
         //
-//        $datas = collect([amsubbudget::with(['amassregs'])->find($amsubbudget->id)]);
-//        return response()->json($datas);
+        $subq = amsubbudget::query()
+            ->select(['amapplications.ambudgettype_id', DB::raw('sum(amsubbudgets.bdg) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
+            ->where([
+                ['amapplications.syear', '=', $syear],
+                ['amapplications.unitgrps_id', '=', $unitgrp->id]
+            ])
+            ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
+            ->groupBy('amapplications.ambudgettype_id');
+        $subSql = $subq->toSql();
+
+        $datas = ambudget::query()
+            ->select(['ambudgets.syear', 'ambudgets.unit', 'ambudgets.type', 'ambudgets.total', 'subq.ambudgettype_id', 'subq.bdg', 'subq.price'])
+            ->where([
+                ['ambudgets.syear', $syear],
+                ['ambudgets.unit', $unitgrp->id]
+            ])
+            ->leftJoin(DB::raw('(' . $subSql . ') as subq'),
+                function ($join) use ($subq) {
+                    $join->on('subq.ambudgettype_id', '=', 'ambudgets.type')
+                        ->addBinding($subq->getBindings());
+                })
+            ->get();
+
+
+        return response()->json($datas);
 
     }
 
     public function getAppAss()
     {
         //
-        $ambudgettype=ambudgettype::whereTemplate("1")->get()->first();
+        $ambudgettype = ambudgettype::whereTemplate("1")->get()->first();
         $datas = amsubbudget::with([
             'amapplication',
             'ambaseas'
         ])
-            ->whereHas('amapplication', function($query) use ($ambudgettype) {
-                $query->where('ambudgettype_id',$ambudgettype->id);
+            ->whereHas('amapplication', function ($query) use ($ambudgettype) {
+                $query->where('ambudgettype_id', $ambudgettype->id);
             })
             ->get();
         return response()->json($datas);
@@ -100,10 +125,11 @@ class amsubbudgetController extends Controller
         return response()->json($datas);
 
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -151,10 +177,11 @@ class amsubbudgetController extends Controller
         }
 
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\amsubbudget  $amsubbudget
+     * @param  \App\models\amsubbudget $amsubbudget
      * @return \Illuminate\Http\Response
      */
     public function show(amsubbudget $amsubbudget)
@@ -165,7 +192,7 @@ class amsubbudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\amsubbudget  $amsubbudget
+     * @param  \App\models\amsubbudget $amsubbudget
      * @return \Illuminate\Http\Response
      */
     public function edit(amsubbudget $amsubbudget)
@@ -176,8 +203,8 @@ class amsubbudgetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\amsubbudget  $amsubbudget
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\models\amsubbudget $amsubbudget
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, amsubbudget $amsubbudget)
@@ -209,7 +236,7 @@ class amsubbudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\amsubbudget  $amsubbudget
+     * @param  \App\models\amsubbudget $amsubbudget
      * @return \Illuminate\Http\Response
      */
     public function destroy(amsubbudget $amsubbudget)
