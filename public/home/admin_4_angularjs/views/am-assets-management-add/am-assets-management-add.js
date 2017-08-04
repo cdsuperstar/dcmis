@@ -145,7 +145,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
@@ -155,7 +154,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -164,7 +162,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -172,7 +169,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
-                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -185,7 +181,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         cellTooltip: function(row){ return row.entity.aspara; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
-                    {name: '采购数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '采购数量', field: 'amt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '库存数量', field: 'regamt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '预算单价', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -234,7 +230,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                         filter: {
-                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -244,7 +239,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         { id: '已报销', isreimstate: '已报销' },
                         { id: '未报销', isreimstate: '未报销' }],
                         filter: {
-                            term: '',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '已报销', label: '已报销' },
@@ -256,7 +250,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         { id: '固定资产', isasstate: '固定资产' },
                         { id: '非固定资产', isasstate: '非固定资产' }],
                         filter: {
-                            term: '',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '固定资产', label: '固定资产' },
@@ -366,7 +359,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 dcEdition.amsubbudget_id = $scope.tmpobjdata;
                                 var tmpdata = new Date(dcEdition.validdate);
                                 if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
-                                console.log(dcEdition);
+                                // console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
                                     function (res) {
