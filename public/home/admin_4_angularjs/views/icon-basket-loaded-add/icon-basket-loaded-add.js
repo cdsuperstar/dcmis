@@ -471,7 +471,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                 footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                             {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                            {name: '其他说明', field: 'otremark',width: '200',enableColumnMenu: true,
+                            {name: '其他说明', field: 'reg',width: '200',enableColumnMenu: true,
                                 cellTooltip: function(row){ return row.entity.contrworkreq; },
                                 //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                 cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'

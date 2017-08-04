@@ -113,7 +113,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
             $scope.changeStatus = function (field,applystatus) {//转换各种状态
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deldata) {
-                        Restangular.all('/amasbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                        Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                             if (res.success) {
                                 deldata.entity[field] = applystatus;
                                 showMsg(res.messages.toString(), '信息', 'lime');
@@ -455,14 +455,9 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         });
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
-                            var tmpstr = '';
                             var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
                             selectdcmodels.forEach(function (deldata) {
-                                    if($scope.templatesign=="1") tmpstr = "/amasbudgets";//物资采购
-                                    if($scope.templatesign=="2") tmpstr = "/amcontrbudgets";//工程采购
-                                    if($scope.templatesign=="3") tmpstr = "/amsvbudgets";//服务采购
-                                    if($scope.templatesign=="4") tmpstr = "/amotbudgets";//其他采购
-                                    Restangular.all(tmpstr+'/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                                    Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                                         if (res.success) {
                                             deldata.entity[field] = applystatus;
                                             row.entity.progress=res.progress;

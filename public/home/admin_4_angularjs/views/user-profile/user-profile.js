@@ -42,7 +42,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 });
                 //$scope.editdataids=[];
 
-            }
+            };
             $scope.saveRow = function (rowEntity) {
                 //$scope.editdataids.push(rowEntity.id);
                 var promise = $q.defer();
@@ -61,8 +61,8 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 columnDefs: [
                     {name: 'ID', field: 'id', width: '40',enableCellEdit: false,enableColumnMenu: false,enableHiding: false,enableFiltering: false},
                     {name: '姓名', field: 'user.name',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true},
-                    {name: '邮箱', field: 'user.email',width: '100',enableCellEdit: false,enableColumnMenu: true},
-                    {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true},
+                    {name: '邮箱', field: 'user.email',width: '100',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true},
+                    {name: '工号', field: 'no',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true},
                     {name: '昵称', field: 'nickname',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:false},
                     {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true,
                         filter: {

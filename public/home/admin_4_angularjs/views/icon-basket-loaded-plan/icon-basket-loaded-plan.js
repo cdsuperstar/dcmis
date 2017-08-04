@@ -107,7 +107,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         ' </div>'},
-                    {name: '项目编号', field: 'no',width: '100',enableCellEdit: false,},
+                    {name: '项目编号', field: 'no',width: '110',enableCellEdit: false,},
                     {name: '项目名称', field: 'name',width: '200',enableCellEdit: false,},
                     {name: '审批状态', field: 'appstate',width: '100',enableCellEdit: false,enableColumnMenu: true,
                         filter: {
@@ -275,14 +275,9 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         });
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
-                            var tmpstr = '';
                             var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
                             selectdcmodels.forEach(function (deldata) {
-                                    if($scope.templatesign=="1") tmpstr = "/amasbudgets";//物资采购
-                                    if($scope.templatesign=="2") tmpstr = "/amcontrbudgets";//工程采购
-                                    if($scope.templatesign=="3") tmpstr = "/amsvbudgets";//服务采购
-                                    if($scope.templatesign=="4") tmpstr = "/amotbudgets";//其他采购
-                                    Restangular.all(tmpstr+'/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                                    Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                                         if (res.success) {
                                             deldata.entity[field] = applystatus;
                                             row.entity.progress=res.progress;
@@ -303,10 +298,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 var userWithId = _.find($scope.soucegridOptions.data, function (user) {
                                     return user.id === edituser.entity.id;
                                 });
-                                if($scope.templatesign=="1") userWithId.route = "/amasbudgets";//物资采购
-                                if($scope.templatesign=="2") userWithId.route = "/amcontrbudgets";//工程采购
-                                if($scope.templatesign=="3") userWithId.route = "/amsvbudgets";//服务采购
-                                if($scope.templatesign=="4") userWithId.route = "/amotbudgets";//其他采购
+                                userWithId.route = "/amsubbudgets";//采购字表的route
                                 userWithId.put().then(function (res) {
                                     if (res.success) {
                                         showMsg(res.messages.toString(), '信息', 'lime');
@@ -337,7 +329,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 $scope.iswzstatus = true; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '物资编号', field: 'wzno',width: '100',enableCellEdit: false,enableColumnMenu: true,visible:true,pinnedLeft:true},
-                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,enableCellEdit: false,
+                                    {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '单位', field: 'wzmeasunit',width: '60',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
@@ -350,7 +342,6 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                                         filter: {
-                                            term:3,
                                             type: uiGridConstants.filter.SELECT,
                                             selectOptions: [] }
                                     },
@@ -432,7 +423,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             {
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
+                                    {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
@@ -517,7 +508,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             {
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
+                                    {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
@@ -602,11 +593,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             {
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
-                                    {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,
+                                    {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
                                         cellTooltip: function(row){ return row.entity.contrname; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                                    {name: '其他说明', field: 'otremark',width: '200',enableCellEdit: false,enableColumnMenu: true,
+                                    {name: '其他说明', field: 'reg',width: '200',enableCellEdit: false,enableColumnMenu: true,
                                         cellTooltip: function(row){ return row.entity.contrworkreq; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },

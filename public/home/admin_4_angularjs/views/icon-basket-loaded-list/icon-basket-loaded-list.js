@@ -136,7 +136,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         ' </div>'},
-                    {name: '项目编号', field: 'no',width: '100'},
+                    {name: '项目编号', field: 'no',width: '110'},
                     {name: '项目名称', field: 'name',width: '200'},
                     {name: '审批状态', field: 'appstate',width: '100',enableColumnMenu: true},
                     {name: '采购进度', field: 'progress',width: '100',enableColumnMenu: true},
@@ -311,7 +311,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '其他说明', field: 'otremark',width: '200',enableColumnMenu: true,
+                                    {name: '其他说明', field: 'reg',width: '200',enableColumnMenu: true,
                                         cellTooltip: function(row){ return row.entity.contrworkreq; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
