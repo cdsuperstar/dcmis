@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\ambudget;
 use Illuminate\Http\Request;
+use App\models\unitgrp;
 use Log;
 
 class ambudgetController extends Controller
@@ -29,6 +30,13 @@ class ambudgetController extends Controller
     public function getYearDatas(String $syear)
     {
         $datas = ambudget::whereSyear($syear)->get();
+        return response()->json($datas);
+
+    }
+
+    public function getYearUnitsDatas(String $syear,unitgrp $unitgrp)
+    {
+        $datas = ambudget::whereSyear($syear)->whereUnit($unitgrp->id)->get();
         return response()->json($datas);
 
     }

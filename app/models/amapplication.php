@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amsvbudget[] $amsvbudgets
  * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereNo($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amapplication whereSyear($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\amsubbudget[] $amsubbudgets
  */
 class amapplication extends Model
 {
@@ -51,22 +52,8 @@ class amapplication extends Model
     protected $table = 'amapplications';
     protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettypes_id','appstate','apper','appdate','progress','isterm','termreason'];
 
-    public function amasbudgets()
+    public function amsubbudgets()
     {
-        return $this->hasMany('App\models\amasbudget','amapplication_id');
+        return $this->hasMany('App\models\amsubbudget','amapplication_id');
     }
-    public function amcontrbudgets()
-    {
-        return $this->hasMany('App\models\amcontrbudget','amapplication_id');
-    }
-    public function amsvbudgets()
-    {
-        return $this->hasMany('App\models\amsvbudget','amapplication_id');
-    }
-    public function amotbudgets()
-    {
-        return $this->hasMany('App\models\amotbudget','amapplication_id');
-    }
-
-
 }

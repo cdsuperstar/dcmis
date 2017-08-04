@@ -43,13 +43,13 @@ class amassregController extends Controller
         //
         $amassreg = new amassreg($request->toArray());
         if ($amassreg->save()) {
-            $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
-            $amassreg->amasbudget->save();
+            $amassreg->amsubbudget->regamt=$amassreg->amsubbudget->amt - $amassreg->amsubbudget->amassregs()->sum("amt");
+            $amassreg->amsubbudget->save();
 
             return response()->json(array_merge([
                     'messages' => trans('data.add', ["data" => $amassreg->id]),
-                    'regamt'=>$amassreg->amasbudget->regamt,
-                    'amt'=>$amassreg->amasbudget->amt,
+                    'regamt'=>$amassreg->amsubbudget->regamt,
+                    'amt'=>$amassreg->amsubbudget->amt,
                     'success' => true,
                 ], $amassreg->toArray()
                 )
@@ -94,13 +94,13 @@ class amassregController extends Controller
         if ($amassreg) {
 
             if ($amassreg->update($request->toArray())) {
-                $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
-                $amassreg->amasbudget->save();
+                $amassreg->amsubbudget->regamt=$amassreg->amsubbudget->amt - $amassreg->amsubbudget->amassregs()->sum("amt");
+                $amassreg->amsubbudget->save();
 
                 return response()->json(array_merge([
                         'messages' => trans('data.update', ["data" => $amassreg->id]),
-                        'regamt'=>$amassreg->amasbudget->regamt,
-                        'amt'=>$amassreg->amasbudget->amt,
+                        'regamt'=>$amassreg->amsubbudget->regamt,
+                        'amt'=>$amassreg->amsubbudget->amt,
                         'success' => true,
                     ], $amassreg->toArray()
                     )
@@ -123,13 +123,13 @@ class amassregController extends Controller
     {
         //
         if ($amassreg->delete()) {
-            $amassreg->amasbudget->regamt=$amassreg->amasbudget->amt - $amassreg->amasbudget->amassregs()->sum("amt");
-            $amassreg->amasbudget->save();
+            $amassreg->amsubbudget->regamt=$amassreg->amsubbudget->amt - $amassreg->amsubbudget->amassregs()->sum("amt");
+            $amassreg->amsubbudget->save();
 
             return response()->json(array_merge([
                 'messages' => trans('data.destroy', ['rows' => $amassreg->id . " with id ".$amassreg->id]),
-                'regamt'=>$amassreg->amasbudget->regamt,
-                'amt'=>$amassreg->amasbudget->amt,
+                'regamt'=>$amassreg->amsubbudget->regamt,
+                'amt'=>$amassreg->amsubbudget->amt,
                 'success' => true,
             ],$amassreg->toArray()));
         } else {
