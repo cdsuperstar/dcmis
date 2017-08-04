@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\models\ambudgettype;
 use App\models\amsubbudget;
 use Illuminate\Http\Request;
+use App\models\amassreg;
+use App\models\amapplication;
 
 class amsubbudgetController extends Controller
 {
@@ -84,7 +86,8 @@ class amsubbudgetController extends Controller
     public function getAssToScrap()
     {
         //
-        $datas = amassreg::with(['amsubbudget.ambaseas'])->get();
+        $datas = amassreg::with(['amsubbudget.ambaseas'])
+            ->get();
         return response()->json($datas);
 
     }
