@@ -55,10 +55,10 @@ class HomeController extends Controller
         /* @var $user User */
         $user=$request->user();
         $sView = 'home.' . $layout . ".lock";
-        if($user->userprofile->signpic==""){
-            $signpic="defaultuser";
-        }else{
+        if(isset($user->userprofile->signpic)){
             $signpic=$user->id."/".$user->userprofile->signpic;
+        }else{
+            $signpic="defaultuser";
 
         }
         Auth::logout();
