@@ -63,8 +63,8 @@ class amsubbudgetController extends Controller
     public function getYearUnitsBudgets(String $year,unitgrp $unitgrp)
     {
         //
-        $datas = collect([amsubbudget::with(['amassregs'])->find($amsubbudget->id)]);
-        return response()->json($datas);
+//        $datas = collect([amsubbudget::with(['amassregs'])->find($amsubbudget->id)]);
+//        return response()->json($datas);
 
     }
 
