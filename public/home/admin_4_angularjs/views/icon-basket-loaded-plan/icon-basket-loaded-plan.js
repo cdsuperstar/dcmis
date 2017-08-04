@@ -276,11 +276,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
                             var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
-                            selectdcmodels.forEach(function (deldata) {
-                                    Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                            selectdcmodels.forEach(function (changedata) {
+                                    Restangular.all('/amsubbudgets/setStatus/'+changedata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                                         if (res.success) {
-                                            deldata.entity[field] = applystatus;
-                                            row.entity.progress=res.progress;
+                                            changedata.entity[field] = applystatus;
+                                            row.entity.progress = res.progress;
                                             showMsg(res.messages.toString(), '信息', 'lime');
                                         }
                                         else {
@@ -301,6 +301,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 userWithId.route = "/amsubbudgets";//采购字表的route
                                 userWithId.put().then(function (res) {
                                     if (res.success) {
+                                        row.entity.progress = res.progress;
                                         showMsg(res.messages.toString(), '信息', 'lime');
                                         $scope.soucegridApi.rowEdit.setRowsClean(Array(userWithId));
                                     } else {
@@ -691,13 +692,13 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
 
             $scope.acceptpurchase = function (applystatus) {//受理采购申请（审批通过、审批未通过）
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
-                selectdcmodels.forEach(function (deldata) {
-                    //console.log(deldata.entity.id);
-                    Restangular.all('/icon-basket-loaded-plan/setStatus/'+deldata.entity.id+'/appstate/'+applystatus).post().then(function (res) {
+                selectdcmodels.forEach(function (changedata) {
+                    //console.log(changedata.entity.id);
+                    Restangular.all('/icon-basket-loaded-plan/setStatus/'+changedata.entity.id+'/appstate/'+applystatus).post().then(function (res) {
                             if (res.success) {
-                                deldata.entity.appstate = applystatus;
-                                deldata.entity.apper = $scope.dcUser.id;
-                                deldata.entity.appdate = $scope.datetimestr;
+                                changedata.entity.appstate = applystatus;
+                                changedata.entity.apper = $scope.dcUser.id;
+                                changedata.entity.appdate = $scope.datetimestr;
                                 showMsg(res.messages.toString(), '信息', 'lime');
                             }
                             else {
