@@ -34,6 +34,14 @@ class ambudgetController extends Controller
 
     }
 
+    public function getYearUnitsDatas(String $year,unitgrp $unitgrp)
+    {
+        //
+        $datas = ambudget::whereSyear($year)->whereUnit($unitgrp->id)->get();
+        return response()->json($datas);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

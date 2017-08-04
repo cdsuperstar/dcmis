@@ -23,17 +23,6 @@ class amsubbudgetController extends Controller
         return response()->json($datas);
 
     }
-    public function getYearUnitsDatas(String $year,unitgrp $unitgrp)
-    {
-        //
-        $datas = amsubbudget::with(['amapplication', 'ambaseas'])
-            ->whereHas('amapplication', function($query) use ($ambudgettype) {
-                $query->where('ambudgettype_id',$ambudgettype->id);
-            })
-            ->get();
-        return response()->json($datas);
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -64,6 +53,14 @@ class amsubbudgetController extends Controller
     }
 
     public function getTheAssReg(amsubbudget $amsubbudget)
+    {
+        //
+        $datas = collect([amsubbudget::with(['amassregs'])->find($amsubbudget->id)]);
+        return response()->json($datas);
+
+    }
+
+    public function getYearUnitsBudgets(String $year,unitgrp $unitgrp)
     {
         //
         $datas = collect([amsubbudget::with(['amassregs'])->find($amsubbudget->id)]);
@@ -189,8 +186,15 @@ class amsubbudgetController extends Controller
         if ($amsubbudget) {
 
             if ($amsubbudget->update($request->toArray())) {
+                $tmpProgress = '';
+                $resAmapp = $amsubbudget->amapplication;
+                $resAmapp->progress = '' . $amsubbudget->amapplication->amsubbudgets()->where(['purchstate' => '已采购'])->count() . '/' . $amsubbudget->amapplication->amsubbudgets()->count();
+                $tmpProgress = $resAmapp->progress;
+                $resAmapp->save();
+
                 return response()->json(array_merge([
                         'messages' => trans('data.update', ["data" => $amsubbudget->id]),
+                        'progress' => $tmpProgress,
                         'success' => true,
                     ], $amsubbudget->toArray()
                     )

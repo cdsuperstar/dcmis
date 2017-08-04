@@ -42,7 +42,7 @@ class CreateAmbudgetsTable extends Migration
 //            $table->string('no')->unique(); //申请表编号9
 //            $table->text('summary')->nullable(); //项目名称
             $table->string('syear'); //年度
-            $table->integer('type'); //类别
+            $table->integer('type'); //类别ID
             $table->integer('unit'); //申请部门
             $table->decimal('total'); //总金额
 //            $table->decimal('requester')->nullable(); //申报人
