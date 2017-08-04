@@ -89,7 +89,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === editdata.entity.id;
                     });
-
+                    userWithId.route = "/amsubbudgets";//采购字表的route
                     userWithId.put().then(function (res) {
                         console.log(res);
                         if (res.success) {
@@ -185,7 +185,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         cellTooltip: function(row){ return row.entity.aspara; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
-                    {name: '数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '采购数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '库存数量', field: 'regamt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '预算单价', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -358,11 +358,15 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                     showMsg('领用数量不能大于库存数量！', '错误', 'ruby');
                                     return false;
                                 }
-                                dcEdition.userdate = new Date();
+                                var date = new Date();
+                                dcEdition.userdate =  date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+ date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); //获得日期字串
+
+                                console.log(dcEdition.userdate);
                                 dcEdition.state = "正常";
-                                dcEdition.amasbudget_id = $scope.tmpobjdata;
-                                dcEdition.validdate = new Date(dcEdition.validdate).toString().split("GMT")[0];
-                                // console.log(dcEdition);
+                                dcEdition.amsubbudget_id = $scope.tmpobjdata;
+                                var tmpdata = new Date(dcEdition.validdate);
+                                if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
+                                console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
                                     function (res) {
