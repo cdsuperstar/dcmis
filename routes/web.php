@@ -238,20 +238,20 @@ Route::group(['prefix'=>'/amassregs'],function(){
 //资产登记模块
 Route::group(['prefix'=>'/am-assets-management-add'],function(){
     //得到所有资产登记
-    Route::get('getAssReg','amasbudgetController@getAssReg'); //
+    Route::get('getAssReg','amsubbudgetController@getAssReg'); //
     //得到具体的资产登记
-    Route::get('getTheAssReg/{amasbudget}','amasbudgetController@getTheAssReg'); //
+    Route::get('getTheAssReg/{amsubbudget}','amsubbudgetController@getTheAssReg'); //
     //得到所有申请资产
-    Route::get('getAppAss','amasbudgetController@getAppAss'); //
+    Route::get('getAppAss','amsubbudgetController@getAppAss'); //
 
 });
 
 //资产报废
 Route::group(['prefix'=>'/am-assets-management-scrap'],function(){
     //得到资产及报废
-    Route::get('getAssScrap','amasbudgetController@getAssScrap'); //
+    Route::get('getAssScrap','amsubbudgetController@getAssScrap'); //
     //得到待报废资产
-    Route::get('getAssToScrap','amasbudgetController@getAssToScrap'); //
+    Route::get('getAssToScrap','amsubbudgetController@getAssToScrap'); //
 
 
 });
