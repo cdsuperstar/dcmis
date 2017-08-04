@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\ambudgettype;
 use App\models\amsubbudget;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,12 @@ class amsubbudgetController extends Controller
     public function getAssReg()
     {
         //
-        $datas = amsubbudget::with(['amassregs', 'ambaseas'])->get();
+        $ambudgettype=ambudgettype::whereTemplate("1")->get()->first();
+        $datas = amsubbudget::with(['amassregs', 'ambaseas'])
+            ->whereHas('amapplication', function($query) use ($ambudgettype) {
+                $query->where('ambudgettypes_id',$ambudgettype->id);
+            })
+            ->get();
         return response()->json($datas);
 
     }
@@ -54,7 +60,15 @@ class amsubbudgetController extends Controller
     public function getAppAss()
     {
         //
-        $datas = amsubbudget::with(['amapplication', 'ambaseas'])->get();
+        $ambudgettype=ambudgettype::whereTemplate("1")->get()->first();
+        $datas = amsubbudget::with([
+            'amapplication',
+            'ambaseas'
+        ])
+            ->whereHas('amapplication', function($query) use ($ambudgettype) {
+                $query->where('ambudgettypes_id',$ambudgettype->id);
+            })
+            ->get();
         return response()->json($datas);
 
     }
