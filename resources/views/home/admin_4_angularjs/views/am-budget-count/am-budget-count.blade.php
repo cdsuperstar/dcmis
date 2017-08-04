@@ -38,7 +38,8 @@
                 <th> 总金额 </th>
                 <th> 申报金额 </th>
                 <th> 支出金额 </th>
-                <th> 可用余额 </th>
+                <th> 预算可用金额 </th>
+                <th> 实际可用金额 </th>
             </tr>
             </thead>
             <tbody>
