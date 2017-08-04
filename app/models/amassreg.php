@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $meas
  * @property int $amt
  * @property int $asuser
- * @property string $unitgrps_id
+ * @property string $unitgrp_id
  * @property string $userdate
  * @property string $validdate
  * @property string $state
@@ -48,7 +48,7 @@ class amassreg extends Model
 {
     //
     protected $table = 'amassregs';
-    protected $fillable = ['amsubbudget_id','amt','asuser','unitgrps_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark'];
+    protected $fillable = ['amsubbudget_id','amt','asuser','unitgrp_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark'];
     public function amsubbudget(){
         return $this->belongsTo('App\models\amsubbudget');
     }

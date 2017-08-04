@@ -152,7 +152,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrps_id',width: '230',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '部门', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
@@ -746,7 +746,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
             $scope.singleFilter = function( renderableRows ){
                 // console.log($scope.basket.syear);
                 var yearmatcher = new RegExp($scope.basket.syear);
-                var unitmatcher = Number($scope.basket.unitgrps_id);
+                var unitmatcher = Number($scope.basket.unitgrp_id);
                 var namematcher = new RegExp($scope.basket.name);
 
                 // var matcher = new RegExp($scope.filterValue);
@@ -761,7 +761,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     if ( $scope.basket.ambudgettype_id && $scope.basket.ambudgettype_id != row.entity['ambudgettype_id']){
                         match = false;
                     }
-                    if ( unitmatcher && unitmatcher != Number(row.entity['unitgrps_id'])){
+                    if ( unitmatcher && unitmatcher != Number(row.entity['unitgrp_id'])){
                         match = false;
                     }
                     if ( $scope.basket.requester && $scope.basket.requester != row.entity['requester']){

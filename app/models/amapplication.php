@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $year
- * @property string $unitgrps_id
+ * @property string $unitgrp_id
  * @property int $requester
  * @property string $name
  * @property int $ambudgettype_id
@@ -50,7 +50,7 @@ class amapplication extends Model
 {
     //
     protected $table = 'amapplications';
-    protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettype_id','appstate','apper','appdate','progress','isterm','termreason'];
+    protected $fillable = ['syear','unitgrp_id','requester','no','name','ambudgettype_id','appstate','apper','appdate','progress','isterm','termreason'];
 
     public function unitgrp()
     {

@@ -69,7 +69,7 @@ class amsubbudgetController extends Controller
             ->select(['amapplications.ambudgettype_id', DB::raw('sum(amsubbudgets.bdg) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
             ->where([
                 ['amapplications.syear', '=', $syear],
-                ['amapplications.unitgrps_id', '=', $unitgrp->id]
+                ['amapplications.unitgrp_id', '=', $unitgrp->id]
             ])
             ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
             ->groupBy('amapplications.ambudgettype_id');

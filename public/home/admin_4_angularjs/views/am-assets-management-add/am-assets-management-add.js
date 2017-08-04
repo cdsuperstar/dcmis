@@ -78,7 +78,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                 $scope.gridOptions.columnDefs[23].supplierHash =  supplierHash ;
             });
 
-            $scope.dcEdition = { unitgrps_id:$scope.dcUser.unitid,asuser:$scope.dcUser.id};  //初始化当前用户数据
+            $scope.dcEdition = { unitgrp_id:$scope.dcUser.unitid,asuser:$scope.dcUser.id};  //初始化当前用户数据
 
 
             var tableDatas = Restangular.all('/am-assets-management-add/getAppAss');
@@ -165,7 +165,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '采购单申请部门', field: 'amapplication.unitgrps_id',width: '150',visible:false,enableCellEdit: false,enableColumnMenu: false,
+                    {name: '采购单申请部门', field: 'amapplication.unitgrp_id',width: '150',visible:false,enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
@@ -396,7 +396,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                         type: uiGridConstants.filter.SELECT,
                                         selectOptions: [] }
                                 },
-                                {name: '领用单位', field: 'unitgrps_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
+                                {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
                                     editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                     editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                                     filter: {

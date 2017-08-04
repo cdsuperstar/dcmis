@@ -35,7 +35,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
             $scope.printsign = false; //打印按钮隐藏
             $scope.subsign = true;  //默认显示提交申报按钮
-            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettype_id:1};  //初始化当前用户数据
+            $scope.basket = { syear:currentYear,unitgrp_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettype_id:1};  //初始化当前用户数据
             //初始化结束
 
             //转换函数  遍历数组
@@ -71,7 +71,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             if($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'] != null && $scope.ModelsDataShare['icon-basket-loaded-list-ModifySubdata'] != null){
                 $scope.basket = {
                     syear:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['syear']),
-                    unitgrps_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrps_id']),
+                    unitgrp_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrp_id']),
                     requester:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester']),
                     ambudgettype_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettype_id']),
                     name:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['name'],
@@ -154,8 +154,8 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 //转换开始
                 $scope.listtyname = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'type');
                 $scope.listusname = changeJsonData($scope.peoplegrps,'id',$scope.basket.requester,'name');
-                $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unitgrps_id,'name');
-                // console.log($scope.basket.unitgrps_id+'--->'+$scope.listunname);
+                $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unitgrp_id,'name');
+                // console.log($scope.basket.unitgrp_id+'--->'+$scope.listunname);
                 //转换结束
                 //生成采购编号
                 if($scope.Midifysign == false){

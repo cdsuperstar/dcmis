@@ -91,7 +91,7 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('syear'); //年度
-            $table->integer('unitgrps_id'); //申请部门
+            $table->integer('unitgrp_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
             $table->string('no')->unique(); //项目编号
@@ -155,7 +155,7 @@ class CreateAmbudgetsTable extends Migration
 
             $table->integer('amt'); //数量
             $table->integer('asuser'); //领用人
-            $table->integer('unitgrps_id')->nullable(); //领用单位
+            $table->integer('unitgrp_id')->nullable(); //领用单位
             $table->dateTime('userdate'); //领用时间
             $table->dateTime('validdate')->nullable(); //有效期
             $table->string('state')->nullable(); //物资状态

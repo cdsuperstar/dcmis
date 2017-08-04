@@ -98,7 +98,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '领用单位', field: 'unitgrps_id',width: '200',enableCellEdit: false,enableColumnMenu: false,
+                    {name: '领用单位', field: 'unitgrp_id',width: '200',enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {

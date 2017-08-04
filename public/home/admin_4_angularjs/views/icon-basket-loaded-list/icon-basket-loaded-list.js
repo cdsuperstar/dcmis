@@ -164,7 +164,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrps_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
+                    {name: '部门', field: 'unitgrp_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
                         cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
                     }
                 ],
