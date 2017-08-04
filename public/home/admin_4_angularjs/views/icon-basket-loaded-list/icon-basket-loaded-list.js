@@ -148,7 +148,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '预算类别', field: 'ambudgettypes_id',width: '120',enableColumnMenu: false,enableHiding: false,
+                    {name: '预算类别', field: 'ambudgettype_id',width: '120',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
@@ -207,10 +207,10 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         $scope.tmpobjno = row.entity.no;  //取当前项目申请表的no
                         $scope.tmpobjname = row.entity.name;  //取当前项目申请表的name
                         //取当前类别的模板类型
-                        if(!row.entity.ambudgettypes_id) row.entity.ambudgettypes_id=1;
+                        if(!row.entity.ambudgettype_id) row.entity.ambudgettype_id=1;
                         if($scope.listnames===undefined){
                         } else {
-                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettypes_id,'template');
+                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettype_id,'template');
                         }
                         //end
                         $scope.soucegridOptions={
@@ -241,7 +241,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             // console.log(accounts);
                         });
 
-                        // console.log(row.entity.ambudgettypes_id);
+                        // console.log(row.entity.ambudgettype_id);
                         switch($scope.templatesign)
                         {
                             case "1":

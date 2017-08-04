@@ -38,7 +38,7 @@ class amapplicationController extends Controller
         //
 //        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
         $sTemplate = ambudgettype::where('template', '=', '1')->get();
-        $datas = amapplication::where('requester', '=', $request->user()->id)->where('ambudgettypes_id', '=', $sTemplate->first()->id)->get();
+        $datas = amapplication::where('requester', '=', $request->user()->id)->where('ambudgettype_id', '=', $sTemplate->first()->id)->get();
         return response()->json($datas);
 
     }

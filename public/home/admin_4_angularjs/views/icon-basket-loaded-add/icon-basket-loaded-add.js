@@ -35,7 +35,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.datetimestr =  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+ date.toLocaleTimeString(); //获得日期字串
             $scope.printsign = false; //打印按钮隐藏
             $scope.subsign = true;  //默认显示提交申报按钮
-            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettypes_id:1};  //初始化当前用户数据
+            $scope.basket = { syear:currentYear,unitgrps_id:$scope.dcUser.unitid,requester:$scope.dcUser.id,ambudgettype_id:1};  //初始化当前用户数据
             //初始化结束
 
             //转换函数  遍历数组
@@ -73,7 +73,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     syear:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['syear']),
                     unitgrps_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['unitgrps_id']),
                     requester:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['requester']),
-                    ambudgettypes_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettypes_id']),
+                    ambudgettype_id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['ambudgettype_id']),
                     name:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['name'],
                     no:$scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['no'],
                     id:Number($scope.ModelsDataShare['icon-basket-loaded-list-Modifydata'][0]['entity']['id'])
@@ -145,22 +145,22 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.yearbudgettotal = 0;
                 Restangular.all('/am-budget-management/getYearDatas/'+$scope.basket.syear).getList().then(function (accounts) {
                     for (var item=0;item<accounts.length;item++){
-                        if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettypes_id)
+                        if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettype_id)
                             $scope.yearbudgettotal = accounts[item]['total'];
                     }
 
                 });
 
                 //转换开始
-                $scope.listtyname = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'type');
+                $scope.listtyname = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'type');
                 $scope.listusname = changeJsonData($scope.peoplegrps,'id',$scope.basket.requester,'name');
                 $scope.listunname = changeJsonData($scope.untigrps,'id',$scope.basket.unitgrps_id,'name');
                 // console.log($scope.basket.unitgrps_id+'--->'+$scope.listunname);
                 //转换结束
                 //生成采购编号
                 if($scope.Midifysign == false){
-                    if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
-                    var templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'spell');
+                    if(!$scope.basket.ambudgettype_id) $scope.basket.ambudgettype_id=1;
+                    var templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'spell');
                     $scope.basket.no=currentYear+templatespell+"0001";
                     Restangular.all('/icon-basket-loaded-add/getLastNo').getList().then(function (accounts) {
                         var tmpno = 0;
@@ -263,10 +263,10 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.changestep = function() {
 
                 //取当前类别的模板类型
-                if(!$scope.basket.ambudgettypes_id) $scope.basket.ambudgettypes_id=1;
+                if(!$scope.basket.ambudgettype_id) $scope.basket.ambudgettype_id=1;
                 if($scope.listnames===undefined){
                 } else {
-                    $scope.basket.templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettypes_id,'template');
+                    $scope.basket.templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'template');
                 }
                 //end
                 switch($scope.basket.templatesign)
@@ -513,7 +513,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     }
                         break;
                     default:
-                        // console.log($scope.basket.ambudgettypes_id);
+                        // console.log($scope.basket.ambudgettype_id);
                         break;
                 }
             };

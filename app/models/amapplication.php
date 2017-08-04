@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $unitgrps_id
  * @property int $requester
  * @property string $name
- * @property int $ambudgettypes_id
+ * @property int $ambudgettype_id
  * @property string $appstate
  * @property int $apper
  * @property string $appdate
@@ -50,7 +50,13 @@ class amapplication extends Model
 {
     //
     protected $table = 'amapplications';
-    protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettypes_id','appstate','apper','appdate','progress','isterm','termreason'];
+    protected $fillable = ['syear','unitgrps_id','requester','no','name','ambudgettype_id','appstate','apper','appdate','progress','isterm','termreason'];
+
+    public function unitgrp()
+    {
+        return $this->belongsTo('App\models\unitgrps');
+
+    }
 
     public function amsubbudgets()
     {

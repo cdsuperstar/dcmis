@@ -7,6 +7,7 @@ use App\models\amsubbudget;
 use Illuminate\Http\Request;
 use App\models\amassreg;
 use App\models\amapplication;
+use App\models\unitgrp;
 
 class amsubbudgetController extends Controller
 {
@@ -19,6 +20,17 @@ class amsubbudgetController extends Controller
     {
         //
         $datas = amsubbudget::all();
+        return response()->json($datas);
+
+    }
+    public function getYearUnitsDatas(String $year,unitgrp $unitgrp)
+    {
+        //
+        $datas = amsubbudget::with(['amapplication', 'ambaseas'])
+            ->whereHas('amapplication', function($query) use ($ambudgettype) {
+                $query->where('ambudgettype_id',$ambudgettype->id);
+            })
+            ->get();
         return response()->json($datas);
 
     }
@@ -44,7 +56,7 @@ class amsubbudgetController extends Controller
         $ambudgettype=ambudgettype::whereTemplate("1")->get()->first();
         $datas = amsubbudget::with(['amassregs', 'ambaseas'])
             ->whereHas('amapplication', function($query) use ($ambudgettype) {
-                $query->where('ambudgettypes_id',$ambudgettype->id);
+                $query->where('ambudgettype_id',$ambudgettype->id);
             })
             ->get();
         return response()->json($datas);
@@ -68,7 +80,7 @@ class amsubbudgetController extends Controller
             'ambaseas'
         ])
             ->whereHas('amapplication', function($query) use ($ambudgettype) {
-                $query->where('ambudgettypes_id',$ambudgettype->id);
+                $query->where('ambudgettype_id',$ambudgettype->id);
             })
             ->get();
         return response()->json($datas);

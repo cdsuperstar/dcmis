@@ -96,7 +96,7 @@ class CreateAmbudgetsTable extends Migration
 
             $table->string('no')->unique(); //项目编号
             $table->string('name'); //项目名称
-            $table->integer('ambudgettypes_id'); //预算类别
+            $table->integer('ambudgettype_id'); //预算类别
             $table->string('appstate')->nullable(); //审批状态
             $table->integer('apper')->nullable(); //审批人
             $table->dateTime('appdate')->nullable(); //审批时间

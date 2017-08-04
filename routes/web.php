@@ -104,8 +104,6 @@ Route::group(['prefix' => '/sys-usersown'], function () {
 Route::group(['prefix'=>'/am-budget-management'],function(){
     // 得到某年数据
     Route::get('getYearDatas/{syear}','ambudgetController@getYearDatas');
-    //得到某年某单位数据
-    Route::get('getYearUnitsDatas/{syear}/{unitgrp}','ambudgetController@getYearUnitsDatas');
 
     Route::get('','ambudgetController@index');
     Route::get('create','ambudgetController@create');
@@ -233,6 +231,13 @@ Route::group(['prefix'=>'/amassregs'],function(){
     Route::put('{amassreg}','amassregController@update'); //
     Route::post('','amassregController@store'); //
     Route::delete('{amassreg}','amassregController@destroy'); //
+});
+
+//预算统计
+Route::group(['prefix'=>'/am-budget-count'],function(){
+    //得到某年某单位数据
+    Route::get('getYearUnitsDatas/{year}/{unitgrp}','amsubbudgetController@getYearUnitsDatas');
+
 });
 
 //资产登记模块

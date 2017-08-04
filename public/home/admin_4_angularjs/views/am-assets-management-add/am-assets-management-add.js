@@ -141,7 +141,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     {name: '采购单年度', field: 'amapplication.syear',width: '100',enableColumnMenu: true,enableCellEdit: false,visible:false},
                     {name: '采购单编号', field: 'amapplication.no',width: '120',enableCellEdit: false,visible:false,enableColumnMenu: true},
                     {name: '采购单名称', field: 'amapplication.name',width: '150',enableCellEdit: false,visible:false,enableColumnMenu: true},
-                    {name: '采购单类别', field: 'amapplication.ambudgettypes_id',width: '120',visible:false,enableCellEdit: false,enableColumnMenu: false,
+                    {name: '采购单类别', field: 'amapplication.ambudgettype_id',width: '120',visible:false,enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
@@ -517,7 +517,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             $scope.soucegridOptions.enableFiltering = !$scope.soucegridOptions.enableFiltering;
                             $scope.soucegridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
                         };
-                        // console.log(row.entity.ambudgettypes_id);
+                        // console.log(row.entity.ambudgettype_id);
                     }]
 
                 }).then(function (dcEdition) {
