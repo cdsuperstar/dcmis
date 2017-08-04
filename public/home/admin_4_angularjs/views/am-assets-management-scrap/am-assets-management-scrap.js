@@ -35,20 +35,22 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 $scope.gridOptions.columnDefs[5].filter.selectOptions=userarr;
                 $scope.gridOptions.columnDefs[5].editDropdownOptionsArray=userarr;
                 $scope.gridOptions.columnDefs[5].userHash =  userHash ;
-                $scope.gridOptions.columnDefs[10].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[10].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[11].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[11].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[11].userHash =  userHash ;
             });
 
             var tableDatas = Restangular.all('/am-assets-management-scrap/getAssToScrap');
 
             $scope.editData = function () { //修改报废的原因
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
+                toEditRows.forEach(function (editdata) {
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
+                        return user.id === editdata.entity.id;
                     });
                     userWithId.route = "/amassregs";
+                    var tmpdata = new Date(userWithId.scrapdate);
+                    if(tmpdata) userWithId.scrapdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
                     userWithId.put().then(function (res) {
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
@@ -106,6 +108,18 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     },
                     {name: '领用时间', field: 'userdate',width: '150',enableCellEdit: false,enableColumnMenu: true},
                     {name: '有效期', field: 'validdate',width: '100',enableCellEdit: false,type:'date',enableColumnMenu: true,cellFilter: 'date:"yyyy-MM-dd"'},
+                    {name: '物资状态', field: 'amsubbudget.asstate',width: '120',enableColumnMenu: true,
+                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                        editDropdownValueLabel: 'isasstate', editDropdownOptionsArray: [
+                        { id: '固定资产', isasstate: '固定资产' },
+                        { id: '非固定资产', isasstate: '非固定资产' }],
+                        filter: {
+                            term: '',
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [
+                                { value: '固定资产', label: '固定资产' },
+                                { value: '非固定资产', label: '非固定资产' }]}
+                    },
                     {name: '领用备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: false,
                         cellTooltip: function(row){ return row.entity.remark; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
@@ -120,7 +134,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     },
 
                     {name: '报废时间', field: 'scrapdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableColumnMenu: true},
-                    {name: '物资状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                    {name: '报废状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
                         editDropdownValueLabel: 'isstate', editDropdownOptionsArray: [
                         { id: '正常', isstate: '正常' },
                         { id: '报废', isstate: '报废' }],
@@ -213,10 +227,8 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
-                if(allAccounts[i]){
-                    for(var i=0;i<allAccounts.length;i++){
-                        allAccounts[i].scrapdate=new Date(allAccounts[i].scrapdate);
-                    }
+                for(var i=0;i<allAccounts.length;i++){
+                    if(allAccounts[i].scrapdate) allAccounts[i].scrapdate=new Date(allAccounts[i].scrapdate);
                 }
                 // console.log(accounts);
                 $scope.gridOptions.data = allAccounts;

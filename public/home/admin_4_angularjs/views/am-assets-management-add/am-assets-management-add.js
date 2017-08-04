@@ -353,8 +353,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 }
                                 var date = new Date();
                                 dcEdition.userdate =  date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+ date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); //获得日期字串
-
-                                console.log(dcEdition.userdate);
                                 dcEdition.state = "正常";
                                 dcEdition.amsubbudget_id = $scope.tmpobjdata;
                                 var tmpdata = new Date(dcEdition.validdate);
