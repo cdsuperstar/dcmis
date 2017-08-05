@@ -67,20 +67,20 @@ class amsubbudgetController extends Controller
         //
         $subq = amsubbudget::query()
             ->select(['amapplications.ambudgettype_id', DB::raw('sum(amsubbudgets.bdg) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
-            ->where([
-                ['amapplications.syear', '=', $syear],
-                ['amapplications.unitgrp_id', '=', $unitgrp->id]
-            ])
+//            ->where([
+//                ['amapplications.syear', '=', $syear],
+//                ['amapplications.unitgrp_id', '=', $unitgrp->id]
+//            ])
             ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
             ->groupBy('amapplications.ambudgettype_id');
         $subSql = $subq->toSql();
 
+        $aCond=array();
+        if($syear)$aCond[]=['ambudgets.syear', $syear];
+        if($unitgrp->id)$aCond[]=['ambudgets.unit', $unitgrp->id];
         $datas = ambudget::query()
             ->select(['ambudgets.syear', 'ambudgets.unit', 'ambudgets.type', 'ambudgets.total', 'subq.ambudgettype_id', 'subq.bdg', 'subq.price'])
-            ->where([
-                ['ambudgets.syear', $syear],
-                ['ambudgets.unit', $unitgrp->id]
-            ])
+            ->where($aCond)
             ->leftJoin(DB::raw('(' . $subSql . ') as subq'),
                 function ($join) use ($subq) {
                     $join->on('subq.ambudgettype_id', '=', 'ambudgets.type')
