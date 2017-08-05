@@ -730,6 +730,7 @@ select setval('unitgrps_id_seq', (select max(id) + 1 from unitgrps));
 select setval('permissions_id_seq', (select max(id) + 1 from permissions));
 select setval('roles_id_seq', (select max(id) + 1 from roles));
 select setval('ambaseass_id_seq', (select max(id) + 1 from ambaseass));
+select setval('ambudgets_id_seq', (select max(id) + 1 from ambudgets));
 select setval('amapplications_id_seq', (select max(id) + 1 from amapplications));
 select setval('amsubbudgets_id_seq', (select max(id) + 1 from amsubbudgets));
 
