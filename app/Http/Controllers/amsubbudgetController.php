@@ -77,8 +77,8 @@ class amsubbudgetController extends Controller
         $subSql = $subq->toSql();
 
         $aCond=array();
-        if($request->input("syear"))$aCond[]=['ambudgets.syear', $request->input("syear")];
-        if($request->input("unitgrp"))$aCond[]=['ambudgets.unit', $request->input("unitgrp")];
+        if(isset($request->input()[0]["syear"]))$aCond[]=['ambudgets.syear', $request->input()[0]["syear"]];
+        if(isset($request->input()[0]["unitgrp"]))$aCond[]=['ambudgets.unit', $request->input()[0]["unitgrp"]];
         $datas = ambudget::query()
             ->select(['ambudgets.syear', 'ambudgets.unit', 'ambudgets.type', 'ambudgets.total', 'subq.ambudgettype_id', 'subq.bdg', 'subq.price'])
             ->where($aCond)
