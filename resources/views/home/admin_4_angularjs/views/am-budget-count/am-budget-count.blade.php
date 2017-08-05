@@ -29,61 +29,8 @@
             </div>
         </div>
     </form>
-    <div class="table-scrollable">
-        <table class="table table-bordered table-hover">
-            <thead style="background-color: #578ebe;color: #ffffff;">
-            <tr>
-                <th> # </th>
-                <th> 预算类别 </th>
-                <th> 总金额 </th>
-                <th> 申报金额 </th>
-                <th> 支出金额 </th>
-                <th> 预算可用金额 </th>
-                <th> 实际可用金额 </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td> 1 </td>
-                <td> 物资预算 </td>
-                <td> 100000 </td>
-                <td> 50000 </td>
-                <td> 40000 </td>
-                <td class="warning"> 60000 </td>
-            </tr>
-            <tr>
-                <td> 2 </td>
-                <td> 工程预算 </td>
-                <td> 100000 </td>
-                <td> 50000 </td>
-                <td> 40000 </td>
-                <td> 60000 </td>
-            </tr>
-            <tr>
-                <td> 3 </td>
-                <td> 服务预算 </td>
-                <td> 100000 </td>
-                <td> 50000 </td>
-                <td> 40000 </td>
-                <td> 60000 </td>
-            </tr>
-            <tr>
-                <td> 4 </td>
-                <td> 其他预算 </td>
-                <td> 100000 </td>
-                <td> 50000 </td>
-                <td> 40000 </td>
-                <td class="danger"> 60000 </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="active" style="text-align: center;"> 小  计  </td>
-                <td class="active"> 100000 </td>
-                <td class="active"> 50000 </td>
-                <td class="active"> 40000 </td>
-                <td class="active"> 60000 </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="table-toolbar">
+        <div id="budgetcountgrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="budgetcountgrid"></div>
     </div>
 
 </div>

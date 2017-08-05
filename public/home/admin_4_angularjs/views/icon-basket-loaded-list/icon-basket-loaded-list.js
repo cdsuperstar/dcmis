@@ -217,12 +217,17 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             enableSorting: true,
                             enableFiltering: false,
                             showColumnFooter:true,
-                            showGridFooter:true,
+                            showGridFooter:false,
                             enableVerticalScrollbar:1,
                             enableHorizontalScrollbar :1,
                             enableGridMenu: true,
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [],
+                            enablePagination: true, //是否分页，默认为true
+                            enablePaginationControls: true, //使用默认的底部分页
+                            paginationPageSizes: [10, 30, 50],
+                            paginationCurrentPage: 1,
+                            paginationPageSize: 30,
                             data: [],
                             onRegisterApi: function (gridApi) {
                                 $scope.gridApi = gridApi;

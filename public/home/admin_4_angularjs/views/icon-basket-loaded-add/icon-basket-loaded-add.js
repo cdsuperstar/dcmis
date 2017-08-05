@@ -221,7 +221,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 enableSorting: true,
                 enableFiltering: false,
                 showColumnFooter:true,
-                showGridFooter:true,
+                showGridFooter:false,
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
                 enableGridMenu: true,
@@ -239,6 +239,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 exporterCsvColumnSeparator: ',',
                 exporterCsvFilename:'Datadownload.csv',
                 columnDefs: [],
+                enablePagination: true, //是否分页，默认为true
+                enablePaginationControls: true, //使用默认的底部分页
+                paginationPageSizes: [10, 30, 50],
+                paginationCurrentPage: 1,
+                paginationPageSize: 30,
                 data: 'imdata',
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;

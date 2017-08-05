@@ -1,0 +1,22 @@
+.jquery-notific8-container.top { top: 60px; }
+
+.budgetcountgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.budgetcountgrid .ui-grid-header{
+    background: #578ebe;
+}
+.budgetcountgrid .ui-grid-top-panel{
+    background: #578ebe;
+}
+.budgetcountgrid .ui-grid-top-panel-background{
+    background: #578ebe;
+}
+.budgetcountgrid .ui-grid-header-cell{
+    color:#000000;
+}
+.budgetcountgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}
