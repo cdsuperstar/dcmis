@@ -108,8 +108,8 @@ Route::group(['prefix'=>'/am-budget-management'],function(){
     Route::get('','ambudgetController@index');
     Route::get('create','ambudgetController@create');
     Route::put('{ambudget}','ambudgetController@update');
-    Route::post('','ambudgetController@store@store');
-    Route::delete('{ambudget}','ambudgetController@destroy@destroy');
+    Route::post('','ambudgetController@store');
+    Route::delete('{ambudget}','ambudgetController@destroy');
 
 });
 
