@@ -235,8 +235,8 @@ Route::group(['prefix'=>'/amassregs'],function(){
 
 //预算统计
 Route::group(['prefix'=>'/am-budget-count'],function(){
-    //得到某年某单位预算申请支出数据
-    Route::get('getYearUnitsBudgets/{syear?}/{unitgrp?}','amsubbudgetController@getYearUnitsBudgets');
+    //得到某年某单位预算申请支出数据 syear unitgrp
+    Route::post('getYearUnitsBudgets','amsubbudgetController@getYearUnitsBudgets');
 
 });
 

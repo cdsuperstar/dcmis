@@ -10,6 +10,7 @@ use App\models\amassreg;
 use App\models\amapplication;
 use App\models\unitgrp;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class amsubbudgetController extends Controller
 {
@@ -62,22 +63,22 @@ class amsubbudgetController extends Controller
 
     }
 
-    public function getYearUnitsBudgets(String $syear, unitgrp $unitgrp)
+    public function getYearUnitsBudgets(Request $request)
     {
         //
         $subq = amsubbudget::query()
             ->select(['amapplications.ambudgettype_id', DB::raw('sum(amsubbudgets.bdg) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
 //            ->where([
 //                ['amapplications.syear', '=', $syear],
-//                ['amapplications.unitgrp_id', '=', $unitgrp->id]
+//                ['amapplications.unitgrp_id', '=', $unitgrp->id]/am-budget-count/getYearUnitsBudgets
 //            ])
             ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
             ->groupBy('amapplications.ambudgettype_id');
         $subSql = $subq->toSql();
 
         $aCond=array();
-        if($syear)$aCond[]=['ambudgets.syear', $syear];
-        if($unitgrp->id)$aCond[]=['ambudgets.unit', $unitgrp->id];
+        if($request->input("syear"))$aCond[]=['ambudgets.syear', $request->input("syear")];
+        if($request->input("unitgrp"))$aCond[]=['ambudgets.unit', $request->input("unitgrp")];
         $datas = ambudget::query()
             ->select(['ambudgets.syear', 'ambudgets.unit', 'ambudgets.type', 'ambudgets.total', 'subq.ambudgettype_id', 'subq.bdg', 'subq.price'])
             ->where($aCond)
