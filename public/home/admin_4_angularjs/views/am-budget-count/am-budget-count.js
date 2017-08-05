@@ -43,7 +43,13 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                     return t;
                 }
             };
-
+/*
+* 这个只能显示某年度 某部门的数据？？
+* 如果只选 2017，不选部门，或者 选部门 ，不选年度，不行么？
+* 应该也可以选 某个年度 所有部门的预算啊，
+* 或者选择 某个部门，看看近几年的预算啊
+*
+* */
             var url = "/am-budget-count/getYearUnitsBudgets/"+currentYear+"/"+$scope.dcUser.unitid;
             $scope.formsearch = function () {
                 var year = $scope.ambudgetcount.syear;
