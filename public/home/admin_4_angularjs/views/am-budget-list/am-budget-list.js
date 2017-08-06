@@ -47,6 +47,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                     {name: '申报金额', field: 'bdg',width: '110',enableColumnMenu: true,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '支出金额', field: 'price',width: '110',enableColumnMenu: true,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '预算可用金额', field: 'budgettotal',width: '110',enableColumnMenu: true,
+                        headerTooltip: '【1000-10000】范围背景为黄色 【0-1000】范围背景为淡红色',
                         cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
                             if (grid.getCellValue(row,col) <= 1000 ) {
                                 return 'cellwarning';
@@ -57,6 +58,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                         },
                         cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '实际可用金额', field: 'actualtotal',width: '110',enableColumnMenu: true,
+                        headerTooltip: '【1000-10000】范围背景为黄色 【0-1000】范围背景为淡红色',
                         cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
                             if (grid.getCellValue(row,col) <= 1000 ) {
                                 return 'cellwarning';
@@ -99,7 +101,7 @@ angular.module("MetronicApp").controller('ambudgetlistCtrl',
                     accounts[item]["actualtotal"] = Number(accounts[item]["total"]) - Number(accounts[item]["price"]); //计算实际可用金额
                 }
                 $scope.gridOptions.data = allAccounts;
-                //console.log(allAccounts);
+                console.log(allAccounts);
             });
 
         }

@@ -425,7 +425,7 @@
                     </div>
                     <label class="col-md-2 control-label"> 类  别 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.ambudgettypes_id" theme="bootstrap" readonly="Midifysign" ng-disabled="Midifysign" ng-change="dumpimdata()">
+                        <ui-select ng-model="basket.ambudgettype_id" theme="bootstrap" readonly="Midifysign" ng-disabled="Midifysign" ng-change="dumpimdata()">
                             <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
                                     repeat="tmplist.id as tmplist in listnames | filter: $select.search">
@@ -437,7 +437,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label"> 部  门 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.unitgrps_id" theme="bootstrap" readonly="true" ng-disabled="true" search-enabled="true">
+                        <ui-select ng-model="basket.unitgrp_id" theme="bootstrap" readonly="true" ng-disabled="true" search-enabled="true">
                             <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices
                                     repeat="category.id as category in untigrps | filter: $select.search">
@@ -520,7 +520,7 @@
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
                             <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
                             <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="4" style="text-align:center;"> </th>
+                            <th colspan="4" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</th>
                         </tr>
                         <tr ng-show="printsign">
                             <th colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</th>

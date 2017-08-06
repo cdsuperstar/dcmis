@@ -334,7 +334,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '单位', field: 'wzmeasunit',width: '60',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.wzsmodel; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '小计', field: 'wztotal',width: '100', enableCellEdit: false,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
@@ -413,7 +413,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                                 { value: '非固定资产', label: '非固定资产' }]}
                                     },
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.remark; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     }
                                 ];
@@ -425,11 +425,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '工期要求', field: 'req',width: '200',enableColumnMenu: true,enableCellEdit: false,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                        cellTooltip: function(row){ return row.entity.req; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '工程地点', field: 'addr',width: '120',enableCellEdit: false,enableColumnMenu: true},
@@ -498,7 +498,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                                 { value: '未报销', label: '未报销' }]}
                                     },
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.remark; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     }
                                 ];
@@ -510,11 +510,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '服务期限', field: 'req',width: '200',enableColumnMenu: true,enableCellEdit: false,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                        cellTooltip: function(row){ return row.entity.req; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '地点', field: 'addr',width: '150',enableCellEdit: false,enableColumnMenu: true},
@@ -583,7 +583,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                                 { value: '未报销', label: '未报销' }]}
                                     },
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.remark; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     }
                                 ];
@@ -595,11 +595,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 $scope.iswzstatus = false; //是否显示固定资产标记
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,enableCellEdit: false,pinnedLeft:true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '其他说明', field: 'reg',width: '200',enableCellEdit: false,enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                        cellTooltip: function(row){ return row.entity.reg; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '合同地点', field: 'addr',width: '150',enableCellEdit: false,enableColumnMenu: true},
@@ -668,7 +668,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                                 { value: '未报销', label: '未报销' }]}
                                     },
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.remark; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     }
                                 ];
