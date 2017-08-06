@@ -581,7 +581,7 @@
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
                             <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
                             <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
@@ -660,7 +660,7 @@
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
                             <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
                             <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
@@ -739,7 +739,7 @@
                             <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
                             <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
                             <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <th colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</th>
                         </tr>
                         <tr>
                             <th style="text-align:center;">序号</th>
