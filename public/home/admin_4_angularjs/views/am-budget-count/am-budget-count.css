@@ -5,17 +5,21 @@
     height: 384px;
 }
 
+.cellwarning { background-color: #fbe1e3 !important; }
+
+.cellinfo { background-color: #f9e491 !important; }
+
 .budgetcountgrid .ui-grid-header{
-    background: #578ebe;
+    background: #F3C200;
 }
 .budgetcountgrid .ui-grid-top-panel{
-    background: #578ebe;
+    background: #F3C200;
 }
 .budgetcountgrid .ui-grid-top-panel-background{
-    background: #578ebe;
+    background: #F3C200;
 }
 .budgetcountgrid .ui-grid-header-cell{
-    color:#000000;
+    color:#ffffff;
 }
 .budgetcountgrid .ui-grid-header-cell-label{
     color:#ffffff;

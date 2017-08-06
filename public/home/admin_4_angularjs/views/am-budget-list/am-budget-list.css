@@ -1,0 +1,26 @@
+.jquery-notific8-container.top { top: 60px; }
+
+.ambudgetlistgrid {
+    /*width: 300px;*/
+    height: 384px;
+}
+
+.cellwarning { background-color: #fbe1e3 !important; }
+
+.cellinfo { background-color: #f9e491 !important; }
+
+.ambudgetlistgrid .ui-grid-header{
+    background: #F3C200;
+}
+.ambudgetlistgrid .ui-grid-top-panel{
+    background: #F3C200;
+}
+.ambudgetlistgrid .ui-grid-top-panel-background{
+    background: #F3C200;
+}
+.ambudgetlistgrid .ui-grid-header-cell{
+    color:#ffffff;
+}
+.ambudgetlistgrid .ui-grid-header-cell-label{
+    color:#ffffff;
+}

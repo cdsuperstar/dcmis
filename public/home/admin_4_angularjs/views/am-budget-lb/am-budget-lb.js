@@ -70,8 +70,8 @@ angular.module("MetronicApp").controller('ambudgetlbCtrl',
                 enableFiltering: false,
                 enableCellEditOnFocus: true,
                 columnDefs: [
-                    {name: '编号', field: 'no', enableCellEdit: true, width: '120',enableFiltering: true,enableColumnResizing:false},
-                    {name: '类别名称',width: '260', field: 'type', enableCellEdit: true},  //主要用来生成编号
+                    {name: '编号', field: 'no', enableCellEdit: true, width: '80',enableFiltering: true,enableColumnResizing:false},
+                    {name: '类别名称',width: '150', field: 'type', enableCellEdit: true},  //主要用来生成编号
                     {name: '类别简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
                     {name: '类别模板', width: '150',field: 'template',enableCellEdit: true,visible:true,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
