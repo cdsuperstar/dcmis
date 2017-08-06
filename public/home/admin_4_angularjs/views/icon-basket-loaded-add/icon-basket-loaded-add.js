@@ -144,11 +144,12 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 //年预算总金额
                 $scope.yearbudgettotal = 0;
                 Restangular.all('/am-budget-management/getYearDatas/'+$scope.basket.syear).getList().then(function (accounts) {
+                    var tmpdata = 0;
                     for (var item=0;item<accounts.length;item++){
                         if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettype_id)
-                            $scope.yearbudgettotal = accounts[item]['total'];
+                            tmpdata = tmpdata+ accounts[item]['total'];
                     }
-
+                    $scope.yearbudgettotal = tmpdata;
                 });
 
                 //年度累计执行金额
