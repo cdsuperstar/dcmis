@@ -189,11 +189,19 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     });
                 }
                 //end
+                //取当前类别的模板类型
+                if(!$scope.basket.ambudgettype_id) $scope.basket.ambudgettype_id=1;
+                if($scope.listnames === undefined){
+                } else {
+                    $scope.basket.templatesign = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'template');
+                }
+                //end
                 //导航开始
                 $scope.isMaterialbudget = false;
                 $scope.isProjectbudget = true;
                 $scope.isServicebudget = true;
                 $scope.isOthersbudget = true;
+                // console.log($scope.basket.templatesign);
                 switch($scope.basket.templatesign)
                 {
                     case "1":{
