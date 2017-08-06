@@ -147,10 +147,9 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     var tmpdata = 0;
                     for (var item=0;item<accounts.length;item++){
                         if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettype_id)
-                            tmpdata = tmpdata + accounts[item]['total'];
+                            tmpdata = tmpdata + Number(accounts[item]['total']);
                     }
                     $scope.yearbudgettotal = tmpdata;
-                    console.log($scope.yearbudgettotal);
                 });
 
                 //年度累计执行金额
@@ -159,12 +158,9 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 Restangular.all('/am-budget-count/getYearUnitsBudgets').post(ShearchJson).then(function (accounts) {
                     var tmpdata = 0;
                     for (var item=0;item<accounts.length;item++){
-                        console.log(accounts[item]["price"],$scope.basket.ambudgettype_id,accounts[item]["ambudgettype_id"]);
                         if ($scope.basket.ambudgettype_id == accounts[item]["ambudgettype_id"]) tmpdata = tmpdata + Number(accounts[item]["price"]);
                     }
-                    console.log(tmpdata);
                     $scope.addactrualbudgettotal = tmpdata;
-                    console.log($scope.addactrualbudgettotal);
                 });
 
 
