@@ -734,6 +734,10 @@ select setval('ambudgets_id_seq', (select max(id) + 1 from ambudgets));
 select setval('amapplications_id_seq', (select max(id) + 1 from amapplications));
 select setval('amsubbudgets_id_seq', (select max(id) + 1 from amsubbudgets));
 
+insert into dcmodel_role(dcmodel_id,role_id) select id,1 from dcmodels;
+
+
+
       ");
 
 
