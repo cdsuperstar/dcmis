@@ -10,10 +10,10 @@
 <!-- BEGIN HEAD -->
 
 <head>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <title data-ng-bind="'资产管理系统 | ' + $state.current.data.pageTitle"></title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
