@@ -201,7 +201,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 $scope.isProjectbudget = true;
                 $scope.isServicebudget = true;
                 $scope.isOthersbudget = true;
-                console.log($scope.basket.templatesign);
+                // console.log($scope.basket.templatesign);
                 switch($scope.basket.templatesign)
                 {
                     case "1":{
