@@ -147,9 +147,10 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     var tmpdata = 0;
                     for (var item=0;item<accounts.length;item++){
                         if(accounts[item]['syear'] == $scope.basket.syear && accounts[item]['unit'] == $scope.dcUser.unitid && accounts[item]['type'] == $scope.basket.ambudgettype_id)
-                            tmpdata = tmpdata+ accounts[item]['total'];
+                            tmpdata = tmpdata + accounts[item]['total'];
                     }
                     $scope.yearbudgettotal = tmpdata;
+                    console.log($scope.yearbudgettotal);
                 });
 
                 //年度累计执行金额
