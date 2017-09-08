@@ -128,6 +128,7 @@ INSERT INTO public.permissions (id, name, display_name, description, created_at,
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (37, 'sys-model.store', '保存模块', null, '2017-02-18 15:17:32', '2017-02-18 15:17:32');
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (38, 'sys-users.store', '保存用户', null, '2017-02-18 15:56:03', '2017-02-18 15:56:03');
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (39, 'user-department.store', '保存机构', null, '2017-02-18 16:08:51', '2017-02-18 16:08:51');
+INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (41, 'sys-role.store', '保存角色 ', null, '2017-02-18 16:08:51', '2017-02-18 16:08:51');
 
 INSERT INTO public.roles (id, name, display_name, description, created_at, updated_at) VALUES (1, 'root', '根用户角色', null, '2017-02-18 17:08:13', '2017-02-18 17:08:13');
 
@@ -172,6 +173,7 @@ INSERT INTO public.permission_role (permission_id, role_id) VALUES (36, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (37, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (38, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (39, 1);
+INSERT INTO public.permission_role (permission_id, role_id) VALUES (41, 1);
 
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (1, 'lb01', '物资预算', 'wz', '1', '2017-07-23 15:17:11', '2017-07-23 15:17:11');
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (2, 'lb02', '工程预算', 'gc', '2', '2017-07-23 15:17:45', '2017-07-23 15:17:45');

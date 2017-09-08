@@ -131,8 +131,8 @@ Route::group(['prefix' => '/sys-role'], function () {
     //设置角色权限
     Route::post('setPermOfRole/{action}/{role}/{permission}','roleController@setPermOfRole');
 
-    Route::put('{dcmodel}','roleController@update')->middleware(['permission:sys-role.update']); //sys-role.update
-    Route::delete('{dcmodel}','roleController@destroy')->middleware(['permission:sys-role.destroy']); //sys-role.destroy
+    Route::put('{role}','roleController@update')->middleware(['permission:sys-role.update']); //sys-role.update
+    Route::delete('{role}','roleController@destroy')->middleware(['permission:sys-role.destroy']); //sys-role.destroy
 });
 
 //权限管理

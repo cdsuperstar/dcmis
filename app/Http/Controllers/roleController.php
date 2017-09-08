@@ -165,11 +165,11 @@ class roleController extends Controller
         if ($role->delete()) {
 
             return response()->json(array_merge([
-                'messages' => trans('users.deletesuccess', ['rows' => $role->id . " with id " . $role->id]),
+                'messages' => trans('users.deletesuccess', ['rows' => $role->count() . " with id " . $role->id]),
                 'success' => true,
             ], $role->toArray()));
         } else {
-            return response()->json(['errors' => trans('users.deletesuccess', ['rows' => $role->id])]);
+            return response()->json(['errors' => trans('users.nofound', ['rows' => $role->id])]);
         }
         //
     }
