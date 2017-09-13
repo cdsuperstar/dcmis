@@ -305,5 +305,3 @@ Route::group(['prefix'=>'/sys-announcement'],function(){
 //    Log::info($event->sql);
 //    Log::info($event->bindings);
 //});
-
-//test
