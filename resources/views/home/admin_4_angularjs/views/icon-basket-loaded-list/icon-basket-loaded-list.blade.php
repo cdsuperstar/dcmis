@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
+                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
                     </div>
                 </div>
             </div>

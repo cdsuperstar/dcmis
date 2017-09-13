@@ -14,24 +14,16 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('users')->insert(
             [
-                'name' => 'test',
-                'email' => 'a@a.a',
+                'name' => 'Homer',
+                'email' => '10835142@qq.com',
                 'password' => bcrypt('aaaaaa'),
                 'created_at' => '2015-08-14 21:47:12',
                 'updated_at' => '2015-08-14 21:47:12',
             ]
         );
-        DB::table('users')->insert(
-            [
-                'name' => 'bbb',
-                'email' => 'b@b.b',
-                'password' => bcrypt('bbbbbb'),
-                'created_at' => '2015-08-14 21:47:12',
-                'updated_at' => '2015-08-14 21:47:12',
-            ]
-        );
+
 //        DB::table('users')->insert(TestDummy::times(20)->create(App\User::class)->toArray());
-        factory(App\User::class, 5)->create();
+        //factory(App\User::class, 5)->create();
 
         //seed roles
 //        DB::table('roles')->delete();

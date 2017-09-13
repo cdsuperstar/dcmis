@@ -11,10 +11,9 @@
         <title>资产管理系统 | 屏幕锁定</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="Preview page of Metronic Admin Theme #4 for " name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link href="/css/gg/gg.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -37,18 +36,22 @@
     <body class="">
         <div class="page-lock">
             <div class="page-logo">
-                <a class="brand" href="index.html">
-                    <img src="../assets/pages/img/logo-big.png" alt="logo" /> </a>
+                <a class="brand" href="#">
+                    <img src="/images/sys/logo-light-login.png" alt="logo" /> </a>
             </div>
             <div class="page-body">
-                <img class="page-lock-img" src="../assets/pages/media/profile/profile.jpg" alt="">
+                <form class="login-form" action="{{ url('/login') }}" method="POST" novalidate="novalidate">
+                    <input class="form-control placeholder-no-fix" required="required" type="hidden" autocomplete="off" placeholder="邮箱"
+                           name="email" value="{{$email}}">
+                    {{ csrf_field() }}
+                    <img class="page-lock-img" src="/images/users/{{ $signpic}}.jpg " alt="">
                 <div class="page-lock-info">
-                    <h1>Bob Nilson</h1>
-                    <span class="email"> bob@keenthemes.com </span>
-                    <span class="locked"> Locked </span>
-                    <form class="form-inline" action="index.html">
-                        <div class="input-group input-medium">
-                            <input type="text" class="form-control" placeholder="Password">
+                    <h1>{{$name}}</h1>
+                    <span class="email" style="padding-top: 5px;"> {{$email}} </span>
+                    <span class="locked"> 锁屏中…… </span>
+                        <div class="input-group input-medium" style="padding-top: 15px;">
+                            <input class="form-control placeholder-no-fix" required="required" type="password" autocomplete="off" placeholder="密码"
+                                   name="password">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn green icn-only">
                                     <i class="m-icon-swapright m-icon-white"></i>
@@ -56,11 +59,11 @@
                             </span>
                         </div>
                         <!-- /input-group -->
-                        <div class="relogin">
-                            <a href="login.html"> Not Bob Nilson ? </a>
+                        <div class="relogin pull-right" style="padding-top: 20px;">
+                            <a href="/home/admin_4_angularjs/login"> 更换用户登录 </a>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
             <div class="page-footer-custom"> <div class="copyright"> 2017 &copy; 重庆比尔科技有限公司&trade;.</div> </div>
         </div>
@@ -91,3 +94,40 @@
     </body>
 
 </html>
+
+<script language="JavaScript">
+    //防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    //禁止刷新F5 和Ctrl+F5
+    function ForbidFreshPage() {
+
+        if ((window.event.ctrlKey && window.event.keyCode == 116) || window.event.keyCode == 116) {
+            window.event.keyCode = 0;
+            window.event.returnValue = false;
+        }
+    }
+    document.onkeydown = ForbidFreshPage;
+    //当用户按键AltF4的时候，提示关闭窗口信息
+    function altF4() {
+        if (window.event.altKey && window.event.keyCode == 115) {
+            window.close();
+        }
+    }
+
+    document.onkeydown = function (e) {
+        var ev = window.event || e;
+        var code = ev.keyCode || ev.which;
+        if (code == 116) {
+            if(ev.preventDefault) {
+                ev.preventDefault();
+            } else {
+                ev.keyCode = 0;
+                ev.returnValue = false;
+            }
+        }
+    }
+
+</script>

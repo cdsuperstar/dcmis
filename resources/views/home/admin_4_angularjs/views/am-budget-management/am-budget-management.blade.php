@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN: ACCORDION DEMO -->
-                <div class="portlet light">
+                <div class="portlet light" style="margin-bottom: 0px;padding-bottom:0px">
                     <div class="portlet-title">
                         <div class="caption font-green-sharp">
                             <i class="icon-settings font-green-sharp"></i>

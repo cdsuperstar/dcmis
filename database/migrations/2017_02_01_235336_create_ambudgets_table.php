@@ -42,7 +42,7 @@ class CreateAmbudgetsTable extends Migration
 //            $table->string('no')->unique(); //申请表编号9
 //            $table->text('summary')->nullable(); //项目名称
             $table->string('syear'); //年度
-            $table->integer('type'); //类别
+            $table->integer('type'); //类别ID
             $table->integer('unit'); //申请部门
             $table->decimal('total'); //总金额
 //            $table->decimal('requester')->nullable(); //申报人
@@ -91,12 +91,12 @@ class CreateAmbudgetsTable extends Migration
             $table->increments('id');
 
             $table->string('syear'); //年度
-            $table->string('unitgrps_id'); //申请部门
+            $table->integer('unitgrp_id'); //申请部门
             $table->integer('requester')->unsigned(); //申请人
 
             $table->string('no')->unique(); //项目编号
             $table->string('name'); //项目名称
-            $table->integer('ambudgettypes_id'); //预算类别
+            $table->integer('ambudgettype_id'); //预算类别
             $table->string('appstate')->nullable(); //审批状态
             $table->integer('apper')->nullable(); //审批人
             $table->dateTime('appdate')->nullable(); //审批时间
@@ -108,17 +108,22 @@ class CreateAmbudgetsTable extends Migration
             $table->timestamps();
         });
 
-
         /**
-         * 物资采购表
+         * 采购表子表
          */
-        Schema::create('amasbudgets', function (Blueprint $table) {
+        Schema::create('amsubbudgets', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('amapplication_id'); //采购申请表id
-            $table->string('wzno'); //物资编号
+
+            $table->string('name')->nullable(); //工程名称
+            $table->text('req')->nullable(); //工程要求 其他要求 otremark
+            $table->text('addr')->nullable(); //工程地点
+            $table->string('picharge')->nullable(); //负责人
+            $table->string('picphone')->nullable(); //负责人电话
+
+            $table->string('wzno')->nullable(); //物资编号
             $table->string('wzsmodel')->nullable(); //规格型号
-            $table->integer('amt'); //数量
+            $table->integer('amt')->nullable(); //数量
             $table->decimal('bdg')->nullable(); //预算单价
             $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
@@ -141,99 +146,16 @@ class CreateAmbudgetsTable extends Migration
         });
 
         /**
-         * 工程采购表
-         */
-        Schema::create('amcontrbudgets', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->integer('amapplication_id'); //采购申请表id
-            $table->string('name'); //工程名称
-            $table->decimal('bdg'); //工程概预算
-            $table->text('req')->nullable(); //工程要求
-            $table->text('addr')->nullable(); //工程地点
-            $table->string('picharge')->nullable(); //负责人
-            $table->string('picphone')->nullable(); //负责人电话
-            $table->decimal('price')->nullable(); //采购单价
-            $table->string('purchway')->nullable(); //采购方式
-            $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsupplier_id')->nullable(); //供应商编号
-            $table->string('reimstate')->nullable(); //报销状态
-            $table->string('contrno')->nullable(); //合同编号
-            $table->decimal('total')->nullable(); //合计金额
-            $table->text('remark')->nullable(); //备注
-            $table->foreign('amapplication_id')->references('id')->on('amapplications')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->timestamps();
-
-        });
-
-        /**
-         * 服务采购表
-         */
-        Schema::create('amsvbudgets', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->integer('amapplication_id'); //采购申请表id
-            $table->string('name'); //服务名称
-            $table->decimal('bdg'); //服务预算
-            $table->text('req')->nullable(); //服务要求
-            $table->text('addr')->nullable(); //服务地点
-
-            $table->string('picharge')->nullable(); //负责人
-            $table->string('picphone')->nullable(); //负责人电话
-            $table->decimal('price')->nullable(); //采购单价
-            $table->string('purchway')->nullable(); //采购方式
-            $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsupplier_id')->nullable(); //供应商编号
-            $table->string('reimstate')->nullable(); //报销状态
-            $table->decimal('total')->nullable(); //合计金额
-            $table->text('remark')->nullable(); //备注
-            $table->foreign('amapplication_id')->references('id')->on('amapplications')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->timestamps();
-        });
-
-        /**
-         * 其他采购表
-         */
-        Schema::create('amotbudgets', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->integer('amapplication_id'); //采购申请表id
-            $table->string('name'); //名称
-            $table->decimal('bdg'); //预算
-            $table->text('otremark')->nullable(); //其他说明
-
-            $table->text('addr')->nullable(); //服务地点
-
-            $table->string('picharge')->nullable(); //负责人
-            $table->string('picphone')->nullable(); //负责人电话
-            $table->decimal('price')->nullable(); //采购单价
-            $table->string('purchway')->nullable(); //采购方式
-            $table->string('purchstate')->nullable(); //采购状态
-            $table->integer('amsupplier_id')->nullable(); //供应商编号
-            $table->string('reimstate')->nullable(); //报销状态
-            $table->decimal('total')->nullable(); //合计金额
-            $table->text('remark')->nullable(); //备注
-            $table->foreign('amapplication_id')->references('id')->on('amapplications')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->timestamps();
-        });
-
-        /**
          * 资产登记表
          */
         Schema::create('amassregs', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('amasbudget_id'); //物资id
+            $table->integer('amsubbudget_id'); //物资id
 
             $table->integer('amt'); //数量
             $table->integer('asuser'); //领用人
-            $table->integer('unitgrps_id')->nullable(); //领用单位
+            $table->integer('unitgrp_id')->nullable(); //领用单位
             $table->dateTime('userdate'); //领用时间
             $table->dateTime('validdate')->nullable(); //有效期
             $table->string('state')->nullable(); //物资状态
@@ -245,7 +167,7 @@ class CreateAmbudgetsTable extends Migration
 
             $table->text('scrapremark')->nullable(); //备注
 
-            $table->foreign('amasbudget_id')->references('id')->on('amasbudgets')
+            $table->foreign('amsubbudget_id')->references('id')->on('amsubbudgets')
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
@@ -273,10 +195,7 @@ class CreateAmbudgetsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('amassregs');
-        Schema::dropIfExists('amotbudgets');
-        Schema::dropIfExists('amsvbudgets');
-        Schema::dropIfExists('amcontrbudgets');
-        Schema::dropIfExists('amasbudgets');
+        Schema::dropIfExists('amsubbudgets');
 
         Schema::dropIfExists('amapplications');
         Schema::dropIfExists('ambaseass');

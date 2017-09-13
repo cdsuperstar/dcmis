@@ -78,6 +78,11 @@
             </label>
             <button type="submit" class="btn green pull-right">登录</button>
         </div>
+        <div style="color:red;">
+            @if($errors->has("email"))
+                错误：{{ $errors->first("email") }}
+            @endif
+        </div>
         {{--<div class="login-options">--}}
             {{--<h4>或者用以下登录方式</h4>--}}
             {{--<ul class="social-icons">--}}

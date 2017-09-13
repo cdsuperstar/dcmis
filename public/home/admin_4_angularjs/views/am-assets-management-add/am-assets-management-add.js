@@ -78,7 +78,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                 $scope.gridOptions.columnDefs[23].supplierHash =  supplierHash ;
             });
 
-            $scope.dcEdition = { unitgrps_id:$scope.dcUser.unitid,asuser:$scope.dcUser.id};  //初始化当前用户数据
+            $scope.dcEdition = { unitgrp_id:$scope.dcUser.unitid,asuser:$scope.dcUser.id};  //初始化当前用户数据
 
 
             var tableDatas = Restangular.all('/am-assets-management-add/getAppAss');
@@ -89,7 +89,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
                         return user.id === editdata.entity.id;
                     });
-
+                    userWithId.route = "/amsubbudgets";//采购字表的route
                     userWithId.put().then(function (res) {
                         console.log(res);
                         if (res.success) {
@@ -113,7 +113,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
             $scope.changeStatus = function (field,applystatus) {//转换各种状态
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 selectdcmodels.forEach(function (deldata) {
-                        Restangular.all('/amasbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                        Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                             if (res.success) {
                                 deldata.entity[field] = applystatus;
                                 showMsg(res.messages.toString(), '信息', 'lime');
@@ -141,11 +141,10 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     {name: '采购单年度', field: 'amapplication.syear',width: '100',enableColumnMenu: true,enableCellEdit: false,visible:false},
                     {name: '采购单编号', field: 'amapplication.no',width: '120',enableCellEdit: false,visible:false,enableColumnMenu: true},
                     {name: '采购单名称', field: 'amapplication.name',width: '150',enableCellEdit: false,visible:false,enableColumnMenu: true},
-                    {name: '采购单类别', field: 'amapplication.ambudgettypes_id',width: '120',visible:false,enableCellEdit: false,enableColumnMenu: false,
+                    {name: '采购单类别', field: 'amapplication.ambudgettype_id',width: '120',visible:false,enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
@@ -155,7 +154,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -164,15 +162,13 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '采购单申请部门', field: 'amapplication.unitgrps_id',width: '150',visible:false,enableCellEdit: false,enableColumnMenu: false,
+                    {name: '采购单申请部门', field: 'amapplication.unitgrp_id',width: '150',visible:false,enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
-                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -185,7 +181,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         cellTooltip: function(row){ return row.entity.aspara; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
-                    {name: '数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                    {name: '采购数量', field: 'amt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '库存数量', field: 'regamt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '预算单价', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                     {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -234,7 +230,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                         filter: {
-                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -244,7 +239,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         { id: '已报销', isreimstate: '已报销' },
                         { id: '未报销', isreimstate: '未报销' }],
                         filter: {
-                            term: '',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '已报销', label: '已报销' },
@@ -256,7 +250,6 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         { id: '固定资产', isasstate: '固定资产' },
                         { id: '非固定资产', isasstate: '非固定资产' }],
                         filter: {
-                            term: '',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '固定资产', label: '固定资产' },
@@ -358,10 +351,12 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                     showMsg('领用数量不能大于库存数量！', '错误', 'ruby');
                                     return false;
                                 }
-                                dcEdition.userdate = new Date();
+                                var date = new Date();
+                                dcEdition.userdate =  date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+ date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); //获得日期字串
                                 dcEdition.state = "正常";
-                                dcEdition.amasbudget_id = $scope.tmpobjdata;
-                                dcEdition.validdate = new Date(dcEdition.validdate).toString().split("GMT")[0];
+                                dcEdition.amsubbudget_id = $scope.tmpobjdata;
+                                var tmpdata = new Date(dcEdition.validdate);
+                                if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
                                 // console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
@@ -401,7 +396,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                         type: uiGridConstants.filter.SELECT,
                                         selectOptions: [] }
                                 },
-                                {name: '领用单位', field: 'unitgrps_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
+                                {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
                                     editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                     editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                                     filter: {
@@ -455,14 +450,9 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         });
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
-                            var tmpstr = '';
                             var selectdcmodels = $scope.soucegridApi.selection.getSelectedGridRows();
                             selectdcmodels.forEach(function (deldata) {
-                                    if($scope.templatesign=="1") tmpstr = "/amasbudgets";//物资采购
-                                    if($scope.templatesign=="2") tmpstr = "/amcontrbudgets";//工程采购
-                                    if($scope.templatesign=="3") tmpstr = "/amsvbudgets";//服务采购
-                                    if($scope.templatesign=="4") tmpstr = "/amotbudgets";//其他采购
-                                    Restangular.all(tmpstr+'/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
+                                    Restangular.all('/amsubbudgets/setStatus/'+deldata.entity.id+'/'+field+'/'+applystatus).post().then(function (res) {
                                         if (res.success) {
                                             deldata.entity[field] = applystatus;
                                             row.entity.progress=res.progress;
@@ -525,7 +515,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             $scope.soucegridOptions.enableFiltering = !$scope.soucegridOptions.enableFiltering;
                             $scope.soucegridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
                         };
-                        // console.log(row.entity.ambudgettypes_id);
+                        // console.log(row.entity.ambudgettype_id);
                     }]
 
                 }).then(function (dcEdition) {

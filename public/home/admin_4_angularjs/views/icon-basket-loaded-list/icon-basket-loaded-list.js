@@ -136,7 +136,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         cellTemplate: '<div style="text-align: center;" class="ui-grid-cell-contents"> ' +
                         '<span class="icon-eye icon-hand" ng-click="grid.appScope.showdetail(row)"  title="查看详情"></span>&nbsp;' +
                         ' </div>'},
-                    {name: '项目编号', field: 'no',width: '100'},
+                    {name: '项目编号', field: 'no',width: '110'},
                     {name: '项目名称', field: 'name',width: '200'},
                     {name: '审批状态', field: 'appstate',width: '100',enableColumnMenu: true},
                     {name: '采购进度', field: 'progress',width: '100',enableColumnMenu: true},
@@ -148,7 +148,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '预算类别', field: 'ambudgettypes_id',width: '120',enableColumnMenu: false,enableHiding: false,
+                    {name: '预算类别', field: 'ambudgettype_id',width: '120',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
@@ -164,7 +164,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrps_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
+                    {name: '部门', field: 'unitgrp_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
                         cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
                     }
                 ],
@@ -207,22 +207,27 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         $scope.tmpobjno = row.entity.no;  //取当前项目申请表的no
                         $scope.tmpobjname = row.entity.name;  //取当前项目申请表的name
                         //取当前类别的模板类型
-                        if(!row.entity.ambudgettypes_id) row.entity.ambudgettypes_id=1;
+                        if(!row.entity.ambudgettype_id) row.entity.ambudgettype_id=1;
                         if($scope.listnames===undefined){
                         } else {
-                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettypes_id,'template');
+                            $scope.templatesign = changeJsonData($scope.listnames,'id',row.entity.ambudgettype_id,'template');
                         }
                         //end
                         $scope.soucegridOptions={
                             enableSorting: true,
                             enableFiltering: false,
                             showColumnFooter:true,
-                            showGridFooter:true,
+                            showGridFooter:false,
                             enableVerticalScrollbar:1,
                             enableHorizontalScrollbar :1,
                             enableGridMenu: true,
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [],
+                            enablePagination: true, //是否分页，默认为true
+                            enablePaginationControls: true, //使用默认的底部分页
+                            paginationPageSizes: [10, 30, 50],
+                            paginationCurrentPage: 1,
+                            paginationPageSize: 30,
                             data: [],
                             onRegisterApi: function (gridApi) {
                                 $scope.gridApi = gridApi;
@@ -241,7 +246,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             // console.log(accounts);
                         });
 
-                        // console.log(row.entity.ambudgettypes_id);
+                        // console.log(row.entity.ambudgettype_id);
                         switch($scope.templatesign)
                         {
                             case "1":
@@ -253,7 +258,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '单位', field: 'wzmeasunit',width: '60',enableColumnMenu: true,pinnedLeft:true},
                                     {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.aspara; },
+                                        cellTooltip: function(row){ return row.entity.wzsmodel; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -268,12 +273,12 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             {
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '工程项目名称', field: 'name',width: '150',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '工程预算', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '工期要求', field: 'req',width: '200',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                        cellTooltip: function(row){ return row.entity.req; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '工程地点', field: 'addr',width: '120',enableColumnMenu: true},
@@ -287,12 +292,12 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             {
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '服务内容', field: 'name',width: '150',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '服务期限', field: 'req',width: '200',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                        cellTooltip: function(row){ return row.entity.req; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '地点', field: 'addr',width: '150',enableColumnMenu: true},
@@ -307,12 +312,12 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
 
                                 $scope.soucegridOptions.columnDefs=[
                                     {name: '采购内容', field: 'name',width: '150',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrname; },
+                                        cellTooltip: function(row){ return row.entity.name; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '预算金额', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
-                                    {name: '其他说明', field: 'otremark',width: '200',enableColumnMenu: true,
-                                        cellTooltip: function(row){ return row.entity.contrworkreq; },
+                                    {name: '其他说明', field: 'reg',width: '200',enableColumnMenu: true,
+                                        cellTooltip: function(row){ return row.entity.reg; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
                                     {name: '合同地点', field: 'addr',width: '150',enableColumnMenu: true},

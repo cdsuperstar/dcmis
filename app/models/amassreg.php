@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $meas
  * @property int $amt
  * @property int $asuser
- * @property string $unitgrps_id
+ * @property string $unitgrp_id
  * @property string $userdate
  * @property string $validdate
  * @property string $state
@@ -40,13 +40,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\models\amasbudget $amasbudget
  * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereAmasbudgetId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\amassreg whereScrapremark($value)
+ * @property int $amsubbudget_id
+ * @property-read \App\models\amsubbudget $amsubbudget
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\amassreg whereAmsubbudgetId($value)
  */
 class amassreg extends Model
 {
     //
     protected $table = 'amassregs';
-    protected $fillable = ['amasbudget_id','amt','asuser','unitgrps_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark'];
-    public function amasbudget(){
-        return $this->belongsTo('App\models\amasbudget');
+    protected $fillable = ['amsubbudget_id','amt','asuser','unitgrp_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark'];
+    public function amsubbudget(){
+        return $this->belongsTo('App\models\amsubbudget');
     }
 }

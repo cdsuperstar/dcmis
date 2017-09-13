@@ -35,20 +35,22 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 $scope.gridOptions.columnDefs[5].filter.selectOptions=userarr;
                 $scope.gridOptions.columnDefs[5].editDropdownOptionsArray=userarr;
                 $scope.gridOptions.columnDefs[5].userHash =  userHash ;
-                $scope.gridOptions.columnDefs[10].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[10].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[10].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[11].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[11].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[11].userHash =  userHash ;
             });
 
             var tableDatas = Restangular.all('/am-assets-management-scrap/getAssToScrap');
 
             $scope.editData = function () { //修改报废的原因
                 var toEditRows = $scope.gridApi.rowEdit.getDirtyRows($scope.gridOptions);
-                toEditRows.forEach(function (edituser) {
+                toEditRows.forEach(function (editdata) {
                     var userWithId = _.find($scope.gridOptions.data, function (user) {
-                        return user.id === edituser.entity.id;
+                        return user.id === editdata.entity.id;
                     });
                     userWithId.route = "/amassregs";
+                    var tmpdata = new Date(userWithId.scrapdate);
+                    if(tmpdata) userWithId.scrapdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
                     userWithId.put().then(function (res) {
                         if (res.success) {
                             showMsg(res.messages.toString(), '信息', 'lime');
@@ -73,16 +75,16 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
-                    {name: '物资编号', field: 'amasbudget.wzno',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                    {name: '物资名称', field: 'amasbudget.ambaseas.name',width: '150',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
-                        cellTooltip: function(row){ return row.entity.amasbudget.ambaseas.name; },
+                    {name: '物资编号', field: 'amsubbudget.wzno',width: '120',enableCellEdit: false,enableColumnMenu: true},
+                    {name: '物资名称', field: 'amsubbudget.ambaseas.name',width: '150',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
+                        cellTooltip: function(row){ return row.entity.amsubbudget.ambaseas.name; },
                         //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>',
                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
-                    {name: '单位', field: 'amasbudget.ambaseas.measunit',width: '50',enableCellEdit: false,enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
+                    {name: '单位', field: 'amsubbudget.ambaseas.measunit',width: '50',enableCellEdit: false,enableColumnMenu: true,editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownRowEntityOptionsArrayPath: 'tmeas.options', editDropdownIdLabel: 'value'
                     },
-                    {name: '规格、型号', field: 'amasbudget.wzsmodel',width: '150',enableColumnMenu: true,enableCellEdit: false,
+                    {name: '规格、型号', field: 'amsubbudget.wzsmodel',width: '150',enableColumnMenu: true,enableCellEdit: false,
                         cellTooltip: function(row){ return row.entity.aspara; },
                         //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
@@ -96,7 +98,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '领用单位', field: 'unitgrps_id',width: '200',enableCellEdit: false,enableColumnMenu: false,
+                    {name: '领用单位', field: 'unitgrp_id',width: '200',enableCellEdit: false,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
@@ -106,7 +108,19 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     },
                     {name: '领用时间', field: 'userdate',width: '150',enableCellEdit: false,enableColumnMenu: true},
                     {name: '有效期', field: 'validdate',width: '100',enableCellEdit: false,type:'date',enableColumnMenu: true,cellFilter: 'date:"yyyy-MM-dd"'},
-                    {name: '领用备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: true,
+                    {name: '物资状态', field: 'amsubbudget.asstate',width: '120',enableColumnMenu: true,
+                        editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                        editDropdownValueLabel: 'isasstate', editDropdownOptionsArray: [
+                        { id: '固定资产', isasstate: '固定资产' },
+                        { id: '非固定资产', isasstate: '非固定资产' }],
+                        filter: {
+                            term: '',
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [
+                                { value: '固定资产', label: '固定资产' },
+                                { value: '非固定资产', label: '非固定资产' }]}
+                    },
+                    {name: '领用备注', field: 'remark',width: '150',enableColumnMenu: true,enableCellEdit: false,
                         cellTooltip: function(row){ return row.entity.remark; },
                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                     },
@@ -120,7 +134,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     },
 
                     {name: '报废时间', field: 'scrapdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableColumnMenu: true},
-                    {name: '物资状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
+                    {name: '报废状态', field: 'state',width: '80',editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,
                         editDropdownValueLabel: 'isstate', editDropdownOptionsArray: [
                         { id: '正常', isstate: '正常' },
                         { id: '报废', isstate: '报废' }],
@@ -177,8 +191,8 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     scope: $scope,
                     controller: ['$scope',function ($scope) {
                         // console.log($scope);
-                        $scope.tmpobjno = row.entity.amasbudget.wzno;  //取当取当期物资的no
-                        $scope.tmpobjname = row.entity.amasbudget.ambaseas.name;  //取当前物资的name
+                        $scope.tmpobjno = row.entity.amsubbudget.wzno;  //取当取当期物资的no
+                        $scope.tmpobjname = row.entity.amsubbudget.ambaseas.name;  //取当前物资的name
                         $scope.scrapremark = row.entity.scrapremark;//赋初始值
                     }]
 
@@ -209,12 +223,12 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     var allAccounts = accounts;
                     $scope.gridOptions.data = allAccounts;
                 });
-            }
+            };
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
                 for(var i=0;i<allAccounts.length;i++){
-                    allAccounts[i].scrapdate=new Date(allAccounts[i].scrapdate);
+                    if(allAccounts[i].scrapdate) allAccounts[i].scrapdate=new Date(allAccounts[i].scrapdate);
                 }
                 // console.log(accounts);
                 $scope.gridOptions.data = allAccounts;

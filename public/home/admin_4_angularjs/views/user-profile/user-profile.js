@@ -42,7 +42,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 });
                 //$scope.editdataids=[];
 
-            }
+            };
             $scope.saveRow = function (rowEntity) {
                 //$scope.editdataids.push(rowEntity.id);
                 var promise = $q.defer();
