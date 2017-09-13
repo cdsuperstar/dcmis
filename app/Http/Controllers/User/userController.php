@@ -61,6 +61,7 @@ class userController extends Controller
 
     public function setUserRole(User $user, Role $role)
     {
+        $user->detachRoles();
         $user->attachRole($role);
         return response()->json(array_merge([
                 'messages' => trans('users.updatesuccess', ["data" => $user->name]),
