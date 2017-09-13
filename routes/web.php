@@ -304,4 +304,4 @@ Route::group(['prefix'=>'/sys-announcement'],function(){
 //DB::listen(function ($event) {
 //    Log::info($event->sql);
 //    Log::info($event->bindings);
-//});1
+//});
