@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\models\Role;
+use App\models\userprofile;
 use App\User;
 use Config;
 use Illuminate\Http\Request;
@@ -109,6 +110,12 @@ class userController extends Controller
             }
 
             if ($user->save()) {
+
+                $recuserprofile=new userprofile();
+                $recuserprofile->id=$user->id;
+                $recuserprofile->nickname=$user->name;
+                $recuserprofile->save();
+
                 return response()->json(array_merge([
                         'messages' => trans('users.savesuccess', ["data" => $user->name]),
                         'success' => true,
