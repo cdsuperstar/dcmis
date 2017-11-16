@@ -189,7 +189,7 @@ class dcmodelController extends Controller
     {
         $tmpArray = array();
         foreach (Auth::user()->roles()->get() as $k => $vObj) {
-            $tmpArray = array_merge($tmpArray, $vObj->models()->select(['id'])->get()->pluck('id')->toArray());
+            $tmpArray = array_merge($tmpArray, $vObj->models()->select(['id'])->where('ismenu',1)->get()->pluck('id')->toArray());
         }
         $mdTreeJson = dcMdGrp::with(['dcmodel' => function ($q) {
             $q->addSelect(array('id', 'name', 'title', 'ismenu', 'icon', 'url', 'templateurl', 'files'));

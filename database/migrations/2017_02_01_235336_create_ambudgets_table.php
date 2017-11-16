@@ -44,10 +44,12 @@ class CreateAmbudgetsTable extends Migration
             $table->string('syear'); //年度
             $table->integer('type'); //类别ID
             $table->integer('unit'); //申请部门
-            $table->decimal('total'); //总金额
+            $table->decimal('total',10,2); //总金额
 //            $table->decimal('requester')->nullable(); //申报人
 //            $table->decimal('urchasingstatus')->nullable(); //采购状态
             $table->text('remark')->nullable(); //备注
+
+            $table->unique(['syear','unit','type']);
 
             $table->timestamps();
         });
@@ -137,7 +139,7 @@ class CreateAmbudgetsTable extends Migration
             $table->integer('scrapamt')->nullable(); //报废数量
 
 
-            $table->decimal('total')->nullable(); //合计金额
+            $table->decimal('total',10,2)->nullable(); //合计金额
             $table->text('remark')->nullable(); //备注
             $table->foreign('amapplication_id')->references('id')->on('amapplications')
                 ->onUpdate('cascade')->onDelete('cascade');

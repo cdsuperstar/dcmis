@@ -129,6 +129,7 @@ class amapplicationController extends Controller
             foreach ($aSubs as $k => $v) {
                 $cntSub = 0;
                 $v['amapplication_id'] = $rec->id;
+                if(!isset($v["amt"]))$v["amt"]=1;
                 if (isset($v["id"])) {
                     $recSub[$k] = amsubbudget::find($v["id"]);
                     $recSub[$k]->fill($v);
