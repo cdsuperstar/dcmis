@@ -402,14 +402,14 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                         type: uiGridConstants.filter.SELECT,
                                         selectOptions: [] }
                                 },
-                                {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
-                                    editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                                    editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
-                                    filter: {
-                                        term:3,
-                                        type: uiGridConstants.filter.SELECT,
-                                        selectOptions: [] }
-                                },
+                                // {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
+                                //     editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                //     editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                                //     filter: {
+                                //         term:3,
+                                //         type: uiGridConstants.filter.SELECT,
+                                //         selectOptions: [] }
+                                // },
                                 {name: '领用数量', field: 'amt',width: '80',enableCellEdit: true,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                 {name: '领用时间', field: 'userdate',width: '120',enableCellEdit: false,enableColumnMenu: true},
                                 {name: '有效期', field: 'validdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableCellEdit: true,enableColumnMenu: true},
