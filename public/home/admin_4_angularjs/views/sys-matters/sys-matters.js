@@ -151,8 +151,11 @@ angular.module("MetronicApp").controller('sysmattersCtrl',
                 },
             };
 
+            $scope.toggleFilteringsign = '筛选数据';
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 

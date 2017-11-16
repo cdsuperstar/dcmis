@@ -87,14 +87,16 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             //修改状态初始化结束
 
             $scope.saveformdata = function() {
-                if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0){
-                    showMsg('必要信息未填写！( 项目名称未填写 或 数据列表为空! )', '错误', 'ruby');
+                var totalminus = $scope.yearbudgettotal - $scope.addactrualbudgettotal - $scope.wztotalimdata; //页面检测申报金额是否超限
+                // console.log(totalminus);
+                if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0 || totalminus < 0){
+                    showMsg('必要信息未填写！( 项目名称未填写 或 数据列表为空 或 申报金额超限! )', '错误', 'ruby');
                     return false;
                 }else {
                     var res = angular.merge($scope.basket, $scope.imdata);
                     $scope.printsign = true;
                     $scope.subsign = false;
-                     //console.log(res);
+                     // console.log(res);
                     Restangular.all('/icon-basket-loaded-add/storeReq').post(res).then(function(storeRes){
                         if (storeRes.success) {
                             showMsg(storeRes.messages.toString(), '信息', 'lime');
@@ -109,13 +111,42 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
 
             $scope.printformdata = function () {
                 var htmstr='';
-                var head_str = "<html><head><title>采购审批表 - 打印</title><link href='http://" +window.location.host+
-                    "/home/assets/global/plugins/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'/></head><body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
-                if($scope.basket.templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
-                if($scope.basket.templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
-                if($scope.basket.templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
-                if($scope.basket.templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
-                var foot_str = "</body></html>"; //生成尾部
+                var head_str = "<html><head><title>采购审批表 - 打印</title></head>" +
+                    "<body style='margin:0px;'><p><h3 align='center'>成都理工大资产经营有限责任公司</h3></p>"; //先生成头部
+                if($scope.basket.templatesign==1) htmstr = "<p><h4 align='center'>物资采购审批表</h4></p>"+document.getElementById('isMaterialbudget').innerHTML;
+                if($scope.basket.templatesign==2) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isProjectbudget').innerHTML;
+                if($scope.basket.templatesign==3) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isServicebudget').innerHTML;
+                if($scope.basket.templatesign==4) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isOthersbudget').innerHTML;
+                var foot_str = "<table class='table table-bordered table-hover' width='800' border='1' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>采购中心负责人意见</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>财务部负责人意见</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>党总支书记审批</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>总经理审批</td>\n" +
+                    "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
+                    "</tr>\n" +
+                    "<tr ng-show='printsign'>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>备注</td>\n" +
+                    "<td colspan='13' height='40px' style='text-align:right;vertical-align:bottom;' width='650px'> </td>\n" +
+                    "</tr>\n" +
+                    "</table></body></html>"; //生成尾部
                 // var older = document.body.innerHTML;
                 // var new_str = document.getElementById('isMaterialbudget').innerHTML; //获取指定打印区域
                 // var old_str = document.body.innerHTML; //获得原本页面的代码
@@ -175,15 +206,15 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 if($scope.Midifysign == false){
                     if(!$scope.basket.ambudgettype_id) $scope.basket.ambudgettype_id=1;
                     var templatespell = changeJsonData($scope.listnames,'id',$scope.basket.ambudgettype_id,'spell');
-                    $scope.basket.no=currentYear+templatespell+"0001";
+                    $scope.basket.no=currentYear+templatespell+"001";
                     Restangular.all('/icon-basket-loaded-add/getLastNo').getList().then(function (accounts) {
                         var tmpno = 0;
                         for(var i=0;i<accounts.length;i++){
                             if(currentYear==accounts[i].no.substr(0,4)){
-                                if(accounts[i].no.substr(6.4) > tmpno) tmpno = Number(accounts[i].no.substr(6.4))+1;
-                                $scope.basket.no = currentYear+templatespell+padleft(tmpno,5);
+                                if(accounts[i].no.substr(6,3) > tmpno) tmpno = Number(accounts[i].no.substr(6,3))+1;
+                                $scope.basket.no = currentYear+templatespell+padleft(tmpno,3);
                             }else {
-                                $scope.basket.no=currentYear+templatespell+"0001";
+                                $scope.basket.no=currentYear+templatespell+"001";
                             }
                         }
                     });

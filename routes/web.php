@@ -12,7 +12,8 @@
 */
 //phpinfo();exit;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home/admin_4_angularjs/login');
+//    return view('welcome');
 });
 
 Auth::routes();
@@ -150,9 +151,9 @@ Route::group(['prefix' => '/sys-privilege-management'], function () {
 Route::group(['prefix' => '/user-department'], function () {
     Route::get('','unitgrpController@index')->middleware(['permission:user-department.allunits']); // user-department.allunits
     Route::get('create','unitgrpController@create')->middleware(['permission:user-department.create']); // user-department.create
-    Route::put('{dcmodel}','unitgrpController@update')->middleware(['permission:user-department.update']); // user-department.update
+    Route::put('{unitgrp}','unitgrpController@update')->middleware(['permission:user-department.update']); // user-department.update
     Route::post('','unitgrpController@store')->middleware(['permission:user-department.store']); //user-department.store
-    Route::delete('{permission}','unitgrpController@destroy')->middleware(['permission:user-department.destroy']); // user-department.destroy
+    Route::delete('{unitgrp}','unitgrpController@destroy')->middleware(['permission:user-department.destroy']); // user-department.destroy
 
     //得到机构的树形
     Route::get('tree','unitgrpController@getTree')->middleware(['permission:user-department.tree']); // user-department.tree

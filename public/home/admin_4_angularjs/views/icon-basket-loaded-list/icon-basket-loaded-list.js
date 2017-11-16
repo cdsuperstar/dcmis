@@ -152,7 +152,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term:1,
+                            // term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
@@ -160,7 +160,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
                         filter: {
-                            term:1,
+                            // term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -342,8 +342,11 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
 
             };
 
+            $scope.toggleFilteringsign = '筛选数据';
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 

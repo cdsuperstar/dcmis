@@ -111,7 +111,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     {name: '项目名称', field: 'name',width: '200',enableCellEdit: false,},
                     {name: '审批状态', field: 'appstate',width: '100',enableCellEdit: false,enableColumnMenu: true,
                         filter: {
-                            term: '审批未通过',
+                            // term: '审批未通过',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '审批通过', label: '审批通过' },
@@ -122,7 +122,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
+                            // term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -140,7 +140,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term:1,
+                            // term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
@@ -148,7 +148,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
-                            term:1,
+                            // term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -156,7 +156,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
-                            term:3,
+                            // term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -165,7 +165,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                         { id: '是', isterm: '是' },
                         { id: '否', isterm: '否' }],
                         filter: {
-                            term: '',
+                            // term: '',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [
                                 { value: '是', label: '是' },
@@ -735,8 +735,11 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 promise.reject();
             };
 
+            $scope.toggleFilteringsign = '筛选数据';
             $scope.Filteringtoggle = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
@@ -744,9 +747,9 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 $scope.gridApi.grid.refresh();
             };
             $scope.singleFilter = function( renderableRows ){
-                // console.log($scope.basket.syear);
+                // console.log($scope.basket);
                 var yearmatcher = new RegExp($scope.basket.syear);
-                var unitmatcher = Number($scope.basket.unitgrp_id);
+                var unitmatcher = Number($scope.basket.unitgrps_id);
                 var namematcher = new RegExp($scope.basket.name);
 
                 // var matcher = new RegExp($scope.filterValue);
@@ -758,7 +761,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     if ( $scope.basket.syear && !row.entity['syear'].match(yearmatcher) ){
                         match = false;
                     }
-                    if ( $scope.basket.ambudgettype_id && $scope.basket.ambudgettype_id != row.entity['ambudgettype_id']){
+                    if ( $scope.basket.ambudgettypes_id && $scope.basket.ambudgettypes_id != row.entity['ambudgettype_id']){
                         match = false;
                     }
                     if ( unitmatcher && unitmatcher != Number(row.entity['unitgrp_id'])){
