@@ -101,8 +101,9 @@
                             <button id="addData" type="button" class="btn btn-success" ng-click="addbranchData()"><i class="fa fa-pencil"></i> 登记领用信息 </button>
                             <button id="delData" type="button" class="btn btn-danger" confirmation-needed="确定要删除这些领用数据吗？" ng-click="delbranchData()"><i class="fa fa-trash"></i> 删除领用信息</button>
                             <button id="saveData" type="button"  class="btn btn-info" ng-click="editbranchData()"><i class="fa fa-check"></i> 保存数据 </button>
-                            <button id='toggleFiltering' type="button"class="btn yellow" ng-click="togglebranchFiltering()" ><i class="fa fa-search"></i> 数据筛选 </button>
-                            </div>
+                            <button id='toggleFiltering' type="button"class="btn yellow" ng-click="togglebranchFiltering()" ><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
+
+                        </div>
                             {{--<div class="btn-group btn-group-solid pull-right">--}}
                             {{--<button type="button" class="btn green-meadow"><i class="fa fa-file-excel-o"> </i>  导出数据  </button>--}}
                             {{--</div>--}}
@@ -116,72 +117,72 @@
 
     <div class="table-toolbar">
 
-        <button id="saveData" type="button"  class="btn btn-primary" ng-click="editData()"><i class="fa fa-check"></i> 保存数据 </button>
-        <div class="btn-group btn-group-solid">
-            <button type="button" id="icon-basketset" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i> 采购方式  <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu" >
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','取消采购')"> 采购方式【取消采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','自行采购')"> 采购方式【自行采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','询价采购')"> 采购方式【询价采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','定点采购')"> 采购方式【定点采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','公开招标')"> 采购方式【公开招标】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','邀请招标')"> 采购方式【邀请招标】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','竞争性谈判')"> 采购方式【竞争性谈判】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','单一来源采购')"> 采购方式【单一来源采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchway','协议供货采购')"> 采购方式【协议供货采购】 </a>
-                </li>
-            </ul>
-        </div>
-        <div class="btn-group btn-group-solid">
-            <button type="button" id="icon-basketset" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> 状态标记  <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu" >
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchstate','已采购')"> 采购状态【已采购】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('purchstate','未采购')"> 采购状态【未采购】 </a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('reimstate','已报销')"> 报销状态【已报销】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('reimstate','未报销')"> 报销状态【未报销】 </a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('asstate','固定资产')"> 物资状态【固定资产】 </a>
-                </li>
-                <li>
-                    <a href="javascript:;" ng-click="changeStatus('asstate','非固定资产')"> 物资状态【非固定资产】 </a>
-                </li>
-            </ul>
-        </div>
-        <button id='toggleFiltering' type="button"class="btn btn-warning" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选数据 </button>
+        <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据 </button>
-
         <div class="btn-group btn-group-solid pull-right">
             <button id="refreshButton" type="button"  class="btn green-meadow" ng-click="exportxls()"><i class="fa fa-file-excel-o"> </i>  导出Excel</button>
         </div>
     </div>
-    <div id="amassetmangementaddgrid" ui-grid="gridOptions"  ui-grid-edit ui-grid-row-edit ui-grid-pinning ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementaddgrid"></div>
+    <div id="amassetmangementaddgrid" ui-grid="gridOptions" ui-grid-pinning ui-grid-exporter ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementaddgrid"></div>
+    {{--<button id="saveData" type="button"  class="btn btn-primary" ng-click="editData()"><i class="fa fa-check"></i> 保存数据 </button>--}}
+    {{--<div class="btn-group btn-group-solid">--}}
+        {{--<button type="button" id="icon-basketset" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i> 采购方式  <i class="fa fa-angle-down"></i>--}}
+        {{--</button>--}}
+        {{--<ul class="dropdown-menu" >--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','取消采购')"> 采购方式【取消采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','自行采购')"> 采购方式【自行采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','询价采购')"> 采购方式【询价采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','定点采购')"> 采购方式【定点采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','公开招标')"> 采购方式【公开招标】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','邀请招标')"> 采购方式【邀请招标】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','竞争性谈判')"> 采购方式【竞争性谈判】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','单一来源采购')"> 采购方式【单一来源采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchway','协议供货采购')"> 采购方式【协议供货采购】 </a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+    {{--<div class="btn-group btn-group-solid">--}}
+        {{--<button type="button" id="icon-basketset" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> 状态标记  <i class="fa fa-angle-down"></i>--}}
+        {{--</button>--}}
+        {{--<ul class="dropdown-menu" >--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchstate','已采购')"> 采购状态【已采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('purchstate','未采购')"> 采购状态【未采购】 </a>--}}
+            {{--</li>--}}
+            {{--<li class="divider"> </li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('reimstate','已报销')"> 报销状态【已报销】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('reimstate','未报销')"> 报销状态【未报销】 </a>--}}
+            {{--</li>--}}
+            {{--<li class="divider"> </li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('asstate','固定资产')"> 物资状态【固定资产】 </a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:;" ng-click="changeStatus('asstate','非固定资产')"> 物资状态【非固定资产】 </a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+    {{--<div id="amassetmangementaddgrid" ui-grid="gridOptions"  ui-grid-edit ui-grid-row-edit ui-grid-pinning ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementaddgrid"></div>--}}
 </div>

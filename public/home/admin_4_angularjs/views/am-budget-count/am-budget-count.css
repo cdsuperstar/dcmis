@@ -10,13 +10,13 @@
 .cellinfo { background-color: #f9e491 !important; }
 
 .budgetcountgrid .ui-grid-header{
-    background: #F3C200;
+    background: #f38811;
 }
 .budgetcountgrid .ui-grid-top-panel{
-    background: #F3C200;
+    background: #f38811;
 }
 .budgetcountgrid .ui-grid-top-panel-background{
-    background: #F3C200;
+    background: #f38811;
 }
 .budgetcountgrid .ui-grid-header-cell{
     color:#ffffff;

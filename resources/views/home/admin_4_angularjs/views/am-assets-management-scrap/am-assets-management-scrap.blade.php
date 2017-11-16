@@ -54,7 +54,8 @@
                 {{--</li>--}}
             {{--</ul>--}}
         {{--</div>--}}
-        <button id='toggleFiltering' type="button"class="btn btn-warning" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> 筛选数据 </button>
+        <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
+
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据 </button>
 
         <div class="btn-group btn-group-solid pull-right">

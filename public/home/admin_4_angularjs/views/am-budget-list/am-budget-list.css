@@ -10,16 +10,16 @@
 .cellinfo { background-color: #f9e491 !important; }
 
 .ambudgetlistgrid .ui-grid-header{
-    background: #F3C200;
+    background: #f38811;
 }
 .ambudgetlistgrid .ui-grid-top-panel{
-    background: #F3C200;
+    background: #f38811;
 }
 .ambudgetlistgrid .ui-grid-top-panel-background{
-    background: #F3C200;
+    background: #f38811;
 }
 .ambudgetlistgrid .ui-grid-header-cell{
-    color:#ffffff;
+    color:#f38811;
 }
 .ambudgetlistgrid .ui-grid-header-cell-label{
     color:#ffffff;
