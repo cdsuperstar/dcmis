@@ -747,9 +747,9 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                 $scope.gridApi.grid.refresh();
             };
             $scope.singleFilter = function( renderableRows ){
-                // console.log($scope.basket.syear);
+                // console.log($scope.basket);
                 var yearmatcher = new RegExp($scope.basket.syear);
-                var unitmatcher = Number($scope.basket.unitgrp_id);
+                var unitmatcher = Number($scope.basket.unitgrps_id);
                 var namematcher = new RegExp($scope.basket.name);
 
                 // var matcher = new RegExp($scope.filterValue);
@@ -761,7 +761,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     if ( $scope.basket.syear && !row.entity['syear'].match(yearmatcher) ){
                         match = false;
                     }
-                    if ( $scope.basket.ambudgettype_id && $scope.basket.ambudgettype_id != row.entity['ambudgettype_id']){
+                    if ( $scope.basket.ambudgettypes_id && $scope.basket.ambudgettypes_id != row.entity['ambudgettype_id']){
                         match = false;
                     }
                     if ( unitmatcher && unitmatcher != Number(row.entity['unitgrp_id'])){
