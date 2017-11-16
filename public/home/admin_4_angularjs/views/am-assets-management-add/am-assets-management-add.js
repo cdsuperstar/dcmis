@@ -359,9 +359,11 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 dcEdition.userdate =  date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+ date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); //获得日期字串
                                 dcEdition.state = "正常";
                                 dcEdition.amsubbudget_id = $scope.tmpobjdata;
-                                var tmpdata = new Date(dcEdition.validdate);
-                                if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
-                                // console.log(dcEdition);
+                                if(dcEdition.validdate != undefined){
+                                    var tmpdata = new Date(dcEdition.validdate);
+                                    if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
+                                }
+                                console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
                                     function (res) {
