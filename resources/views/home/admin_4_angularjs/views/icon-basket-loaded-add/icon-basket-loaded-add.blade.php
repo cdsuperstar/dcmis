@@ -468,7 +468,7 @@
                 <div class="table-scrollable" uib-collapse="isMaterialbudget" id="isMaterialbudget">
                     <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
                         <tr>
-                            <td>编号：<font color="red">@{{ basket.no }}</font></td>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
                         </tr>
                     </table>
                     <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
@@ -528,10 +528,12 @@
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isProjectbudget" id="isProjectbudget">
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
                     <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
-                        <thead align="left">
-                        编号：<font color="red">@{{ basket.no }}</font>
-                        </thead>
                         <tbody>
                         <tr>
                             <td colspan="3" style="text-align:center;">预算年度</td>
@@ -583,10 +585,12 @@
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isServicebudget" id="isServicebudget">
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
                     <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
-                        <thead align="left">
-                        编号：<font color="red">@{{ basket.no }}</font>
-                        </thead>
                         <tbody>
                         <tr>
                             <td colspan="3" style="text-align:center;">预算年度</td>
@@ -638,10 +642,12 @@
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isOthersbudget" id="isOthersbudget">
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
                     <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
-                        <thead align="left">
-                        编号：<font color="red">@{{ basket.no }}</font>
-                        </thead>
                         <tbody>
                         <tr>
                             <td colspan="3" style="text-align:center;">预算年度</td>

@@ -112,11 +112,11 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             $scope.printformdata = function () {
                 var htmstr='';
                 var head_str = "<html><head><title>采购审批表 - 打印</title></head>" +
-                    "<body style='margin:0px;'><p><h3 align='center'>成都理工大资产经营有限责任公司</h3></p>"; //先生成头部
-                if($scope.basket.templatesign==1) htmstr = "<p><h4 align='center'>物资采购审批表</h4></p>"+document.getElementById('isMaterialbudget').innerHTML;
-                if($scope.basket.templatesign==2) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isProjectbudget').innerHTML;
-                if($scope.basket.templatesign==3) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isServicebudget').innerHTML;
-                if($scope.basket.templatesign==4) htmstr = "<p><h4 align='center'>工程/服务采购审批表</h4></p>"+document.getElementById('isOthersbudget').innerHTML;
+                    "<body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p>"; //先生成头部
+                if($scope.basket.templatesign==1) htmstr = "<p><h3 align='center'>物资采购审批表</h3></p>"+document.getElementById('isMaterialbudget').innerHTML;
+                if($scope.basket.templatesign==2) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isProjectbudget').innerHTML;
+                if($scope.basket.templatesign==3) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isServicebudget').innerHTML;
+                if($scope.basket.templatesign==4) htmstr = "<p><h3 align='center'>工程/服务采购审批表</h3></p>"+document.getElementById('isOthersbudget').innerHTML;
                 var foot_str = "<table class='table table-bordered table-hover' width='800' border='1' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
                     "<tr ng-show='printsign'>\n" +
                     "<td colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</td>\n" +
