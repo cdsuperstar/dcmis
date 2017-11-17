@@ -87,9 +87,10 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
             //修改状态初始化结束
 
             $scope.saveformdata = function() {
-                var totalminus = $scope.yearbudgettotal - $scope.addactrualbudgettotal - $scope.wztotalimdata; //页面检测申报金额是否超限
+                var totalminus = $scope.yearbudgettotal - $scope.addactrualbudgettotal - $scope.wztotalimdata; //页面检测物资申报金额是否超限
+                var totalotminus = $scope.yearbudgettotal - $scope.addactrualbudgettotal - $scope.totalimdata; //页面检测工程申报金额是否超限
                 // console.log(totalminus);
-                if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0 || totalminus < 0){
+                if(!$scope.basket.name || $scope.imdata == null || angular.equals({}, $scope.imdata) || $scope.imdata.length == 0 || totalminus < 0 || totalotminus < 0){
                     showMsg('必要信息未填写！( 项目名称未填写 或 数据列表为空 或 申报金额超限! )', '错误', 'ruby');
                     return false;
                 }else {
