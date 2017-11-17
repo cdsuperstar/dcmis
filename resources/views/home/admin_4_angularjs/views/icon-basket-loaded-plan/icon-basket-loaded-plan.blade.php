@@ -149,7 +149,7 @@
         </div>
         <div class="table-toolbar" style="margin-top: 0px;">
             <button id="saveData" type="button"  class="btn btn-info" ng-click="editData()"><i class="fa fa-check"></i> 保存数据 </button>
-            <button type="button" id='toggleFiltering' ng-click="Filteringtoggle()" class="btn yellow"><i class="fa fa-search"></i> 筛选数据 </button>
+            <button type="button" id='toggleFiltering' ng-click="Filteringtoggle()" class="btn yellow"><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
             <div class="btn-group btn-group-solid">
                 <button type="button" class="btn green-seagreen dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> 批量受理申请
                     <span class="caret"></span>

@@ -123,7 +123,7 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', 'Restangular', 
                     if (percent < 30) percolor = "progress-bar-danger";
                     tmpu = {
                         percolor: percolor,
-                        percent: percent,
+                        percent: percent.toFixed(2),
                         no: accounts[i].no,
                         name: accounts[i].name,
                         states: states

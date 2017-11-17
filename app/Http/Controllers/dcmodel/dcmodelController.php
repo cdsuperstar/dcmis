@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Config;
+use Illuminate\Support\Facades\Auth;
 use Log;
 
 class dcmodelController extends Controller
@@ -186,9 +187,16 @@ class dcmodelController extends Controller
 
     public function getModTree()
     {
+        $tmpArray = array();
+        foreach (Auth::user()->roles()->get() as $k => $vObj) {
+            $tmpArray = array_merge($tmpArray, $vObj->models()->select(['id'])->where('ismenu',1)->get()->pluck('id')->toArray());
+        }
         $mdTreeJson = dcMdGrp::with(['dcmodel' => function ($q) {
             $q->addSelect(array('id', 'name', 'title', 'ismenu', 'icon', 'url', 'templateurl', 'files'));
-        }])->get()->tohierarchy();
+        }])
+            ->whereIn('dcmodel_id',$tmpArray)
+            ->get()
+            ->tohierarchy();
         return response($mdTreeJson);
     }
 

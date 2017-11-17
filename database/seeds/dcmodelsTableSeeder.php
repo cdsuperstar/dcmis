@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use Illuminate\Database\Seeder;
 
@@ -30,7 +30,7 @@ INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (32, 'sys-function', '系统功能', 1, 'icon-disc', '/sys-function.html', NULL, NULL, 'dcviews/sys-function', 'views/sys-function/sys-function.css,views/sys-function/sys-function.js,js/controllers/GeneralPageController.js', '2017-02-14 09:57:51', '2017-02-16 21:31:08');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (34, 'sys-matters', '事项提醒', 1, 'icon-calendar', '/sys-matters.html', NULL, NULL, 'dcviews/sys-matters', 'views/sys-matters/sys-matters.css,views/sys-matters/sys-matters.js,js/controllers/GeneralPageController.js', '2017-02-14 10:02:16', '2017-02-16 21:31:08');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (33, 'sys-announcement', '系统公告', 1, 'fa fa-bullhorn', '/sys-announcement.html', NULL, NULL, 'dcviews/sys-announcement', 'views/sys-announcement/sys-announcement.css, views/sys-announcement/sys-announcement.js, js/controllers/GeneralPageController.js', '2017-02-14 10:00:22', '2017-02-16 21:31:08');
-INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (1, 'root', 'System1', 0, '', '', NULL, NULL, '', '', '2015-01-15 06:17:09', '2017-02-18 19:03:15');
+INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (1, 'root', 'System1', 1, '', '', NULL, NULL, '', '', '2015-01-15 06:17:09', '2017-02-18 19:03:15');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (5, 'sys-role', '角色管理', 1, 'icon-globe', '/sys-role.html', NULL, NULL, 'dcviews/sys-role', 'views/sys-role/sys-role.css,../assets/global/plugins/jstree/dist/themes/default/style.min.css,views/sys-role/sys-role.js,../assets/global/plugins/jstree/dist/jstree.min.js,js/controllers/GeneralPageController.js', '1989-04-28 02:26:40', '2017-01-22 08:22:51');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (18, 'am-budget-management', '预算设置', 1, 'icon-screen-tablet', '/am-budget-management.html', NULL, NULL, 'dcviews/am-budget-management', 'views/am-budget-management/am-budget-management.css,views/am-budget-management/am-budget-management.js,js/controllers/GeneralPageController.js,', '2017-01-22 08:43:00', '2017-03-02 10:46:28');
 INSERT INTO public.dcmodels (id, name, title, ismenu, icon, url, syscfg, usercfg, templateurl, files, created_at, updated_at) VALUES (19, 'am-budget-list', '预算查询', 1, 'icon-notebook', '/am-budget-list.html', NULL, NULL, 'dcviews/am-budget-list', 'views/am-budget-list/am-budget-list.css,views/am-budget-list/am-budget-list.js,js/controllers/GeneralPageController.js,', '2017-01-22 08:43:57', '2017-03-02 10:46:28');
@@ -88,16 +88,6 @@ INSERT INTO public.dcmdgrps (id, parent_id, lft, rgt, depth, dcmodel_id, created
 
 INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (1, null, 1, 2, 0, 'root', '系统根机构', '2017-02-09 14:16:27', '2017-02-09 14:16:37');
 INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (3, 1, 2, 3, 1, '理工大资产经营有限公司', null, '2017-02-11 18:02:57', '2017-02-11 18:06:31');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (4, 1, 4, 5, 1, '办公室', null, '2017-02-11 18:03:22', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (5, 1, 6, 7, 1, '采购科', null, '2017-02-11 18:03:34', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (6, 1, 8, 9, 1, '云乐购办公室', null, '2017-02-11 18:04:00', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (7, 1, 10, 11, 1, '理工宾馆', null, '2017-02-11 18:04:18', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (8, 1, 12, 13, 1, '理工超市', null, '2017-02-11 18:04:30', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (9, 1, 14, 15, 1, '中兴物业管理有限公司', null, '2017-02-11 18:04:46', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (10, 1, 16, 17, 1, '物业管理中心', null, '2017-02-11 18:04:56', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (11, 1, 18, 19, 1, '物业管理办公室', null, '2017-02-11 18:05:07', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (12, 1, 20, 21, 1, '物业管理工程科', null, '2017-02-11 18:05:20', '2017-02-11 18:06:32');
-INSERT INTO public.unitgrps (id, parent_id, lft, rgt, depth, name, brief, created_at, updated_at) VALUES (13, 1, 22, 23, 1, '商贸中心', null, '2017-02-11 18:05:38', '2017-02-11 18:06:32');
 
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (2, 'sys-model.create', '创建模块', null, '2017-02-18 14:27:35', '2017-02-18 14:27:35');
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (1, 'sys-model.allmodels', '查询所有模块', null, '2017-02-18 14:25:09', '2017-02-18 14:27:48');
@@ -138,6 +128,7 @@ INSERT INTO public.permissions (id, name, display_name, description, created_at,
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (37, 'sys-model.store', '保存模块', null, '2017-02-18 15:17:32', '2017-02-18 15:17:32');
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (38, 'sys-users.store', '保存用户', null, '2017-02-18 15:56:03', '2017-02-18 15:56:03');
 INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (39, 'user-department.store', '保存机构', null, '2017-02-18 16:08:51', '2017-02-18 16:08:51');
+INSERT INTO public.permissions (id, name, display_name, description, created_at, updated_at) VALUES (41, 'sys-role.store', '保存角色 ', null, '2017-02-18 16:08:51', '2017-02-18 16:08:51');
 
 INSERT INTO public.roles (id, name, display_name, description, created_at, updated_at) VALUES (1, 'root', '根用户角色', null, '2017-02-18 17:08:13', '2017-02-18 17:08:13');
 
@@ -182,27 +173,12 @@ INSERT INTO public.permission_role (permission_id, role_id) VALUES (36, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (37, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (38, 1);
 INSERT INTO public.permission_role (permission_id, role_id) VALUES (39, 1);
+INSERT INTO public.permission_role (permission_id, role_id) VALUES (41, 1);
 
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (1, 'lb01', '物资预算', 'wz', '1', '2017-07-23 15:17:11', '2017-07-23 15:17:11');
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (2, 'lb02', '工程预算', 'gc', '2', '2017-07-23 15:17:45', '2017-07-23 15:17:45');
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (3, 'lb03', '服务预算', 'fw', '3', '2017-07-23 15:18:05', '2017-07-23 15:18:05');
 INSERT INTO public.ambudgettypes (id, no, type, spell, template, created_at, updated_at) VALUES (4, 'lb04', '其他预算', 'qt', '4', '2017-07-23 15:18:27', '2017-07-23 15:18:27');
-
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (1, '2017', 1, 3, 10000, null, '2017-07-23 15:20:17', '2017-07-23 15:20:17');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (2, '2017', 2, 3, 50000, null, '2017-07-23 15:20:28', '2017-07-23 15:20:28');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (3, '2017', 3, 3, 10000, null, '2017-07-23 15:20:35', '2017-07-23 15:20:35');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (4, '2017', 4, 3, 10000, null, '2017-07-23 15:20:45', '2017-07-23 15:20:45');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (5, '2017', 1, 4, 10000, null, '2017-07-23 15:20:59', '2017-07-23 15:20:59');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (6, '2017', 2, 4, 30000, null, '2017-07-23 15:21:09', '2017-07-23 15:21:09');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (7, '2017', 3, 4, 3000, '', '2017-07-23 15:21:25', '2017-07-23 15:21:25');
-INSERT INTO public.ambudgets (id, syear, type, unit, total, remark, created_at, updated_at) VALUES (8, '2017', 4, 4, 10000, null, '2017-07-23 15:21:41', '2017-07-23 15:22:44');
-
-INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (4, '重庆万友科技有限公司', '李荣', '王鹏', '023-92312131', '18502138972', '重庆市渝中区马鞍北路89号', '主要负责我公司基础物资采购', '2017-07-23 18:00:26', '2017-07-23 18:07:18');
-INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (5, '成都理想有限公司', '张望', '李阿斯', '028-86232943', '13987620965', '成都市太升南路12号', '主要是耗材采购', '2017-07-23 18:02:02', '2017-07-23 18:07:18');
-INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (7, '测试公司', '阿道夫', '额头湾', '028-34829231', '21231233212', '989823', '23424', '2017-07-23 18:05:08', '2017-07-23 18:07:18');
-INSERT INTO public.amsuppliers (id, compname, principal, contacter, tel, phone, compaddr, remark, created_at, updated_at) VALUES (6, '成都奥斯特教育咨询有限公司', '杨珊', '林冉', '028-643234923', '18292302131', '成都市高新区天府大道北段12号', '主要负责培训事宜', '2017-07-23 18:03:35', '2017-07-23 18:07:18');
-
-INSERT INTO public.userprofiles (id, no, nickname, sex, phone, birth, tel, address, duties, unitid, signpic, memo, created_at, updated_at) VALUES (1, '10201201234', '测试', '男', '1234567890', '2017-07-24', '000-123455678', '办公室地址', null, 3, 'signpic5975ee7a8612b', '个人简介', '2017-07-24 20:56:26', '2017-07-24 20:56:55');
 
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3464, '各类纸张', 'wz000002', 'A4复印纸(彩色)', '包', 'a4fyzc', '2017-07-23 15:17:00', '2017-07-23 15:17:00');
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3465, '各类纸张', 'wz000003', 'A3复印纸', '包', 'a3fyz', '2017-07-23 15:17:00', '2017-07-23 15:17:00');
@@ -705,36 +681,19 @@ INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, 
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3962, '电线电源', 'wz000500', 'USB连接线', '根', 'USBljx', '2017-07-23 15:17:00', '2017-07-23 15:17:00');
 INSERT INTO public.ambaseass (id, class, no, name, measunit, spell, created_at, updated_at) VALUES (3963, '插头插座', 'wz000501', '插头', '个', 'ct', '2017-07-23 15:17:00', '2017-07-23 15:17:00');
 
-
-INSERT INTO public.amapplications (id, syear, unitgrps_id, requester, no, name, ambudgettypes_id, appstate, apper, appdate, progress, isterm, termreason, created_at, updated_at) VALUES (1, '2017', '3', 1, '2017wz0001', '2017年度办公室物资材料', 1, null, null, null, null, null, null, '2017-07-26 20:30:27', '2017-07-26 20:30:27');
-INSERT INTO public.amapplications (id, syear, unitgrps_id, requester, no, name, ambudgettypes_id, appstate, apper, appdate, progress, isterm, termreason, created_at, updated_at) VALUES (2, '2017', '3', 1, '2017gc0002', '2017公司道路日常维护', 2, null, null, null, null, null, null, '2017-07-26 20:37:38', '2017-07-26 20:37:38');
-INSERT INTO public.amapplications (id, syear, unitgrps_id, requester, no, name, ambudgettypes_id, appstate, apper, appdate, progress, isterm, termreason, created_at, updated_at) VALUES (3, '2017', '3', 1, '2017fw0003', '资产公司咨询服务', 3, null, null, null, null, null, null, '2017-07-26 21:15:25', '2017-07-26 21:15:25');
-INSERT INTO public.amapplications (id, syear, unitgrps_id, requester, no, name, ambudgettypes_id, appstate, apper, appdate, progress, isterm, termreason, created_at, updated_at) VALUES (4, '2017', '3', 1, '2017qt0004', '2017公司员工培训事宜', 4, null, null, null, null, null, null, '2017-07-26 21:17:49', '2017-07-26 21:17:49');
-
-INSERT INTO public.amasbudgets (id, amapplication_id, wzno, wzsmodel, amt, bdg, price, purchway, purchstate, reimstate, contrno, asstate, total, remark, created_at, updated_at) VALUES (1, 1, 'wz000003', '223', 11, 11, null, null, null, null, null, null, null, '223123', '2017-07-26 20:30:27', '2017-07-26 20:30:27');
-INSERT INTO public.amasbudgets (id, amapplication_id, wzno, wzsmodel, amt, bdg, price, purchway, purchstate, reimstate, contrno, asstate, total, remark, created_at, updated_at) VALUES (2, 1, 'wz000003', '11', 11, 11, null, null, null, null, null, null, null, '11', '2017-07-26 20:30:27', '2017-07-26 20:30:27');
-INSERT INTO public.amasbudgets (id, amapplication_id, wzno, wzsmodel, amt, bdg, price, purchway, purchstate, reimstate, contrno, asstate, total, remark, created_at, updated_at) VALUES (3, 1, 'wz000349', '343', 34, 345, null, null, null, null, null, null, null, '345', '2017-07-26 20:30:27', '2017-07-26 20:30:27');
-INSERT INTO public.amasbudgets (id, amapplication_id, wzno, wzsmodel, amt, bdg, price, purchway, purchstate, reimstate, contrno, asstate, total, remark, created_at, updated_at) VALUES (4, 1, 'wz000366', '23', 23, 345, null, null, null, null, null, null, null, '345', '2017-07-26 20:30:27', '2017-07-26 20:30:27');
-
-INSERT INTO public.amcontrbudgets (id, amapplication_id, name, bdg, req, addr, picharge, picphone, price, purchway, purchstate, amsupplier_id, reimstate, contrno, total, remark, created_at, updated_at) VALUES (1, 2, '路面铺设', 1000, '2017年8月31日前完工', '公司停车场', '王鹏', '13982192345', null, null, null, null, null, null, null, '包括材料', '2017-07-26 20:37:38', '2017-07-26 20:37:38');
-INSERT INTO public.amcontrbudgets (id, amapplication_id, name, bdg, req, addr, picharge, picphone, price, purchway, purchstate, amsupplier_id, reimstate, contrno, total, remark, created_at, updated_at) VALUES (2, 2, '道路旁边植被维护', 1200, '2017年8月31日前完工', '公司楼下', '李超', '18223412341', null, null, null, null, null, null, null, '包含植被维护材料', '2017-07-26 20:37:38', '2017-07-26 20:37:38');
-
-INSERT INTO public.amsvbudgets (id, amapplication_id, name, bdg, req, addr, picharge, picphone, price, purchway, purchstate, amsupplier_id, reimstate, total, remark, created_at, updated_at) VALUES (1, 3, 'xx产品咨询服务', 1000, '2017年3月-2018年5月', '公司咨询室', '李哒', '1920912333', null, null, null, null, null, null, '主要包含产品设计及推广咨询服务', '2017-07-26 21:15:25', '2017-07-26 21:15:25');
-
-INSERT INTO public.amotbudgets (id, amapplication_id, name, bdg, otremark, addr, picharge, picphone, price, purchway, purchstate, amsupplier_id, reimstate, total, remark, created_at, updated_at) VALUES (1, 4, '岗前培训', 2000, '请vxx公司进行', '红星路二段18号', '王鸿', '18512334123', null, null, null, null, null, null, '主要培训公司文化及岗位责任等。', '2017-07-26 21:17:49', '2017-07-26 21:17:49');
-
-
 select setval('dcmdgrps_id_seq', (select max(id) + 1 from dcmdgrps));
 select setval('dcmodels_id_seq', (select max(id) + 1 from dcmodels));
 select setval('unitgrps_id_seq', (select max(id) + 1 from unitgrps));
 select setval('permissions_id_seq', (select max(id) + 1 from permissions));
 select setval('roles_id_seq', (select max(id) + 1 from roles));
 select setval('ambaseass_id_seq', (select max(id) + 1 from ambaseass));
+select setval('ambudgets_id_seq', (select max(id) + 1 from ambudgets));
 select setval('amapplications_id_seq', (select max(id) + 1 from amapplications));
-select setval('amcontrbudgets_id_seq', (select max(id) + 1 from amcontrbudgets));
-select setval('amasbudgets_id_seq', (select max(id) + 1 from amasbudgets));
-select setval('amsvbudgets_id_seq', (select max(id) + 1 from amsvbudgets));
-select setval('amotbudgets_id_seq', (select max(id) + 1 from amotbudgets));
+select setval('amsubbudgets_id_seq', (select max(id) + 1 from amsubbudgets));
+
+insert into dcmodel_role(dcmodel_id,role_id) select id,1 from dcmodels;
+
+
 
       ");
 

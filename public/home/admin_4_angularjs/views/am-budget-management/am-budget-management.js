@@ -162,11 +162,10 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: $scope.uigrtyear}
                     },
-                    {name: '预算类别', field: 'type',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                    {name: '预算类别', field: 'type',width: '120',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,enableFiltering: true,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.lbHash',lbHash:[],
                         filter: {
-                            term:1,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: []}
                     },
@@ -174,7 +173,6 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
-                            term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -225,8 +223,11 @@ angular.module("MetronicApp").controller('budgetmanagementCtrl',
                 $scope.gridApi.exporter.csvExport( 'all', 'all', myElement );
             };
 
+            $scope.toggleFilteringsign = '筛选数据';
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 

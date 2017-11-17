@@ -6,6 +6,7 @@ use App\models\dcmodel;
 
 use App\User;
 use Illuminate\Http\Request;
+use Auth;
 use Log;
 use Carbon\Carbon;
 use App\models\usermsg;
@@ -47,6 +48,21 @@ class HomeController extends Controller
     {
         $sView = 'home.' . $layout . ".index";
         return view($sView);
+    }
+
+    public function getLockScreen(Request $request,String $layout)
+    {
+        /* @var $user User */
+        $user=$request->user();
+        $sView = 'home.' . $layout . ".lock";
+        if(isset($user->userprofile->signpic)){
+            $signpic=$user->id."/".$user->userprofile->signpic;
+        }else{
+            $signpic="defaultuser";
+
+        }
+        Auth::logout();
+        return view($sView,['name' => $user->name, 'email' => $user->email, 'signpic' => $signpic]);
     }
 
     public function tpl(String $layout, String $tpl)

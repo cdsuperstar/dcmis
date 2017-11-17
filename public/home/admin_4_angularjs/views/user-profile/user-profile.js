@@ -42,7 +42,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                 });
                 //$scope.editdataids=[];
 
-            }
+            };
             $scope.saveRow = function (rowEntity) {
                 //$scope.editdataids.push(rowEntity.id);
                 var promise = $q.defer();
@@ -66,7 +66,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                     {name: '昵称', field: 'nickname',width: '100',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:false},
                     {name: '性别', field: 'sex',width: '60',enableCellEdit: true,enableColumnMenu: true,
                         filter: {
-                            term: '男',
+                            // term: '男',
                             condition: uiGridConstants.filter.STARTS_WITH,
                             flags: { caseSensitive: false },         //区分大小写,
                             type: uiGridConstants.filter.SELECT,
@@ -88,7 +88,7 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
                         filter: {
-                            term:3,
+                            // term:3,
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
@@ -109,8 +109,11 @@ angular.module("MetronicApp").controller('userprofilesCtrl',
 
             $scope.gridOptions.enableGridMenu = true;
 
+            $scope.toggleFilteringsign = '筛选数据';
             $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 

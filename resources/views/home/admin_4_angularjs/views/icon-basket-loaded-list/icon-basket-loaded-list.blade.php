@@ -15,14 +15,14 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
+                        <div id="soucegrid" ui-grid="soucegridOptions" ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize ui-grid-move-columns class="iconbaketsoucelistgrid"></div>
                     </div>
                 </div>
             </div>
         </div>
     </script>
     <div class="table-toolbar">
-        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow"><i class="fa fa-search"></i> 筛选数据 </button>
+        <button type="button" id='toggleFiltering' ng-click="toggleFiltering()" class="btn yellow"><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
         <button type="button" id="delData" class="btn red" confirmation-needed="确定要删除这些数据吗？" ng-click="delData()"><i class="fa fa-trash"></i> 删除数据 </button>
         <button type="button" id="delData" class="btn green" confirmation-needed="确定要修改此项数据吗？（请选择一条数据进行操作）" ng-click="ModifyData()"><i class="fa fa-pencil"></i> 修改数据 </button>
 

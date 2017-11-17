@@ -425,7 +425,7 @@
                     </div>
                     <label class="col-md-2 control-label"> 类  别 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.ambudgettypes_id" theme="bootstrap" readonly="Midifysign" ng-disabled="Midifysign" ng-change="dumpimdata()">
+                        <ui-select ng-model="basket.ambudgettype_id" theme="bootstrap" readonly="Midifysign" ng-disabled="Midifysign" ng-change="dumpimdata()">
                             <ui-select-match placeholder="选择类别...">@{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices
                                     repeat="tmplist.id as tmplist in listnames | filter: $select.search">
@@ -437,7 +437,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label"> 部  门 </label>
                     <div class="col-md-4">
-                        <ui-select ng-model="basket.unitgrps_id" theme="bootstrap" readonly="true" ng-disabled="true" search-enabled="true">
+                        <ui-select ng-model="basket.unitgrp_id" theme="bootstrap" readonly="true" ng-disabled="true" search-enabled="true">
                             <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices
                                     repeat="category.id as category in untigrps | filter: $select.search">
@@ -466,39 +466,41 @@
             </div>
             <div class="tab-pane" id="preview">
                 <div class="table-scrollable" uib-collapse="isMaterialbudget" id="isMaterialbudget">
-                    <table class="table table-bordered table-hover" width="800">
-                        <thead align="left">
-                        <b>编号：</b><font color="red">@{{ basket.no }}</font>
-                        </thead>
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
                         <tbody>
                         <tr>
-                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td colspan="3" style="text-align:center;">预算年度</td>
                             <td>@{{ basket.syear }}</td>
-                            <th colspan="4" style="text-align:center;">项目名称</th>
+                            <td colspan="4" style="text-align:center;">项目名称</td>
                             <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="3" style="text-align:center;">申请单位</td>
                             <td colspan="7">@{{ listunname }} </td>
-                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3" style="text-align:center;">预算类别</td>
                             <td colspan="3">@{{ listtyname }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="3" style="text-align:center;">申请人</td>
                             <td colspan="7">@{{ listusname }}</td>
-                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3" style="text-align:center;">申请日期</td>
                             <td colspan="3">@{{ datetimestr }}</td>
                         </tr>
                         <tr>
-                            <th style="text-align:center;">序号</th>
-                            <th colspan="3" style="text-align:center;">物资编号</th>
-                            <th colspan="3" style="text-align:center;">物资名称</th>
-                            <th colspan="4" style="text-align:center;">规格、型号</th>
-                            <th style="text-align:center;">数量</th>
-                            <th style="text-align:center;">单位</th>
-                            <th style="text-align:center;">预算单价</th>
-                            <th style="text-align:center;">小计</th>
-                            <th style="text-align:center;">备注</th>
+                            <td style="text-align:center;">序号</td>
+                            <td colspan="3" style="text-align:center;">物资编号</td>
+                            <td colspan="3" style="text-align:center;">物资名称</td>
+                            <td colspan="4" style="text-align:center;">规格、型号</td>
+                            <td style="text-align:center;">数量</td>
+                            <td style="text-align:center;">单位</td>
+                            <td style="text-align:center;">预算单价</td>
+                            <td style="text-align:center;">小计</td>
+                            <td style="text-align:center;">备注</td>
                         </tr>
                         {{--按照物资分类排序--}}
                         <tr ng-repeat="wzdata in imdata">
@@ -513,84 +515,62 @@
                             <td>@{{ wzdata.remark }}</td>
                         </tr>
                         <tr>
-                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                            <th colspan="9" style="text-align:center;"> @{{ wztotalimdata | currency:'￥' }}</th>
+                            <td colspan="7" style="text-align:center;">本次预算金额合计（元）</td>
+                            <td colspan="9" style="text-align:center;"> @{{ wztotalimdata | currency:'￥' }}</td>
                         </tr>
                         <tr>
-                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
-                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="4" style="text-align:center;"> </th>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>采购中心负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>财务部负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>备注</th>
-                            <td colspan='13' height='40px' style='text-align:right;vertical-align:bottom;' width='650px'> </td>
+                            <td colspan="4" style="text-align:center;">年预算总金额（元）</td>
+                            <td colspan="6" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</td>
+                            <td colspan="3" style="text-align:center;">累计执行金额（元）</td>
+                            <td colspan="4" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isProjectbudget" id="isProjectbudget">
-                    <table class="table table-bordered table-hover" width="800">
-                        <thead align="left">
-                        <b>编号：</b><font color="red">@{{ basket.no }}</font>
-                        </thead>
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
                         <tbody>
                         <tr>
-                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td colspan="3" style="text-align:center;">预算年度</td>
                             <td>@{{ basket.syear }}</td>
-                            <th colspan="5" style="text-align:center;">项目名称</th>
+                            <td colspan="5" style="text-align:center;">项目名称</td>
                             <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="3" style="text-align:center;">申请单位</td>
                             <td colspan="8">@{{ listunname }} </td>
-                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3" style="text-align:center;">预算类别</td>
                             <td colspan="3">@{{ listtyname }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="3" style="text-align:center;">申请人</td>
                             <td colspan="7">@{{ listusname }}</td>
-                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3" style="text-align:center;">申请日期</td>
                             <td colspan="4">@{{ datetimestr }}</td>
                         </tr>
                         <tr>
-                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                            <th colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</th>
+                            <td colspan="7" style="text-align:center;">本次预算金额合计（元）</td>
+                            <td colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</td>
                         </tr>
                         <tr>
-                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
-                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <td colspan="4" style="text-align:center;">年预算总金额（元）</td>
+                            <td colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</td>
+                            <td colspan="3" style="text-align:center;">累计执行金额（元）</td>
+                            <td colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</td>
                         </tr>
                         <tr>
-                            <th style="text-align:center;">序号</th>
-                            <th colspan="8" style="text-align:center;">工程项目名称</th>
-                            <th colspan="4" style="text-align:center;">工期要求</th>
-                            <th style="text-align:center;">工程预算</th>
-                            <th style="text-align:center;">工程地点</th>
-                            <th colspan="1" style="text-align:center;">负责人</th>
-                            <th colspan="1" style="text-align:center;">负责人电话</th>
+                            <td style="text-align:center;">序号</td>
+                            <td colspan="8" style="text-align:center;">工程项目名称</td>
+                            <td colspan="4" style="text-align:center;">工期要求</td>
+                            <td style="text-align:center;">工程预算</td>
+                            <td style="text-align:center;">工程地点</td>
+                            <td colspan="1" style="text-align:center;">负责人</td>
+                            <td colspan="1" style="text-align:center;">负责人电话</td>
                         </tr>
                         <tr ng-repeat="gcdata in imdata">
                             <td style="text-align:center;">@{{ $index+1 }}</td>
@@ -601,75 +581,53 @@
                             <td colspan="1" >@{{ gcdata.picharge }}</td>
                             <td colspan="1" >@{{ gcdata.picphone }}</td>
                         </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>采购中心负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>财务部负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>备注</th>
-                            <td colspan='13' height='40px' style='text-align:right;vertical-align:bottom;' width='650px'> </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isServicebudget" id="isServicebudget">
-                    <table class="table table-bordered table-hover" width="800">
-                        <thead align="left">
-                        <b>编号：</b><font color="red">@{{ basket.no }}</font>
-                        </thead>
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
                         <tbody>
                         <tr>
-                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td colspan="3" style="text-align:center;">预算年度</td>
                             <td>@{{ basket.syear }}</td>
-                            <th colspan="5" style="text-align:center;">项目名称</th>
+                            <td colspan="5" style="text-align:center;">项目名称</td>
                             <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="3" style="text-align:center;">申请单位</td>
                             <td colspan="8">@{{ listunname }} </td>
-                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3" style="text-align:center;">预算类别</td>
                             <td colspan="3">@{{ listtyname }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="3" style="text-align:center;">申请人</td>
                             <td colspan="7">@{{ listusname }}</td>
-                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3" style="text-align:center;">申请日期</td>
                             <td colspan="4">@{{ datetimestr }}</td>
                         </tr>
                         <tr>
-                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                            <th colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</th>
+                            <td colspan="7" style="text-align:center;">本次预算金额合计（元）</td>
+                            <td colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</td>
                         </tr>
                         <tr>
-                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
-                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <td colspan="4" style="text-align:center;">年预算总金额（元）</td>
+                            <td colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</td>
+                            <td colspan="3" style="text-align:center;">累计执行金额（元）</td>
+                            <td colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</td>
                         </tr>
                         <tr>
-                            <th style="text-align:center;">序号</th>
-                            <th colspan="8" style="text-align:center;">服务内容</th>
-                            <th colspan="4" style="text-align:center;">服务期限</th>
-                            <th style="text-align:center;">预算金额</th>
-                            <th style="text-align:center;">地点</th>
-                            <th colspan="1" style="text-align:center;">负责人</th>
-                            <th colspan="1" style="text-align:center;">负责人电话</th>
+                            <td style="text-align:center;">序号</td>
+                            <td colspan="8" style="text-align:center;">服务内容</td>
+                            <td colspan="4" style="text-align:center;">服务期限</td>
+                            <td style="text-align:center;">预算金额</td>
+                            <td style="text-align:center;">地点</td>
+                            <td colspan="1" style="text-align:center;">负责人</td>
+                            <td colspan="1" style="text-align:center;">负责人电话</td>
                         </tr>
                         <tr ng-repeat="fwdata in imdata">
                             <td style="text-align:center;">@{{ $index+1 }}</td>
@@ -680,75 +638,53 @@
                             <td colspan="1" >@{{ fwdata.picharge }}</td>
                             <td colspan="1" >@{{ fwdata.picphone }}</td>
                         </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>采购中心负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>财务部负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>备注</th>
-                            <td colspan='13' height='40px' style='text-align:right;vertical-align:bottom;' width='650px'> </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="table-scrollable"  uib-collapse="isOthersbudget" id="isOthersbudget">
-                    <table class="table table-bordered table-hover" width="800">
-                        <thead align="left">
-                        <b>编号：</b><font color="red">@{{ basket.no }}</font>
-                        </thead>
+                    <table width="800" border="0" style="border-collapse:collapse;" align="center" cellpadding="8px">
+                        <tr>
+                            <td>编号：<b><font color="red">@{{ basket.no }}</font></b></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-hover" width="800" border="1" style="border-collapse:collapse;" align="center" cellpadding="8px">
                         <tbody>
                         <tr>
-                            <th colspan="3" style="text-align:center;">预算年度</th>
+                            <td colspan="3" style="text-align:center;">预算年度</td>
                             <td>@{{ basket.syear }}</td>
-                            <th colspan="5" style="text-align:center;">项目名称</th>
+                            <td colspan="5" style="text-align:center;">项目名称</td>
                             <td colspan="8">@{{ basket.name }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请单位</th>
+                            <td colspan="3" style="text-align:center;">申请单位</td>
                             <td colspan="8">@{{ listunname }} </td>
-                            <th colspan="3" style="text-align:center;">预算类别</th>
+                            <td colspan="3" style="text-align:center;">预算类别</td>
                             <td colspan="3">@{{ listtyname }} </td>
                         </tr>
                         <tr>
-                            <th colspan="3" style="text-align:center;">申请人</th>
+                            <td colspan="3" style="text-align:center;">申请人</td>
                             <td colspan="7">@{{ listusname }}</td>
-                            <th colspan="3" style="text-align:center;">申请日期</th>
+                            <td colspan="3" style="text-align:center;">申请日期</td>
                             <td colspan="4">@{{ datetimestr }}</td>
                         </tr>
                         <tr>
-                            <th colspan="7" style="text-align:center;">本次预算金额合计（元）</th>
-                            <th colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</th>
+                            <td colspan="7" style="text-align:center;">本次预算金额合计（元）</td>
+                            <td colspan="10" style="text-align:center;"> @{{ totalimdata | currency:'￥'}}</td>
                         </tr>
                         <tr>
-                            <th colspan="4" style="text-align:center;">年预算总金额（元）</th>
-                            <th colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</th>
-                            <th colspan="3" style="text-align:center;">累计执行金额（元）</th>
-                            <th colspan="3" style="text-align:center;"> </th>
+                            <td colspan="4" style="text-align:center;">年预算总金额（元）</td>
+                            <td colspan="7" style="text-align:center;"> @{{ yearbudgettotal | currency:'￥' }}</td>
+                            <td colspan="3" style="text-align:center;">累计执行金额（元）</td>
+                            <td colspan="3" style="text-align:center;"> @{{ addactrualbudgettotal | currency:'￥' }}</td>
                         </tr>
                         <tr>
-                            <th style="text-align:center;">序号</th>
-                            <th colspan="8" style="text-align:center;">采购内容</th>
-                            <th colspan="4" style="text-align:center;">其他说明</th>
-                            <th style="text-align:center;">预算金额</th>
-                            <th style="text-align:center;">地点</th>
-                            <th colspan="1" style="text-align:center;">负责人</th>
-                            <th colspan="1" style="text-align:center;">负责人电话</th>
+                            <td style="text-align:center;">序号</td>
+                            <td colspan="8" style="text-align:center;">采购内容</td>
+                            <td colspan="4" style="text-align:center;">其他说明</td>
+                            <td style="text-align:center;">预算金额</td>
+                            <td style="text-align:center;">地点</td>
+                            <td colspan="1" style="text-align:center;">负责人</td>
+                            <td colspan="1" style="text-align:center;">负责人电话</td>
                         </tr>
                         <tr ng-repeat="qtdata in imdata">
                             <td style="text-align:center;">@{{ $index+1 }}</td>
@@ -758,30 +694,6 @@
                             <td >@{{ qtdata.addr }}</td>
                             <td colspan="1" >@{{ qtdata.picharge }}</td>
                             <td colspan="1" >@{{ qtdata.picphone }}</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>申请单位（部门）负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>采购中心负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>财务部负责人意见</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>总经理审批</th>
-                            <td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
-                        </tr>
-                        <tr ng-show="printsign">
-                            <th colspan='4' style='vertical-align:middle;text-align: center;'>备注</th>
-                            <td colspan='13' height='40px' style='text-align:right;vertical-align:bottom;' width='650px'> </td>
                         </tr>
                         </tbody>
                     </table>

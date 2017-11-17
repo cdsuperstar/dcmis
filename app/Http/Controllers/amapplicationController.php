@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\models\amapplication;
 use Illuminate\Http\Request;
-use App\models\amasbudget;
-use App\models\amcontrbudget;
-use App\models\amsvbudget;
-use App\models\amotbudget;
 use App\models\ambudgettype;
+use App\models\amsubbudget;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -41,7 +38,7 @@ class amapplicationController extends Controller
         //
 //        $datas = amapplication::limit(1)->orderBy('id','desc')->get(["no"]);
         $sTemplate = ambudgettype::where('template', '=', '1')->get();
-        $datas = amapplication::where('requester', '=', $request->user()->id)->where('ambudgettypes_id', '=', $sTemplate->first()->id)->get();
+        $datas = amapplication::where('requester', '=', $request->user()->id)->where('ambudgettype_id', '=', $sTemplate->first()->id)->get();
         return response()->json($datas);
 
     }
@@ -63,20 +60,7 @@ class amapplicationController extends Controller
     public function getSubsFromAppID(amapplication $amapplication)
     {
         //
-        switch ($amapplication->ambudgettypes_id) {
-            case 1:
-                $datas = $amapplication->amasbudgets();
-                break;
-            case 2:
-                $datas = $amapplication->amcontrbudgets();
-                break;
-            case 3:
-                $datas = $amapplication->amsvbudgets();
-                break;
-            case 4:
-                $datas = $amapplication->amotbudgets();
-                break;
-        }
+        $datas = $amapplication->amsubbudgets();
 
         return response()->json($datas->get());
 
@@ -145,39 +129,12 @@ class amapplicationController extends Controller
             foreach ($aSubs as $k => $v) {
                 $cntSub = 0;
                 $v['amapplication_id'] = $rec->id;
-                switch ($aAmapplicationsinut['templatesign']) {
-                    case "1":
-                        if (isset($v["id"])) {
-                            $recSub[$k] = amasbudget::find($v["id"]);
-                            $recSub[$k]->fill($v);
-                        } else {
-                            $recSub[$k] = new amasbudget($v);
-                        }
-                        break;
-                    case "2":
-                        if (isset($v["id"])) {
-                            $recSub[$k] = amasbudget::find($v["id"]);
-                            $recSub[$k]->fill($v);
-                        } else {
-                            $recSub[$k] = new amcontrbudget($v);
-                        }
-                        break;
-                    case "3":
-                        if (isset($v["id"])) {
-                            $recSub[$k] = amasbudget::find($v["id"]);
-                            $recSub[$k]->fill($v);
-                        } else {
-                            $recSub[$k] = new amsvbudget($v);
-                        }
-                        break;
-                    case "4":
-                        if (isset($v["id"])) {
-                            $recSub[$k] = amasbudget::find($v["id"]);
-                            $recSub[$k]->fill($v);
-                        } else {
-                            $recSub[$k] = new amotbudget($v);
-                        }
-                        break;
+                if(!isset($v["amt"]))$v["amt"]=1;
+                if (isset($v["id"])) {
+                    $recSub[$k] = amsubbudget::find($v["id"]);
+                    $recSub[$k]->fill($v);
+                } else {
+                    $recSub[$k] = new amsubbudget($v);
                 }
                 if ($recSub[$k]->save()) $cntSub++;
 

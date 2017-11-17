@@ -151,7 +151,7 @@ angular.module("MetronicApp").controller('rolesCtrl',
                     disableAnimation: true,  //是否显示动画
                     closeByEscape: true
                 }).then(function (dcEdition) {
-
+                    console.log(dcEdition);
                     tableDatas.post(dcEdition).then(
                         function (res) {
                             if (res.success) {
@@ -254,9 +254,12 @@ angular.module("MetronicApp").controller('rolesCtrl',
 
             $scope.gridOptions.enableGridMenu = true;
 
-            $scope.toggleFiltering = function () {
+            $scope.toggleFilteringsign = '筛选数据';
+            $scope.toggleFiltering = function(){
                 $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
-                $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                if(!$scope.gridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                else $scope.toggleFilteringsign = '取消筛选';
+                $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
             $scope.refreshData = function () {
