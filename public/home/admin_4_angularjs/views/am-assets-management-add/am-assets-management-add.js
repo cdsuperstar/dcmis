@@ -305,21 +305,21 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         $scope.tmpobjname = row.entity.ambaseas.name;  //取当前物资的name
 
                         //机构列表
-                        Restangular.all('/user-department').getList().then(function (accounts) {
-                            //console.log(accounts);
-                            var untarr = [];
-                            var tmpu = {};
-                            var unitHash=[];
-                            for(var i=0;i<accounts.length;i++){
-                                //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
-                                tmpu ={value:accounts[i].id,label:accounts[i].name};
-                                unitHash[accounts[i].id]=accounts[i].name;
-                                untarr.push(tmpu);
-                            }
-                            $scope.soucegridOptions.columnDefs[1].filter.selectOptions=untarr;
-                            $scope.soucegridOptions.columnDefs[1].editDropdownOptionsArray=untarr;
-                            $scope.soucegridOptions.columnDefs[1].unitHash =  unitHash ;
-                        });
+                        // Restangular.all('/user-department').getList().then(function (accounts) {
+                        //     //console.log(accounts);
+                        //     var untarr = [];
+                        //     var tmpu = {};
+                        //     var unitHash=[];
+                        //     for(var i=0;i<accounts.length;i++){
+                        //         //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                        //         tmpu ={value:accounts[i].id,label:accounts[i].name};
+                        //         unitHash[accounts[i].id]=accounts[i].name;
+                        //         untarr.push(tmpu);
+                        //     }
+                        //     $scope.soucegridOptions.columnDefs[1].filter.selectOptions=untarr;
+                        //     $scope.soucegridOptions.columnDefs[1].editDropdownOptionsArray=untarr;
+                        //     $scope.soucegridOptions.columnDefs[1].unitHash =  unitHash ;
+                        // });
 
                         //人员列表
                         Restangular.all('/sys-users').getList().then(function (accounts) {
@@ -363,7 +363,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                     var tmpdata = new Date(dcEdition.validdate);
                                     if(tmpdata) dcEdition.validdate = tmpdata.getFullYear()+"-"+(tmpdata.getMonth()+1)+"-"+tmpdata.getDate();
                                 }
-                                console.log(dcEdition);
+                                // console.log(dcEdition);
                                 var posttableDatas = Restangular.all('/amassregs');
                                 posttableDatas.post(dcEdition).then(
                                     function (res) {

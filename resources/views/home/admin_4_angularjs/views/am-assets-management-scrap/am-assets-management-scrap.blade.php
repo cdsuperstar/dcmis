@@ -58,6 +58,8 @@
 
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据 </button>
 
+        <button id="refreshButton" type="button"  class="btn green" ng-click="printoutformdata()"><i class="fa fa-print"></i> 打印出库单 </button>
+
         <div class="btn-group btn-group-solid pull-right">
             <button id="refreshButton" type="button"  class="btn green-meadow" ng-click="exportxls()"><i class="fa fa-file-excel-o"> </i>  导出Excel</button>
         </div>

@@ -8,7 +8,7 @@
                     <div class="portlet-title">
                         <div class="caption font-green-sharp">
                             <i class="icon-settings font-green-sharp"></i>
-                            <span class="caption-subject bold uppercase"> 固定资产登记 </span>
+                            <span class="caption-subject bold uppercase"> 登记领用信息 </span>
                         </div>
                         <div class="tools">
                             <a href="" class="fullscreen"> </a>

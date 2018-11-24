@@ -18,7 +18,7 @@
     <meta content="" name="author"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title data-ng-bind="'资产管理系统 | ' + $state.current.data.pageTitle"></title>
+    <title data-ng-bind="'采购管理系统 | ' + $state.current.data.pageTitle"></title>
     <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->

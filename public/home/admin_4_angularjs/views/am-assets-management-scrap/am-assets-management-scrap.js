@@ -220,6 +220,64 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
+            $scope.printoutformdata = function () {
+                var date = new Date();
+                var userunitid = "";
+                var unitname = "";
+                //数据
+                var datastr = "";
+                var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
+                selectdcmodels.forEach(function (changedata) {
+                        // console.log(changedata.entity.unitgrp_id);
+                        userunitid = changedata.entity.unitgrp_id;
+                        datastr="<tr>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + changedata.entity.amsubbudget.wzno + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + changedata.entity.amsubbudget.ambaseas.name + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + (changedata.entity.amsubbudget.wzsmodel ? changedata.entity.amsubbudget.wzsmodel :"") + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + (changedata.entity.amsubbudget.ambaseas.measunit ? changedata.entity.amsubbudget.ambaseas.measunit : "") + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + changedata.entity.amt + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>¥" + changedata.entity.amsubbudget.price + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>¥" + (changedata.entity.amt * changedata.entity.amsubbudget.price).toFixed(2) + "</td>\n" +
+                            "<td style='vertical-align:middle;text-align: center;'>" + (changedata.entity.amsubbudget.remark ?  changedata.entity.amsubbudget.remark : "") + "</td>\n" +
+                            "</tr>\n" + datastr;
+                    }
+                );
+
+                //机构名称
+                unitname = $scope.gridOptions.columnDefs[6].unitHash[userunitid];
+
+
+                var head_str = "<html><head><title>出库通知单 - 打印</title></head>" +
+                    "<body style='margin:0px;'><p><h2 align='center'>成都理工大资产经营有限责任公司</h2></p><p><h3 align='center'>物资出库通知单</h3></p>"+
+                    "<table class='table table-bordered table-hover' width='800' border='0' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
+                    "<tr>\n" +
+                    "<td width='500' style='vertical-align:middle;text-align: left;'>领用单位："+unitname+"</td>\n" +
+                    "<td width='300' style='vertical-align:middle;text-align: right;'>制单日期："+date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日 "+"</td>\n" +
+                    "</tr>\n" +
+                    "</table>"; //先生成头部
+                var htmstr = "<table class='table table-bordered table-hover' width='800' border='1' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
+                    "<tr>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>编号</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>名称</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>规格</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>单位</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>数量</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>单价</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>总金额</th>\n" +
+                    "<th style='vertical-align:middle;text-align: center;'>备注</th>\n" +
+                    "</tr>\n" + datastr +
+                    "</table></body></html>"; //生成尾部
+
+                var foot_str = "<table class='table table-bordered table-hover' width='800' border='0' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
+                    "<tr>\n" +
+                    "<td colspan='8' style='vertical-align:middle;text-align: left;'>编号：[<b>No 201809001</b>]&nbsp;&nbsp;&nbsp;库管员：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领用人：</td>\n" +
+                    "</tr>\n" +
+                    "</table></body></html>"; //生成尾部
+
+                var newh = window.open();
+                newh.document.body.innerHTML = head_str + htmstr + foot_str; //构建新网页
+            };
+
             $scope.refreshData = function(){
                 $scope.gridOptions.data = [];
                 tableDatas.getList().then(function (accounts) {

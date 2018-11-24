@@ -132,7 +132,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                     "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
                     "</tr>\n" +
                     "<tr ng-show='printsign'>\n" +
-                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>副总经理审批</td>\n" +
+                    "<td colspan='4' style='vertical-align:middle;text-align: center;'>总经理助理审批</td>\n" +
                     "<td colspan='13' height='80px' style='text-align:right;vertical-align:bottom;' width='650px'> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>\n" +
                     "</tr>\n" +
                     "<tr ng-show='printsign'>\n" +

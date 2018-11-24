@@ -7,7 +7,7 @@
 <html lang="en"><!--<![endif]--><!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8">
-    <title>资产管理系统</title>
+    <title>采购管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="login " name="description">
@@ -41,7 +41,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="index.html">
-        <img src="/images/sys/logo-light-login.png" alt="资产管理系统"> </a>
+        <img src="/images/sys/logo-light-login.png" alt="采购管理系统"> </a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
