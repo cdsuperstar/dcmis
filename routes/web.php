@@ -20,6 +20,8 @@ Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
+///home/admin_4_angularjs/login
+//{"email":"10835142@qq.com","password":"aaaaaa","_token":"9sW3i1crBbFXv2LRp8pPCjiNKTkbxT5NoKKPQdq8"}
 Route::group(['prefix' => '/home/{layout}'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm');
     Route::get('dcviews/{view}', 'HomeController@views');
@@ -229,6 +231,9 @@ Route::group(['prefix'=>'/icon-basket-setindex'],function(){
 Route::group(['prefix'=>'/amassregs'],function(){
     Route::get('','amassregController@index'); //
     Route::get('create','amassregController@create'); //
+    //得到最后编号
+    Route::get('getLastNo','amassregController@getLastNo'); //
+
     Route::put('{amassreg}','amassregController@update'); //
     Route::post('','amassregController@store'); //
     Route::delete('{amassreg}','amassregController@destroy'); //

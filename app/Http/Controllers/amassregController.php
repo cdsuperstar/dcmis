@@ -70,6 +70,13 @@ class amassregController extends Controller
         //
     }
 
+    public function getLastNo()
+    {
+        //
+        $datas = amassreg::limit(1)->whereNotNull("outbound")->orderBy('id','desc')->get(["outbound"]);
+        return response()->json($datas);
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

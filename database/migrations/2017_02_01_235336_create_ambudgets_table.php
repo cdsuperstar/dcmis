@@ -161,6 +161,7 @@ class CreateAmbudgetsTable extends Migration
             $table->dateTime('userdate'); //领用时间
             $table->dateTime('validdate')->nullable(); //有效期
             $table->string('state')->nullable(); //物资状态
+            $table->string('outbound')->nullable(); //出库单号
 
             $table->text('remark')->nullable(); //备注
 
