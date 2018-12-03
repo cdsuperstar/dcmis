@@ -17,8 +17,11 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
             };
 
             //获取最大编号
+            $scope.outboundmax="0";
             Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
-                $scope.outboundmax = accounts[0].outbound;
+                if(accounts.length){
+                    $scope.outboundmax = accounts[0].outbound;
+                }
             });
 
             //机构列表
@@ -284,6 +287,8 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     }else {
                         outboundno = currentYear+"0001";
                     }
+
+                    //console.log(outboundno);
                     //写入新编号
                     selectdcmodels.forEach(function (changedata) {
                         changedata.entity.outbound = outboundno;
@@ -297,6 +302,13 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                             });
                         }
                     );
+                    $scope.outboundmax=outboundno;
+                    //Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
+                    //    if(accounts.length){
+                    //        $scope.outboundmax = accounts[0].outbound;
+                    //    }
+                    //});
+
                 }else {
                     outboundno = outno;
                 }
