@@ -5,6 +5,22 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
         function ($scope, Restangular, $q, $filter, ngDialog,uiGridConstants,i18nService) {
             i18nService.setCurrentLang('zh-cn');
 
+            //获得年度列表
+            var date = new Date();
+            var currentYear = date.getFullYear();
+            var currentMonth = date.getMonth();
+
+            //准换数字左边补0
+            var padleft = function(num, n) {
+                var y='00000000000000000000000000000'+num; //爱几个0就几个，自己够用就行
+                return y.substr(y.length-n);
+            };
+
+            //获取最大编号
+            Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
+                $scope.outboundmax = accounts[0].outbound;
+            });
+
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
                 //console.log(accounts);
@@ -17,9 +33,9 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     unitHash[accounts[i].id]=accounts[i].name;
                     untarr.push(tmpu);
                 }
-                $scope.gridOptions.columnDefs[6].filter.selectOptions=untarr;
-                $scope.gridOptions.columnDefs[6].editDropdownOptionsArray=untarr;
-                $scope.gridOptions.columnDefs[6].unitHash =  unitHash ;
+                $scope.gridOptions.columnDefs[7].filter.selectOptions=untarr;
+                $scope.gridOptions.columnDefs[7].editDropdownOptionsArray=untarr;
+                $scope.gridOptions.columnDefs[7].unitHash =  unitHash ;
             });
 
             //人员列表
@@ -32,12 +48,12 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     userHash[accounts[i].id]=accounts[i].name;
                     userarr.push(tmpu);
                 }
-                $scope.gridOptions.columnDefs[5].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[5].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[5].userHash =  userHash ;
-                $scope.gridOptions.columnDefs[11].filter.selectOptions=userarr;
-                $scope.gridOptions.columnDefs[11].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[11].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[6].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[6].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[6].userHash =  userHash ;
+                $scope.gridOptions.columnDefs[12].filter.selectOptions=userarr;
+                $scope.gridOptions.columnDefs[12].editDropdownOptionsArray=userarr;
+                $scope.gridOptions.columnDefs[12].userHash =  userHash ;
             });
 
             var tableDatas = Restangular.all('/am-assets-management-scrap/getAssToScrap');
@@ -75,6 +91,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 showColumnFooter: true,
                 enableCellEditOnFocus:true,
                 columnDefs: [
+                    {name: '出库单编号', field: 'outbound',width: '120',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,},
                     {name: '物资编号', field: 'amsubbudget.wzno',width: '120',enableCellEdit: false,enableColumnMenu: true},
                     {name: '物资名称', field: 'amsubbudget.ambaseas.name',width: '150',enableCellEdit: false,enableColumnMenu: true,pinnedLeft:true,
                         cellTooltip: function(row){ return row.entity.amsubbudget.ambaseas.name; },
@@ -221,14 +238,24 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
             };
 
             $scope.printoutformdata = function () {
+                //生成页面
                 var date = new Date();
                 var userunitid = "";
                 var unitname = "";
                 //数据
                 var datastr = "";
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
+                if(selectdcmodels.length === 0){
+                    showMsg('未选定数据！', '错误', 'ruby');
+                    return false;
+                }else {
+                    var outno = selectdcmodels[0].entity.outbound; //取json第一个值
+                }
+                var outsign = 0;
                 selectdcmodels.forEach(function (changedata) {
-                        // console.log(changedata.entity.unitgrp_id);
+                        //判断单号是否一样
+                        if(outno !== changedata.entity.outbound)  outsign = 1;
+
                         userunitid = changedata.entity.unitgrp_id;
                         datastr="<tr>\n" +
                             "<td style='vertical-align:middle;text-align: center;'>" + changedata.entity.amsubbudget.wzno + "</td>\n" +
@@ -243,8 +270,38 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     }
                 );
 
+                if(outsign === 1){
+                    showMsg('选定数据单号不一致！', '错误', 'ruby');
+                    return false;
+                }
+                //检测单号是否为空并生成新编号
+                var outboundno = "";
+                var tmpno = 0;
+                if(outno === null){
+                    if(currentYear==$scope.outboundmax.substr(0,4)){
+                        if($scope.outboundmax.substr(4,4) > tmpno) tmpno = Number($scope.outboundmax.substr(4,4))+1;
+                        outboundno = currentYear + "" + padleft(tmpno,4);
+                    }else {
+                        outboundno = currentYear+"0001";
+                    }
+                    //写入新编号
+                    selectdcmodels.forEach(function (changedata) {
+                        changedata.entity.outbound = outboundno;
+                        changedata.entity.route = "/amassregs";
+                        changedata.entity.put().then(function (res) {
+                                if (res.success) {
+                                    showMsg(res.messages.toString(), '信息', 'lime');
+                                } else {
+                                    showMsg(res.errors.toString(), '错误', 'ruby');
+                                }
+                            });
+                        }
+                    );
+                }else {
+                    outboundno = outno;
+                }
                 //机构名称
-                unitname = $scope.gridOptions.columnDefs[6].unitHash[userunitid];
+                unitname = $scope.gridOptions.columnDefs[7].unitHash[userunitid];
 
 
                 var head_str = "<html><head><title>出库通知单 - 打印</title></head>" +
@@ -270,12 +327,13 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
 
                 var foot_str = "<table class='table table-bordered table-hover' width='800' border='0' style='border-collapse:collapse;' align='center' cellpadding='8px'>\n" +
                     "<tr>\n" +
-                    "<td colspan='8' style='vertical-align:middle;text-align: left;'>编号：[<b>No 201809001</b>]&nbsp;&nbsp;&nbsp;库管员：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领用人：</td>\n" +
+                    "<td colspan='8' style='vertical-align:middle;text-align: left;'>编号：[<b>No "+ outboundno +"</b>]&nbsp;&nbsp;&nbsp;库管员：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领用人：</td>\n" +
                     "</tr>\n" +
                     "</table></body></html>"; //生成尾部
 
                 var newh = window.open();
                 newh.document.body.innerHTML = head_str + htmstr + foot_str; //构建新网页
+
             };
 
             $scope.refreshData = function(){

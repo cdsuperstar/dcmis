@@ -48,7 +48,7 @@ class amassreg extends Model
 {
     //
     protected $table = 'amassregs';
-    protected $fillable = ['amsubbudget_id','amt','asuser','unitgrp_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark'];
+    protected $fillable = ['amsubbudget_id','amt','asuser','unitgrp_id','userdate','validdate','state','remark','scrapuser','scrapdate','scrapremark','outbound'];
     public function amsubbudget(){
         return $this->belongsTo('App\models\amsubbudget');
     }
