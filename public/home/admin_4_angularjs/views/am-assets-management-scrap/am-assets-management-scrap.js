@@ -17,7 +17,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
             };
 
             //获取最大编号
-            $scope.outboundmax="0";
+            // $scope.outboundmax="0";
             Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
                 if(accounts.length){
                     $scope.outboundmax = accounts[0].outbound;
@@ -240,16 +240,17 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
+            console.log($scope.outboundmax);
+
             $scope.printoutformdata = function () {
                 //生成页面
-                var date = new Date();
                 var userunitid = "";
                 var unitname = "";
                 //数据
                 var datastr = "";
                 var selectdcmodels = $scope.gridApi.selection.getSelectedGridRows();
                 if(selectdcmodels.length === 0){
-                    showMsg('未选定数据！', '错误', 'ruby');
+                    showMsg('请选定一行及以上数据再做打印操作（未选定数据）！', '错误', 'ruby');
                     return false;
                 }else {
                     var outno = selectdcmodels[0].entity.outbound; //取json第一个值
@@ -274,41 +275,34 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 );
 
                 if(outsign === 1){
-                    showMsg('选定数据单号不一致！', '错误', 'ruby');
+                    showMsg('选定数据的出库单号不一致（数据不一致）！', '错误', 'ruby');
                     return false;
                 }
                 //检测单号是否为空并生成新编号
                 var outboundno = "";
                 var tmpno = 0;
-                if(outno === null){
-                    if(currentYear==$scope.outboundmax.substr(0,4)){
-                        if($scope.outboundmax.substr(4,4) > tmpno) tmpno = Number($scope.outboundmax.substr(4,4))+1;
-                        outboundno = currentYear + "" + padleft(tmpno,4);
+                if(outno === '' || outno === null){
+                    if(currentYear==$scope.outboundmax.substr(0,4) && currentMonth==Number($scope.outboundmax.substr(4,2))){
+                        if($scope.outboundmax.substr(6,3) > tmpno) tmpno = Number($scope.outboundmax.substr(6,3))+1;
+                        outboundno = currentYear + ""+ padleft(currentMonth,2) + padleft(tmpno,3);
                     }else {
-                        outboundno = currentYear+"0001";
+                        outboundno = currentYear+""+ padleft(currentMonth,2) +"001";
                     }
 
-                    //console.log(outboundno);
                     //写入新编号
-                    selectdcmodels.forEach(function (changedata) {
-                        changedata.entity.outbound = outboundno;
-                        changedata.entity.route = "/amassregs";
-                        changedata.entity.put().then(function (res) {
-                                if (res.success) {
-                                    showMsg(res.messages.toString(), '信息', 'lime');
-                                } else {
-                                    showMsg(res.errors.toString(), '错误', 'ruby');
-                                }
-                            });
-                        }
-                    );
+                    // selectdcmodels.forEach(function (changedata) {
+                    //     changedata.entity.outbound = outboundno;
+                    //     changedata.entity.route = "/amassregs";
+                    //     changedata.entity.put().then(function (res) {
+                    //             if (res.success) {
+                    //                 showMsg(res.messages.toString(), '信息', 'lime');
+                    //             } else {
+                    //                 showMsg(res.errors.toString(), '错误', 'ruby');
+                    //             }
+                    //         });
+                    //     }
+                    // );
                     $scope.outboundmax=outboundno;
-                    //Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
-                    //    if(accounts.length){
-                    //        $scope.outboundmax = accounts[0].outbound;
-                    //    }
-                    //});
-
                 }else {
                     outboundno = outno;
                 }

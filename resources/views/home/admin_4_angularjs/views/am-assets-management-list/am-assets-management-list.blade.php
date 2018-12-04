@@ -31,6 +31,6 @@
                 </div>
             </div>
     </form>
-    <div id="amassetmangementlistgrid" ui-grid="gridOptions"  ui-grid-edit ui-grid-row-edit ui-grid-pinning ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementlistgrid"></div>
+    <div id="amassetmangementlistgrid" ui-grid="gridOptions"  ui-grid-pinning ui-grid-exporter ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="amassetmangementlistgrid"></div>
 
 </div>
