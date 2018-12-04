@@ -67,13 +67,13 @@ class amsubbudgetController extends Controller
     {
         //
         $subq = amsubbudget::query()
-            ->select(['amapplications.ambudgettype_id', DB::raw('sum(amsubbudgets.bdg*amsubbudgets.amt) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
+            ->select(['amapplications.ambudgettype_id', 'amapplications.unitgrp_id', DB::raw('sum(amsubbudgets.bdg*amsubbudgets.amt) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
 //            ->where([
 //                ['amapplications.syear', '=', $syear],
 //                ['amapplications.unitgrp_id', '=', $unitgrp->id]/am-budget-count/getYearUnitsBudgets
 //            ])
             ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
-            ->groupBy('amapplications.ambudgettype_id');
+            ->groupBy('amapplications.ambudgettype_id','amapplications.unitgrp_id');
         $subSql = $subq->toSql();
 
         $aCond=array();
@@ -85,6 +85,7 @@ class amsubbudgetController extends Controller
             ->leftJoin(DB::raw('(' . $subSql . ') as subq'),
                 function ($join) use ($subq) {
                     $join->on('subq.ambudgettype_id', '=', 'ambudgets.type')
+                        ->on('subq.unitgrp_id', '=', 'ambudgets.unit')
                         ->addBinding($subq->getBindings());
                 })
             ->get();
