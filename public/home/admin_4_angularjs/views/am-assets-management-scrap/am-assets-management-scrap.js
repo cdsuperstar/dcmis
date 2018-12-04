@@ -8,7 +8,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
             //获得年度列表
             var date = new Date();
             var currentYear = date.getFullYear();
-            var currentMonth = date.getMonth();
+            var currentMonth = date.getMonth() + 1;
 
             //准换数字左边补0
             var padleft = function(num, n) {
@@ -17,12 +17,12 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
             };
 
             //获取最大编号
-            // $scope.outboundmax="0";
+            $scope.outboundmax="0";
             Restangular.all('/amassregs/getLastNo').getList().then(function (accounts) {
                 if(accounts.length){
                     $scope.outboundmax = accounts[0].outbound;
                 }
-                console.log(accounts);
+                // console.log(accounts);
             });
 
             //机构列表
@@ -241,7 +241,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
             };
 
-            console.log($scope.outboundmax);
+            // console.log($scope.outboundmax);
 
             $scope.printoutformdata = function () {
                 //生成页面
@@ -280,6 +280,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     return false;
                 }
                 //检测单号是否为空并生成新编号
+                // console.log($scope.outboundmax);
                 var outboundno = "";
                 var tmpno = 0;
                 if(outno === '' || outno === null){
@@ -291,18 +292,18 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                     }
 
                     //写入新编号
-                    // selectdcmodels.forEach(function (changedata) {
-                    //     changedata.entity.outbound = outboundno;
-                    //     changedata.entity.route = "/amassregs";
-                    //     changedata.entity.put().then(function (res) {
-                    //             if (res.success) {
-                    //                 showMsg(res.messages.toString(), '信息', 'lime');
-                    //             } else {
-                    //                 showMsg(res.errors.toString(), '错误', 'ruby');
-                    //             }
-                    //         });
-                    //     }
-                    // );
+                    selectdcmodels.forEach(function (changedata) {
+                        changedata.entity.outbound = outboundno;
+                        changedata.entity.route = "/amassregs";
+                        changedata.entity.put().then(function (res) {
+                                if (res.success) {
+                                    showMsg(res.messages.toString(), '信息', 'lime');
+                                } else {
+                                    showMsg(res.errors.toString(), '错误', 'ruby');
+                                }
+                            });
+                        }
+                    );
                     $scope.outboundmax=outboundno;
                 }else {
                     outboundno = outno;
