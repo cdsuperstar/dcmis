@@ -64,7 +64,7 @@ class amsubbudget extends Model
 {
     //
     protected $table = 'amsubbudgets';
-    protected $fillable = ['amapplication_id','name','req','addr','picharge','picphone','wzno','wzsmodel','amt','bdg','price','purchway','purchstate','reimstate','contrno','amsupplier_id','asstate','regamt','scrapamt','total','remark'];
+    protected $fillable = ['amapplication_id','name','req','addr','picharge','picphone','wzno','wzsmodel','amt','bdg','price','purchway','purchstate','purchdate','reimstate','contrno','amsupplier_id','asstate','regamt','scrapamt','total','remark'];
 
     public function amapplication(){
         return $this->belongsTo('App\models\amapplication');

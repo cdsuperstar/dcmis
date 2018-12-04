@@ -158,8 +158,10 @@ class amsubbudgetController extends Controller
         if ($field <> 'purchway' && $field <> 'purchstate' && $field <> 'reimstate' && $field <> 'asstate') return false;
         $amsubbudget->fill([$field => $status]);
 
-        if ($field == 'purchstate' && $status == "已采购")
+        if ($field == 'purchstate' && $status == "已采购"){
             $amsubbudget->regamt = $amsubbudget->amt - $amsubbudget->amassregs()->sum("amt");
+            $amsubbudget->purchdate=now();
+        }
 
         if ($amsubbudget->save()) {
             $tmpProgress = '';

@@ -130,6 +130,9 @@ class CreateAmbudgetsTable extends Migration
             $table->decimal('price')->nullable(); //采购单价
             $table->string('purchway')->nullable(); //采购方式
             $table->string('purchstate')->nullable(); //采购状态
+            $table->dateTime('purchdate'); //采购日期
+
+
             $table->string('reimstate')->nullable(); //报销状态
             $table->string('contrno')->nullable(); //合同编号
             $table->integer('amsupplier_id')->nullable(); //供应商编号
