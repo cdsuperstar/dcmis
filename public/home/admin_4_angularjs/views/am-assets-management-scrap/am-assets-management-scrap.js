@@ -22,6 +22,7 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 if(accounts.length){
                     $scope.outboundmax = accounts[0].outbound;
                 }
+                console.log(accounts);
             });
 
             //机构列表

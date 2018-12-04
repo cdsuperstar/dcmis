@@ -100,8 +100,8 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
 
             $scope.formsearch = function () {
                 var ShearchJson = [{"syear":$scope.ambudgetcount.syear,"unitgrp":$scope.ambudgetcount.unit}];
+                console.log($scope.ambudgetcount.unit);
                 Restangular.all('/am-budget-count/getYearUnitsBudgets').post(ShearchJson).then(function (accounts) {
-                    var allAccounts = accounts;
                     for (var item=0;item<accounts.length;item++){
                         if (accounts[item]["total"] === null) accounts[item]["total"] = 0;
                         if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
@@ -109,13 +109,14 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                         accounts[item]["budgettotal"] = Number(accounts[item]["total"]) - Number(accounts[item]["bdg"]); //计算预算可用金额
                         accounts[item]["actualtotal"] = Number(accounts[item]["total"]) - Number(accounts[item]["price"]); //计算实际可用金额
                     }
+                    var allAccounts = accounts;
                     $scope.gridOptions.data = allAccounts;
                 });
             };
 
             var ShearchJson = [{"syear":$scope.ambudgetcount.syear,"unitgrp":$scope.ambudgetcount.unit}];
+
             Restangular.all('/am-budget-count/getYearUnitsBudgets').post(ShearchJson).then(function (accounts) {
-                var allAccounts = accounts;
                 for (var item=0;item<accounts.length;item++){
                     if (accounts[item]["total"] === null) accounts[item]["total"] = 0;
                     if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
@@ -123,8 +124,9 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                     accounts[item]["budgettotal"] = Number(accounts[item]["total"]) - Number(accounts[item]["bdg"]); //计算预算可用金额
                     accounts[item]["actualtotal"] = Number(accounts[item]["total"]) - Number(accounts[item]["price"]); //计算实际可用金额
                 }
+                var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                //console.log(allAccounts);
+                console.log(allAccounts);
             });
 
         }
