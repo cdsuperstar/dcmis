@@ -73,7 +73,7 @@ class amassregController extends Controller
     public function getLastNo()
     {
         //
-        $datas = amassreg::limit(1)->whereNotNull("outbound")->orderBy('id','desc')->get(["outbound"]);
+        $datas = amassreg::limit(1)->whereNotNull("outbound")->orderBy('outbound','desc')->get(["outbound"]);
         return response()->json($datas);
 
     }
