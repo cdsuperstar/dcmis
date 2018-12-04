@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\ambudget;
 use App\models\ambudgettype;
 use App\models\amsubbudget;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\models\amassreg;
 use App\models\amapplication;
@@ -160,7 +161,7 @@ class amsubbudgetController extends Controller
 
         if ($field == 'purchstate' && $status == "已采购"){
             $amsubbudget->regamt = $amsubbudget->amt - $amsubbudget->amassregs()->sum("amt");
-            $amsubbudget->purchdate=now();
+            $amsubbudget->purchdate= Carbon::now();
         }
 
         if ($amsubbudget->save()) {
