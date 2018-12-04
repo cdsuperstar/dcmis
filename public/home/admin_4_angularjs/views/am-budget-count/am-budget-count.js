@@ -100,7 +100,7 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
 
             $scope.formsearch = function () {
                 var ShearchJson = [{"syear":$scope.ambudgetcount.syear,"unitgrp":$scope.ambudgetcount.unit}];
-                console.log($scope.ambudgetcount.unit);
+                // console.log($scope.ambudgetcount.unit);
                 Restangular.all('/am-budget-count/getYearUnitsBudgets').post(ShearchJson).then(function (accounts) {
                     for (var item=0;item<accounts.length;item++){
                         if (accounts[item]["total"] === null) accounts[item]["total"] = 0;
@@ -115,7 +115,6 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
             };
 
             var ShearchJson = [{"syear":$scope.ambudgetcount.syear,"unitgrp":$scope.ambudgetcount.unit}];
-
             Restangular.all('/am-budget-count/getYearUnitsBudgets').post(ShearchJson).then(function (accounts) {
                 for (var item=0;item<accounts.length;item++){
                     if (accounts[item]["total"] === null) accounts[item]["total"] = 0;
@@ -126,7 +125,7 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                 }
                 var allAccounts = accounts;
                 $scope.gridOptions.data = allAccounts;
-                console.log(allAccounts);
+                // console.log(allAccounts);
             });
 
         }
