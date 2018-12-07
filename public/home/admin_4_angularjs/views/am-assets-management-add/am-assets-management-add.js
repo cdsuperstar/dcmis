@@ -73,9 +73,9 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                     supplierarr.push(tmpu);
                 }
                 $scope.suppliergrps = accounts;
-                $scope.gridOptions.columnDefs[23].filter.selectOptions=supplierarr;
-                $scope.gridOptions.columnDefs[23].editDropdownOptionsArray=supplierarr;
-                $scope.gridOptions.columnDefs[23].supplierHash =  supplierHash ;
+                $scope.gridOptions.columnDefs[22].filter.selectOptions=supplierarr;
+                $scope.gridOptions.columnDefs[22].editDropdownOptionsArray=supplierarr;
+                $scope.gridOptions.columnDefs[22].supplierHash =  supplierHash ;
             });
 
             $scope.dcEdition = { unitgrp_id:$scope.dcUser.unitid,asuser:$scope.dcUser.id};  //初始化当前用户数据
@@ -226,7 +226,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                 { value: '未采购', label: '未采购' }]}
                     },
                     {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
-                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,
+                    {name: '供应商', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                         filter: {
@@ -269,6 +269,28 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                 exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
                 exporterCsvFilename:'Allmatterdownload.csv',
+                exporterFieldCallback: function( grid, row, col, input ) {
+                    switch( col.field ){
+                        case 'amapplication.unitgrp_id':
+                            return $scope.gridOptions.columnDefs[9].unitHash[input];
+                            break;
+                        case 'amapplication.ambudgettype_id':
+                            return $scope.gridOptions.columnDefs[4].lbHash[input];
+                            break;
+                        case 'amsupplier_id':
+                            return $scope.gridOptions.columnDefs[22].supplierHash[input];
+                            break;
+                        case 'amapplication.apper':
+                            return $scope.gridOptions.columnDefs[6].userHash[input];
+                            break;
+                        case 'amapplication.requester':
+                            return $scope.gridOptions.columnDefs[8].userHash[input];
+                            break;
+                        default:
+                            return input;
+                            break;
+                    }
+                },
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -305,21 +327,21 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                         $scope.tmpobjname = row.entity.ambaseas.name;  //取当前物资的name
 
                         //机构列表
-                        // Restangular.all('/user-department').getList().then(function (accounts) {
-                        //     //console.log(accounts);
-                        //     var untarr = [];
-                        //     var tmpu = {};
-                        //     var unitHash=[];
-                        //     for(var i=0;i<accounts.length;i++){
-                        //         //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
-                        //         tmpu ={value:accounts[i].id,label:accounts[i].name};
-                        //         unitHash[accounts[i].id]=accounts[i].name;
-                        //         untarr.push(tmpu);
-                        //     }
-                        //     $scope.soucegridOptions.columnDefs[1].filter.selectOptions=untarr;
-                        //     $scope.soucegridOptions.columnDefs[1].editDropdownOptionsArray=untarr;
-                        //     $scope.soucegridOptions.columnDefs[1].unitHash =  unitHash ;
-                        // });
+                        Restangular.all('/user-department').getList().then(function (accounts) {
+                            //console.log(accounts);
+                            var untarr = [];
+                            var tmpu = {};
+                            var unitHash=[];
+                            for(var i=0;i<accounts.length;i++){
+                                //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
+                                tmpu ={value:accounts[i].id,label:accounts[i].name};
+                                unitHash[accounts[i].id]=accounts[i].name;
+                                untarr.push(tmpu);
+                            }
+                            $scope.soucegridOptions.columnDefs[1].filter.selectOptions=untarr;
+                            $scope.soucegridOptions.columnDefs[1].editDropdownOptionsArray=untarr;
+                            $scope.soucegridOptions.columnDefs[1].unitHash =  unitHash ;
+                        });
 
                         //人员列表
                         Restangular.all('/sys-users').getList().then(function (accounts) {
@@ -391,6 +413,8 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             enableVerticalScrollbar:1,
                             enableHorizontalScrollbar :1,
                             enableGridMenu: true,
+                            exporterMenuCsv : false, //导出Excel 开关
+                            exporterMenuPdf : false, //导出pdf 开关
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [
                                 {name: '领用人', field: 'asuser',width: '80',enableCellEdit: true,enableColumnMenu: true,pinnedLeft:true,
@@ -402,14 +426,14 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                                         type: uiGridConstants.filter.SELECT,
                                         selectOptions: [] }
                                 },
-                                // {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
-                                //     editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                                //     editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
-                                //     filter: {
-                                //         term:3,
-                                //         type: uiGridConstants.filter.SELECT,
-                                //         selectOptions: [] }
-                                // },
+                                {name: '领用单位', field: 'unitgrp_id',width: '230',enableCellEdit: true,enableColumnMenu: false,
+                                    editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
+                                    editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                                    filter: {
+                                        term:3,
+                                        type: uiGridConstants.filter.SELECT,
+                                        selectOptions: [] }
+                                },
                                 {name: '领用数量', field: 'amt',width: '80',enableCellEdit: true,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                 {name: '领用时间', field: 'userdate',width: '120',enableCellEdit: false,enableColumnMenu: true},
                                 {name: '有效期', field: 'validdate',width: '120',type:'date',cellFilter: 'date:"yyyy-MM-dd"',enableCellEdit: true,enableColumnMenu: true},
@@ -443,7 +467,7 @@ angular.module("MetronicApp").controller('amassetmangementaddCtrl',
                             var amttotal = 0;
                             for (var item=0;item<listdata.length;item++){
                                 // listdata[item]["validdate"] = new Date(listdata[item]["validdate"]);
-                                listdata[item].validdate = new Date(listdata[item].validdate);
+                                // listdata[item].validdate = new Date(listdata[item].validdate);
                                 if(listdata[item]["amt"]) { //计算物资数量合计
                                     amttotal += Number(listdata[item]["amt"]);
                                 }

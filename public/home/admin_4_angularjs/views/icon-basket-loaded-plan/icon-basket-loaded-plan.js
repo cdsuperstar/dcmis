@@ -175,16 +175,35 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                     {name: '终止原因', field: 'termreason',width: '200',enableCellEdit: true}
                 ],
 
-                enableGridMenu: true,
 
                 //--------------导出----------------------------------
                 exporterHeaderFilterUseName : true,
                 exporterMenuCsv : true, //导出Excel 开关
                 exporterMenuPdf : false, //导出pdf 开关
                 exporterMenuLabel : "Export",
-                exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'datadownload.csv',
+                exporterOlderExcelCompatibility : true,   //解决导出乱码的问题(支持低版本的Excel)
+                enableGridMenu: true, //是否显示grid 菜单
+                exporterCsvFilename:'exportbasketloadplan.csv',
+                exporterFieldCallback: function( grid, row, col, input ) {
+                    switch( col.field ){
+                        case 'unitgrp_id':
+                            return $scope.gridOptions.columnDefs[10].unitHash[input];
+                            break;
+                        case 'ambudgettype_id':
+                            return $scope.gridOptions.columnDefs[8].lbHash[input];
+                            break;
+                        case 'apper':
+                            return $scope.gridOptions.columnDefs[4].userHash[input];
+                            break;
+                        case 'requester':
+                            return $scope.gridOptions.columnDefs[9].userHash[input];
+                            break;
+                        default:
+                            return input;
+                            break;
+                    }
+                },
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -252,6 +271,8 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                             enableVerticalScrollbar:1,
                             enableHorizontalScrollbar :1,
                             enableGridMenu: true,
+                            exporterMenuCsv : false, //导出Excel 开关
+                            exporterMenuPdf : false, //导出pdf 开关
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [],
                             data: [],
@@ -339,7 +360,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                     },
                                     {name: '小计', field: 'wztotal',width: '100', enableCellEdit: false,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
                                     {name: '合同编号', field: 'contrno',width: '150',enableColumnMenu: true},
-                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                    {name: '供应商', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                                         filter: {
@@ -436,7 +457,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                     {name: '工程预算', field: 'bdg',width: '80',cellFilter: 'currency',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                    {name: '供应商', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                                         filter: {
@@ -521,7 +542,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                     {name: '预算金额', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                    {name: '供应商', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                                         filter: {
@@ -606,7 +627,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                     {name: '预算金额', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '负责人', field: 'picharge',width: '120',enableCellEdit: false,enableColumnMenu: true},
                                     {name: '负责人电话', field: 'picphone',width: '120',enableCellEdit: false,enableColumnMenu: true},
-                                    {name: '供应商编号', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
+                                    {name: '供应商', field: 'amsupplier_id',width: '200',enableCellEdit: true,enableColumnMenu: false,enableHiding: false,
                                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
                                         editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.supplierHash',supplierHash:[],
                                         filter: {

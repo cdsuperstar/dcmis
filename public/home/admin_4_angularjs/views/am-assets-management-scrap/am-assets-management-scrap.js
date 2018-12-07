@@ -184,7 +184,23 @@ angular.module("MetronicApp").controller('amassetmangementscrapCtrl',
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'download.csv',
+                exporterCsvFilename:'managementscrap.csv',
+                exporterFieldCallback: function( grid, row, col, input ) {
+                    switch( col.field ){
+                        case 'unitgrp_id':
+                            return $scope.gridOptions.columnDefs[7].unitHash[input];
+                            break;
+                        case 'asuser':
+                            return $scope.gridOptions.columnDefs[6].userHash[input];
+                            break;
+                        case 'scrapuser':
+                            return $scope.gridOptions.columnDefs[12].userHash[input];
+                            break;
+                        default:
+                            return input;
+                            break;
+                    }
+                },
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页

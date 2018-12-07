@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"> 领用部门 </label>
                             <div class="col-md-8">
-                                <ui-select ng-model="dcEdition.unitgrps_id" theme="bootstrap">
+                                <ui-select ng-model="dcEdition.unitgrp_id" theme="bootstrap">
                                     <ui-select-match placeholder="选择部门...">@{{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices
                                             repeat="category.id as category in untigrps | filter: $select.search">

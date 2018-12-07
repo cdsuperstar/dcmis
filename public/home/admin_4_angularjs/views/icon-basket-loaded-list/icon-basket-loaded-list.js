@@ -65,7 +65,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                 $scope.peoplegrps = accounts;
                 $scope.gridOptions.columnDefs[7].filter.selectOptions=userarr;
                 $scope.gridOptions.columnDefs[7].editDropdownOptionsArray=userarr;
-                $scope.gridOptions.columnDefs[7].unitHash =  userHash ;
+                $scope.gridOptions.columnDefs[7].userHash =  userHash ;
             });
             //物资列表
             Restangular.all('/icon-basket-setindex').getList().then(function (accounts) {
@@ -158,7 +158,7 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     },
                     {name: '申请人', field: 'requester',width: '100',enableColumnMenu: false,enableHiding: false,
                         editDropdownIdLabel:'value',editDropdownValueLabel: 'label',editableCellTemplate: 'ui-grid/dropdownEditor',
-                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.unitHash',userHash:[],
+                        editDropdownOptionsArray: [],cellFilter: 'dFilterHash:col.colDef.userHash',userHash:[],
                         filter: {
                             // term:1,
                             type: uiGridConstants.filter.SELECT,
@@ -169,16 +169,32 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                     }
                 ],
 
-                enableGridMenu: true,
 
                 //--------------导出----------------------------------
                 exporterHeaderFilterUseName : true,
                 exporterMenuCsv : true, //导出Excel 开关
                 exporterMenuPdf : false, //导出pdf 开关
                 exporterMenuLabel : "Export",
-                exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'datadownload.csv',
+                exporterOlderExcelCompatibility : true,   //解决导出乱码的问题(支持低版本的Excel)
+                enableGridMenu: true, //是否显示grid 菜单
+                exporterCsvFilename:'exportbasketloadlist.csv',
+                exporterFieldCallback: function( grid, row, col, input ) {
+                    switch( col.field ){
+                        case 'unitgrp_id':
+                            return $scope.gridOptions.columnDefs[8].unitHash[input];
+                            break;
+                        case 'ambudgettype_id':
+                            return $scope.gridOptions.columnDefs[6].lbHash[input];
+                            break;
+                        case 'requester':
+                            return $scope.gridOptions.columnDefs[7].userHash[input];
+                            break;
+                        default:
+                            return input;
+                            break;
+                    }
+                },
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -221,6 +237,8 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             enableVerticalScrollbar:1,
                             enableHorizontalScrollbar :1,
                             enableGridMenu: true,
+                            exporterMenuCsv : false, //导出Excel 开关
+                            exporterMenuPdf : false, //导出pdf 开关
                             //rowTemplate : '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>',
                             columnDefs: [],
                             enablePagination: true, //是否分页，默认为true

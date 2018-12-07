@@ -22,10 +22,10 @@
                         </ui-select>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" id="inmatterButton" class="btn yellow" ng-click="printinattredata()"><i class="fa fa-print"></i> 生成入库统计表
+                        <button type="button" id="inmatterButton" class="btn yellow" ng-click="printinattredata()"><i class="fa fa-file-excel-o"></i> 生成入库统计表
                         </button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button" id="outmatterButton" class="btn green" ng-click="printoutattredata()"><i class="fa fa-print"></i> 生成出库统计表
+                        <button type="button" id="outmatterButton" class="btn green" ng-click="printoutattredata()"><i class="fa fa-file-excel-o"></i> 生成出库统计表
                         </button>
                     </div>
                 </div>

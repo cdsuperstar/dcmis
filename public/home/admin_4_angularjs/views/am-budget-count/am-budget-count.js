@@ -44,7 +44,6 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                 showGridFooter:false,
                 enableVerticalScrollbar:1,
                 enableHorizontalScrollbar :1,
-                enableGridMenu: true,
                 columnDefs: [
                     {name: '年度', field: 'syear',width: '60',enableColumnMenu: false,cellFilter: 'yearGender'},
                     {name: '部门', field: 'unit',width: '180',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
@@ -83,9 +82,23 @@ angular.module("MetronicApp").controller('ambudgetcountCtrl',
                 exporterMenuCsv : true, //导出Excel 开关
                 exporterMenuPdf : false, //导出pdf 开关
                 exporterMenuLabel : "Export",
-                exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'datadownload.csv',
+                exporterOlderExcelCompatibility : true,   //解决导出乱码的问题(支持低版本的Excel)
+                enableGridMenu: true, //是否显示grid 菜单
+                exporterCsvFilename:'exportbudgetcount.csv',
+                exporterFieldCallback: function( grid, row, col, input ) {
+                    switch( col.field ){
+                        case 'unit':
+                            return $scope.gridOptions.columnDefs[1].unitHash[input];
+                            break;
+                        case 'type':
+                            return $scope.gridOptions.columnDefs[2].lbHash[input];
+                            break;
+                        default:
+                            return input;
+                            break;
+                    }
+                },
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
