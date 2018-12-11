@@ -74,6 +74,9 @@ class amsubbudget extends Model
         return $this->belongsTo('App\models\ambaseas','wzno','no');
     }
 
+    public function amsupplier(){
+        return $this->belongsTo('App\models\amsupplier');
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

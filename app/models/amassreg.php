@@ -52,4 +52,10 @@ class amassreg extends Model
     public function amsubbudget(){
         return $this->belongsTo('App\models\amsubbudget');
     }
+
+    public function unitgrp()
+    {
+        return $this->belongsTo('App\models\unitgrp');
+
+    }
 }

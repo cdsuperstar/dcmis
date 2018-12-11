@@ -28,6 +28,42 @@ class amsubbudgetController extends Controller
 
     }
 
+
+    public function getDateDatasOfInbound($sYear="",$sMonth="")
+    {
+        //
+
+        /*
+        *
+select amsubbudgets.purchdate,amsubbudgets.purchway,amapplications.no,amsuppliers.compname,ambaseass.name,wzsmodel,ambaseass.measunit,amt,price,
+       amapplications.unitgrp_id,remark from amsubbudgets;
+
+select userdate,outbound,amsubbudgets.wzno.name,amsubbudgets.wzsmodel,amsubbudgets.wzno.measunit,amt,amsubbudgets.price,unitgrp_id.name,
+       remark from amassregs;
+        */
+//        Log::info("test",["$sYear","$sMonth"]);
+        if($sMonth){
+            $datas = amsubbudget::with(['amapplication.unitgrp', 'ambaseas','amsupplier'])
+                ->whereYear('purchdate',$sYear)
+                ->whereMonth('purchdate',$sMonth)
+                ->get();
+        }else{
+            $datas = amsubbudget::with(['amapplication.unitgrp', 'ambaseas','amsupplier'])
+                ->whereYear('purchdate',$sYear)
+                ->get();
+        }
+        return response()->json($datas);
+
+    }
+
+    public function getDateDatasOfOutbound($sYear="",$sMonth=""){
+//        Log::info("test",["$sYear","$sMonth"]);
+        $sMonth?$sQDate=$sYear.$sMonth:$sQDate=$sYear;
+        $datas = amassreg::with(['amsubbudget.ambaseas','unitgrp'])
+            ->where('outbound','like',$sQDate.'%')
+            ->get();
+        return response()->json($datas);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -54,7 +54,7 @@ class amapplication extends Model
 
     public function unitgrp()
     {
-        return $this->belongsTo('App\models\unitgrps');
+        return $this->belongsTo('App\models\unitgrp');
 
     }
 

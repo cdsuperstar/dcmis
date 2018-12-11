@@ -191,6 +191,12 @@ Route::group(['prefix'=>'/amsubbudgets'],function(){
     //设置字段值
     Route::post('setStatus/{amsubbudget}/{field}/{status}','amsubbudgetController@setStatus'); //
 
+    // 得到某年入库数据
+    Route::get('getDateDatasOfInbound/{sYear}/{sMonth?}','amsubbudgetController@getDateDatasOfInbound');
+
+    // 得到某年出库数据
+    Route::get('getDateDatasOfOutbound/{sYear}/{sMonth?}','amsubbudgetController@getDateDatasOfOutbound');
+
     Route::get('','amsubbudgetController@index'); //
     Route::get('create','amsubbudgetController@create'); //
     Route::put('{amsubbudget}','amsubbudgetController@update'); //
