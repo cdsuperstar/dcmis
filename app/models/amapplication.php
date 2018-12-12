@@ -58,6 +58,9 @@ class amapplication extends Model
 
     }
 
+    public function ambudgettype(){
+        return $this->belongsTo('App\models\ambudgettype','ambudgettype_id');
+    }
     public function amsubbudgets()
     {
         return $this->hasMany('App\models\amsubbudget','amapplication_id');

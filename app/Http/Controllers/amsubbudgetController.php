@@ -43,12 +43,14 @@ select userdate,outbound,amsubbudgets.wzno.name,amsubbudgets.wzsmodel,amsubbudge
         */
 //        Log::info("test",["$sYear","$sMonth"]);
         if($sMonth){
-            $datas = amsubbudget::with(['amapplication.unitgrp', 'ambaseas','amsupplier'])
+            $datas = amsubbudget::with(['amapplication.unitgrp','amapplication.ambudgettype', 'ambaseas','amsupplier'])
+                ->where('purchstate','已采购')
                 ->whereYear('purchdate',$sYear)
                 ->whereMonth('purchdate',$sMonth)
                 ->get();
         }else{
-            $datas = amsubbudget::with(['amapplication.unitgrp', 'ambaseas','amsupplier'])
+            $datas = amsubbudget::with(['amapplication.unitgrp','amapplication.ambudgettype', 'ambaseas','amsupplier'])
+                ->where('purchstate','已采购')
                 ->whereYear('purchdate',$sYear)
                 ->get();
         }
