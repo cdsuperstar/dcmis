@@ -6,7 +6,7 @@
                     <label class="col-md-1 control-label">  年 度  </label>
                     <div class="col-md-2">
                         <ui-select ng-model="managelist.syear" theme="bootstrap">
-                            <ui-select-match placeholder="选择年度..." allow-clear="true">@{{$select.selected}}</ui-select-match>
+                            <ui-select-match placeholder="选择年度...">@{{$select.selected}}</ui-select-match>
                             <ui-select-choices repeat="tmparr in tyear | filter: $select.search">
                                 <div ng-bind-html="tmparr | highlight: $select.search"></div>
                             </ui-select-choices>
@@ -15,7 +15,7 @@
                     <label class="col-md-1 control-label">  月 份  </label>
                     <div class="col-md-2">
                         <ui-select ng-model="managelist.smonth" theme="bootstrap">
-                            <ui-select-match placeholder="选择月份..." allow-clear="true">@{{$select.selected}}</ui-select-match>
+                            <ui-select-match placeholder="选择月份..." allow-clear="false">@{{$select.selected}}</ui-select-match>
                             <ui-select-choices repeat="tmarmr in tmonth | filter: $select.search">
                                 <div ng-bind-html="tmarmr | highlight: $select.search"></div>
                             </ui-select-choices>
