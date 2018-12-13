@@ -23,24 +23,6 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
             //end
             $scope.managelist = { syear:currentYear,smonth:currentMonth};  //初始化为当前年月
 
-            //预算类别列表
-            Restangular.all('/am-budget-lb').getList().then(function (accounts) {
-                //console.log(accounts);
-                var lbarr = [];
-                var tmpu = {};
-                var lbHash=[] ;
-                for(var i=0;i<accounts.length;i++){
-                    //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
-                    tmpu ={value:accounts[i].id,label:accounts[i].type};
-                    lbHash[accounts[i].id] = accounts[i].type;
-                    lbarr.push(tmpu);
-                }
-                $scope.listnames = accounts;
-                // $scope.gridOptions.columnDefs[3].filter.selectOptions=lbarr;
-                // $scope.gridOptions.columnDefs[3].editDropdownOptionsArray=lbarr;
-                $scope.gridOptions.columnDefs[3].lbHash =  lbHash;
-            });
-
             $scope.gridOptions={
                 enableSorting: true,
                 enableFiltering: false,
@@ -51,14 +33,13 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                 enableGridMenu: true,
                 columnDefs: [
                     {name: '采购日期', field: 'purchdate',width: '100',enableColumnMenu: true},
-                    {name: '部门', field: 'amapplication.unitgrp.name',width: '120',enableColumnMenu: true},
-                    {name: '供应商', field: 'amsupplier.compname',width: '100',enableColumnMenu: true},
-                    {name: '采购类型', field: 'amapplication.ambudgettype_id',width: '100',enableColumnMenu: true,enableHiding: false,
-                        cellFilter: 'dFilterHash:col.colDef.lbHash'},
-                    {name: '预算单号', field: 'amapplication.no',width: '100',enableColumnMenu: true},
-                    {name: '物资名称', field: 'ambaseas.name',width: '150',enableColumnMenu: true},
+                    {name: '部门', field: 'unitname',width: '120',enableColumnMenu: true},
+                    {name: '供应商', field: 'amsuppliername',width: '100',enableColumnMenu: true},
+                    {name: '采购类型', field: 'ambudgettypename',width: '100',enableColumnMenu: true},
+                    {name: '预算单号', field: 'amapplicationno',width: '100',enableColumnMenu: true},
+                    {name: '物资名称', field: 'ambaseasname',width: '150',enableColumnMenu: true},
                     {name: '规格型号', field: 'wzsmodel',width: '120',enableColumnMenu: true},
-                    {name: '单位', field: 'ambaseas.measunit',width: '60',enableColumnMenu: true},
+                    {name: '单位', field: 'measunit',width: '60',enableColumnMenu: true},
                     {name: '数量', field: 'amt',width: '80',enableColumnMenu: true},
                     {name: '单价', field: 'bdg',width: '80',enableColumnMenu: true,cellFilter: 'currency'},
                     {name: '金额', field: 'alltotal',width: '80',enableColumnMenu: true,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
@@ -73,7 +54,7 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                 exporterMenuLabel : "Export",
                 exporterOlderExcelCompatibility : true,
                 exporterCsvColumnSeparator: ',',
-                exporterCsvFilename:'datadownload.csv',
+                exporterCsvFilename:'indatadownload.csv',
 
                 enablePagination: true, //是否分页，默认为true
                 enablePaginationControls: true, //使用默认的底部分页
@@ -87,30 +68,100 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
             };
             var ShearchJson = "/amsubbudgets/getDateDatasOfInbound/" + $scope.managelist.syear + "/" + $scope.managelist.smonth;
             Restangular.all(ShearchJson).getList().then(function (accounts) {
-                var allAccounts = accounts;
+                if(accounts.length === 0){
+                    showMsg('当前年度月份无入库数据 0 ！', '信息', 'ruby');
+                    return false;
+                }
                 for (var item=0;item<accounts.length;item++){
                     if (accounts[item]["alltotal"] === null) accounts[item]["alltotal"] = 0;
-                    if (accounts[item]["bdg"] === null) accounts[item]["amsubbudget.price"] = 0;
+                    if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
                     if (accounts[item]["amt"] === null) accounts[item]["amt"] = 0;
                     accounts[item]["alltotal"] = Number(accounts[item]["amt"]) * Number(accounts[item]["bdg"]); //计算金额
+
+                    //转换到到第一级
+                    if(accounts[item]["amapplication_id"]) accounts[item]["unitname"] = accounts[item].amapplication.unitgrp.name;
+                    if(accounts[item]["amsupplier_id"]) accounts[item]["amsuppliername"] = accounts[item].amsupplier.compname;
+                    if(accounts[item]["amapplication_id"]) accounts[item]["amapplicationno"] = accounts[item].amapplication.no;
+                    accounts[item]["ambaseasname"] = accounts[item].ambaseas.name;
+                    accounts[item]["measunit"] = accounts[item].ambaseas.measunit;
+                    accounts[item]["ambudgettypename"] = accounts[item].amapplication.ambudgettype.type;
+                    //转换结束
+                    // console.log(accounts[item].amapplication.unitgrp.name);
                 }
                 // console.log(accounts);
-                $scope.gridOptions.data = allAccounts;
+                $scope.gridOptions.data = accounts;
             });
 
             //生成生成入库统计表
             $scope.printinattredata = function(){
+                $scope.gridOptions={
+                    enableSorting: true,
+                    enableFiltering: false,
+                    showColumnFooter:true,
+                    showGridFooter:false,
+                    enableVerticalScrollbar:1,
+                    enableHorizontalScrollbar :1,
+                    enableGridMenu: true,
+                    columnDefs: [
+                        {name: '采购日期', field: 'purchdate',width: '100',enableColumnMenu: true},
+                        {name: '部门', field: 'unitname',width: '120',enableColumnMenu: true},
+                        {name: '供应商', field: 'amsuppliername',width: '100',enableColumnMenu: true},
+                        {name: '采购类型', field: 'ambudgettypename',width: '100',enableColumnMenu: true},
+                        {name: '预算单号', field: 'amapplicationno',width: '100',enableColumnMenu: true},
+                        {name: '物资名称', field: 'ambaseasname',width: '150',enableColumnMenu: true},
+                        {name: '规格型号', field: 'wzsmodel',width: '120',enableColumnMenu: true},
+                        {name: '单位', field: 'measunit',width: '60',enableColumnMenu: true},
+                        {name: '数量', field: 'amt',width: '80',enableColumnMenu: true},
+                        {name: '单价', field: 'bdg',width: '80',enableColumnMenu: true,cellFilter: 'currency'},
+                        {name: '金额', field: 'alltotal',width: '80',enableColumnMenu: true,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                        {name: '备注', field: 'remark',width: '100',enableColumnMenu: false}
+
+                    ],
+
+                    //--------------导出----------------------------------
+                    exporterHeaderFilterUseName : true,
+                    exporterMenuCsv : true, //导出Excel 开关
+                    exporterMenuPdf : false, //导出pdf 开关
+                    exporterMenuLabel : "Export",
+                    exporterOlderExcelCompatibility : true,
+                    exporterCsvColumnSeparator: ',',
+                    exporterCsvFilename:'indatadownload.csv',
+
+                    enablePagination: true, //是否分页，默认为true
+                    enablePaginationControls: true, //使用默认的底部分页
+                    paginationPageSizes: [10, 30, 50],
+                    paginationCurrentPage: 1,
+                    paginationPageSize: 30,
+                    data: [],
+                    onRegisterApi: function (gridApi) {
+                        $scope.gridApi = gridApi;
+                    }
+                };
+
                 var ShearchJson = "/amsubbudgets/getDateDatasOfInbound/" + $scope.managelist.syear + "/" + $scope.managelist.smonth;
                 Restangular.all(ShearchJson).getList().then(function (accounts) {
-                    var allAccounts = accounts;
+                    if(accounts.length === 0){
+                        showMsg('当前年度月份无入库数据 0 ！', '信息', 'ruby');
+                        return false;
+                    }
                     for (var item=0;item<accounts.length;item++){
                         if (accounts[item]["alltotal"] === null) accounts[item]["alltotal"] = 0;
-                        if (accounts[item]["bdg"] === null) accounts[item]["amsubbudget.price"] = 0;
+                        if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
                         if (accounts[item]["amt"] === null) accounts[item]["amt"] = 0;
                         accounts[item]["alltotal"] = Number(accounts[item]["amt"]) * Number(accounts[item]["bdg"]); //计算金额
+
+                        //转换到到第一级
+                        if(accounts[item]["amapplication_id"]) accounts[item]["unitname"] = accounts[item].amapplication.unitgrp.name;
+                        if(accounts[item]["amsupplier_id"]) accounts[item]["amsuppliername"] = accounts[item].amsupplier.compname;
+                        if(accounts[item]["amapplication_id"]) accounts[item]["amapplicationno"] = accounts[item].amapplication.no;
+                        accounts[item]["ambaseasname"] = accounts[item].ambaseas.name;
+                        accounts[item]["measunit"] = accounts[item].ambaseas.measunit;
+                        accounts[item]["ambudgettypename"] = accounts[item].amapplication.ambudgettype.type;
+                        //转换结束
+                        // console.log(accounts[item].amapplication.unitgrp.name);
                     }
                     // console.log(accounts);
-                    $scope.gridOptions.data = allAccounts;
+                    $scope.gridOptions.data = accounts;
                 });
 
             };
@@ -127,13 +178,13 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                     enableGridMenu: true,
                     columnDefs: [
                         {name: '领用日期', field: 'userdate',width: '100',enableColumnMenu: true},
-                        {name: '部门', field: 'unitgrp.name',width: '150',enableColumnMenu: true},
+                        {name: '部门', field: 'unitname',width: '150',enableColumnMenu: true},
                         {name: '出库单号', field: 'outbound',width: '100',enableColumnMenu: true},
-                        {name: '物资名称', field: 'amsubbudget.ambaseas.name',width: '180',enableColumnMenu: true},
-                        {name: '规格型号', field: 'amsubbudget.wzsmodel',width: '120',enableColumnMenu: true},
-                        {name: '单位', field: 'amsubbudget.ambaseas.measunit',width: '60',enableColumnMenu: true},
+                        {name: '物资名称', field: 'ambaseasname',width: '180',enableColumnMenu: true},
+                        {name: '规格型号', field: 'wzsmodel',width: '120',enableColumnMenu: true},
+                        {name: '单位', field: 'measunit',width: '60',enableColumnMenu: true},
                         {name: '数量', field: 'amt',width: '80',enableColumnMenu: true},
-                        {name: '单价', field: 'amsubbudget.price',width: '80',enableColumnMenu: true,cellFilter: 'currency'},
+                        {name: '单价', field: 'bdg',width: '80',enableColumnMenu: true,cellFilter: 'currency'},
                         {name: '金额', field: 'alltotal',width: '80',enableColumnMenu: true,cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                         {name: '备注', field: 'remark',width: '120',enableColumnMenu: false}
 
@@ -146,7 +197,7 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                     exporterMenuLabel : "Export",
                     exporterOlderExcelCompatibility : true,
                     exporterCsvColumnSeparator: ',',
-                    exporterCsvFilename:'datadownload.csv',
+                    exporterCsvFilename:'outdatadownload.csv',
 
                     enablePagination: true, //是否分页，默认为true
                     enablePaginationControls: true, //使用默认的底部分页
@@ -160,15 +211,27 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
                 };
                 var ShearchJson = "/amsubbudgets/getDateDatasOfOutbound/" + $scope.managelist.syear + "/" + $scope.managelist.smonth;
                 Restangular.all(ShearchJson).getList().then(function (accounts) {
-                    var allAccounts = accounts;
-                    for (var item=0;item<accounts.length;item++){
-                        if (accounts[item]["alltotal"] === null) accounts[item]["alltotal"] = 0;
-                        if (accounts[item]["amsubbudget.price"] === null) accounts[item]["amsubbudget.price"] = 0;
-                        if (accounts[item]["amt"] === null) accounts[item]["amt"] = 0;
-                        accounts[item]["alltotal"] = Number(accounts[item]["amt"]) * Number(accounts[item]["amsubbudget.price"]); //计算金额
+                    if(accounts.length === 0){
+                        showMsg('当前年度月份无出库数据 0 ！', '信息', 'ruby');
+                        return false;
                     }
-                    console.log(accounts);
-                    $scope.gridOptions.data = allAccounts;
+
+                    for (var item=0;item<accounts.length;item++){
+                        //转换到到第一级
+                        if(accounts[item]["unitgrp_id"]) accounts[item]["unitname"] = accounts[item].unitgrp.name;
+                        if(accounts[item]["amsubbudget_id"]) accounts[item]["ambaseasname"] = accounts[item].amsubbudget.ambaseas.name;
+                        if(accounts[item]["amsubbudget_id"]) accounts[item]["wzsmodel"] = accounts[item].amsubbudget.wzsmodel;
+                        accounts[item]["measunit"] = accounts[item].amsubbudget.ambaseas.measunit;
+                        accounts[item]["bdg"] = accounts[item].amsubbudget.price;
+                        //转换结束
+
+                        if (accounts[item]["alltotal"] === null) accounts[item]["alltotal"] = 0;
+                        if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
+                        if (accounts[item]["amt"] === null) accounts[item]["amt"] = 0;
+                        accounts[item]["alltotal"] = Number(accounts[item]["amt"]) * Number(accounts[item]["bdg"]); //计算金额
+                    }
+                    // console.log(accounts);
+                    $scope.gridOptions.data = accounts;
                 });
 
             };
