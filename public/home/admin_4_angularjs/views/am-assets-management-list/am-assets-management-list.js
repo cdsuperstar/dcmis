@@ -68,10 +68,6 @@ angular.module("MetronicApp").controller('amassetmangementlistCtrl',
             };
             var ShearchJson = "/amsubbudgets/getDateDatasOfInbound/" + $scope.managelist.syear + "/" + $scope.managelist.smonth;
             Restangular.all(ShearchJson).getList().then(function (accounts) {
-                if(accounts.length === 0){
-                    showMsg('当前年度月份无入库数据 0 ！', '信息', 'ruby');
-                    return false;
-                }
                 for (var item=0;item<accounts.length;item++){
                     if (accounts[item]["alltotal"] === null) accounts[item]["alltotal"] = 0;
                     if (accounts[item]["bdg"] === null) accounts[item]["bdg"] = 0;
