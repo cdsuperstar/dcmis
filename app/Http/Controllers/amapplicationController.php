@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\amapplication;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\models\ambudgettype;
 use App\models\amsubbudget;
@@ -26,8 +27,9 @@ class amapplicationController extends Controller
     }
 
     public function getUserApplica(Request $request){
-        $tmpRolename=$request->user()->role()->name;
-        if($tmpRolename=='admin'||$tmpRolename='root'){
+        $tmpUser=\App\User::find($request->user()->id);
+
+        if($tmpUser->hasRole('admin')||$tmpUser->hasRole('root')){
             $datas = amapplication::all();
         }else{
             $datas = amapplication::where('requester', '=', $request->user()->id)->get();
