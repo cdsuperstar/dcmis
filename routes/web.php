@@ -209,7 +209,10 @@ Route::group(['prefix'=>'/icon-basket-loaded-list'],function(){
     //删除采购申请
     Route::delete('{amapplication}','amapplicationController@destroy'); //
     //得到所有采购申请
-    Route::get('','amapplicationController@index'); //
+    #Route::get('','amapplicationController@index'); //
+
+    //得到登录用户采购申请
+    Route::get('','amapplicationController@getUserApplica'); //
     //根据申请ID得到子项
     Route::get('getSubsFromAppID/{amapplication}','amapplicationController@getSubsFromAppID'); //
 

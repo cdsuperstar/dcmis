@@ -25,6 +25,16 @@ class amapplicationController extends Controller
 
     }
 
+    public function getUserApplica(Request $request){
+        $tmpRolename=$request->user()->role()->name;
+        if($tmpRolename=='admin'||$tmpRolename='root'){
+            $datas = amapplication::all();
+        }else{
+            $datas = amapplication::where('requester', '=', $request->user()->id)->get();
+        }
+        return response()->json($datas);
+    }
+
     public function getLastNo()
     {
         //
@@ -32,6 +42,7 @@ class amapplicationController extends Controller
         return response()->json($datas);
 
     }
+
 
     public function getApplicationProgress(Request $request)
     {
