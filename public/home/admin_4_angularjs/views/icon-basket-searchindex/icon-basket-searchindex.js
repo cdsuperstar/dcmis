@@ -26,7 +26,7 @@ angular.module("MetronicApp").controller('iconbasketsearchindexCtrl',
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
-                },
+                }
             };
 
             $scope.toggleFilteringsign = '筛选数据';
@@ -43,7 +43,7 @@ angular.module("MetronicApp").controller('iconbasketsearchindexCtrl',
                     var allAccounts = accounts;
                     $scope.gridOptions.data = allAccounts;
                 });
-            }
+            };
 
             tableDatas.getList().then(function (accounts) {
                 var allAccounts = accounts;
