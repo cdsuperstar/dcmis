@@ -25,7 +25,7 @@ angular.module("MetronicApp").controller('iconbasketsearchindexCtrl',
                 data: [],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
-                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+                    // gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
                 }
             };
 
