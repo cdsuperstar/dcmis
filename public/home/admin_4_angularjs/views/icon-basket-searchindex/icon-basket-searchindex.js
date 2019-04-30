@@ -13,9 +13,9 @@ angular.module("MetronicApp").controller('iconbasketsearchindexCtrl',
                 columnDefs: [
                     {name: '编号', field: 'no', enableCellEdit: false, width: '120',enableFiltering: true,enableColumnResizing:false},
                     {name: '物资分类', field: 'class', width: '120',enableCellEdit: false,enableHiding: false},
-                    {name: '物资名称',width: '180', field: 'name', enableCellEdit: true},
-                    {name: '单位',width: '100',field: 'measunit', enableCellEdit: true},
-                    {name: '物资简拼', width: '150',field: 'spell',enableCellEdit: true,visible:true},
+                    {name: '物资名称',width: '180', field: 'name', enableCellEdit: false},
+                    {name: '单位',width: '100',field: 'measunit', enableCellEdit: false},
+                    {name: '物资简拼', width: '150',field: 'spell',enableCellEdit: false,visible:true},
                     {name: '创建时间',width: '160', field: 'created_at',enableCellEdit: false,visible:true},
                     {name: '更新时间', width: '160',field: 'updated_at',enableCellEdit: false,visible:true}
 

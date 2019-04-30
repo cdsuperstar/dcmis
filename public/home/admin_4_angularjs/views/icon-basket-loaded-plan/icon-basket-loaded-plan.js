@@ -292,7 +292,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 }
                             }
                             $scope.soucegridOptions.data = accounts;
-                            // console.log(accounts);
+                            console.log(accounts);
                         });
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
@@ -367,8 +367,9 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                             type: uiGridConstants.filter.SELECT,
                                             selectOptions: [] }
                                     },
-                                    {name: '数量', field: 'amt',width: '60',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '申报数量', field: 'amt',width: '80',enableCellEdit: false,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '预算单价', field: 'bdg',width: '80',enableCellEdit: false,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '采购数量', field: 'regamt',width: '80',enableCellEdit: true,enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '采购单价', field: 'price',width: '80',enableCellEdit: true,cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '采购方式', field: 'purchway',width: '120',enableColumnMenu: true,
                                         editableCellTemplate: 'ui-grid/dropdownEditor',enableCellEdit: true,

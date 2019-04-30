@@ -41,14 +41,18 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
             //机构列表
             Restangular.all('/user-department').getList().then(function (accounts) {
                 //console.log(accounts);
+                var unitarr = [];
                 var tmpu = {};
                 var unitHash=[];
                 for(var i=0;i<accounts.length;i++){
                     //accounts[i].name = JSON.stringify(accounts[i].name).replace(/\"/g, "'");
                     tmpu ={value:accounts[i].id,label:accounts[i].name};
                     unitHash[accounts[i].id]=accounts[i].name;
+                    unitarr.push(tmpu);
                 }
                 $scope.gridOptions.columnDefs[8].unitHash =  unitHash ;
+                $scope.gridOptions.columnDefs[8].filter.selectOptions=unitarr;
+                $scope.gridOptions.columnDefs[8].editDropdownOptionsArray=unitarr;
             });
 
             //人员列表
@@ -164,8 +168,12 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                             type: uiGridConstants.filter.SELECT,
                             selectOptions: [] }
                     },
-                    {name: '部门', field: 'unitgrp_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: false,
-                        cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[]
+                    {name: '部门', field: 'unitgrp_id',width: '230',enableColumnMenu: false,enableHiding: false,enableFiltering: true,
+                        cellFilter: 'dFilterHash:col.colDef.unitHash',unitHash:[],
+                        filter: {
+                            // term:1,
+                            type: uiGridConstants.filter.SELECT,
+                            selectOptions: [] }
                     }
                 ],
 

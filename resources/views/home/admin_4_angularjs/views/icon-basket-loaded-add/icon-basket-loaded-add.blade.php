@@ -1,4 +1,30 @@
 <div class="tabbable" data-ng-controller="iconbasketloadedCtrl">
+    <script type="text/ng-template" id="showdetail-material">
+        <div class="row">
+            <div class ="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-green-sharp">
+                            <i class="icon-settings font-green-sharp"></i>
+                            <span class="caption-subject bold uppercase"> 物资列表
+                            </span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="fullscreen"> </a>
+                            <a href="javascript:;" class="remove"  ng-click="closeThisDialog(addMaterialdetail)">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-toolbar">
+                        <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
+                        <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
+                        <button id="saveData" type="button"  class="btn btn-info" ng-click="SelectData()"><i class="fa fa-check"></i> 选择完成 </button>
+                    </div>
+                    <div id="iconmaterialgrid" ui-grid="materialgridOptions" ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconmaterialgrid"></div>
+                </div>
+            </div>
+        </div>
+    </script>
     <script type="text/ng-template" id="add-material">
         <div class="row">
             <div class="col-md-12">
@@ -7,7 +33,8 @@
                     <div class="portlet-title">
                         <div class="caption font-green-sharp">
                             <i class="icon-settings font-green-sharp"></i>
-                            <span class="caption-subject bold uppercase"> 添加物资 </span>
+                            <span class="caption-subject bold uppercase"> 添加物资
+                            </span>
                         </div>
                         <div class="tools">
                             <a href="" class="fullscreen"> </a>
@@ -31,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 物资名称 </label>
+                            <label class="col-md-3 control-label" ng-click="ShowmaterialData()" style="cursor:pointer;border-width:1px;border-style:dashed;border-color:#E00D91;" title="点击进入 物资筛选 ！"> <i class="fa fa-search"></i>  物资名称 </label>
                             <div class="col-md-8">
                                 <ui-select ng-model="dcaddMaterial.wzno" theme="bootstrap">
                                     <ui-select-match placeholder="选择物资名称...">@{{$select.selected.name}} 【@{{$select.selected.measunit}}】</ui-select-match>

@@ -5,5 +5,5 @@
         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
 
     </div>
-    <div id="iconbasketsearchindexgrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-edit ui-grid-row-edit ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="iconbasketsearchindexgrid"></div>
+    <div id="iconbasketsearchindexgrid" ui-grid="gridOptions" ui-grid-selection  ui-grid-pagination ui-grid-cellNav ui-grid-resize-columns ui-grid-move-columns class="iconbasketsearchindexgrid"></div>
 </div>

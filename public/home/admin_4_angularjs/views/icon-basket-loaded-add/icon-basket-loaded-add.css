@@ -1,5 +1,5 @@
 .ngdialog.iconaddmaterial .ngdialog-content{width : 500px;background: #ffffff;}
-
+.ngdialog.iconmaterialgrid .ngdialog-content{width : 650px;background: #ffffff;}
 .jquery-notific8-container.top { top: 60px; }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -9,6 +9,24 @@
 .iconbasketloadedgrid {
     /*width: 800px;*/
     height: 384px;
+}
+
+.iconmaterialgrid {
+    /*width: 800px;*/
+    /*height: 384px;*/
+}
+
+.iconmaterialgrid .ui-grid-header{
+    background: #80AF92;
+}
+.iconmaterialgrid .ui-grid-top-panel{
+    background: #80AF92;
+}
+.iconmaterialgrid .ui-grid-top-panel-background{
+    background: #80AF92;
+}
+.iconmaterialgrid .ui-grid-header-cell-label{
+    color:#ffffff;
 }
 
 .iconbasketloadedgrid .ui-grid-header{
