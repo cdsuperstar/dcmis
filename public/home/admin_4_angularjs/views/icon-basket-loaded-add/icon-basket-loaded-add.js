@@ -461,7 +461,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                         }else{
                                             showMsg('选取物资不能超过2个！', '错误', 'ruby');
                                         }
-                                        console.log(selectmaterialdcmodels);
+                                        // console.log(selectmaterialdcmodels);
                                   };
 
                                     var tableDatas = Restangular.all('/icon-basket-setindex');

@@ -292,7 +292,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 }
                             }
                             $scope.soucegridOptions.data = accounts;
-                            console.log(accounts);
+                            // console.log(accounts);
                         });
 
                         $scope.changeStatus = function (field,applystatus) {//转换各种状态
