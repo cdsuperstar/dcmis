@@ -269,7 +269,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                 //导航结束
                 //计算总金额
                 $scope.totalimdata = SumJsonData($scope.imdata,'bdg','');
-                $scope.wztotalimdata = SumJsonData($scope.imdata,'bdg','amt');
+                $scope.wztotalimdata = SumJsonData($scope.imdata,'bdg','reqamt');
             };
             $scope.soucegridOptions={
                 enableSorting: true,
@@ -350,7 +350,7 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                 //cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents souce-cell-wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                 cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                             },
-                            {name: '数量', field: 'amt',width: '60',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                            {name: '申报数量', field: 'reqamt',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                             {name: '预算单价', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                             {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}
                         ];
@@ -378,11 +378,108 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     //结束
                                     $scope.wzfl =result; //将物资分类的数组赋过去
                                     $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
+                                    // console.log($scope.dcaddMaterial);
+                                    // TODO
                                     $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
+                                    // console.log($Scope);
 
                                     $scope.chanagewzdata = function() {
                                         $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
                                         $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
+                                    };
+
+                                    $scope.ShowmaterialData = function () {
+                                        ngDialog.openConfirm({
+                                            template: 'showdetail-material',
+                                            className: 'ngdialog-theme-default iconmaterialgrid',
+                                            scope: $scope,
+                                            controller: ['$scope', function ($scope) {
+                                                //二级联动start 物品分类
+                                                //增加物资详情的grid
+                                                $scope.materialgridOptions = {
+                                                    enableSorting: true,
+                                                    enableFiltering: false,
+                                                    enableCellEditOnFocus: true,
+                                                    columnDefs: [
+                                                        {name: '编号', field: 'no', enableCellEdit: false, width: '100',enableFiltering: true,enableColumnResizing:false},
+                                                        {name: '物资分类', field: 'class', width: '80',enableCellEdit: false,enableHiding: false},
+                                                        {name: '物资简拼', width: '100',field: 'spell',enableCellEdit: false,visible:true},
+                                                        {name: '物资名称',width: '180', field: 'name', enableCellEdit: false},
+                                                        {name: '单位',width: '60',field: 'measunit', enableCellEdit: false}
+                                                    ],
+                                                    paginationPageSizes: [10, 30, 50],
+                                                    paginationPageSize: 10,
+                                                    data: [],
+                                                    onRegisterApi: function (materialgridApi) {
+                                                        $scope.materialgridApi = materialgridApi;
+                                                        materialgridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+                                                    }
+                                                };
+                                                $scope.toggleFilteringsign = '筛选数据';
+                                                $scope.toggleFiltering = function(){
+                                                    $scope.materialgridOptions.enableFiltering = !$scope.materialgridOptions.enableFiltering;
+                                                    if(!$scope.materialgridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
+                                                    else $scope.toggleFilteringsign = '取消筛选';
+                                                    $scope.materialgridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+                                                };
+
+                                                $scope.refreshData = function(){
+                                                    $scope.materialgridOptions.data = [];
+                                                    tableDatas.getList().then(function (accounts) {
+                                                        var allAccounts = accounts;
+                                                        $scope.materialgridOptions.data = allAccounts;
+                                                    });
+                                                };
+
+                                                $scope.SelectData = function (field,applystatus) {
+                                                    var selectmaterialdcmodels = $scope.materialgridApi.selection.getSelectedGridRows();
+                                                    if(selectmaterialdcmodels.length === 1){
+                                                        $scope.dcaddMaterial = {aswzfl:selectmaterialdcmodels[0].entity.class,wzno:selectmaterialdcmodels[0].entity.no}; //初始化值
+                                                        console.log($scope.dcaddMaterial);
+
+                                                    }else{
+                                                        showMsg('选取物资不能超过2个！', '错误', 'ruby');
+                                                    }
+                                                    // console.log(selectmaterialdcmodels);
+                                                };
+
+                                                var tableDatas = Restangular.all('/icon-basket-setindex');
+                                                i18nService.setCurrentLang('zh-cn');
+
+                                                tableDatas.getList().then(function (accounts) {
+                                                    var allAccounts = accounts;
+                                                    $scope.materialgridOptions.data = allAccounts;
+                                                    //console.log( $scope.gridOptions.data);
+                                                });
+                                                ////////
+                                                //结束
+                                                // $scope.wzfl =result; //将物资分类的数组赋过去
+                                                // $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
+                                                // $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
+                                                //
+                                                // $scope.chanagewzdata = function() {
+                                                //     $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
+                                                //     $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
+                                                // };
+                                                //end
+
+                                            }],
+                                            showClose: false,
+                                            setBodyPadding: 1,
+                                            overlay: true,        //是否用div覆盖当前页面
+                                            closeByDocument:false,  //是否点覆盖div 关闭会话
+                                            disableAnimation:true,  //是否显示动画
+                                            closeByEscape: true
+                                        }).then(function (dcaddMaterial) {
+                                            // TODO
+
+                                            $scope.dcaddMaterial.aswzfl=dcaddMaterial.selection.getSelectedGridRows()[0].entity.class;
+                                            $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
+                                            $scope.dcaddMaterial.wzno=dcaddMaterial.selection.getSelectedGridRows()[0].entity.no;
+                                            //end
+                                        }, function (addMaterialdetail) {
+                                            // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
+                                        });
                                     };
                                     //end
 
@@ -405,104 +502,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                     showMsg('添加失败!编号：'+dcaddMaterial.wzno, '错误', 'ruby');
                                 }
                             }, function (dcaddMaterial) {
-                                // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
-                            });
-                        };
-                        $scope.ShowmaterialData = function () {
-                            // console.log($scope.imdata);
-                            ngDialog.openConfirm({
-                                template: 'showdetail-material',
-                                className: 'ngdialog-theme-default iconmaterialgrid',
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    //二级联动start 物品分类
-                                    //增加物资详情的grid
-                                    $scope.materialgridOptions = {
-                                        enableSorting: true,
-                                        enableFiltering: false,
-                                        enableCellEditOnFocus: true,
-                                        columnDefs: [
-                                            {name: '编号', field: 'no', enableCellEdit: false, width: '100',enableFiltering: true,enableColumnResizing:false},
-                                            {name: '物资分类', field: 'class', width: '80',enableCellEdit: false,enableHiding: false},
-                                            {name: '物资简拼', width: '100',field: 'spell',enableCellEdit: false,visible:true},
-                                            {name: '物资名称',width: '180', field: 'name', enableCellEdit: false},
-                                            {name: '单位',width: '60',field: 'measunit', enableCellEdit: false}
-                                        ],
-                                        paginationPageSizes: [10, 30, 50],
-                                        paginationPageSize: 10,
-                                        data: [],
-                                        onRegisterApi: function (materialgridApi) {
-                                            $scope.materialgridApi = materialgridApi;
-                                            materialgridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
-                                        }
-                                    };
-                                    $scope.toggleFilteringsign = '筛选数据';
-                                    $scope.toggleFiltering = function(){
-                                        $scope.materialgridOptions.enableFiltering = !$scope.materialgridOptions.enableFiltering;
-                                        if(!$scope.materialgridOptions.enableFiltering) $scope.toggleFilteringsign = '筛选数据';
-                                        else $scope.toggleFilteringsign = '取消筛选';
-                                        $scope.materialgridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
-                                    };
-
-                                    $scope.refreshData = function(){
-                                        $scope.materialgridOptions.data = [];
-                                        tableDatas.getList().then(function (accounts) {
-                                            var allAccounts = accounts;
-                                            $scope.materialgridOptions.data = allAccounts;
-                                        });
-                                    };
-
-                                    $scope.SelectData = function (field,applystatus) {//转换各种状态
-                                        var selectmaterialdcmodels = $scope.materialgridApi.selection.getSelectedGridRows();
-                                        if(selectmaterialdcmodels.length === 1){
-                                            $scope.dcaddMaterial = {aswzfl:selectmaterialdcmodels[0].entity.class,wzno:selectmaterialdcmodels[0].entity.no}; //初始化值
-                                            console.log($scope.dcaddMaterial);
-
-                                        }else{
-                                            showMsg('选取物资不能超过2个！', '错误', 'ruby');
-                                        }
-                                        // console.log(selectmaterialdcmodels);
-                                  };
-
-                                    var tableDatas = Restangular.all('/icon-basket-setindex');
-                                    i18nService.setCurrentLang('zh-cn');
-
-                                    tableDatas.getList().then(function (accounts) {
-                                        var allAccounts = accounts;
-                                        $scope.materialgridOptions.data = allAccounts;
-                                        //console.log( $scope.gridOptions.data);
-                                    });
-                                    ////////
-                                    //结束
-                                    // $scope.wzfl =result; //将物资分类的数组赋过去
-                                    // $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
-                                    // $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
-                                    //
-                                    // $scope.chanagewzdata = function() {
-                                    //     $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
-                                    //     $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
-                                    // };
-                                    //end
-
-                                }],
-                                showClose: false,
-                                setBodyPadding: 1,
-                                overlay: true,        //是否用div覆盖当前页面
-                                closeByDocument:false,  //是否点覆盖div 关闭会话
-                                disableAnimation:true,  //是否显示动画
-                                closeByEscape: true
-                            }).then(function (addMaterialdetail) {
-                                // if(dcaddMaterial.wzno){
-                                //     dcaddMaterial.wzname = changeJsonData($scope.datawzgrps,'no',dcaddMaterial.wzno,'name');//获取物资名称
-                                //     dcaddMaterial.wzmeasunit = changeJsonData($scope.datawzgrps,'no',dcaddMaterial.wzno,'measunit');//获取物资单位
-                                //     // console.log(dcaddMaterial);
-                                //     // $scope.soucegridOptions.data.push(dcaddMaterial);
-                                //     $scope.imdata.push(dcaddMaterial);
-                                //     showMsg('添加成功!编号：'+dcaddMaterial.wzno, '信息', 'lime');
-                                // }else {
-                                //     showMsg('添加失败!编号：'+dcaddMaterial.wzno, '错误', 'ruby');
-                                // }
-                            }, function (addMaterialdetail) {
                                 // console.log('Modal promise rejected. Reason: ', dcaddMaterial);
                             });
                         };

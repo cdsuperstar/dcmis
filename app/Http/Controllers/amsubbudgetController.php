@@ -106,7 +106,7 @@ select userdate,outbound,amsubbudgets.wzno.name,amsubbudgets.wzsmodel,amsubbudge
     {
         //
         $subq = amsubbudget::query()
-            ->select(['amapplications.ambudgettype_id', 'amapplications.unitgrp_id', DB::raw('sum(amsubbudgets.bdg*amsubbudgets.amt) as bdg'), DB::raw('sum(amsubbudgets.price) as price')])
+            ->select(['amapplications.ambudgettype_id', 'amapplications.unitgrp_id', DB::raw('sum(amsubbudgets.bdg*amsubbudgets.reqamt) as bdg'), DB::raw('sum(amsubbudgets.price*amsubbudgets.amt) as price')])
 //            ->where([
 //                ['amapplications.syear', '=', $syear],
 //                ['amapplications.unitgrp_id', '=', $unitgrp->id]/am-budget-count/getYearUnitsBudgets

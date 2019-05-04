@@ -18,7 +18,7 @@
                     <div class="table-toolbar">
                         <button id='toggleFiltering' type="button"class="btn yellow" ng-click="toggleFiltering()" ><i class="fa fa-search"></i> @{{ toggleFilteringsign }} </button>
                         <button id="refreshButton" type="button"  class="btn purple-plum" ng-click="refreshData()"><i class="fa fa-refresh"></i> 重获数据</button>
-                        <button id="saveData" type="button"  class="btn btn-info" ng-click="SelectData()"><i class="fa fa-check"></i> 选择完成 </button>
+                        <button id="saveData" type="button"  class="btn btn-info" ng-click="confirm( materialgridApi )"><i class="fa fa-check"></i> 选择完成 </button>
                     </div>
                     <div id="iconmaterialgrid" ui-grid="materialgridOptions" ui-grid-selection ui-grid-edit ui-grid-row-edit ui-grid-exporter ui-grid-pagination ui-grid-pinning ui-grid-resize-columns ui-grid-auto-resize ui-grid-move-columns class="iconmaterialgrid"></div>
                 </div>
