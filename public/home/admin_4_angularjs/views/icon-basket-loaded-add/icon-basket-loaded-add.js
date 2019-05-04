@@ -431,17 +431,17 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                                     });
                                                 };
 
-                                                $scope.SelectData = function (field,applystatus) {
-                                                    var selectmaterialdcmodels = $scope.materialgridApi.selection.getSelectedGridRows();
-                                                    if(selectmaterialdcmodels.length === 1){
-                                                        $scope.dcaddMaterial = {aswzfl:selectmaterialdcmodels[0].entity.class,wzno:selectmaterialdcmodels[0].entity.no}; //初始化值
-                                                        console.log($scope.dcaddMaterial);
-
-                                                    }else{
-                                                        showMsg('选取物资不能超过2个！', '错误', 'ruby');
-                                                    }
-                                                    // console.log(selectmaterialdcmodels);
-                                                };
+                                                // $scope.SelectData = function (field,applystatus) {
+                                                //     var selectmaterialdcmodels = $scope.materialgridApi.selection.getSelectedGridRows();
+                                                //     if(selectmaterialdcmodels.length === 1){
+                                                //         $scope.dcaddMaterial = {aswzfl:selectmaterialdcmodels[0].entity.class,wzno:selectmaterialdcmodels[0].entity.no}; //初始化值
+                                                //         console.log($scope.dcaddMaterial);
+                                                //
+                                                //     }else{
+                                                //         showMsg('选取物资不能超过2个！', '错误', 'ruby');
+                                                //     }
+                                                //     // console.log(selectmaterialdcmodels);
+                                                // };
 
                                                 var tableDatas = Restangular.all('/icon-basket-setindex');
                                                 i18nService.setCurrentLang('zh-cn');
@@ -451,16 +451,6 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                                     $scope.materialgridOptions.data = allAccounts;
                                                     //console.log( $scope.gridOptions.data);
                                                 });
-                                                ////////
-                                                //结束
-                                                // $scope.wzfl =result; //将物资分类的数组赋过去
-                                                // $scope.dcaddMaterial={aswzfl:$scope.wzfl[0]}; //初始化第一个分类为默认值
-                                                // $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
-                                                //
-                                                // $scope.chanagewzdata = function() {
-                                                //     $scope.dcaddMaterial.wzno = undefined; //如果分类改变，该值置为空
-                                                //     $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl});
-                                                // };
                                                 //end
 
                                             }],
@@ -472,10 +462,13 @@ angular.module("MetronicApp").controller('iconbasketloadedCtrl',
                                             closeByEscape: true
                                         }).then(function (dcaddMaterial) {
                                             // TODO
-
-                                            $scope.dcaddMaterial.aswzfl=dcaddMaterial.selection.getSelectedGridRows()[0].entity.class;
-                                            $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
-                                            $scope.dcaddMaterial.wzno=dcaddMaterial.selection.getSelectedGridRows()[0].entity.no;
+                                            if(dcaddMaterial.selection.getSelectedGridRows().length === 1){
+                                                $scope.dcaddMaterial.aswzfl=dcaddMaterial.selection.getSelectedGridRows()[0].entity.class;
+                                                $scope.wzgrps = $filter("filter")($scope.datawzgrps,{class:$scope.dcaddMaterial.aswzfl}); //初始化第一个分类的值为默认值
+                                                $scope.dcaddMaterial.wzno=dcaddMaterial.selection.getSelectedGridRows()[0].entity.no;
+                                            }else{
+                                                showMsg('未选定物资或者选取物资超过2个！', '错误', 'ruby');
+                                            }
                                             //end
                                         }, function (addMaterialdetail) {
                                             // console.log('Modal promise rejected. Reason: ', dcaddMaterial);

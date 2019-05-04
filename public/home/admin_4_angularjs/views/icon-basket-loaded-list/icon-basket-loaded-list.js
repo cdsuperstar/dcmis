@@ -283,11 +283,11 @@ angular.module("MetronicApp").controller('iconbasketloadlistCtrl',
                                     {name: '物资名称', field: 'wzname',width: '200',enableColumnMenu: true,
                                         footerCellTemplate: '<div class="ui-grid-bottom-panel" style="text-align: center;color: #000000">合计</div>'},
                                     {name: '单位', field: 'wzmeasunit',width: '60',enableColumnMenu: true,pinnedLeft:true},
-                                    {name: '规格、型号', field: 'wzsmodel',width: '200',enableColumnMenu: true,
+                                    {name: '规格、型号', field: 'wzsmodel',width: '100',enableColumnMenu: true,
                                         cellTooltip: function(row){ return row.entity.wzsmodel; },
                                         cellTemplate: '<div class="ui-grid-row ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
                                     },
-                                    {name: '申报数量', field: 'reqamt',width: '80',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
+                                    {name: '申报数量', field: 'reqamt',width: '100',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '预算单价', field: 'bdg',width: '80',cellFilter: 'currency',enableColumnMenu: true,aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true},
                                     {name: '小计', field: 'wztotal',width: '100', cellFilter: 'currency',aggregationType: uiGridConstants.aggregationTypes.sum,aggregationHideLabel: true,enableColumnMenu: true},
                                     {name: '备注', field: 'remark',width: '150',enableColumnMenu: true}

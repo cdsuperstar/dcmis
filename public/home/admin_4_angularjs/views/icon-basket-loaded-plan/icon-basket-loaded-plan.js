@@ -287,7 +287,7 @@ angular.module("MetronicApp").controller('iconbasketloadplanCtrl',
                                 if(accounts[item]["wzno"]) {
                                     accounts[item]["wzname"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'name');//获取物资名称
                                     accounts[item]["wzmeasunit"] = changeJsonData($scope.datawzgrps,'no',accounts[item]["wzno"],'measunit');//获取物资单位
-                                    if (accounts[item]["purchprice"]) accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["purchprice"];//计算物资小计
+                                    if (accounts[item]["price"]) accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["price"];//计算物资小计
                                     else accounts[item]["wztotal"] = accounts[item]["amt"] * accounts[item]["bdg"];//计算物资小计
                                 }
                             }

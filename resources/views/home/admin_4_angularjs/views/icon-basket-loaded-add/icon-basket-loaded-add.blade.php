@@ -83,11 +83,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"> 数 量 </label>
+                            <label class="col-md-3 control-label"> 申报数量 </label>
                             <div class="col-md-8">
                                 <div class="input-icon right">
                                     <i class="fa fa-warning tooltips font-red" data-original-title="必填项" data-container="body"></i>
-                                    <input type="number" class="form-control" ng-model="dcaddMaterial.amt" placeholder="数量">
+                                    <input type="number" class="form-control" ng-model="dcaddMaterial.reqamt" placeholder="申报数量">
                                 </div>
                             </div>
                         </div>
@@ -523,7 +523,7 @@
                             <td colspan="3" style="text-align:center;">物资编号</td>
                             <td colspan="3" style="text-align:center;">物资名称</td>
                             <td colspan="4" style="text-align:center;">规格、型号</td>
-                            <td style="text-align:center;">数量</td>
+                            <td style="text-align:center;">申报数量</td>
                             <td style="text-align:center;">单位</td>
                             <td style="text-align:center;">预算单价</td>
                             <td style="text-align:center;">小计</td>
@@ -535,7 +535,7 @@
                             <td colspan="3">@{{ wzdata.wzno }}</td>
                             <td colspan="3">@{{ wzdata.wzname }}</td>
                             <td colspan="4">@{{ wzdata.wzsmodel }}</td>
-                            <td>@{{ wzdata.amt }}</td>
+                            <td>@{{ wzdata.reqamt }}</td>
                             <td>@{{ wzdata.wzmeasunit }}</td>
                             <td>@{{ wzdata.bdg | currency:'￥'}}</td>
                             <td>@{{ wzdata.amt*wzdata.bdg | currency:'￥' }}</td>
