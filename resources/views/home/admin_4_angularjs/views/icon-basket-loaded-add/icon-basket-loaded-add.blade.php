@@ -538,7 +538,7 @@
                             <td>@{{ wzdata.reqamt }}</td>
                             <td>@{{ wzdata.wzmeasunit }}</td>
                             <td>@{{ wzdata.bdg | currency:'￥'}}</td>
-                            <td>@{{ wzdata.amt*wzdata.bdg | currency:'￥' }}</td>
+                            <td>@{{ wzdata.reqamt*wzdata.bdg | currency:'￥' }}</td>
                             <td>@{{ wzdata.remark }}</td>
                         </tr>
                         <tr>
