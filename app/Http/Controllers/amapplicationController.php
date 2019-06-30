@@ -130,7 +130,6 @@ class amapplicationController extends Controller
                 $aAmapplicationsinut[$k] = $v;
             }
         }
-
         if (isset($aAmapplicationsinut["id"])) {
             $rec = amapplication::find($aAmapplicationsinut["id"]);
             $rec->fill($aAmapplicationsinut);
@@ -139,8 +138,8 @@ class amapplicationController extends Controller
         }
         $rec->save();
         if ($rec) {
-            foreach ($aSubs as $k => $v) {
-                $cntSub = 0;
+			$cntSub = 0;
+			foreach ($aSubs as $k => $v) {
                 $v['amapplication_id'] = $rec->id;
                 if(!isset($v["reqamt"]))$v["reqamt"]=1;
                 if (isset($v["id"])) {
@@ -150,11 +149,19 @@ class amapplicationController extends Controller
                     $recSub[$k] = new amsubbudget($v);
                 }
                 if ($recSub[$k]->save()) $cntSub++;
-
+                $tmpReqSubs[$recSub[$k]->id]=1;
             }
+			$tmpSubs=amsubbudget::where('amapplication_id','=',$rec->id)->get(['id']);
+            $cntSubremove=0;
+			foreach ($tmpSubs as $tmpSub) {
+				if(!isset( $tmpReqSubs[$tmpSub->id])){
+					$tmpSub->delete();
+					$cntSubremove++;
+				}
+			}
 
-            return response()->json(array_merge([
-                    'messages' => trans('data.add', ["data" => $rec->id]) . "($cntSub subs)",
+			return response()->json(array_merge([
+                    'messages' => trans('data.add', ["data" => $rec->id]) . "($cntSub subs saved, $cntSubremove subs removed)",
                     'success' => true,
                 ], $rec->toArray()
                 )
