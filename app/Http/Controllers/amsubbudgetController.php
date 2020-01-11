@@ -111,7 +111,7 @@ select userdate,outbound,amsubbudgets.wzno.name,amsubbudgets.wzsmodel,amsubbudge
 //                ['amapplications.syear', '=', $syear],
 //                ['amapplications.unitgrp_id', '=', $unitgrp->id]/am-budget-count/getYearUnitsBudgets
 //            ])
-            ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')
+            ->leftJoin('amapplications', 'amapplications.id', '=', 'amsubbudgets.amapplication_id')->where('amapplications.syear', $request->input()[0]["syear"])
             ->groupBy('amapplications.ambudgettype_id','amapplications.unitgrp_id');
         $subSql = $subq->toSql();
 

@@ -125,7 +125,7 @@ class CreateAmbudgetsTable extends Migration
 
             $table->string('wzno')->nullable(); //物资编号
             $table->string('wzsmodel')->nullable(); //规格型号
-            $table->integer('amt')->nullable()->->default(1);; //实际数量
+            $table->integer('amt')->nullable()->default(1); //实际数量
             $table->integer('reqamt')->nullable(); //申报数量
             $table->decimal('bdg')->nullable(); //预算单价
             $table->decimal('price')->nullable(); //采购单价
